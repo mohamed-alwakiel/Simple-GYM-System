@@ -93,7 +93,7 @@ return [
          * foreign key is other than `team_id`.
          */
 
-        'team_foreign_key' => 'team_id',
+        // 'team_foreign_key' => 'team_id',
     ],
 
     /*
@@ -101,7 +101,7 @@ return [
      * Set this to false, if you want to implement custom logic for checking permissions.
      */
 
-    'register_permission_check_method' => true,
+    'register_permission_check_method' => false,
 
     /*
      * When set to true the package implements teams using the 'team_foreign_key'. If you want
