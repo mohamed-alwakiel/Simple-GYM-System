@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,17 +23,17 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-//Gym Manager Routes
+//Gym Managers Routes
 Route::middleware(['auth'])->group(function () {
-    Route::GET('/test', [PostController::class, 'index'])->name('test.index');
+    Route::GET('/GymManagers', [GymManagerController::class, 'index'])->name('GymManagers.index');
 
-    Route::GET('/test/create', [PostController::class, 'create'])->name('test.create');
-    Route::POST('/test', [PostController::class, 'store'])->name('test.store');
+    Route::GET('/GymManagers/create', [GymManagerController::class, 'create'])->name('GymManagers.create');
+    Route::POST('/GymManagers', [GymManagerController::class, 'store'])->name('GymManagers.store');
 
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::GET('/test/{test}/edit', [PostController::class, 'edit'])->name('test.edit');
-    Route::PUT('/test/{test}', [PostController::class, 'update'])->name('test.update');
+    Route::GET('/GymManagers/{GymManager}/edit', [GymManagerController::class, 'edit'])->name('GymManagers.edit');
+    Route::PUT('/GymManagers/{GymManager}', [GymManagerController::class, 'update'])->name('GymManagers.update');
 
-    Route::DELETE('/test/{test}', [PostController::class, 'destroy'])->name('test.destroy');
+    Route::DELETE('/GymManagers/{GymManager}', [GymManagerController::class, 'destroy'])->name('GymManagers.destroy');
 });

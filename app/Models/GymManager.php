@@ -14,6 +14,8 @@ class GymManager extends Model
         'email',
         'password',
         'national_id',
-        'profile_img'
+        'profile_img',
+        'role_id',
+        'role_type'
     ];
 }
