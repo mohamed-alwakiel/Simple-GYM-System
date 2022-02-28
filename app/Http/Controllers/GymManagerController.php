@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GymManager;
-use App\Http\Requests\StoreGymManagerRequest;
-use App\Http\Requests\UpdateGymManagerRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Psy\CodeCleaner\ReturnTypePass;
 
 class GymManagerController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -20,10 +16,9 @@ class GymManagerController extends Controller
      */
     public function index()
     {
-
         $gymManagers = DB::table('users')->where('role_id', 3)->get();
 
-        return view('GymManager.index', [
+        return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
         ]);
     }
@@ -36,7 +31,7 @@ class GymManagerController extends Controller
      */
     public function create()
     {
-        return view('GymManager.create');
+        return view('gymManagers.edit');
     }
 
 
@@ -46,15 +41,15 @@ class GymManagerController extends Controller
      * @param  \App\Http\Requests\StoreGymManagerRequest  $request
      * @return \Illuminate\Http\Response
      */
+
     // public function store(StoreGymManagerRequest $request)
     public function store()
     {
         //fetch request data
         $requestData = request()->all();
 
-
         // store new data into data base
-        GymManager::create([
+        User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
@@ -67,7 +62,7 @@ class GymManagerController extends Controller
         ]);
 
         //redirection to posts.index
-        return redirect()->route('GymManagers.index');
+        return redirect()->route('gymManagers.index');
     }
 
 
@@ -91,7 +86,7 @@ class GymManagerController extends Controller
      */
     public function edit(GymManager $gymManager)
     {
-        //
+        // return view('gymManagers.edit');
     }
 
 

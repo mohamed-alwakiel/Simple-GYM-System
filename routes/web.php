@@ -4,6 +4,17 @@ use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GymManagersController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\CityManagersController;
+use App\Http\Controllers\GymsController;
+use App\Http\Controllers\TrainingPackagesController;
+use App\Http\Controllers\CoachesController;
+use App\Http\Controllers\BuyPackageController;
+use App\Http\Controllers\SessionsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +34,66 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-//Gym Managers Routes
-Route::middleware(['auth'])->group(function () {
-    Route::GET('/GymManagers', [GymManagerController::class, 'index'])->name('GymManagers.index');
+// --------------- CITY MANAGERS
+Route::get('/cityManagers', [CityManagersController::class, 'index'])->name('cityManagers.index')->middleware('auth');
 
-    Route::GET('/GymManagers/create', [GymManagerController::class, 'create'])->name('GymManagers.create');
-    Route::POST('/GymManagers', [GymManagerController::class, 'store'])->name('GymManagers.store');
+
+
+
+// --------------- GYM MANAGERS
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/gymManagers', [GymManagerController::class, 'index'])->name('gymManagers.index');
+
+    Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
+    Route::POST('/gymManagers', [GymManagerController::class, 'store'])->name('gymManagers.store');
 
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::GET('/GymManagers/{GymManager}/edit', [GymManagerController::class, 'edit'])->name('GymManagers.edit');
-    Route::PUT('/GymManagers/{GymManager}', [GymManagerController::class, 'update'])->name('GymManagers.update');
+    Route::GET('/gymManagers/{gymManagers}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
+    Route::PUT('/gymManagers/{gymManagers}', [GymManagerController::class, 'update'])->name('gymManagers.update');
 
-    Route::DELETE('/GymManagers/{GymManager}', [GymManagerController::class, 'destroy'])->name('GymManagers.destroy');
+    Route::DELETE('/gymManagers/{gymManagers}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
 });
+
+
+
+// --------------- Cities
+Route::get('/cities', [CitiesController::class, 'index'])->name('cities.index')->middleware('auth');
+
+
+
+// --------------- GYMS
+Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index')->middleware('auth');
+
+
+
+// --------------- Users
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+
+
+
+// --------------- Training Packages
+Route::get('/trainingPackages', [TrainingPackagesController::class, 'index'])->name('trainingPackages.index')->middleware('auth');
+
+
+
+// --------------- Sessions
+Route::get('/sessions', [SessionsController::class, 'index'])->name('sessions.index')->middleware('auth');
+
+
+
+// --------------- Coaches
+Route::get('/coaches', [CoachesController::class, 'index'])->name('coaches.index')->middleware('auth');
+
+
+
+// --------------- Attendance
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index')->middleware('auth');
+
+
+
+// --------------- Buy Package
+Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
+
+
+
