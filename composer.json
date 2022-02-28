@@ -10,7 +10,7 @@
         "cybercog/laravel-ban": "^4.7",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
-        "laravel/sanctum": "^2.14.1",
+        "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "spatie/laravel-permission": "^5.5",
