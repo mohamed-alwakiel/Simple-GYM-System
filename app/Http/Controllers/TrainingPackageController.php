@@ -12,12 +12,11 @@ class TrainingPackageController extends Controller
     public function index()
     {
         $packageCollection = Package::paginate(10);
-        return view('trainingPackages.index',['packageCollectionView' => $packageCollection]);
+        return view('trainingPackages.index',['packageCollection' => $packageCollection]);
     }
 
     public function show(Package $Package)
     {
-
         return view('trainingPackages.show', ['package' => $Package]);
     }
 
@@ -28,19 +27,8 @@ class TrainingPackageController extends Controller
 
     public function store(StorePackageRequest $requestObj)
     {
-
-        // $requestData = $requestObj->all();
         Package::create($requestObj->all());
-        // $Package = Package::create([
-
-        //     'id' => $requestObj->id,
-        //     'name' => $requestObj->name,
-        //     'price' => $requestObj->price,
-        //     'number_of_sessions'=> $requestObj->number_of_sessions,
-
-        // ]);
-
-        return redirect()->route('trainingPackages.index');
+        return to_route('trainingPackages.index');
     }
 
     public function edit(Package $Package)
@@ -56,14 +44,15 @@ class TrainingPackageController extends Controller
         $package =  Package::findOrFail($package_id);
         $package->update($requestObj->all());
         $package->save();
-        return redirect()->route('trainingPackages.index')->with('success', 'Package Updated Successfully');
+        return to_route('trainingPackages.show', ['package' => $package])
+        ->with('success', 'Package Updated Successfully');
     }
 
     public function destroy(Package $package)
     {
         $package->delete();
 
-        return redirect()->route('trainingPackages.index')
+        return to_route('trainingPackages.index')
             ->with('success', 'package deleted successfully');
     }
 }

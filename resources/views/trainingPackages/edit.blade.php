@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('title')
 Editing Training Packages
 @endsection
@@ -32,7 +32,7 @@ Editing Training Packages
     </div>
 
     <div class="form-group m-3">
-        <label for="num_sessions">Post Creator</label>
+        <label for="num_sessions">Number Of Sessions</label>
         <input name="number_of_sessions" type="text" class="form-control" value="{{ $package->number_of_sessions }}" id="num_sessions" aria-describedby="titleHelp">
 
     </div>
