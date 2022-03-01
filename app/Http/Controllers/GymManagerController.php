@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class GymManagerController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +32,7 @@ class GymManagerController extends Controller
      */
     public function create()
     {
-        return view('gymManagers.edit');
+        return view('gymManagers.create');
     }
 
 
@@ -56,7 +57,7 @@ class GymManagerController extends Controller
 
             'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
-
+                                                                
             'role_type' => 'Gym_Mgr',
             'role_id' => 3,
         ]);
@@ -84,9 +85,13 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function edit(GymManager $gymManager)
+    public function edit($gymManagerID)
     {
-        // return view('gymManagers.edit');
+        $gymManager = User::find($gymManagerID);
+
+        return view('gymManagers.edit',[
+            'gymManager' => $gymManager
+        ]);
     }
 
 
@@ -97,9 +102,22 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update($gymManagerID)
     {
-        //
+         //fetch request data
+         $requestData = request()->all();
+
+         // update new data into data base
+         USER::find($gymManagerID)->update([
+
+            'name' => $requestData['name'],
+            'email' => $requestData['email'],
+            'profile_img' => $requestData['img'],
+            'national_id' => $requestData['national_id'],
+         ]);
+
+         //redirection to posts.index
+         return redirect()->route('gymManagers.index');
     }
 
 
@@ -109,8 +127,9 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GymManager $gymManager)
+    public function destroy($gymManager)
     {
-        //
+        User::find($gymManager)->delete();
+        return redirect()->route('gymManagers.index');
     }
 }

@@ -49,10 +49,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::GET('/gymManagers/{gymManagers}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
-    Route::PUT('/gymManagers/{gymManagers}', [GymManagerController::class, 'update'])->name('gymManagers.update');
+    Route::GET('/gymManagers/{gymManager}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
+    Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
 
-    Route::DELETE('/gymManagers/{gymManagers}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
+    Route::DELETE('/gymManagers/{gymManager}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
 });
 
 
@@ -67,8 +67,13 @@ Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index')->middl
 
 
 
+
 // --------------- Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+
+
+
+
 
 
 
