@@ -8,7 +8,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CityManagersController;
 use App\Http\Controllers\GymsController;
-use App\Http\Controllers\TrainingPackagesController;
+use App\Http\Controllers\TrainingPackageController;
 use App\Http\Controllers\CoachesController;
 use App\Http\Controllers\BuyPackageController;
 use App\Http\Controllers\SessionsController;
@@ -61,9 +61,17 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index')->mid
 
 
 // --------------- Training Packages
-Route::get('/trainingPackages', [TrainingPackagesController::class, 'index'])->name('trainingPackages.index')->middleware('auth');
+Route::group(['middleware' => ['auth'] ], function() {
 
+Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+Route::get('/trainingPackages/create',[TrainingPackageController::class, 'create'])->name('trainingPackages.create');
+Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+Route::get('/trainingPackages/{package}/edit',[TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
+Route::put('/trainingPackages/{package}',[TrainingPackageController::class, 'update'])->name('trainingPackages.update');
+Route::post('/trainingPackages',[TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 
+});
 
 // --------------- Sessions
 Route::get('/sessions', [SessionsController::class, 'index'])->name('sessions.index')->middleware('auth');
