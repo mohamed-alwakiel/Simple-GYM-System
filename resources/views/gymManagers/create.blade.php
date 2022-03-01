@@ -1,36 +1,34 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title')
-    Gym Managers
+Gym Managers
 @endsection
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
 
 
-        <form action="{{ route('gymManagers.store') }}" method="POST">
+<form action="{{ route('gymManagers.store') }}" method="POST">
 
-            @csrf
-            <label for="">name</label>
-            <input type="text" name="name"><br>
+    @csrf
+    <label for="">name</label>
+    <input type="text" name="name"><br>
 
-            <label for="">email</label>
-            <input type="email" name="email"><br>
+    <label for="">email</label>
+    <input type="email" name="email"><br>
 
-            <label for="">password</label>
-            <input type="password" name="password"><br>
+    <label for="">password</label>
+    <input type="password" name="password"><br>
 
-            <label for="">national id</label>
-            <input type="number" name="national_id"><br>
+    <label for="">national id</label>
+    <input type="number" name="national_id"><br>
 
-            <label for="">profile img</label>
-            <input type="text" name="img"><br>
+    <label for="">profile img</label>
+    <input type="text" name="img"><br>
 
-            <button type="submit">Save</button>
+    <button type="submit">Save</button>
 
-        </form>
+</form>
 
-    </div>
-    <!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
 @endsection

@@ -21,6 +21,7 @@ class GymManagerController extends Controller
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
         ]);
+        // return view('gymManagers.index');
     }
 
 
@@ -72,10 +73,10 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function show(GymManager $gymManager)
-    {
-        //
-    }
+    // public function show(GymManager $gymManager)
+    // {
+    //     //
+    // }
 
 
     /**
@@ -84,10 +85,10 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function edit(GymManager $gymManager)
-    {
-        // return view('gymManagers.edit');
-    }
+    // public function edit(GymManager $gymManager)
+    // {
+    //     // return view('gymManagers.edit');
+    // }
 
 
     /**
@@ -109,8 +110,8 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GymManager $gymManager)
-    {
-        //
-    }
+    // public function destroy(GymManager $gymManager)
+    // {
+    //     //
+    // }
 }
