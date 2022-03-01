@@ -1,12 +1,11 @@
  @extends('layouts.master')
 
 @section('title')
-    Gym Managers
+Gym Managers
 @endsection
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
 
 
 
@@ -42,6 +41,5 @@
 
 
 
-    </div>
     <!-- /.content-wrapper -->
 @endsection

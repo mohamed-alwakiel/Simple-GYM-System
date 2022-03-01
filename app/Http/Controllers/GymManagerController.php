@@ -22,6 +22,7 @@ class GymManagerController extends Controller
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
         ]);
+        // return view('gymManagers.index');
     }
 
 
@@ -57,7 +58,7 @@ class GymManagerController extends Controller
 
             'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
-                                                                
+
             'role_type' => 'Gym_Mgr',
             'role_id' => 3,
         ]);
@@ -73,10 +74,10 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function show(GymManager $gymManager)
-    {
-        //
-    }
+    // public function show(GymManager $gymManager)
+    // {
+    //     //
+    // }
 
 
     /**

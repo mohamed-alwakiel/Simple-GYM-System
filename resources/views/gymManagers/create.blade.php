@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
-@section('title')
+<!-- @section('title')
     Gym Managers
-@endsection
+@endsection -->
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
 
         <form action="{{ route('gymManagers.store') }}" method="POST">
 
@@ -31,6 +29,6 @@
 
         </form>
 
-    </div>
+
     <!-- /.content-wrapper -->
 @endsection

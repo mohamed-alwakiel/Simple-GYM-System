@@ -1,13 +1,14 @@
 @extends('layouts.master')
 
-@section('title')
+<!-- @section('title')
     Gym Managers
-@endsection
+@endsection -->
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper text-center">
+    {{-- <div class="content-wrapper text-center"> --}}
 
+        <a href="{{ route('gymManagers.create') }}" class="btn btn-dark">Create</a>
 
         <a href="{{ route('gymManagers.create') }}" class="btn btn-success my-3">Add New Manager</a>
 
@@ -49,6 +50,6 @@
         </table>
 
 
-    </div>
+    {{-- </div> --}}
     <!-- /.content-wrapper -->
 @endsection
