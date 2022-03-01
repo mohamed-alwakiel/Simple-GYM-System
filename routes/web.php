@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,19 @@ Route::get('/cityManagers', [CityManagersController::class, 'index'])->name('cit
 
 
 // --------------- GYM MANAGERS
-Route::get('/gymManagers', [GymManagersController::class, 'index'])->name('gymManagers.index')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/gymManagers', [GymManagerController::class, 'index'])->name('gymManagers.index');
 
+    Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
+    Route::POST('/gymManagers', [GymManagerController::class, 'store'])->name('gymManagers.store');
+
+    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+    Route::GET('/gymManagers/{gymManager}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
+    Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
+
+    Route::DELETE('/gymManagers/{gymManager}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
+});
 
 
 
@@ -50,13 +62,18 @@ Route::get('/cities', [CitiesController::class, 'index'])->name('cities.index')-
 
 
 
-// --------------- GYMS 
+// --------------- GYMS
 Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index')->middleware('auth');
 
 
 
-// --------------- Users 
+
+// --------------- Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+
+
+
+
 
 
 
@@ -90,6 +107,3 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 // --------------- Buy Package
 Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
-
-
-
