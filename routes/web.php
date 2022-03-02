@@ -4,10 +4,9 @@ use App\Http\Controllers\GymManagerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GymManagersController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CitiesController;
-use App\Http\Controllers\CityManagersController;
+use App\Http\Controllers\CityManagerController;
 use App\Http\Controllers\GymsController;
 use App\Http\Controllers\TrainingPackagesController;
 use App\Http\Controllers\CoachesController;
@@ -35,9 +34,19 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 // --------------- CITY MANAGERS
-Route::get('/cityManagers', [CityManagersController::class, 'index'])->name('cityManagers.index')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
 
+    Route::GET('/cityManagers/create', [CityManagerController::class, 'create'])->name('cityManagers.create');
+    Route::POST('/cityManagers', [CityManagerController::class, 'store'])->name('cityManagers.store');
 
+    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+    Route::GET('/cityManagers/{cityManager}/edit', [CityManagerController::class, 'edit'])->name('cityManagers.edit');
+    Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
+
+    Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
+});
 
 
 // --------------- GYM MANAGERS
@@ -47,14 +56,11 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
     Route::POST('/gymManagers', [GymManagerController::class, 'store'])->name('gymManagers.store');
 
-    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-
     Route::GET('/gymManagers/{gymManager}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
     Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
 
     Route::DELETE('/gymManagers/{gymManager}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
 });
-
 
 
 // --------------- Cities
