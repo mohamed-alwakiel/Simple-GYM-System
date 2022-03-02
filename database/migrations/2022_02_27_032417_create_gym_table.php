@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('cover_img');
 
             // $table->integer('city_id');
-            
+
             $table->timestamps();
 
         });

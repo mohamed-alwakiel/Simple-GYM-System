@@ -47,15 +47,25 @@ Route::get('/gymManagers', [GymManagersController::class, 'index'])->name('gymMa
 
 // --------------- Cities
 Route::get('/cities', [CitiesController::class, 'index'])->name('cities.index')->middleware('auth');
+Route::get('/cities/create', [CitiesController::class, 'create'])->name('cities.create')->middleware('auth');
+Route::post('/cities/store', [CitiesController::class, 'store'])->name('cities.store')->middleware('auth');
+Route::get('/cities/edit/{city_id}', [CitiesController::class, 'edit'])->name('cities.edit')->middleware('auth');
+Route::patch('/cities/update/{city_id}', [CitiesController::class, 'update'])->name('cities.update')->middleware('auth');
+Route::delete('/cities/destroy/{city_id}', [CitiesController::class, 'destroy'])->name('cities.destroy')->middleware('auth');
 
 
 
-// --------------- GYMS 
+
+// --------------- GYMS
 Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index')->middleware('auth');
+Route::get('/gyms/create', [GymsController::class, 'create'])->name('gyms.create')->middleware('auth');
+Route::post('/gyms/store', [GymsController::class, 'store'])->name('gyms.store')->middleware('auth');
+Route::get('/gyms/edit/{gym_id}', [GymsController::class, 'edit'])->name('gyms.edit')->middleware('auth');
+Route::patch('/gyms/update/{gym_id}', [GymsController::class, 'update'])->name('gyms.update')->middleware('auth');
+Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->name('gyms.destroy')->middleware('auth');
 
 
-
-// --------------- Users 
+// --------------- Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
 
 
