@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    
     /**
      * Run the migrations.
      *
@@ -13,16 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coaches_sessions', function (Blueprint $table) {
-            $table->id();
-
-          //  $table->integer('session_id');
-
-           // $table->integer('coach_id');
-
-            $table->timestamps();
+        
+        Schema::table('training_sessions', function (Blueprint $table) {
+            $table->string('day')->change();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coaches_sessions');
+        Schema::table('training_sessions', function (Blueprint $table) {
+            $table->date('day')->change();
+        });
     }
 };
