@@ -7,6 +7,7 @@
 @section('content')
 
     <div class="content-wrapper">
+        <h1>{{$city['name']}}</h1>
         <div class="container">
             <a href="{{route('cities.index')}}" class="btn btn-success mt-5">Back</a>
             <div class="row">
@@ -15,9 +16,11 @@
                         @csrf
                         @method('patch')
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" name="name"  value={{$city->name}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
+                            <label for="name" class="form-label">Name</label>
+                            <input   type="text" name="name"   value={{$city['name']}} class="form-control" >
+                            @error('name')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update</button>

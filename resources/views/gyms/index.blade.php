@@ -24,7 +24,7 @@
                         @foreach($gyms as $gym)
                             <tr>
                                 <td scope="row">{{$gym->name}}</td>
-                                <td scope="row">{{$gym->cover_img}}</td>
+                                <td scope="row"><img src="{{url('imgs/gym/'.$gym->cover_img)}} " width="80" height="80" alt=""/></td>
                                 <td scope="row">{{$gym->city_id}}</td>
                                 <td>
 

@@ -12,12 +12,17 @@
             <div class="row">
                 <div class="col-12 mt-5">
 
-                    <form action="{{route('gyms.update',$gym->id)}}" method="POST">
+                    <form action="{{route('gyms.update',$gym->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Name</label>
                             <input type="text" name="name"  value={{$gym->name}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="image">Avatar</label>
+                            <input type="file"  id="image" name="cover_img">
 
                         </div>
                         <div class="form-group">
