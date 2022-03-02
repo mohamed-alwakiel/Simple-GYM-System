@@ -6,7 +6,7 @@ Update user
 
 @section('content')
 
-<form method="POST" action="{{ route('users.update', $user->id) }}" class="mt-5" enctype="multipart/form-data" style=" margin:0 25px">
+<form method="POST" action="{{ route('users.update',$user['id']) }}" class="mt-5" enctype="multipart/form-data" style=" margin:0 25px">
     @csrf
     @method('put')
   <div class="form-group">
@@ -23,7 +23,7 @@ Update user
     <div class="form-group-prepend">
         <span class="form-group-text"><i class="far fa-calendar-alt"></i></span>
     </div>
-    <input name="date_of_birth" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="{{$user->date_of_birth}}">
+    <input name="date_of_birth" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask value="{{$user->date_of_birth}}">
     <span style="color:red">{{$errors->first("date_of_birth")}}</span>
 </div>
   <div class="form-check">
@@ -38,12 +38,6 @@ Update user
         <input type="text" name="nationalId" class="form-control" id="nationalId" value="{{$user->national_id}}" >
         <span style="color:red">{{$errors->first("nationalId")}}</span>
     </div>
-
-  <div class="form-group">
-    <label for="profileImg">Profile Image</label>
-    <input type="file" name="profileImg" class="form-control" id="profileImg" value="{{$user->profile_img}}" >
-    <span style="color:red">{{$errors->first("profileImg")}}</span>
-  </div>
   <button type="submit" class="btn btn-success">Create</button>
 </form>
 

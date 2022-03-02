@@ -77,8 +77,11 @@ Route::middleware(['auth'])->group(function () {
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
     Route::GET('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
 
 
 });

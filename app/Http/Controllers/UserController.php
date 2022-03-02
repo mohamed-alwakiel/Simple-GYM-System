@@ -87,7 +87,7 @@ class UserController extends Controller
     public function edit( $userId)
     {
         $user =User::find($userId);
-        return view("users.edit",['user'=> $user,]);
+        return view("users.edit",data:['user'=> $user,]);
     }
 
     /**
@@ -99,9 +99,14 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        User::find($id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'national_id' => $request['nationalId'],
+            'date_of_birth' =>$request['date_of_birth'],
+            'gender' => $request['gender'],
+        ]);
         return redirect()->route('users.index');
-        User::find($id)->update($request->all());
-
     }
 
     /**
