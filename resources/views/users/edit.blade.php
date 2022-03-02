@@ -6,9 +6,10 @@ Update user
 
 @section('content')
 
-<form method="POST" action="{{ route('users.update',$user['id']) }}" class="mt-5" enctype="multipart/form-data" style=" margin:0 25px">
+<form method="post" action="{{ route('users.update',$user->id) }}" class="mt-5" style=" margin:0 25px">
     @csrf
     @method('put')
+    <input type="hidden" name="id" value="{{ $user->id }}">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" name="name" class="form-control" id="name" value="{{$user->name}}" >

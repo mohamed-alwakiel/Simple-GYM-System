@@ -28,9 +28,6 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|max:50|min:3',
             'email' => 'required|email',
             'nationalId' => 'required|numeric|min:1',
-            'passwd' => 'required|min:3|max:20',
-            'confirmPassword' => 'required|same:passwd',
-            'profileImg' => 'nullable|image|mimes:jpg,jpeg',
             'date_of_birth' => 'required|date',
         ];
     }
