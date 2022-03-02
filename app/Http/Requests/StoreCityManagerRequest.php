@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGymManagerRequest extends FormRequest
+class StoreCityManagerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,21 +29,18 @@ class StoreGymManagerRequest extends FormRequest
             'password' => ['required', 'string', 'min:6'],
             'national_id' => ['required', 'min:14', 'max:14','unique:users']
         ];
-
     }
-
 
     /**
      * Get the error messages for the defined validation rules.
      *
      * @return array
      */
-    public function messages()      // if you want to override the error message
+    public function messages()     
     {
         return [
             'natioal_id.min' => 'national ID must be 14 digits',
             'natioal_id.max' => 'national ID must be 14 digits',
         ];
     }
-
 }

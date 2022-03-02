@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCityManagerRequest;
+use App\Http\Requests\UpdateCityManagerRequest;
+use App\Models\CityManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,7 +12,8 @@ use Illuminate\Support\Facades\Hash;
 
 class CityManagerController extends Controller
 {
-     /**
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -43,18 +47,18 @@ class CityManagerController extends Controller
      */
 
     // public function store(StoreGymManagerRequest $request)
-    public function store()
+    public function store(StoreCityManagerRequest $request)
     {
         //fetch request data
         $requestData = request()->all();
 
         // store new data into data base
-        User::create([
+        CityManager::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
-            'profile_img' => $requestData['img'],
+            'profile_img' => 'cityMgr.png',
             'national_id' => $requestData['national_id'],
 
             'role_type' => 'City_Mgr',
@@ -66,17 +70,6 @@ class CityManagerController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(GymManager $gymManager)
-    // {
-    //     //
-    // }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -86,9 +79,9 @@ class CityManagerController extends Controller
      */
     public function edit($cityManagerID)
     {
-        $cityManager = User::find($cityManagerID);
+        $cityManager = CityManager::find($cityManagerID);
 
-        return view('cityManagers.edit',[
+        return view('cityManagers.edit', [
             'cityManager' => $cityManager
         ]);
     }
@@ -101,22 +94,21 @@ class CityManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function update($cityManagerID)
+    public function update(UpdateCityManagerRequest $request , $cityManagerID)
     {
-         //fetch request data
-         $requestData = request()->all();
+        //fetch request data
+        $requestData = request()->all();
 
-         // update new data into data base
-         USER::find($cityManagerID)->update([
+        // update new data into data base
+        CityManager::find($cityManagerID)->update([
 
             'name' => $requestData['name'],
             'email' => $requestData['email'],
-            'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
-         ]);
+        ]);
 
-         //redirection to posts.index
-         return redirect()->route('cityManagers.index');
+        //redirection to posts.index
+        return redirect()->route('cityManagers.index');
     }
 
 
@@ -128,7 +120,7 @@ class CityManagerController extends Controller
      */
     public function destroy($cityManager)
     {
-        User::find($cityManager)->delete();
+        CityManager::find($cityManager)->delete();
         return redirect()->route('cityManagers.index');
     }
 }

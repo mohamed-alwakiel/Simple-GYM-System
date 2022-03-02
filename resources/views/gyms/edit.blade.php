@@ -5,45 +5,48 @@
 @endsection
 
 @section('content')
+    <div class="pt-4">
 
-    <div class="content-wrapper">
-        <div class="container">
-            <a href="{{route('gyms.index')}}" class="btn btn-success mt-5">Back</a>
-            <div class="row">
-                <div class="col-12 mt-5">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('gyms.update', $gym->id) }}" method="post">
+            @csrf
+            @method('patch')
 
-                    <form action="{{route('gyms.update',$gym->id)}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('patch')
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" name="name"  value={{$gym->name}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
-                        </div>
-                        @error('name')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-                        <div class="mb-3">
-                            <label for="image">Avatar</label>
-                            <input type="file"  id="image" name="cover_img">
+            <div class="mb-3">
+                <label class="form-label"> Gym Name </label>
+                <input type="text" value="{{ $gym->name }}" name="name" class="form-control">
+            </div>
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">City Name</label>
-                            <select class="form-control" name="city_id">
-                                @foreach($cities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white" id="inputGroupFileAddon01">Gym Iamge</span>
+                </div>
 
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
+                <div class="custom-file">
+                    <input type="file" name="cover_img" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
                 </div>
 
             </div>
-        </div>
-    </div>
 
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">City Name</label>
+                <select class="form-control" name="city_id">
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}" {{ $gym->city_id == $city->id ? "SELECTED" : "" }}>{{ $city->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                 <button type="submit" class="btn btn-success py-2 px-4">Update</button>
+             </div>
+
+         </form>
+     </div>
 @endsection
-

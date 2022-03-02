@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\GymManager;
+use App\Models\CityManager;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class GymManagerSeeder extends Seeder
+class CityManagerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class GymManagerSeeder extends Seeder
      */
     public function run()
     {
-        GymManager::factory(5)->create();
+        CityManager::factory(5)->create();
     }
 }

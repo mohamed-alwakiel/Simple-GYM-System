@@ -12,25 +12,33 @@
              @csrf
              @method('put')
 
+             <input type="hidden" name="id" value="{{ $cityManager->id }}">
+
              <div class="mb-3">
                  <label class="form-label"> Manager Name </label>
                  <input type="text" value="{{ $cityManager->name }}" name="name" class="form-control">
              </div>
+             @error('name')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
              <div class="mb-3">
                  <label class="form-label"> Email </label>
                  <input type="email" value="{{ $cityManager->email }}" name="email" class="form-control">
              </div>
+             @error('email')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
              <div class="mb-3">
                  <label class="form-label"> National ID </label>
                  <input type="number" value="{{ $cityManager->national_id }}" name="national_id" class="form-control">
              </div>
+             @error('national_id')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
-             <div class="mb-3">
-                 <label class="form-label"> Profile Iamge </label>
-                 <input type="text" value="{{ $cityManager->profile_img }}" name="img" class="form-control">
-             </div>
+
 
              {{-- <div class="mb-3">
                     <label class="form-label">Post Creator</label>

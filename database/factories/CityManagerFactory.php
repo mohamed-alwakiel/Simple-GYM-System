@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GymManager>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CityManager>
  */
-class GymManagerFactory extends Factory
+class CityManagerFactory extends Factory
 {
-
     protected $model = User::class;
 
     /**
@@ -29,9 +28,9 @@ class GymManagerFactory extends Factory
             // 'email_verified_at' => now(),
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
-            'profile_img' => 'GymMgr.Png',
-            'role_id' => 3,
-            'role_type' => 'Gym_Mgr'
+            'profile_img' => 'CityMgr.Png',
+            'role_id' => 2,
+            'role_type' => 'City_Mgr'
         ];
     }
 }

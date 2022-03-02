@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GymManager extends Model
+class CityManager extends Model
 {
     use HasFactory;
 
@@ -20,5 +20,4 @@ class GymManager extends Model
         'role_id',
         'role_type'
     ];
-
 }

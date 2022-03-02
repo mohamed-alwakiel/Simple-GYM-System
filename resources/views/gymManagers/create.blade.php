@@ -71,9 +71,9 @@
                         <option value="{{ $user->id }}" {{ $selectedPost['user_id'] == $user->id ? "SELECTED" : "" }}>{{ $user->name }}</option>
                     @endforeach
 
-                </select>
+                </select> --}}
 
-            </div> --}}
+            </div>
 
             <div class="d-flex justify-content-end">
 

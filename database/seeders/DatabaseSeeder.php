@@ -16,7 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        // create gym manager
+        // $this->call([
+        //     GitySeeder::class
+        //     GymManagerSeeder::class
+        //     CityManagerSeeder::class
+        // ]);
+
         Package::factory(10)->create();
     }
 }

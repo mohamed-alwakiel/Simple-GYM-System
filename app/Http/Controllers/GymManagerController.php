@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateGymManagerRequest;
+use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,6 @@ class GymManagerController extends Controller
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
         ]);
-        // return view('gymManagers.index');
     }
 
 
@@ -46,7 +46,6 @@ class GymManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function store(StoreGymManagerRequest $request)
     public function store(StoreGymManagerRequest $request)
     {
 
@@ -60,14 +59,13 @@ class GymManagerController extends Controller
         // $image->move(public_path('dist/img/GymMgr'), $imageName);
 
         // store new data into data base
-        User::create([
+        GymManager::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
             // 'profile_img' => $imageName,
-            'profile_img' => 'gymManager.png',
-
+            'profile_img' => 'gymMgr.png',
             'national_id' => $requestData['national_id'],
 
             'role_type' => 'Gym_Mgr',
@@ -89,7 +87,7 @@ class GymManagerController extends Controller
      */
     public function edit($gymManagerID)
     {
-        $gymManager = User::find($gymManagerID);
+        $gymManager = GymManager::find($gymManagerID);
 
         return view('gymManagers.edit', [
             'gymManager' => $gymManager
@@ -110,7 +108,7 @@ class GymManagerController extends Controller
         $requestData = request()->all();
 
         // update new data into data base
-        USER::find($gymManagerID)->update([
+        GymManager::find($gymManagerID)->update([
 
             'name' => $requestData['name'],
             'email' => $requestData['email'],
@@ -130,7 +128,7 @@ class GymManagerController extends Controller
      */
     public function destroy($gymManager)
     {
-        User::find($gymManager)->delete();
+        GymManager::find($gymManager)->delete();
         return redirect()->route('gymManagers.index');
     }
 }
