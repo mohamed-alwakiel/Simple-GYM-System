@@ -1,45 +1,64 @@
  @extends('layouts.master')
 
-@section('title')
-Gym Managers
-@endsection
+ @section('title')
+     Gym Managers
+ @endsection
 
-@section('content')
-<!-- Content Wrapper. Contains page content -->
+ @section('content')
+     <div class="pt-4">
 
+         <form class="mt-5 w-50 mx-auto" action="{{ route('gymManagers.update', $gymManager->id) }}" method="post">
+             @csrf
+             @method('put')
 
-
-
-            <form action="{{ route('gymManagers.update', $gymManager->id) }}" method="post">
-
-                @csrf
-                @method('put')
+             <input type="hidden" name="id" value="{{ $gymManager->id }}">
 
 
-                <label for="">name</label>
-                <input type="text" name="name" value="{{ $gymManager->name }}"><br>
+             <div class="mb-3">
+                 <label class="form-label"> Manager Name </label>
+                 <input type="text" value="{{ $gymManager->name }}" name="name" class="form-control">
+             </div>
+             @error('name')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
-                <label for="">email</label>
-                <input type="email" name="email" value="{{ $gymManager->email }}"><br>
+             <div class="mb-3">
+                 <label class="form-label"> Email </label>
+                 <input type="email" value="{{ $gymManager->email }}" name="email" class="form-control">
+             </div>
+             @error('email')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
-                <label for="">national id</label>
-                <input type="number" name="national_id" value="{{ $gymManager->national_id }}"><br>
+             <div class="mb-3">
+                 <label class="form-label"> National ID </label>
+                 <input type="number" value="{{ $gymManager->national_id }}" name="national_id" class="form-control">
+             </div>
+             @error('national_id')
+                 <div class="alert alert-danger">{{ $message }}</div>
+             @enderror
 
-                <label for="">profile img</label>
-                <input type="text" name="img" value="{{ $gymManager->profile_img }}"><br>
+             {{-- <div class="mb-3">
+                    <label class="form-label">Post Creator</label>
 
-                <button type="submit">Update</button>
+                    <select name="user_id" class="form-control">
 
-            </form>
+                        <option class="text-center" value="" {{ $selectedPost->user ? "" : "SELECTED" }}> -- select creator -- </option>
 
+                        {{-- loop on users to show them in drop down list --}}
+             {{-- @foreach ($users as $user)
 
+                            <option value="{{ $user->id }}" {{ $selectedPost['user_id'] == $user->id ? "SELECTED" : "" }}>{{ $user->name }}</option>
+                        @endforeach
 
+                    </select>
 
+                </div> --}}
 
+             <div class="d-flex justify-content-end">
+                 <button type="submit" class="btn btn-success py-2 px-4">Update</button>
+             </div>
 
-
-
-
-
-    <!-- /.content-wrapper -->
-@endsection
+         </form>
+     </div>
+ @endsection

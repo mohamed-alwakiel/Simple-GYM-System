@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGymManagerRequest;
+use App\Http\Requests\UpdateGymManagerRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,10 +47,17 @@ class GymManagerController extends Controller
      */
 
     // public function store(StoreGymManagerRequest $request)
-    public function store()
+    public function store(StoreGymManagerRequest $request)
     {
+
         //fetch request data
         $requestData = request()->all();
+
+        // deal with image
+        // $image = $request->img;
+
+        // $imageName = time() . rand(1, 200) . '.' . $image->extension();
+        // $image->move(public_path('dist/img/GymMgr'), $imageName);
 
         // store new data into data base
         User::create([
@@ -56,7 +65,9 @@ class GymManagerController extends Controller
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
-            'profile_img' => $requestData['img'],
+            // 'profile_img' => $imageName,
+            'profile_img' => 'gymManager.png',
+
             'national_id' => $requestData['national_id'],
 
             'role_type' => 'Gym_Mgr',
@@ -68,16 +79,6 @@ class GymManagerController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(GymManager $gymManager)
-    // {
-    //     //
-    // }
 
 
     /**
@@ -90,7 +91,7 @@ class GymManagerController extends Controller
     {
         $gymManager = User::find($gymManagerID);
 
-        return view('gymManagers.edit',[
+        return view('gymManagers.edit', [
             'gymManager' => $gymManager
         ]);
     }
@@ -103,22 +104,21 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function update($gymManagerID)
+    public function update(UpdateGymManagerRequest $request, $gymManagerID)
     {
-         //fetch request data
-         $requestData = request()->all();
+        //fetch request data
+        $requestData = request()->all();
 
-         // update new data into data base
-         USER::find($gymManagerID)->update([
+        // update new data into data base
+        USER::find($gymManagerID)->update([
 
             'name' => $requestData['name'],
             'email' => $requestData['email'],
-            'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
-         ]);
+        ]);
 
-         //redirection to posts.index
-         return redirect()->route('gymManagers.index');
+        //redirection to posts.index
+        return redirect()->route('gymManagers.index');
     }
 
 

@@ -24,15 +24,15 @@ return new class extends Migration
 
             $table->date('date_of_birth');
             $table->enum('gender',['male','female']);
-            $table->string('profile_img');
-            $table->bigInteger('national_id');
+            $table->string('profile_img')->nullable();
+            $table->bigInteger('national_id')->nullable();
 
             $table->morphs('role');     // for permissio
             $table->timestamp('banned_at')->nullable(); // for ban user
 
             $table->dateTime('last_login')->nullable();
 
-            // $table->integer('gym_id');
+            // $table->integer('gym_id')->nullable();
 
             // $table->integer('city_id');
 

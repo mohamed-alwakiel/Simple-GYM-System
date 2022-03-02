@@ -6,10 +6,48 @@ Sessions
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <a href="#" class="btn btn-info btn-lg">Button 1</a>
-    <a href="#" class="btn btn-info btn-lg">Button 2</a>
-    <a href="#" class="btn btn-info btn-lg">Button 3</a>
+<div class='container dark:bg-gray-900'>
+    <div class="text-center mt-5">
+        <a href="{{ route('sessions.create') }}" class="btn btn-success ">Create session</a>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">day</th>
+
+                <th scope="col">started_at</th>
+                <th scope="col">finished_at </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($sessions as $session)
+                <tr>
+                    <th scope="row">{{ $session->id }}</th>
+                    <td>{{ $session->name }}</td>
+                    <td>{{ $session->day}}</td>
+                    <td>{{ $session->started_at }}</td>
+                    <td>{{ $session->finished_at }}</td>
+                    {{-- <td><a href="{{ route('sessions.show', ['id' => $session->id]) }}" class="btn btn-info">View</a></td> --}}
+                    <td><a href="{{ route('sessions.edit', ['id' => $session->id]) }}" class="btn btn-success">Edite</a></td>
+
+                    <td>
+
+                        <form method="POST" action="{{ route('sessions.destroy', ['id' => $session->id]) }}">
+                            @CSRF
+
+                            @method('delete')
+                            <input class='btn btn-danger' type="submit" onclick=" return confirm('are you sure ?')"
+                                value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    {{-- {{ $sessions->links() }} --}}
 </div>
 <!-- /.content-wrapper -->
 @endsection

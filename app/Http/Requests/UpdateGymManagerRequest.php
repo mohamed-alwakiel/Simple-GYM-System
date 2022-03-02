@@ -13,7 +13,7 @@ class UpdateGymManagerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,25 @@ class UpdateGymManagerRequest extends FormRequest
      */
     public function rules()
     {
+        $mgrID = $this->request->get("id");
+
         return [
-            //
+            'name' => ['required', 'string', 'min:4'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $mgrID],
+            'national_id' => ['required', 'min:14', 'max:14', 'unique:users,national_id,' . $mgrID]
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()      // if you want to override the error message
+    {
+        return [
+            'natioal_id.min' => 'national ID must be 14 digits',
+            'natioal_id.max' => 'national ID must be 14 digits',
         ];
     }
 }
