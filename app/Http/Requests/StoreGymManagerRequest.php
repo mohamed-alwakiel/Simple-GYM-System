@@ -24,7 +24,26 @@ class StoreGymManagerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'min:4'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'national_id' => ['required', 'min:14', 'max:14','unique:users']
+        ];
+
+    }
+
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()      // if you want to override the error message
+    {
+        return [
+            'natioal_id.min' => 'national ID must be 14 digits',
+            'natioal_id.max' => 'national ID must be 14 digits',
         ];
     }
+
 }

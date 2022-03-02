@@ -2,29 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGymManagerRequest;
-use App\Http\Requests\UpdateGymManagerRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class GymManagerController extends Controller
+class CityManagerController extends Controller
 {
-
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $gymManagers = DB::table('users')->where('role_id', 3)->get();
+        $cityManagers = DB::table('users')->where('role_id', 2)->get();
 
-        return view('gymManagers.index', [
-            'gymManagers' => $gymManagers,
+        return view('cityManagers.index', [
+            'cityManagers' => $cityManagers,
         ]);
-        // return view('gymManagers.index');
     }
 
 
@@ -35,7 +31,7 @@ class GymManagerController extends Controller
      */
     public function create()
     {
-        return view('gymManagers.create');
+        return view('cityManagers.create');
     }
 
 
@@ -47,17 +43,10 @@ class GymManagerController extends Controller
      */
 
     // public function store(StoreGymManagerRequest $request)
-    public function store(StoreGymManagerRequest $request)
+    public function store()
     {
-
         //fetch request data
         $requestData = request()->all();
-
-        // deal with image
-        // $image = $request->img;
-
-        // $imageName = time() . rand(1, 200) . '.' . $image->extension();
-        // $image->move(public_path('dist/img/GymMgr'), $imageName);
 
         // store new data into data base
         User::create([
@@ -65,20 +54,28 @@ class GymManagerController extends Controller
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
-            // 'profile_img' => $imageName,
-            'profile_img' => 'gymManager.png',
-
+            'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
 
-            'role_type' => 'Gym_Mgr',
-            'role_id' => 3,
+            'role_type' => 'City_Mgr',
+            'role_id' => 2,
         ]);
 
         //redirection to posts.index
-        return redirect()->route('gymManagers.index');
+        return redirect()->route('cityManagers.index');
     }
 
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\GymManager  $gymManager
+     * @return \Illuminate\Http\Response
+     */
+    // public function show(GymManager $gymManager)
+    // {
+    //     //
+    // }
 
 
     /**
@@ -87,12 +84,12 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function edit($gymManagerID)
+    public function edit($cityManagerID)
     {
-        $gymManager = User::find($gymManagerID);
+        $cityManager = User::find($cityManagerID);
 
-        return view('gymManagers.edit', [
-            'gymManager' => $gymManager
+        return view('cityManagers.edit',[
+            'cityManager' => $cityManager
         ]);
     }
 
@@ -104,21 +101,22 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGymManagerRequest $request, $gymManagerID)
+    public function update($cityManagerID)
     {
-        //fetch request data
-        $requestData = request()->all();
+         //fetch request data
+         $requestData = request()->all();
 
-        // update new data into data base
-        USER::find($gymManagerID)->update([
+         // update new data into data base
+         USER::find($cityManagerID)->update([
 
             'name' => $requestData['name'],
             'email' => $requestData['email'],
+            'profile_img' => $requestData['img'],
             'national_id' => $requestData['national_id'],
-        ]);
+         ]);
 
-        //redirection to posts.index
-        return redirect()->route('gymManagers.index');
+         //redirection to posts.index
+         return redirect()->route('cityManagers.index');
     }
 
 
@@ -128,9 +126,9 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy($gymManager)
+    public function destroy($cityManager)
     {
-        User::find($gymManager)->delete();
-        return redirect()->route('gymManagers.index');
+        User::find($cityManager)->delete();
+        return redirect()->route('cityManagers.index');
     }
 }

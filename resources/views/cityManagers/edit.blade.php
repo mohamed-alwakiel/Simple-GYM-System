@@ -1,42 +1,36 @@
  @extends('layouts.master')
 
  @section('title')
-     Gym Managers
+     City Managers
  @endsection
 
  @section('content')
      <div class="pt-4">
 
-         <form class="mt-5 w-50 mx-auto" action="{{ route('gymManagers.update', $gymManager->id) }}" method="post">
+
+         <form class="mt-5 w-50 mx-auto" action="{{ route('cityManagers.update', $cityManager->id) }}" method="post">
              @csrf
              @method('put')
 
-             <input type="hidden" name="id" value="{{ $gymManager->id }}">
-
-
              <div class="mb-3">
                  <label class="form-label"> Manager Name </label>
-                 <input type="text" value="{{ $gymManager->name }}" name="name" class="form-control">
+                 <input type="text" value="{{ $cityManager->name }}" name="name" class="form-control">
              </div>
-             @error('name')
-                 <div class="alert alert-danger">{{ $message }}</div>
-             @enderror
 
              <div class="mb-3">
                  <label class="form-label"> Email </label>
-                 <input type="email" value="{{ $gymManager->email }}" name="email" class="form-control">
+                 <input type="email" value="{{ $cityManager->email }}" name="email" class="form-control">
              </div>
-             @error('email')
-                 <div class="alert alert-danger">{{ $message }}</div>
-             @enderror
 
              <div class="mb-3">
                  <label class="form-label"> National ID </label>
-                 <input type="number" value="{{ $gymManager->national_id }}" name="national_id" class="form-control">
+                 <input type="number" value="{{ $cityManager->national_id }}" name="national_id" class="form-control">
              </div>
-             @error('national_id')
-                 <div class="alert alert-danger">{{ $message }}</div>
-             @enderror
+
+             <div class="mb-3">
+                 <label class="form-label"> Profile Iamge </label>
+                 <input type="text" value="{{ $cityManager->profile_img }}" name="img" class="form-control">
+             </div>
 
              {{-- <div class="mb-3">
                     <label class="form-label">Post Creator</label>
@@ -56,9 +50,10 @@
                 </div> --}}
 
              <div class="d-flex justify-content-end">
+
                  <button type="submit" class="btn btn-success py-2 px-4">Update</button>
              </div>
-
          </form>
+
      </div>
  @endsection
