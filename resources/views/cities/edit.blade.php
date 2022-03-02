@@ -18,10 +18,11 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input   type="text" name="name"   value={{$city['name']}} class="form-control" >
-                            @error('name')
-                            <div class="alert alert-danger">{{$message}}</div>
-                            @enderror
+
                         </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
 
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>

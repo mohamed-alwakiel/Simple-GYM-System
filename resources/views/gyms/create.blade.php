@@ -17,6 +17,9 @@
                             <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
                         </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                         <div class="mb-3">
                             <label for="image">Upload Avatar Image</label>
                             <input type="file"  id="image" name="cover_img">
@@ -31,6 +34,7 @@
                                 @endforeach
                             </select>
                         </div>
+
 
 
                         <button type="submit" class="btn btn-primary">Submit</button>

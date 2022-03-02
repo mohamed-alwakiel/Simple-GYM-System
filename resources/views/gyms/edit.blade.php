@@ -20,6 +20,9 @@
                             <input type="text" name="name"  value={{$gym->name}} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
                         </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                         <div class="mb-3">
                             <label for="image">Avatar</label>
                             <input type="file"  id="image" name="cover_img">
