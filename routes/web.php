@@ -9,9 +9,9 @@ use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CityManagerController;
 use App\Http\Controllers\GymsController;
 use App\Http\Controllers\TrainingPackageController;
-use App\Http\Controllers\CoachesController;
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\BuyPackageController;
-use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\TrainingSessionController;
 
 
 
@@ -29,10 +29,6 @@ use App\Http\Controllers\SessionsController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
 // --------------- CITY MANAGERS
 Route::middleware(['auth'])->group(function () {
     Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
@@ -117,13 +113,27 @@ Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, '
 });
 
 // --------------- Sessions
-Route::get('/sessions', [SessionsController::class, 'index'])->name('sessions.index')->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
+    Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
+    Route::POST('/sessions', [TrainingSessionController::class, 'store'])->name('sessions.store');
+    Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');
+    Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
+    Route::DELETE('/sessions/{id}', [TrainingSessionController::class, 'destroy'])->name('sessions.destroy');
+});
 
 
 
 // --------------- Coaches
-Route::get('/coaches', [CoachesController::class, 'index'])->name('coaches.index')->middleware('auth');
-
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/coaches', [CoachController::class, 'index'])->name('coaches.index');
+    Route::GET('/coaches/create', [CoachController::class, 'create'])->name('coaches.create');
+    Route::POST('/coaches', [CoachController::class, 'store'])->name('coaches.store');
+    Route::GET('/coaches/{id}/edit', [CoachController::class, 'edit'])->name('coaches.edit');
+    Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
+    Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
+});
 
 
 // --------------- Attendance
@@ -133,3 +143,10 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 // --------------- Buy Package
 Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
+
+
+
+
+Auth::routes();
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+

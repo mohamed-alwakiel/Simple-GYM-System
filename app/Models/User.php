@@ -29,7 +29,7 @@ class User extends Authenticatable
         'profile_img',
         'role_id',
         'role_type'
-        
+
     ];
 
     /**
