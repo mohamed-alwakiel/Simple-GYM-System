@@ -32,7 +32,7 @@ class GymsController extends Controller
         $imageName = time() . rand(1, 200) . '.' . $image->extension();
         $image->move(public_path('imgs//' . 'gym'), $imageName);
 
-        
+
         Gym::create([
             'name' => $request->name,
             'cover_img' => $imageName,
@@ -58,14 +58,7 @@ class GymsController extends Controller
 
         // all data exeept image
         if( $request->cover_img){
-//            if user want update image
-            // get old image
-            $oldImage = public_path("imgs//gym//" . $gym->cover_img);
-            if( file_exists($oldImage)){
-                // delete old image
-                unlink($oldImage);
-            }
-            $image = $request->cover_img;
+
             // create new name for image
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             // move image to public folder
