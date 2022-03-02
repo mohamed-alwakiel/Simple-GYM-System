@@ -4,15 +4,7 @@ Creating Training Packages
 @endsection
 
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+
 <form method="POST" action="{{route('trainingPackages.store')}}" class="mt-5">
     @csrf
     <div class="form-group m-3">
@@ -22,19 +14,27 @@ Creating Training Packages
 
 
     </div>
+    @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
     <div class="form-group m-3">
         <label for="Desc">Price</label>
         <input name="price" type="text" class="form-control" id="price" aria-describedby="titleHelp">
 
     </div>
+    @error('price')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
     <div class="form-group m-3">
         <label for="num_sessions">Number Of Sessions</label>
         <input name="number_of_sessions" type="text" class="form-control" id="num_sessions" aria-describedby="titleHelp">
 
     </div>
-
+    @error('number_of_sessions')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
     <button type="submit" class="btn btn-success m-4">Create</button>
 </form>
