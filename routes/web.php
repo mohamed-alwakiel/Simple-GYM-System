@@ -84,8 +84,19 @@ Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->nam
 
 
 // --------------- Users
-Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/users', [UserController::class, 'index'])->name('users.index');
+    Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::POST('/users', [UserController::class, 'store'])->name('users.store');
 
+    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+    Route::GET('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+
+});
 
 
 
