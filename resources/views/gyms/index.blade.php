@@ -25,7 +25,15 @@
                             <tr>
                                 <td scope="row">{{$gym->name}}</td>
                                 <td scope="row"><img src="{{url('imgs/gym/'.$gym->cover_img)}} " width="80" height="80" alt=""/></td>
-                                <td scope="row">{{$gym->city_id}}</td>
+                                <td scope="row">
+                                    @foreach ($cities as $city)
+                                        @if ($gym->city_id == $city->id)
+                                            {{ $city->name }}
+                                        @endif
+                                    @endforeach
+                                </td>
+
+
                                 <td>
 
                                     <a  href="{{route('gyms.edit',$gym->id) }}" class="btn btn-primary  btn-sm">Edit</a>
