@@ -14,6 +14,8 @@
 
                 <th scope="col">started_at</th>
                 <th scope="col">finished_at </th>
+                <th scope="col">  Edite </th>
+                <th scope="col">  Delete </th>
             </tr>
         </thead>
         <tbody>
