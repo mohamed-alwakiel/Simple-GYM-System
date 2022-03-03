@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('bought_packages', 'packege_id')) {
-            Schema::table('bought_packages', function (Blueprint $table) {
-                $table->renameColumn('packege_id', 'package_id');
-            });
-        };
+        
+            if (Schema::hasColumn('bought_packages', 'name')){
+                Schema::table('bought_packages', function (Blueprint $table) {
+    
+                    $table->dropColumn('name');
+                });
+            }
     }
 
     /**
@@ -27,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-       
+        Schema::table('bought_packages', function (Blueprint $table) {
+            //
+        });
     }
 };
