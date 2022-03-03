@@ -144,9 +144,19 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 
 // --------------- Buy Package
+Route::group(['middleware' => ['auth'] ], function() {
+
+    Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index');
+    Route::get('/buyPackage/create',[BuyPackageController::class, 'create'])->name('buyPackage.create');
+    Route::get('/buyPackage/{package}', [BuyPackageController::class, 'show'])->name('buyPackage.show');
+    Route::get('/buyPackage/{package}/edit',[BuyPackageController::class, 'edit'])->name('buyPackage.edit');
+    Route::put('/buyPackage/{package}',[BuyPackageController::class, 'update'])->name('buyPackage.update');
+    Route::post('/buyPackage',[BuyPackageController::class, 'store'])->name('buyPackage.store');
+    Route::delete('/buyPackage/{package}',[BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
+    
+    });
 
 
 
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
