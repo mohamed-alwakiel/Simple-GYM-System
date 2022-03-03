@@ -15,7 +15,10 @@
             <tr>
                 <th>name</th>
                 <th>email</th>
-                <th>role</th>
+                <th>National ID</th>
+                <th>profile Img</th>
+
+                <th>City Name</th>
 
                 <th>Controllers</th>
             </tr>
@@ -27,7 +30,13 @@
                 <tr>
                     <th>{{ $manager->name }}</th>
                     <th>{{ $manager->email }}</th>
-                    <th>{{ $manager->role_type }}</th>
+                    <th>{{ $manager->national_id }}</th>
+
+                    <th>
+                        <img src="{{ url('imgs/CityMgr/' . $manager->profile_img) }} " width="50px" height="50px" alt="not found" />
+                    </th>
+
+                    <td>{{ $manager->city ? $manager->city->name : 'Not Found !' }}</td>
 
                     <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('cityManagers.edit', $manager->id) }}" class="btn btn-primary">Update</a>

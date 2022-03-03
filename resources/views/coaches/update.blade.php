@@ -5,29 +5,27 @@
 @endsection
 
 @section('content')
-    {{-- @error('title')
-        <div class='alert-danger'>
+    <div class="pt-4">
 
-            {{ $message }}
-
-
-
-        </div>
-    @enderror --}}
-    <div class='container col-6'>
-
-        <form method="POST" action="{{ route('coaches.update', ['id' => $coaches['id']]) }}" class="mt-5">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('coaches.update', ['id' => $coaches['id']]) }}" method="post">
             @csrf
             @method('put')
-            <div class="mb-3 w-100">
-                <label for="name" class="form-label">Title</label>
-                <input name="name" id='name'type="text" value="{{ $coaches['name'] }}" class="form-control"
-                    >
-            </div>
-            
 
             <input type="hidden" name='id' value="{{ $coaches->id }}">
-            <button type="submit" class="btn btn-success">Submit</button>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Title</label>
+                <input name="name" id='name' type="text" value="{{ $coaches['name'] }}" class="form-control">
+            </div>
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success py-2 px-4">Update</button>
+            </div>
+
         </form>
     </div>
 @endsection

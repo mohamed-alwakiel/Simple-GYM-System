@@ -1,58 +1,58 @@
 @extends('layouts.master')
 
-@section('title','Gyms')
+@section('title', 'Gyms')
 
 
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
 
-        <div class="container">
-            <a href="{{route('gyms.create')}}" class="btn btn-info btn-lg mt-5">Add New Gym </a>
-            <div class="row">
-                <div class="col-10 mt-5">
-                    <table class="table table-hover text-center ">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Cover Image</th>
-                            <th scope="col">City Name</th>
-                            <th colspan="2" scope="col" >Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($gyms as $gym)
-                            <tr>
-                                <td scope="row">{{$gym->name}}</td>
-                                <td scope="row"><img src="{{url('imgs/gym/'.$gym->cover_img)}} " width="80" height="80" alt=""/></td>
-                                <td scope="row">{{$gym->city_id}}</td>
-                                <td>
-
-                                    <a  href="{{route('gyms.edit',$gym->id) }}" class="btn btn-primary  btn-sm">Edit</a>
-                                </td>
-
-                                <td>
-
-                                    <form action="{{route('gyms.destroy', $gym->id)}}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" onclick="return confirm('Are You Sure You Want To Delete?');"  id="btnDelete"
-                                                class="btn btn-danger btn-sm" >
-                                            Delete
-                                        </button>
-                                    </form>
-                                </td>
-
-
-
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="w-75 mx-auto pt-3 d-flex justify-content-end">
+        <a href="{{ route('gyms.create') }}" class="btn btn-success my-3">Add New Gym</a>
     </div>
-    <!-- /.content-wrapper -->
+
+    <table class="w-75 mx-auto text-center table-bordered border-2 table-striped ">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Cover Image</th>
+                <th>City Name</th>
+
+                <th>Controllers</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach ($gyms as $gym)
+                <tr>
+                    <th>{{ $gym->name }}</th>
+
+                    <th>
+                        <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" />
+                    </th>
+
+                    <th>
+                        {{ $gym->city_id }}
+                    </th>
+
+
+                    <th class="d-flex justify-content-around py-2">
+                        <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-primary">Update</a>
+
+                        <form action="{{ route('gyms.destroy', $gym->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+
+                    </th>
+
+                </tr>
+            @endforeach
+
+        </tbody>
+    </table>
+
 @endsection

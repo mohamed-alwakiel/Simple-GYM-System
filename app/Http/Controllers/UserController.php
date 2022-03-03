@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
     /**
@@ -20,9 +21,10 @@ class UserController extends Controller
     {
         $users = User::where('role_id', 4)->get();
 
-        return view('users.index',data: [
-            'users' => $users,]);
-        }
+        return view('users.index', data: [
+            'users' => $users,
+        ]);
+    }
 
 
     /**
@@ -43,28 +45,35 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-            //fetch request data
-            $request = request()->all();
-            //move uploaded image
-            $img=$request['profileImg'];
-            $ext=$img->getClientOriginalExtension();
-            $imgName =$request['name']."-". uniqid() . ".$ext ";
-            $img->storeAs('public/uploads/userImg', $imgName);
-            // store new data into data base
-            User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['passwd']),
-                'national_id' => $request['nationalId'],
-                'profile_img' => $imgName,
-                'date_of_birth' =>$request['date_of_birth'],
-                'gender' => $request['gender'],
-                'role_type' => 'client',
-                'role_id' => 4,
-            ]);
+        //fetch request data
+        $request = request()->all();
 
-            //redirection to posts.index
-            return redirect()->route('users.index');
+        // $image = $request->img;
+
+
+
+        //move uploaded image
+        $img = $request['profileImg'];
+        $imageName = time() . rand(1, 200) . '.' . $img->extension();
+
+        $img->move(public_path('imgs//' . 'client'), $imageName);
+
+
+        // store new data into data base
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['passwd']),
+            'national_id' => $request['nationalId'],
+            'profile_img' => $imageName,
+            'date_of_birth' => $request['date_of_birth'],
+            'gender' => $request['gender'],
+            'role_type' => 'client',
+            'role_id' => 4,
+        ]);
+
+        //redirection to posts.index
+        return redirect()->route('users.index');
     }
 
     /**
@@ -84,10 +93,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit( $userId)
+    public function edit($userId)
     {
-        $user =User::find($userId);
-        return view("users.edit",['user'=> $user,]);
+        $user = User::find($userId);
+        return view("users.edit", ['user' => $user,]);
     }
 
     /**
@@ -111,7 +120,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $userId)
     {
-      User::find($userId)->delete($request->all());
-      return redirect()->route('users.index');
+        User::find($userId)->delete($request->all());
+        return redirect()->route('users.index');
     }
 }

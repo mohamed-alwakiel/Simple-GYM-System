@@ -38,22 +38,19 @@
                  <div class="alert alert-danger">{{ $message }}</div>
              @enderror
 
-             {{-- <div class="mb-3">
-                    <label class="form-label">Post Creator</label>
+             <div class="mb-3">
+                 <label class="form-label">Gym</label>
 
-                    <select name="user_id" class="form-control">
+                 <select name="gym_id" class="form-control">
 
-                        <option class="text-center" value="" {{ $selectedPost->user ? "" : "SELECTED" }}> -- select creator -- </option>
+                     @foreach ($gyms as $gym)
+                         <option value="{{ $gym->id }}" {{ $gymManager->gym_id == $gym->id ? 'SELECTED' : '' }}>
+                             {{ $gym->name }}</option>
+                     @endforeach
 
-                        {{-- loop on users to show them in drop down list --}}
-             {{-- @foreach ($users as $user)
+                 </select>
 
-                            <option value="{{ $user->id }}" {{ $selectedPost['user_id'] == $user->id ? "SELECTED" : "" }}>{{ $user->name }}</option>
-                        @endforeach
-
-                    </select>
-
-                </div> --}}
+             </div>
 
              <div class="d-flex justify-content-end">
                  <button type="submit" class="btn btn-success py-2 px-4">Update</button>

@@ -20,9 +20,9 @@ class PackageFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(),
-            'price' => $this->faker->numerify(),
-            'number_of_sessions' => $this->faker->numerify()
+            'name' => $this->faker->name,
+            'price' => $this->faker->numerify('####'),
+            'number_of_sessions' => $this->faker->numerify('##')
         ];
     }
 }

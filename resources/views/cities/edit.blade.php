@@ -5,32 +5,25 @@
 @endsection
 
 @section('content')
+    <div class="pt-4">
 
-    <div class="content-wrapper">
-        <h1>{{$city['name']}}</h1>
-        <div class="container">
-            <a href="{{route('cities.index')}}" class="btn btn-success mt-5">Back</a>
-            <div class="row">
-                <div class="col-12 mt-5">
-                    <form action="{{route('cities.update',$city->id)}}" method="POST">
-                        @csrf
-                        @method('patch')
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input   type="text" name="name"   value={{$city['name']}} class="form-control" >
+        <form class="mt-5 w-50 mx-auto" action="{{ route('cities.update', $city->id) }}" method="post">
+            @csrf
+            @method('patch')
 
-                        </div>
-                        @error('name')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-
+            <div class="mb-3">
+                <label class="form-label"> City Name </label>
+                <input type="text" value="{{ $city['name'] }}" name="name" class="form-control">
             </div>
-        </div>
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success py-2 px-4">Update</button>
+            </div>
+
+        </form>
     </div>
-
 @endsection
-

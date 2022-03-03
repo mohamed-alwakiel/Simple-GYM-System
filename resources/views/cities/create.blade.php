@@ -5,27 +5,24 @@
 @endsection
 
 @section('content')
+    <div class="pt-4">
 
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mt-5">
-                    <form action="{{route('cities.store')}}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
-                        </div>
-                        @error('name')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
+        <form class="mt-5 w-50 mx-auto" action="{{ route('cities.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            {{-- manager name --}}
+            <div class="mb-3">
+                <label class="form-label"> City Name </label>
+                <input type="text" name="name" class="form-control">
             </div>
-        </div>
-</div>
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
+            <div class="d-flex justify-content-end">
+
+                <button type="submit" class="btn btn-success py-2 px-4">Save</button>
+            </div>
+        </form>
+
+    </div>
 @endsection
