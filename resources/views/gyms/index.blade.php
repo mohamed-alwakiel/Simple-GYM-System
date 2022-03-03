@@ -28,7 +28,7 @@
                     <th>{{ $gym->name }}</th>
 
                     <th>
-                        <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="80" height="80" alt="" />
+                        <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" />
                     </th>
 
                     <th>
@@ -36,7 +36,7 @@
                     </th>
 
 
-                    <th class="d-flex justify-content-around py-4">
+                    <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-primary">Update</a>
 
                         <form action="{{ route('gyms.destroy', $gym->id) }}" method="post">

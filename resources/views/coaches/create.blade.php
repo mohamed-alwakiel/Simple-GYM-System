@@ -5,16 +5,25 @@
 @endsection
 
 @section('content')
+    <div class="pt-4">
 
-    <div class='container '>
-        <form method="POST" class='mt-5' action="{{ route('coaches.store') }}" class="mt-5" enctype="multipart/form-data">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('coaches.store') }}" method="post">
             @csrf
-            
-            <div class="mb-3 w-100 mt-5">
+
+            <div class="mb-3">
                 <label for="name" class="form-label">Coach name</label>
                 <input name="name" type="text" class="form-control" id="name">
-           
-            <button type="submit" class="btn btn-success">Add</button>
+            </div>
+            
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <div class="d-flex justify-content-end">
+
+                <button type="submit" class="btn btn-success py-2 px-4">Save</button>
+            </div>
         </form>
+
     </div>
 @endsection

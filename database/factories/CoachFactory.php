@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
+use App\Models\Coach;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Package>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Coach>
  */
-
-class PackageFactory extends Factory
+class CoachFactory extends Factory
 {
+    protected $model = Coach::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,10 +19,9 @@ class PackageFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'name' => $this->faker->name,
-            'price' => $this->faker->numerify('####'),
-            'number_of_sessions' => $this->faker->numerify('##')
         ];
     }
 }

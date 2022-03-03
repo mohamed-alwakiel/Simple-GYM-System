@@ -26,7 +26,7 @@ class GymManagerFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            // 'email_verified_at' => now(),
+            'email_verified_at' => now(),
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'GymMgr.Png',
