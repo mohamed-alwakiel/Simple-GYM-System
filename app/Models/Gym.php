@@ -19,6 +19,6 @@ class Gym extends Model
     protected$table='gyms';
 
     public function city() {
-        return $this->belongsTo('App\Models\Gym');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }

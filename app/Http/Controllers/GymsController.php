@@ -79,6 +79,7 @@ class GymsController extends Controller
     }
 
     public function destroy($gym_id) {
+
         Gym::find($gym_id)->delete();
 
         return redirect()->route('gyms.index');
