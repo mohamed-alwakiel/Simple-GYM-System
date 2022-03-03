@@ -15,8 +15,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
-    @endif
+        </div>    @endif
     <div class='container '>
         <form method="POST" class='mt-5' action="{{ route('sessions.store') }}" class="mt-5"
             enctype="multipart/form-data">

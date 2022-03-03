@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Coach;
 use App\Models\CoachSession;
@@ -44,11 +45,11 @@ class TrainingSessionController extends Controller
         $requestedData=request()->all();
 
       $session=  TrainingSession::create($requestedData);
-foreach($requestedData['coach_id'] as $coach ){
+     foreach($requestedData['coach_id'] as $coach ){
         CoachSession::create(
             array(
             'training_session_id'=> $session['id'],
-        'coach_id'=> $coach,
+            'coach_id'=> $coach,
         )
 
         );}
@@ -60,23 +61,17 @@ foreach($requestedData['coach_id'] as $coach ){
     }
 
 
-    // public function show($id)
-    // {
-    //     $sessions= TrainingSession::find($id);
-
-
-    //     return view('$sessions.show', [
-    //         '$sessions' => $sessions
-    //     ]);
-    // }
 
 
     public function edit($id)
     {
         $session= TrainingSession::find($id);
+        $coaches=Coach::all();
 
-        return view('sessions.update', [
-            'session' => $session
+        return view('sessions.update',
+        [
+            'session' => $session,
+            'coaches'=> $coaches
         ]);
 
     }
@@ -86,7 +81,9 @@ foreach($requestedData['coach_id'] as $coach ){
         $formDAta=request()->all();
 
         $session=TrainingSession::find($id)->update($formDAta);
+        $session = TrainingSession::find($id);
 
+         $session->coaches()->sync($formDAta['coach_id']);
          return redirect()->route('sessions.index');
     }
 
@@ -95,9 +92,25 @@ foreach($requestedData['coach_id'] as $coach ){
     {
          $session= TrainingSession::find($id);
 
+         $session->coaches()->detach();
         $session->delete();
 
 
         return redirect()->route('sessions.index');
+    }
+
+
+    public function paginateFast(Request $request){
+
+        if($request->ajax()){
+            Paginator::useBootstrapFive();
+            $sessions=TrainingSession::paginate(10);
+
+            return view('sessions.index_child',
+            [
+                'sessions' =>$sessions,
+
+            ])->render();
+        }
     }
 }
