@@ -144,8 +144,6 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 
 // --------------- Buy Package
-Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
-
 
 
 

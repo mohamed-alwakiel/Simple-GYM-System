@@ -15,6 +15,6 @@ class GymSeeder extends Seeder
      */
     public function run()
     {
-        Gym::factory(5)->create();
+        Gym::factory(10)->create();
     }
 }

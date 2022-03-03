@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePackageRequest;
 use Illuminate\Http\Request;
 use App\Models\Package;
-
+use Illuminate\Pagination\Paginator;
 
 class TrainingPackageController extends Controller
 {
     public function index()
     {
+        // Paginator::useBootstrapFive();
         $packageCollection = Package::paginate(10);
         return view('trainingPackages.index',['packageCollection' => $packageCollection]);
     }
@@ -54,6 +55,7 @@ class TrainingPackageController extends Controller
 
         return to_route('trainingPackages.index')
             ->with('success', 'package deleted successfully');
+       
     }
 }
 
