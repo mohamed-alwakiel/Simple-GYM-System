@@ -22,11 +22,11 @@ class TrainingSession extends Model
     public function gym(){
 
         return $this->belongsTo(Gym::class);
-    } 
-    public function coach()
-    {
-        return $this->belongsToMany(Coach::class, 'coaches_sessions');
     }
-    
-    
+    public function coaches()
+    {
+        return $this->belongsToMany(Coach::class, 'coach_sessions','training_session_id','coach_id');
+    }
+
+
 }

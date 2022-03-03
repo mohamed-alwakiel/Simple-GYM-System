@@ -17,12 +17,11 @@ class TrainingSessionFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->random(),
+
             'name' => $this->faker->text(20),
             'day' =>$this->faker->date,
-            'started_at' => $this->faker->now(),
-            'finished_at' => $this->faker->now(),
-            'gym_id' =>Gym::all()->random()->id,
+          
+            //'gym_id' =>Gym::all()->random()->id,
              //
         ];
     }

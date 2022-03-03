@@ -14,9 +14,10 @@ Sessions
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">day</th>
+                <th scope="col">Session number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Day</th>
+                <th scope="col">Coach</th>
 
                 <th scope="col">started_at</th>
                 <th scope="col">finished_at </th>
@@ -28,8 +29,16 @@ Sessions
                     <th scope="row">{{ $session->id }}</th>
                     <td>{{ $session->name }}</td>
                     <td>{{ $session->day}}</td>
+                    <td>
+                    <ul>
+                    @foreach($session->coaches as $coach)
+                       <li>{{ $coach->name }}</li>
+                   @endforeach
+                </ul>
+            </td>
                     <td>{{ $session->started_at }}</td>
                     <td>{{ $session->finished_at }}</td>
+
                     {{-- <td><a href="{{ route('sessions.show', ['id' => $session->id]) }}" class="btn btn-info">View</a></td> --}}
                     <td><a href="{{ route('sessions.edit', ['id' => $session->id]) }}" class="btn btn-success">Edite</a></td>
 
@@ -47,7 +56,9 @@ Sessions
             @endforeach
         </tbody>
     </table>
-    {{-- {{ $sessions->links() }} --}}
+    {{ $sessions->links() }}
 </div>
 <!-- /.content-wrapper -->
+
+@
 @endsection

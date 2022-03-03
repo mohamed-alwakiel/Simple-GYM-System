@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\CoachSession;
 use Illuminate\Support\Carbon;
 use App\Models\TrainingSession;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
-use App\Http\Controllers\TrainingSessionController;
-use App\Http\Requests\UpdateTrainingSessionRequest;
 
 class TrainingSessionController extends Controller
 {
-  
+
 
     public function index()
     {
-        $sessions=TrainingSession::all();
-        
-    
+        Paginator::useBootstrapFive();
+        $sessions=TrainingSession::paginate(10);
+
+
         return view('sessions.index',
         [
             'sessions' =>$sessions,
-            
         ]);
     }
 
@@ -30,7 +30,7 @@ class TrainingSessionController extends Controller
     {
         $sessions=TrainingSession::all();
         $coaches=Coach::all();
-     
+
         return view('sessions.create',
         [
             'sessions' => $sessions,
@@ -38,38 +38,47 @@ class TrainingSessionController extends Controller
         ]);
     }
 
-    
+
     public function store(TrainingSessionRequest $request)
     {
         $requestedData=request()->all();
-      
-       dd(   $session);
-        TrainingSession::create($requestedData);
-        CoachesSessions::create();
+
+      $session=  TrainingSession::create($requestedData);
+foreach($requestedData['coach_id'] as $coach ){
+        CoachSession::create(
+            array(
+            'training_session_id'=> $session['id'],
+        'coach_id'=> $coach,
+        )
+
+        );}
+
+
+
 
         return redirect()->route('sessions.index');
     }
 
- 
-    public function show($id)
-    {
-        $sessions= TrainingSession::find($id);
-      
 
-        return view('$sessions.show', [
-            '$sessions' => $sessions
-        ]);
-    }
+    // public function show($id)
+    // {
+    //     $sessions= TrainingSession::find($id);
 
- 
+
+    //     return view('$sessions.show', [
+    //         '$sessions' => $sessions
+    //     ]);
+    // }
+
+
     public function edit($id)
     {
         $session= TrainingSession::find($id);
-        
+
         return view('sessions.update', [
             'session' => $session
         ]);
-        
+
     }
 
     public function update( $id,TrainingSessionRequest $request)
@@ -77,11 +86,11 @@ class TrainingSessionController extends Controller
         $formDAta=request()->all();
 
         $session=TrainingSession::find($id)->update($formDAta);
- 
+
          return redirect()->route('sessions.index');
     }
 
- 
+
     public function destroy($id)
     {
          $session= TrainingSession::find($id);
