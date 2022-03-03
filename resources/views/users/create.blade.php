@@ -1,3 +1,7 @@
+use App\Models\User;
+use App\Models\Gym;
+use App\Models\City;
+
 @extends('layouts.master')
 
 @section('title')
@@ -34,8 +38,8 @@ Create user
     <br>
   <div class="form-group">
         <label for="nationalId">National id</label>
-        <input type="text" name="nationalId" class="form-control" id="nationalId" value="{{old('nationalId','')}}" >
-        <span style="color:red">{{$errors->first("nationalId")}}</span>
+        <input type="text" name="national_id" class="form-control" id="national_id" value="{{old('national_id','')}}" >
+        <span style="color:red">{{$errors->first("national_id")}}</span>
     </div>
   <div class="form-group">
     <label for="passwd">Password</label>
@@ -52,7 +56,49 @@ Create user
     <input type="file" name="profileImg" class="form-control" id="profileImg" value="{{old('profileImg','')}}" >
     <span style="color:red">{{$errors->first("profileImg")}}</span>
   </div>
+  <div class="form-group">
+    <label for="cityName">Select City</label>
+    <select name="city_id" class="form-control" id='cityName' >
+    <option value="0" disable="true" selected="true">=== Select City ===</option>
+        @foreach($cities as $city)
+        <option value="{{$city->id}}"> {{$city->name}} </option>
+        @endforeach
+    </select>
+    <span style="color:red">{{$errors->first("city_id")}}</span>
+  </div>
+  <div class="form-group">
+    <label for="gymName">Select Gym</label>
+    <select name="gym_id" class="form-control" id='gymName' >
+
+    </select>
+    <span style="color:red">{{$errors->first("gym_id")}}</span>
+  </div>
   <button type="submit" class="btn btn-success">Create</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $('#cityName').on('change', function(e){
+        console.log(e);
+        var city_id = e.target.value;
+        $.get('/json-gym?city_id=' + city_id,function(data) {
+          console.log(data);
+          $('#gymName').empty();
+          $('#gymName').append('<option value="0" disable="true" selected="true">=== Select Gym ===</option>');
+
+          $.each(data, function(index, gymObj){
+            $('#gymName').append('<option value="'+ gymObj.id +'">'+ gymObj.name +'</option>');
+          })
+        });
+      });
+  </script>
+
+
+
 </form>
 
+
+
 @endsection
+
+

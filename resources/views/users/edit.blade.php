@@ -35,9 +35,9 @@ Update user
     </div>
     <br>
   <div class="form-group">
-        <label for="nationalId">National id</label>
-        <input type="text" name="nationalId" class="form-control" id="nationalId" value="{{$user->national_id}}" >
-        <span style="color:red">{{$errors->first("nationalId")}}</span>
+        <label for="national_id">National id</label>
+        <input type="text" name="national_id" class="form-control" id="national_id" value="{{$user->national_id}}" >
+        <span style="color:red">{{$errors->first("national_id")}}</span>
     </div>
   <button type="submit" class="btn btn-success">Create</button>
 </form>

@@ -24,12 +24,13 @@ class User extends Authenticatable
         'password',
         'date_of_birth',
         'gender',
-
         'national_id',
         'profile_img',
         'role_id',
-        'role_type'
-        
+        'role_type',
+        'gym_id' ,
+        'city_id'
+
     ];
 
     /**

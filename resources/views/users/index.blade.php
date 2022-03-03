@@ -34,11 +34,10 @@ Users
 
                 <th class="d-flex justify-content-around py-2">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Update</a>
-
                     <form action="{{ route('users.destroy', $user->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger" type="submit">
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('Are You Sure You Want To Delete?');">
                             Delete
                         </button>
                     </form>

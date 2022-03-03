@@ -87,10 +87,11 @@ Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->nam
 Route::middleware(['auth'])->group(function () {
     Route::GET('/users', [UserController::class, 'index'])->name('users.index');
     Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
+    // Route::get('GetGymNameFromCityName/{id}', [UserController::class,'GetGymNameFromCityName']);
+    Route::get('/json-gym',[UserController::class,'GetGymNameFromCityName']);
     Route::GET('/users/{data}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::POST('/users', [UserController::class, 'store'])->name('users.store');
-
-    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    // Route::GET('/users/{user}', [PostController::class, 'show'])->name('users.show');
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
