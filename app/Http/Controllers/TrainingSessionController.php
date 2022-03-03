@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coach;
+use App\Models\CoachSession;
 use Illuminate\Support\Carbon;
 use App\Models\TrainingSession;
+use Illuminate\Pagination\Paginator;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
-use App\Http\Controllers\TrainingSessionController;
-use App\Http\Requests\UpdateTrainingSessionRequest;
 
 class TrainingSessionController extends Controller
 {
@@ -16,14 +16,14 @@ class TrainingSessionController extends Controller
 
     public function index()
     {
-        $sessions = TrainingSession::all();
+        Paginator::useBootstrapFive();
+        $sessions = TrainingSession::paginate(10);
 
 
         return view(
             'sessions.index',
             [
                 'sessions' => $sessions,
-
             ]
         );
     }
@@ -47,24 +47,33 @@ class TrainingSessionController extends Controller
     {
         $requestedData = request()->all();
 
-        // dd($requestedData);
+        $session =  TrainingSession::create($requestedData);
+        foreach ($requestedData['coach_id'] as $coach) {
+            CoachSession::create(
+                array(
+                    'training_session_id' => $session['id'],
+                    'coach_id' => $coach,
+                )
 
-        TrainingSession::create($requestedData);
-        // CoachesSessions::create();
+            );
+        }
+
+
+
 
         return redirect()->route('sessions.index');
     }
 
 
-    public function show($id)
-    {
-        $sessions = TrainingSession::find($id);
+    // public function show($id)
+    // {
+    //     $sessions= TrainingSession::find($id);
 
 
-        return view('$sessions.show', [
-            '$sessions' => $sessions
-        ]);
-    }
+    //     return view('$sessions.show', [
+    //         '$sessions' => $sessions
+    //     ]);
+    // }
 
 
     public function edit($id)
@@ -79,6 +88,8 @@ class TrainingSessionController extends Controller
     public function update($id, TrainingSessionRequest $request)
     {
         $formDAta = request()->all();
+
+        $session = TrainingSession::find($id)->update($formDAta);
 
         $session = TrainingSession::find($id)->update($formDAta);
 

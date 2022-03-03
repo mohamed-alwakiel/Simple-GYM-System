@@ -3,13 +3,13 @@
 @section('title')
     Create
 @endsection
-	
+
 
 
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
-            
+
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -41,15 +41,20 @@
             </div>
             <div class="mb-3 w-25">
                 <label for="started_at" class="form-label">started at</label>
-                <input name="started_at" type="time" class="form-control" id="started_at">
+                <input name="started_at" type="datetime-local" class="form-control" id="started_at">
             </div>
             <div class="mb-3 w-25">
                 <label for="finished_at" class="form-label">finished at</label>
-                <input name="finished_at" type="time" class="form-control" id="finished_at">
+                <input name="finished_at" type="datetime-local" class="form-control" id="finished_at">
             </div>
+
+
+
+
+
             <div class="mb-3 w-25">
                 <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-                <select name="_id" class="form-control">
+                <select multiple name="coach_id[]" class="form-control">
                     @foreach ($coaches as $coach)
                         <option value="{{ $coach->id }}">{{ $coach->name }}</option>
                     @endforeach

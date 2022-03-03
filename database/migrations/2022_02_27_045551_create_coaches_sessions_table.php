@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('coaches_sessions', function (Blueprint $table) {
             $table->id();
 
-          //  $table->integer('session_id');
+          // $table->integer('session_id');
 
            // $table->integer('coach_id');
 

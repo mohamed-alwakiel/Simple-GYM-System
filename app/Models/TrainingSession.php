@@ -23,9 +23,9 @@ class TrainingSession extends Model
 
         return $this->belongsTo(Gym::class);
     }
-    public function coach()
+    public function coaches()
     {
-        return $this->belongsToMany(Coach::class, 'coaches_sessions');
+        return $this->belongsToMany(Coach::class, 'coach_sessions','training_session_id','coach_id');
     }
 
 
