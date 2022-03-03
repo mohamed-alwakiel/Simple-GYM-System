@@ -48,6 +48,7 @@ class TrainingSessionController extends Controller
         $requestedData = request()->all();
 
         $session =  TrainingSession::create($requestedData);
+        
         foreach ($requestedData['coach_id'] as $coach) {
             CoachSession::create(
                 array(

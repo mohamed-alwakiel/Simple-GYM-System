@@ -46,22 +46,31 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            {{-- <div class="mb-3">
-                <label class="form-label">Post Creator</label>
+            {{-- profile img --}}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-white" id="inputGroupFileAddon01">Profile Iamge</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" name="img" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
+                </div>
+            </div>
 
-                <select name="user_id" class="form-control">
 
-                    <option class="text-center" value="" {{ $selectedPost->user ? "" : "SELECTED" }}> -- select creator -- </option>
+            <div class="mb-3">
+                <label class="form-label">City</label>
 
-                    {{-- loop on users to show them in drop down list --}}
-            {{-- @foreach ($users as $user)
+                <select name="city_id" class="form-control">
 
-                        <option value="{{ $user->id }}" {{ $selectedPost['user_id'] == $user->id ? "SELECTED" : "" }}>{{ $user->name }}</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">
+                            {{ $city->name }}</option>
                     @endforeach
 
                 </select>
-
-            </div> --}}
+            </div>
 
             <div class="d-flex justify-content-end">
 

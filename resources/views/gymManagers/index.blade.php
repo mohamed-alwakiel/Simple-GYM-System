@@ -17,6 +17,9 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>National ID</th>
+                <th>profile Img</th>
+
+                <th>Gym Name</th>
 
                 <th>Controllers</th>
             </tr>
@@ -29,6 +32,14 @@
                     <th>{{ $manager->name }}</th>
                     <th>{{ $manager->email }}</th>
                     <th>{{ $manager->national_id }}</th>
+
+
+                    <th>
+                        <img src="{{ url('imgs/GymMgr/' . $manager->profile_img) }} " width="50px" height="50px" alt="not found" />
+                    </th>
+
+                    <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
+
 
                     <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('gymManagers.edit', $manager->id) }}" class="btn btn-primary">Update</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateGymManagerRequest;
+use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,10 +21,13 @@ class GymManagerController extends Controller
      */
     public function index()
     {
-        $gymManagers = DB::table('users')->where('role_id', 3)->get();
+     
+        $gymManagers = GymManager::where('role_id', 3)->get();
+        $gyms = Gym::all();
 
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
+            'gyms' => $gyms
         ]);
     }
 
@@ -35,7 +39,11 @@ class GymManagerController extends Controller
      */
     public function create()
     {
-        return view('gymManagers.create');
+        $gyms = Gym::all();
+
+        return view('gymManagers.create' ,[
+            'gyms' => $gyms
+        ]);
     }
 
 
@@ -53,10 +61,13 @@ class GymManagerController extends Controller
         $requestData = request()->all();
 
         // deal with image
-        // $image = $request->img;
-
-        // $imageName = time() . rand(1, 200) . '.' . $image->extension();
-        // $image->move(public_path('dist/img/GymMgr'), $imageName);
+        $image = $request->img;
+        if($image != null):
+            $imageName = time() . rand(1, 200) . '.' . $image->extension();
+            $image->move(public_path('imgs//' . 'GymMgr'), $imageName);
+        else:
+            $imageName = 'gymMgr.png';
+        endif;
 
         // store new data into data base
         GymManager::create([
@@ -64,18 +75,18 @@ class GymManagerController extends Controller
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
-            // 'profile_img' => $imageName,
-            'profile_img' => 'gymMgr.png',
+            'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
             'role_type' => 'Gym_Mgr',
             'role_id' => 3,
+
+            'gym_id' => $request['gym_id']
         ]);
 
         //redirection to posts.index
         return redirect()->route('gymManagers.index');
     }
-
 
 
 
@@ -88,9 +99,11 @@ class GymManagerController extends Controller
     public function edit($gymManagerID)
     {
         $gymManager = GymManager::find($gymManagerID);
+        $gyms = Gym::all();
 
         return view('gymManagers.edit', [
-            'gymManager' => $gymManager
+            'gymManager' => $gymManager,
+            'gyms' => $gyms
         ]);
     }
 
@@ -113,6 +126,7 @@ class GymManagerController extends Controller
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'national_id' => $requestData['national_id'],
+            'gym_id' => $requestData['gym_id']
         ]);
 
         //redirection to posts.index

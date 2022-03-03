@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCityManagerRequest;
 use App\Http\Requests\UpdateCityManagerRequest;
+use App\Models\City;
 use App\Models\CityManager;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,10 +21,13 @@ class CityManagerController extends Controller
      */
     public function index()
     {
-        $cityManagers = DB::table('users')->where('role_id', 2)->get();
+
+        $cityManagers = CityManager::where('role_id', 2)->get();
+        $cities = City::all();
 
         return view('cityManagers.index', [
             'cityManagers' => $cityManagers,
+            'cities' => $cities
         ]);
     }
 
@@ -35,7 +39,11 @@ class CityManagerController extends Controller
      */
     public function create()
     {
-        return view('cityManagers.create');
+        $cities = City::all();
+
+        return view('cityManagers.create', [
+            'cities' => $cities
+        ]);
     }
 
 
@@ -52,17 +60,29 @@ class CityManagerController extends Controller
         //fetch request data
         $requestData = request()->all();
 
+        // deal with image
+        $image = $request->img;
+        if($image != null):
+            $imageName = time() . rand(1, 200) . '.' . $image->extension();
+            $image->move(public_path('imgs//' . 'CityMgr'), $imageName);
+        else:
+            $imageName = 'cityMgr.png';
+        endif;
+
         // store new data into data base
         CityManager::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
 
-            'profile_img' => 'cityMgr.png',
+            'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
             'role_type' => 'City_Mgr',
             'role_id' => 2,
+
+            'city_id' => $request['city_id']
+
         ]);
 
         //redirection to posts.index
@@ -80,9 +100,11 @@ class CityManagerController extends Controller
     public function edit($cityManagerID)
     {
         $cityManager = CityManager::find($cityManagerID);
+        $cities = City::all();
 
         return view('cityManagers.edit', [
-            'cityManager' => $cityManager
+            'cityManager' => $cityManager,
+            'cities' => $cities
         ]);
     }
 
@@ -105,6 +127,7 @@ class CityManagerController extends Controller
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'national_id' => $requestData['national_id'],
+            'city_id' => $requestData['city_id']
         ]);
 
         //redirection to posts.index

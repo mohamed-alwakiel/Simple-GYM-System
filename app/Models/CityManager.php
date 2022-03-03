@@ -18,6 +18,12 @@ class CityManager extends Model
         'national_id',
         'profile_img',
         'role_id',
-        'role_type'
+        'role_type',
+        'city_id'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

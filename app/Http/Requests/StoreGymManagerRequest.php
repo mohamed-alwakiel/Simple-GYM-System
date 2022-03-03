@@ -27,7 +27,8 @@ class StoreGymManagerRequest extends FormRequest
             'name' => ['required', 'string', 'min:4'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6'],
-            'national_id' => ['required', 'min:14', 'max:14','unique:users']
+            'national_id' => ['required', 'min:14', 'max:14','unique:users'],
+            'img' => ['image, mimes:jpg,jpeg'],
         ];
 
     }

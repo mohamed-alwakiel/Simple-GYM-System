@@ -7,7 +7,8 @@
 @section('content')
     <div class="pt-4">
 
-        <form class="mt-5 w-50 mx-auto" action="{{ route('gymManagers.store') }}" method="post" enctype="multipart/form-data">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('gymManagers.store') }}" method="post"
+            enctype="multipart/form-data">
             @csrf
 
             {{-- manager name --}}
@@ -47,31 +48,28 @@
             @enderror
 
             {{-- profile img --}}
-
-            {{-- <div class="input-group mb-3">
+            <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text bg-white" id="inputGroupFileAddon01">Profile Iamge</span>
+                    <span class="input-group-text bg-white" id="inputGroupFileAddon01">Profile Iamge</span>
                 </div>
                 <div class="custom-file">
-                  <input type="file" name="img" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
+                    <input type="file" name="img" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
                 </div>
-              </div> --}}
+            </div>
 
-            {{-- <div class="mb-3">
-                <label class="form-label">Post Creator</label>
+            <div class="mb-3">
+                <label class="form-label">Gym</label>
 
-                <select name="user_id" class="form-control">
+                <select name="gym_id" class="form-control">
 
-                    <option class="text-center" value="" {{ $selectedPost->user ? "" : "SELECTED" }}> -- select creator -- </option>
-
-                    {{-- loop on users to show them in drop down list --}}
-            {{-- @foreach ($users as $user)
-
-                        <option value="{{ $user->id }}" {{ $selectedPost['user_id'] == $user->id ? "SELECTED" : "" }}>{{ $user->name }}</option>
+                    @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}">
+                            {{ $gym->name }}</option>
                     @endforeach
 
-                </select> --}}
+                </select>
 
             </div>
 

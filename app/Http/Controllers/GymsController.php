@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 
 class GymsController extends Controller
 {
+    
     public function index()
     {
         $gyms=Gym::all();
         $cities = City::all();
         return view('gyms.index', compact('gyms','cities'));
     }
+
+
+
     public function create() {
         $cities = City::all();
         $gyms = Gym::all();

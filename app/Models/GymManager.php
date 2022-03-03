@@ -18,7 +18,13 @@ class GymManager extends Model
         'national_id',
         'profile_img',
         'role_id',
-        'role_type'
+        'role_type',
+        'gym_id'
     ];
+
+    public function gym()
+    {
+        return $this->belongsTo(Gym::class);
+    }
 
 }
