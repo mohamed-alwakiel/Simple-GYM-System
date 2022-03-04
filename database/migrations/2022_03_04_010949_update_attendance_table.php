@@ -13,18 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendance', function (Blueprint $table) {
-            $table->id();
+        // Schema::table('attendance', function (Blueprint $table) {
+        //     Schema::rename('attendance', 'attendances');
+        //     $table->renameColumn('session_id', 'training_session_id');
 
-            // $table->integer('user_id');
-
-             $table->integer('session_id');
-
-            $table->date('attendance_date');
-            $table->time('attendance_time');
-
-            $table->timestamps();
-        });
+        // });
     }
 
     /**
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendance');
+        //
     }
 };
