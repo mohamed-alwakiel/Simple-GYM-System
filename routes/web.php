@@ -11,6 +11,7 @@ use App\Http\Controllers\GymsController;
 use App\Http\Controllers\TrainingPackageController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\BuyPackageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TrainingSessionController;
 
 
@@ -153,9 +154,13 @@ Route::group(['middleware' => ['auth'] ], function() {
     Route::put('/buyPackage/{package}',[BuyPackageController::class, 'update'])->name('buyPackage.update');
     Route::post('/buyPackage',[BuyPackageController::class, 'store'])->name('buyPackage.store');
     Route::delete('/buyPackage/{package}',[BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
-    
-    });
+  
+    Route::post('/create-checkout-session',[PaymentController::class, 'stripe'])->name('payment.stripe');
+    Route::get('/buyPackage/create/success',[PaymentController::class, 'success'])->name('buyPackage.success');
+    Route::get('/buyPackage/create/cancel',[PaymentController::class, 'cancel'])->name('buyPackage.cancel');
 
+
+    });
 
 
 Auth::routes();

@@ -35,6 +35,7 @@ class BuyPackageController extends Controller
         $users = User::all();
         $packages = Package::all();
         $gyms = Gym::all(); 
+        
         return view('payment.create', ['users' => $users ,'packages'=> $packages,'gyms'=>$gyms]);
     }
 
