@@ -8,6 +8,7 @@ use App\Models\Package;
 use App\Models\Attendance;
 use App\Models\CoachSession;
 use App\Models\TrainingSession;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -31,7 +32,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
         ]);
-        
+
         Package::factory(10)->create();
          TrainingSession::factory(20)->create();
          Coach::factory(20)->create();

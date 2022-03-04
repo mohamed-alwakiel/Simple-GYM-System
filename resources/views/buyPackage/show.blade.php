@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-view Training Packages
+Buy Package
 @endsection
 @section('content')
 <div class="container p-5">
@@ -13,12 +13,9 @@ view Training Packages
                 <div class="col-md-4">
                     <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
                 </div>
-                <!-- This will cause the card to be Edited when clicked -->
-                <div class="col-md-4">
-                    <a class="btn btn-tool btn-danger" href="{{ route('trainingPackages.edit', ['package' => $package->id]) }}"><i class="fas fa-pencil-alt"></i></a>
-                </div>
+        
                 <!-- This will cause the card to be removed when clicked -->
-                <form class="col-md-4" action="{{ route('trainingPackages.destroy',$package->id) }}" method="POST">
+                <form class="col-md-4" action="{{ route('buyPackage.destroy',$package->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <!-- <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-tool"><i class="fas fa-times"></i></button> -->
@@ -31,6 +28,11 @@ view Training Packages
             <p class="card-text"><b>Price:- </b> {{$package->price}}</p>
             <p class="card-text"><b>Number Of Sessions:- </b> {{$package->number_of_sessions}}</p>
             <p class="card-text"><b>Created at:- </b> {{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</p>
+            <p class="card-title mb-3"><b>Trainee :- </b> {{$package->user ? $package->user->name : 'not found'}}</p>
+            <p class="card-text"><b>Gym :- </b>{{$package->gym ? $package->gym->name : 'not found'}}</p>
+            <p class="card-text"><b>package:- </b> {{$package->package ? $package->package->name : 'not found'}}</p>
+       
+       
         </div>
     </div>
 </div>

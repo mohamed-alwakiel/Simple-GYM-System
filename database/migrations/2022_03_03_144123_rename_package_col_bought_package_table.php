@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('gyms', function (Blueprint $table) {
-             $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
-        });
+        if (Schema::hasColumn('bought_packages', 'packege_id')) {
+            Schema::table('bought_packages', function (Blueprint $table) {
+                $table->renameColumn('packege_id', 'package_id');
+            });
+        };
     }
 
     /**
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('gyms', function (Blueprint $table) {
-            //
-        });
+       
     }
 };
