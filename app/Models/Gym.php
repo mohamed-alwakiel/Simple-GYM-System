@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TrainingSession;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Gym extends Model
 {
@@ -20,5 +21,8 @@ class Gym extends Model
 
     public function city() {
         return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+    public function TrainingSessions(){
+        return $this->hasMany(TrainingSession::class,'gym_id');
     }
 }
