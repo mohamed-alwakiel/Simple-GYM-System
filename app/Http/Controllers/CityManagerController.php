@@ -62,12 +62,16 @@ class CityManagerController extends Controller
 
         // deal with image
         $image = $request->img;
-        if($image != null):
+
+
+        if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'CityMgr'), $imageName);
-        else:
+        else :
             $imageName = 'cityMgr.png';
         endif;
+
+
 
         // store new data into data base
         CityManager::create([
@@ -116,7 +120,7 @@ class CityManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCityManagerRequest $request , $cityManagerID)
+    public function update(UpdateCityManagerRequest $request, $cityManagerID)
     {
         //fetch request data
         $requestData = request()->all();

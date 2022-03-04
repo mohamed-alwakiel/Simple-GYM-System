@@ -19,12 +19,19 @@ class GymManager extends Model
         'profile_img',
         'role_id',
         'role_type',
-        'gym_id'
+        'gym_id',
+        'city_id'
     ];
 
     public function gym()
     {
         return $this->belongsTo(Gym::class);
     }
+
+
+    // public function city()
+    // {
+    //     return $this->belongsTo(City::class);
+    // }
 
 }

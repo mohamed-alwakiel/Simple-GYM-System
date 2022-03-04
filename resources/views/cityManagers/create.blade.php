@@ -7,7 +7,7 @@
 @section('content')
     <div class="pt-4">
 
-        <form class="mt-5 w-50 mx-auto" action="{{ route('cityManagers.store') }}" method="post">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('cityManagers.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             {{-- manager name --}}
@@ -40,7 +40,7 @@
             {{-- national id --}}
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="number" name="national_id" class="form-control">
+                <input type="text" name="national_id" class="form-control" onkeypress="return event.charCode > 47 && event.charCode < 58;"/>
             </div>
             @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -57,6 +57,9 @@
                     <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
                 </div>
             </div>
+            @error('img')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
 
             <div class="mb-3">
@@ -80,5 +83,4 @@
 
 
     </div>
-
 @endsection

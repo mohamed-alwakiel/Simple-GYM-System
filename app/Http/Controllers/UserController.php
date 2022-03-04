@@ -49,7 +49,6 @@ class UserController extends Controller
 
     public function GetGymNameFromCityName(Request $request)
     {
-
         $city_id = $request->get('city_id');
         $gyms = Gym::where('city_id', '=', $city_id)->get();
         return response()->json($gyms);
