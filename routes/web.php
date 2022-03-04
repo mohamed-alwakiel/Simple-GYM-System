@@ -29,6 +29,16 @@ use App\Http\Controllers\TrainingSessionController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// --------------- Ban users
+Route::get('/banned', [HomeController::class, 'banView'])->name('banned');
+// Route::get('/notallowed', [HomeController::class , 'notallowedView'])->name('notallowed');
+
+Route::get('/home/{userId}/ban', 'HomeController@ban')->name('user.ban');
+Route::get('/home/{userId}/unban', 'HomeController@unban')->name('user.unban');
+
+
 // --------------- CITY MANAGERS
 Route::middleware(['auth'])->group(function () {
     Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
