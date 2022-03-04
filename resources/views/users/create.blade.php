@@ -1,3 +1,7 @@
+{{-- use App\Models\User;
+use App\Models\Gym;
+use App\Models\City; --}}
+
 @extends('layouts.master')
 
 @section('title')
@@ -48,14 +52,13 @@
 
 
             <div class="form-check mb-3">
-                
+
                 <input class="form-check-input" type="radio" name="gender" value="male" id="gender1" checked>
                 <label class="form-check-label" for="gender1"> Male </label>
                 <input class="form-check-input" type="radio" name="gender" value="female" id="gender2"
                     style=" margin-left:25px">
                 <label class="form-check-label" for="gender2" style=" margin-left:45px"> Female </label>
             </div>
-
 
             {{-- password --}}
             <div class="mb-3">
@@ -98,11 +101,64 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
+
+            <div class="form-group">
+                <label for="cityName">Select City</label>
+                <select name="city_id" class="form-control" id='cityName'>
+                    <option value="0" disable="true" selected="true">=== Select City ===</option>
+                    @foreach ($cities as $city)
+                    <option value="{{ $city->id }}"> {{ $city->name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            @error('city_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
+            <div class="form-group">
+                <label for="gymName">Select Gym</label>
+                <select name="gym_id" class="form-control" id='gymName'>
+
+                </select>
+            </div>
+            @error('gym_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+
             <div class="d-flex justify-content-end">
 
                 <button type="submit" class="btn btn-success py-2 px-4">Save</button>
             </div>
+
+
         </form>
 
     </div>
+
+
+
+    </form>
+
+    {{-- scripts --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#cityName').on('change', function(e) {
+            console.log(e);
+            var city_id = e.target.value;
+            $.get('/json-gym?city_id=' + city_id, function(data) {
+                console.log(data);
+                $('#gymName').empty();
+                $('#gymName').append(
+                    '<option value="0" disable="true" selected="true">=== Select Gym ===</option>');
+
+                $.each(data, function(index, gymObj) {
+                    $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +
+                        '</option>');
+                })
+            });
+        });
+    </script>
 @endsection

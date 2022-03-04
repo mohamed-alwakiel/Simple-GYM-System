@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Gym;
+use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+// use Illuminate\Support\Facades\Request;
+
 
 class UserController extends Controller
 {
@@ -34,7 +41,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $cities = City::all();
+        return view('users.create', data: [
+            'cities' => $cities,
+        ]);
+    }
+
+    public function GetGymNameFromCityName(Request $request)
+    {
+
+        $city_id = $request->get('city_id');
+        $gyms = Gym::where('city_id', '=', $city_id)->get();
+        return response()->json($gyms);
     }
 
     /**
@@ -45,14 +63,11 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        dd('hello');
         //fetch request data
         $request = request()->all();
 
-        // $image = $request->img;
-
-
-
-        //move uploaded image
+        // //move uploaded image
         $img = $request['profileImg'];
         $imageName = time() . rand(1, 200) . '.' . $img->extension();
 
@@ -64,12 +79,14 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['passwd']),
-            'national_id' => $request['nationalId'],
+            'national_id' => $request['national_id'],
             'profile_img' => $imageName,
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'role_type' => 'client',
             'role_id' => 4,
+            'city_id' =>  $request['city_id'],
+            'gym_id' =>  $request['gym_id'],
         ]);
 
         //redirection to posts.index
@@ -82,9 +99,14 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($userId)
     {
-        //
+        // $user =User::find($userId);
+        // $gym=Gym::find($user->gym_id);
+        // $city=City::find($user->city_id);
+        // return view("users.edit",[
+        //     'user'=> $user,
+        // ]);
     }
 
     /**
