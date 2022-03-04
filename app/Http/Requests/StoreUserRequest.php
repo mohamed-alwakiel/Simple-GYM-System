@@ -27,10 +27,10 @@ class StoreUserRequest extends FormRequest
             // validate data from user
             'name' => 'required|max:50|min:3',
             'email' => 'required|unique:users|email',
-            'national_id' => 'required|unique:users|numeric|min:14',
+            'national_id' => 'required|unique:users|digits_between:14,14',
             'passwd' => 'required|min:6|max:20',
             'confirmPassword' => 'required|same:passwd',
-            'profileImg' => 'required|image|mimes:jpg,jpeg',
+            'profileImg' => 'image|mimes:jpg,jpeg',
             'date_of_birth' => 'required|date',
             'gym_id' =>'required|exists:gyms,id',
             'city_id' =>'required|exists:cities,id',
