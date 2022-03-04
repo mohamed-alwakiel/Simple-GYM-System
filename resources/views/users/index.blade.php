@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="w-75 mx-auto pt-3 d-flex justify-content-end">
-        <a href="{{ route('gymManagers.create') }}" class="btn btn-success my-3">Add New Client</a>
+        <a href="{{ route('users.create') }}" class="btn btn-success my-3">Add New Client</a>
     </div>
 
     <table class="w-75 mx-auto text-center table-bordered table-striped border-2">
@@ -35,7 +35,7 @@
                         <form action="{{ route('users.destroy', $user->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger" type="submit">
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are You Sure You Want To Delete?');">
                                 Delete
                             </button>
                         </form>

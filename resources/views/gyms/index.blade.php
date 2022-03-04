@@ -32,7 +32,11 @@
                     </th>
 
                     <th>
-                        {{ $gym->city_id }}
+                        @foreach($cities as $city)
+                            @if($gym->city_id == $city->id)
+                                {{$city->name}}
+                            @endif
+                        @endforeach
                     </th>
 
 

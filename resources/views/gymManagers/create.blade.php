@@ -41,7 +41,8 @@
             {{-- national id --}}
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="number" name="national_id" class="form-control">
+                <input type="text" name="national_id" class="form-control"
+                    onkeypress="return event.charCode > 47 && event.charCode < 58;" />
             </div>
             @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -59,19 +60,45 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Gym</label>
-
-                <select name="gym_id" class="form-control">
-
-                    @foreach ($gyms as $gym)
-                        <option value="{{ $gym->id }}">
-                            {{ $gym->name }}</option>
+            {{-- select city and gym --}}
+            {{-- if role Admsin --}}
+            <div class="form-group">
+                <label for="cityName">Select City</label>
+                <select name="city_id" class="form-control" id='cityName'>
+                    <option value="0" disable="true" selected="true">=== Select City ===</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}"> {{ $city->name }} </option>
                     @endforeach
+                </select>
+            </div>
+            @error('city_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <div class="form-group">
+                <label for="gymName">Select Gym</label>
+                <select name="gym_id" class="form-control" id='gymName'>
 
                 </select>
-
             </div>
+            @error('gym_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            {{-- if role city manager --}}
+            {{-- <div class="form-group">
+                <label for="gymName">Select Gym</label>
+                <select name="gym_id" class="form-control">
+                    <option value="0" disable="true" selected="true">=== Select Gym ===</option>
+                    @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            @error('gym_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror --}}
+
 
             <div class="d-flex justify-content-end">
 
@@ -80,4 +107,25 @@
         </form>
 
     </div>
+
+    {{-- scripts --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#cityName').on('change', function(e) {
+            console.log(e);
+            var city_id = e.target.value;
+            $.get('/json-gym?city_id=' + city_id, function(data) {
+                console.log(data);
+                $('#gymName').empty();
+                $('#gymName').append(
+                    '<option value="0" disable="true" selected="true">=== Select Gym ===</option>');
+
+                $.each(data, function(index, gymObj) {
+                    $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +
+                        '</option>');
+                })
+            });
+        });
+    </script>
 @endsection
