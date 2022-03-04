@@ -17,7 +17,7 @@ use App\Models\City; --}}
             {{-- manager name --}}
             <div class="mb-3">
                 <label class="form-label"> Client Name </label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" value="{{old('name','')}}">
             </div>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -26,7 +26,7 @@ use App\Models\City; --}}
             {{-- email --}}
             <div class="mb-3">
                 <label class="form-label"> Email </label>
-                <input type="email" name="email" class="form-control">
+                <input type="email" name="email" class="form-control" value="{{old('email','')}}">
             </div>
             @error('email')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -42,8 +42,8 @@ use App\Models\City; --}}
                     </span>
                 </div>
 
-                <input name="date_of_birth" type="text" class="form-control" @error('date_of_birth') is-invalid @enderror"
-                    data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                <input name="date_of_birth" type="text" class="form-control" data-inputmask-alias="datetime"
+                     data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="Date of Birth" value="{{old('date_of_birth','')}}">
 
             </div>
             @error('date_of_birth')
@@ -63,7 +63,7 @@ use App\Models\City; --}}
             {{-- password --}}
             <div class="mb-3">
                 <label class="form-label"> Password </label>
-                <input type="password" name="passwd" class="form-control">
+                <input type="password" name="passwd" class="form-control" value="{{old('passwd','')}}">
             </div>
             @error('passwd')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -71,7 +71,7 @@ use App\Models\City; --}}
 
             <div class="mb-3">
                 <label class="form-label">Confirm Password </label>
-                <input type="password" name="confirmPassword" class="form-control">
+                <input type="password" name="confirmPassword" class="form-control" value="{{old('confirmPassword','')}}">
             </div>
             @error('confirmPassword')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -80,9 +80,9 @@ use App\Models\City; --}}
             {{-- national id --}}
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="number" name="nationalId" class="form-control">
+                <input type="text" name="national_id" class="form-control" value="{{old('national_id','')}}">
             </div>
-            @error('nationalId')
+            @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
@@ -93,7 +93,7 @@ use App\Models\City; --}}
                 </div>
                 <div class="custom-file">
                     <input type="file" name="profileImg" class="custom-file-input" id="inputGroupFile01"
-                        aria-describedby="inputGroupFileAddon01">
+                        aria-describedby="inputGroupFileAddon01" value="{{old('profileImg','')}}">
                     <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
                 </div>
             </div>

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rules\Exists;
+
 // use Illuminate\Support\Facades\Request;
 
 
@@ -63,15 +65,16 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        dd('hello');
         //fetch request data
+        $img= $request->profileImg;
         $request = request()->all();
 
-        // //move uploaded image
-        $img = $request['profileImg'];
+        if($img != null):
         $imageName = time() . rand(1, 200) . '.' . $img->extension();
-
         $img->move(public_path('imgs//' . 'client'), $imageName);
+        else:
+            $imageName = 'user.png';
+        endif;
 
 
         // store new data into data base
@@ -81,7 +84,7 @@ class UserController extends Controller
             'password' => Hash::make($request['passwd']),
             'national_id' => $request['national_id'],
             'profile_img' => $imageName,
-            'date_of_birth' => $request['date_of_birth'],
+            'date_of_birth' =>$request['date_of_birth'],
             'gender' => $request['gender'],
             'role_type' => 'client',
             'role_id' => 4,
@@ -130,7 +133,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        User::find($id)->update($request->all());
+        $request = request()->all();
+        User::find($id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'national_id' => $request['national_id'],
+            'date_of_birth' =>$request['date_of_birth'],
+        ]);
         return redirect()->route('users.index');
     }
 
