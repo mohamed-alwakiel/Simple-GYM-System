@@ -54,6 +54,7 @@ class BuyPackageController extends Controller
             'user_id' => $requestObj->user_id,
             
         ]);
+   
         return to_route('buyPackage.index');
     }
 }

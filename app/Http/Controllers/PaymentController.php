@@ -43,6 +43,7 @@ class PaymentController extends Controller
 
     public function success()
     {
+ 
         return view('payment.success');
     }
 

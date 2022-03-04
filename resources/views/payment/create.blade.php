@@ -46,26 +46,26 @@ Payment
             <button type="submit" class="btn btn-success py-2 px-4">Buy</button>
         </div>
     </form>
-
-</div>
-
-<div class="body pt-4">
-    <link rel="stylesheet" href="../../css/style.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-
-    <section>
-        <div class="product">
-            <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
-            <div class="description">
-                <h3>Stubborn Attachments</h3>
-                <h5>$20.00</h5>
+    <div class="body pt-4">
+        {{-- <link rel="stylesheet" href="../../css/style.css"> --}}
+        <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        
+        <section class="mt-5 w-50 mx-auto">
+            <div class="product">
+                <div class="description">
+                    <h5>$20.00</h5>
+                </div>
             </div>
-        </div>
-        <form action="/create-checkout-session" method="POST">
-        @csrf
-            <button type="submit" id="checkout-button">Checkout</button>
-        </form>
-    </section>
+            <form  action="/create-checkout-session" method="POST">
+            @csrf
+            
+                <button class="btn btn-success py-2 px-4" type="submit" id="checkout-button" >Checkout</button>
+            </form>
+        </section>
+    </div>
+
 </div>
+
+
 @endsection
