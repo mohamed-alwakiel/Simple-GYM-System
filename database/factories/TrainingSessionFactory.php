@@ -21,9 +21,9 @@ class TrainingSessionFactory extends Factory
 
             'name' => $this->faker->text(20),
             'day' =>$this->faker->date,
-          
-            //'gym_id' =>Gym::all()->random()->id,
-             //
+
+            'gym_id' =>Gym::all()->random()->id,
+
         ];
     }
 }
