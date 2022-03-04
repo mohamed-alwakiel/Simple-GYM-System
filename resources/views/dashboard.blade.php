@@ -2,24 +2,11 @@
 
 @section('content')
 <!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Dashboard v2</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v2</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
 <!-- /.content-header -->
 
 <!-- Main content -->
+@hasanyrole('admin')
+<h1>ADMIN is here</h1>
 <section class="content">
     <div class="container-fluid">
         <!-- Info boxes -->
@@ -854,5 +841,16 @@
     </div>
     <!--/. container-fluid -->
 </section>
+@endrole
+@hasanyrole('cityManager')
+<h1>City Manager is here</h1>
+@endrole
+@hasanyrole('gymManager')
+<h1>Gym Manager is here</h1>
+@endrole
+@role('client')
+<h1>USER is here</h1>
+@endrole
+
 <!-- /.content -->
 @endsection

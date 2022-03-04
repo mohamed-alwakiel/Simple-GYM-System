@@ -77,7 +77,7 @@ class UserController extends Controller
 
 
         // store new data into data base
-        User::create([
+        $newUser = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['passwd']),
@@ -90,7 +90,7 @@ class UserController extends Controller
             'city_id' =>  $request['city_id'],
             'gym_id' =>  $request['gym_id'],
         ]);
-
+        $newUser->assignRole('client');
         //redirection to posts.index
         return redirect()->route('users.index');
     }

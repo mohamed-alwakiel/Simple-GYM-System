@@ -30,6 +30,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 
 // --------------- Ban users
 Route::get('/banned', [HomeController::class, 'banView'])->name('banned');
@@ -38,6 +42,8 @@ Route::get('/banned', [HomeController::class, 'banView'])->name('banned');
 Route::get('/home/{userId}/ban', 'HomeController@ban')->name('user.ban');
 Route::get('/home/{userId}/unban', 'HomeController@unban')->name('user.unban');
 
+
+// --------------------------------
 
 // --------------- CITY MANAGERS
 Route::middleware(['auth'])->group(function () {
@@ -100,18 +106,11 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-
-
-
 });
 
 
-
-
-
-
 // --------------- Training Packages
+<<<<<<< HEAD
 Route::group(['middleware' => ['auth'] ], function() {
 
 Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
@@ -122,6 +121,17 @@ Route::put('/trainingPackages/{package}',[TrainingPackageController::class, 'upd
 Route::post('/trainingPackages',[TrainingPackageController::class, 'store'])->name('trainingPackages.store');
 Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 
+=======
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+    Route::get('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
+    Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+    Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
+    Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
+    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
+>>>>>>> origin/reem
 });
 
 // --------------- Sessions
@@ -156,10 +166,10 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 // --------------- Buy Package
 Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
+Route::get('/getGymsBelongsToCity/{id}', [BuyPackageController::class, 'getGymsBelongsToCity']);
 
 
 
-
+// --------------- Auth -> Login & Register
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-
