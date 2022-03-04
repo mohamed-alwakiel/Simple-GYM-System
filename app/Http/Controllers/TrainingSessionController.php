@@ -91,8 +91,9 @@ class TrainingSessionController extends Controller
     public function destroy($id)
     {
          $session= TrainingSession::find($id);
-
+        $session->gyms()->dissociate();
          $session->coaches()->detach();
+        //TODO:
         $session->delete();
 
 

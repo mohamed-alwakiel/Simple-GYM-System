@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\TrainingSession;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TrainingSessionSeeder extends Seeder
 {
@@ -14,10 +15,12 @@ class TrainingSessionSeeder extends Seeder
      */
     public function run()
     {
-    TrainingSession::factory()->count(20)->create();
-    foreach(TrainingSession::all() as $session){
-        $coaches=Coach::inRandomOrder()->take(rand(1,3))->pluck('id');
-        $session->coaches()->attach($coaches);
-    }
+    // TrainingSession::factory()->count(20)->create();
+    // foreach(TrainingSession::all() as $session){
+    //     $coaches=Coach::inRandomOrder()->take(rand(1,3))->pluck('id');
+    //     $session->coaches()->attach($coaches);
+
+    TrainingSession::factory(20)->create();
+   
     }
 }

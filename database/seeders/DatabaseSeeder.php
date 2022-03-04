@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Gym;
 use App\Models\Coach;
 use App\Models\Package;
+use App\Models\Attendance;
 use App\Models\CoachSession;
 use App\Models\TrainingSession;
 use Illuminate\Database\Seeder;
@@ -31,6 +33,8 @@ class DatabaseSeeder extends Seeder
          TrainingSession::factory(20)->create();
          Coach::factory(20)->create();
          CoachSession::factory(20)->create();
+         Attendance::factory(20)->create();
+         Gym::factory(20)->create();
 
          TrainingSession::factory()->count(20)->create();
         //  foreach(TrainingSession::all() as $session){

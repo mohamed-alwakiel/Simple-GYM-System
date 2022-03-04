@@ -11,12 +11,13 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+        public function up()
     {
         Schema::table('gyms', function (Blueprint $table) {
-            //$table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.
