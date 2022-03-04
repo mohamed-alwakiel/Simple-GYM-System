@@ -53,25 +53,25 @@ class UserController extends Controller
 
 
         //move uploaded image
-        $img = $request['profileImg'];
-        $imageName = time() . rand(1, 200) . '.' . $img->extension();
+        // $img = $request['profileImg'];
+        // $imageName = time() . rand(1, 200) . '.' . $img->extension();
 
-        $img->move(public_path('imgs//' . 'client'), $imageName);
+        // $img->move(public_path('imgs//' . 'client'), $imageName);
 
 
         // store new data into data base
-        User::create([
+        $newUser = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['passwd']),
             'national_id' => $request['nationalId'],
-            'profile_img' => $imageName,
+            // 'profile_img' => $imageName,
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'role_type' => 'client',
             'role_id' => 4,
         ]);
-
+        $newUser->assignRole('client');
         //redirection to posts.index
         return redirect()->route('users.index');
     }

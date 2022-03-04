@@ -21,7 +21,7 @@ class GymManagerController extends Controller
      */
     public function index()
     {
-     
+
         $gymManagers = GymManager::where('role_id', 3)->get();
         $gyms = Gym::all();
 
@@ -41,7 +41,7 @@ class GymManagerController extends Controller
     {
         $gyms = Gym::all();
 
-        return view('gymManagers.create' ,[
+        return view('gymManagers.create', [
             'gyms' => $gyms
         ]);
     }
@@ -62,15 +62,15 @@ class GymManagerController extends Controller
 
         // deal with image
         $image = $request->img;
-        if($image != null):
+        if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'GymMgr'), $imageName);
-        else:
+        else :
             $imageName = 'gymMgr.png';
         endif;
 
         // store new data into data base
-        GymManager::create([
+        $newGymManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
@@ -78,13 +78,15 @@ class GymManagerController extends Controller
             'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
-            'role_type' => 'Gym_Mgr',
+            'gym_id' => $request['gym_id'],
+
+            'role_type' => 'gymManager',
             'role_id' => 3,
-
-            'gym_id' => $request['gym_id']
         ]);
+        $newGymManager->assignRole('gymManager')->givePermissionTo(['create session','update session','delete session',
+        'read session', 'read coach','read package', 'assign coach']);
 
-        //redirection to posts.index
+
         return redirect()->route('gymManagers.index');
     }
 

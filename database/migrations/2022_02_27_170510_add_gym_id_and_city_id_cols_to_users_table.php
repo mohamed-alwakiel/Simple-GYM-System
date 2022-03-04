@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 return new class extends Migration
 {
@@ -15,10 +16,10 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // $table->bigInteger('gym_id')->after('banned_at');
-            // $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');
+            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade')->Nullable;
 
             // // $table->bigInteger('city_id')->after('gym_id');
-            // $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade')->Nullable;
         });
     }
 

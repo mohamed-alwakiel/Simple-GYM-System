@@ -17,9 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('cover_img');
-
-            // $table->integer('city_id');
-
             $table->timestamps();
 
         });

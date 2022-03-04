@@ -70,7 +70,7 @@ class CityManagerController extends Controller
         endif;
 
         // store new data into data base
-        CityManager::create([
+        $newCityManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
@@ -78,14 +78,21 @@ class CityManagerController extends Controller
             'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
-            'role_type' => 'City_Mgr',
+            'city_id' => $request['city_id'],
+            'role_type' => 'cityManager',
             'role_id' => 2,
 
-            'city_id' => $request['city_id']
-
         ]);
+        $newCityManager->assignRole('cityManager')->givePermissionTo(['create gym','create gym manager','create coach','create session',
 
-        //redirection to posts.index
+        'update gym manager','update gym','update coach','update session',
+
+        'delete gym manager','delete gym','delete coach','delete session',
+
+        'read gym manager','read gym','read coach','read package',
+
+        'read session','assign coach']);
+
         return redirect()->route('cityManagers.index');
     }
 
