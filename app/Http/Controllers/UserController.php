@@ -24,9 +24,10 @@ class UserController extends Controller
     {
         $users = User::where('role_id', 4)->get();
 
-        return view('users.index', data: [
-            'users' => $users,
-        ]);
+//        return view('users.index', data: [
+//            'users' => $users,
+//        ]);
+        return view('users.datatable');
     }
     public function getUsers()
     {
