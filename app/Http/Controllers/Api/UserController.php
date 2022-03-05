@@ -7,11 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
-<<<<<<< HEAD
-
-=======
 use Illuminate\Validation\Rule;
->>>>>>> 4e6cc317f556a740043eedd936d767cd9d91e848
 
 class UserController extends Controller
 {
