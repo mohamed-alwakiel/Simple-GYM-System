@@ -15,7 +15,7 @@ class SessionAttendence extends Model
         'attendance_date'
     ];
 
-    protected $table = 'attendance';
+    protected $table = 'attendances';
     public $timestamps = false;
 
     public function user()
