@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
+use App\Models\Gym;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -31,8 +33,10 @@ class UserFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'Client.Png',
-            'role_id' => 4,
-            'role_type' => 'Client',
+            'gym_id' => Gym::inRandomOrder()->first()->id,
+            'city_id' => City::inRandomOrder()->first()->id,
+            // 'role_id' => 4,
+            // 'role_type' => 'Client',
         ];
     }
 

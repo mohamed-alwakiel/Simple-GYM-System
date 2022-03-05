@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Coach;
 use App\Models\CoachSession;
@@ -12,6 +13,19 @@ use App\Http\Requests\StoreTrainingSessionRequest;
 
 class TrainingSessionController extends Controller
 {
+    public function sessionDataTables() {
+
+
+        $sessions = TrainingSession::all();
+
+
+        return view(
+            'sessions.datatables',
+            [
+                'sessions' => $sessions,
+            ]
+        );
+    }
 
 
     public function index()
@@ -47,14 +61,13 @@ class TrainingSessionController extends Controller
     {
         $requestedData = request()->all();
 
-        $session =  TrainingSession::create($requestedData);
-        
-        foreach ($requestedData['coach_id'] as $coach) {
-            CoachSession::create(
-                array(
-                    'training_session_id' => $session['id'],
-                    'coach_id' => $coach,
-                )
+      $session=  TrainingSession::create($requestedData);
+     foreach($requestedData['coach_id'] as $coach ){
+        CoachSession::create(
+            array(
+            'training_session_id'=> $session['id'],
+            'coach_id'=> $coach,
+        )
 
             );
         }
@@ -66,23 +79,17 @@ class TrainingSessionController extends Controller
     }
 
 
-    // public function show($id)
-    // {
-    //     $sessions= TrainingSession::find($id);
-
-
-    //     return view('$sessions.show', [
-    //         '$sessions' => $sessions
-    //     ]);
-    // }
 
 
     public function edit($id)
     {
-        $session = TrainingSession::find($id);
+        $session= TrainingSession::find($id);
+        $coaches=Coach::all();
 
-        return view('sessions.update', [
-            'session' => $session
+        return view('sessions.update',
+        [
+            'session' => $session,
+            'coaches'=> $coaches
         ]);
     }
 
@@ -92,19 +99,38 @@ class TrainingSessionController extends Controller
 
         $session = TrainingSession::find($id)->update($formDAta);
 
-        $session = TrainingSession::find($id)->update($formDAta);
+        $session=TrainingSession::find($id)->update($formDAta);
+        $session = TrainingSession::find($id);
 
-        return redirect()->route('sessions.index');
+         $session->coaches()->sync($formDAta['coach_id']);
+         return redirect()->route('sessions.index');
     }
 
 
     public function destroy($id)
     {
-        $session = TrainingSession::find($id);
-
+         $session= TrainingSession::find($id);
+        $session->gyms()->dissociate();
+         $session->coaches()->detach();
+        //TODO:
         $session->delete();
 
 
         return redirect()->route('sessions.index');
+    }
+
+
+    public function paginateFast(Request $request){
+
+        if($request->ajax()){
+            Paginator::useBootstrapFive();
+            $sessions=TrainingSession::paginate(10);
+
+            return view('sessions.index_child',
+            [
+                'sessions' =>$sessions,
+
+            ])->render();
+        }
     }
 }

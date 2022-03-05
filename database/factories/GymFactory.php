@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\City;
-use App\Models\Gym;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,9 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GymFactory extends Factory
 {
-
-    protected $model = Gym::class;
-
     /**
      * Define the model's default state.
      *
@@ -22,9 +18,12 @@ class GymFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name . 'gym',
-            'cover_img' => 'Gym.jpg',
-            'city_id' =>City::all()->random()->id,
+            'name'=>$this->faker->name,
+            'cover_img'=>$this->faker->name,
+            'created_at'=>$this->faker->date,
+            'updated_at'=>$this->faker->date,
+            // 'city_id'=>$this->faker->numberBetween(1,10)
+            'city_id' => City::inRandomOrder()->first()->id
         ];
     }
 }

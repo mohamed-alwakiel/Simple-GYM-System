@@ -9,13 +9,13 @@ class SessionAttendence extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'session_id',
+        'training_session_id',
         'user_id',
         'attendance_time',
         'attendance_date'
     ];
 
-    protected $table = 'attendance';
+    protected $table = 'attendances';
     public $timestamps = false;
 
     public function user()

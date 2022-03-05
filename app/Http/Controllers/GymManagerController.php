@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateGymManagerRequest;
+use App\Models\City;
+use App\Models\CityManager;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class GymManagerController extends Controller
 {
@@ -21,29 +25,91 @@ class GymManagerController extends Controller
      */
     public function index()
     {
-     
-        $gymManagers = GymManager::where('role_id', 3)->get();
-        $gyms = Gym::all();
 
-        return view('gymManagers.index', [
-            'gymManagers' => $gymManagers,
-            'gyms' => $gyms
-        ]);
+        $gymManagers = GymManager::where('role_id', 3)->get();
+
+//        return view('gymManagers.index', [
+//            'gymManagers' => $gymManagers,
+//            'gyms' => $gyms
+//        ]);
+        return view('gymManagers.datatable');
+    }
+    public function getGymManager()
+    {
+        if (request()->ajax()) {
+            $gymManagers = GymManager::where('role_id', 3)->get();
+            $gyms = Gym::all();
+
+
+            return DataTables::of($gymManagers)
+                ->addIndexColumn()
+
+
+                ->addColumn('name',function($row){
+                    return $row->name;
+                })
+                ->addColumn('email',function($row){
+                    return $row->email;
+                })
+                ->addColumn('national_id',function($row){
+                    return $row->national_id;
+                })
+                ->addColumn('profile_img',function($row){
+                    return $row->profile_img;
+                })
+
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('gymManagers.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('gymManagers.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('gymManagers.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $gyms = Gym::all();
+        // if admin
+        // $role = Auth::user()->role_type;
+        // $role= auth()->user()->hasPermissionTo('create gym manager');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+        if ($roleAdmin) {
+            $cities = City::all();
+            return view('gymManagers.create', ['cities' => $cities]);
+        } elseif ($roleCityManager) {
+            // // if city manager
+            $city_id = Auth::user()->city_id;
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gymManagers.create', ['gyms' => $gyms]);
+        }
+    }
 
-        return view('gymManagers.create' ,[
-            'gyms' => $gyms
-        ]);
+    /**
+     * function to get all gyms by city name or id
+     */
+    public function GetGymNameFromCityName(Request $request)
+    {
+        $city_id = $request->get('city_id');
+        $gyms = Gym::where('city_id', '=', $city_id)->get();
+        return response()->json($gyms);
     }
 
 
@@ -62,15 +128,19 @@ class GymManagerController extends Controller
 
         // deal with image
         $image = $request->img;
-        if($image != null):
+        if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'GymMgr'), $imageName);
-        else:
+        else :
             $imageName = 'gymMgr.png';
         endif;
 
+        // // handle creator
+        // if(Auth::user()->role_id == 1):
+        //     $city_id ==
+
         // store new data into data base
-        GymManager::create([
+        $newGymManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
@@ -78,13 +148,22 @@ class GymManagerController extends Controller
             'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
-            'role_type' => 'Gym_Mgr',
+
+            'city_id' => $request['city_id'],
+            'gym_id' => $request['gym_id'],
+
+            'role_type' => 'gymManager',
             'role_id' => 3,
 
+            'city_id' => $request['city_id'],
             'gym_id' => $request['gym_id']
         ]);
+        $newGymManager->assignRole('gymManager')->givePermissionTo([
+            'create session', 'update session', 'delete session',
+            'read session', 'read coach', 'read package', 'assign coach'
+        ]);
 
-        //redirection to posts.index
+
         return redirect()->route('gymManagers.index');
     }
 
@@ -144,5 +223,31 @@ class GymManagerController extends Controller
     {
         GymManager::find($gymManager)->delete();
         return redirect()->route('gymManagers.index');
+    }
+
+
+    // for ban users
+    public function ban($gymManager)
+    {
+        GymManager::findOrFail($gymManager)->ban([
+            'comment' => 'Enjoy your ban!',
+        ]);
+        return redirect()->route('gymManagers.index');
+    }
+
+    // for unban users
+    public function unban($gymManager)
+    {
+        GymManager::findOrFail($gymManager)->unban();
+        return redirect()->route('gymManagers.index');
+    }
+
+    // for show bans users
+    public function banView()
+    {
+        $bannedManagers = GymManager::onlyBanned()->get();
+        return view('gymManagers.banned', [
+            "bannedManagers" => $bannedManagers
+        ]);
     }
 }

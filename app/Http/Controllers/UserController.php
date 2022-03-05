@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Gym;
+use App\Models\GymManager;
+use App\Models\User;
 use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -18,6 +18,8 @@ use Illuminate\Validation\Rules\Exists;
 
 // use Illuminate\Support\Facades\Request;
 
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -30,9 +32,58 @@ class UserController extends Controller
     {
         $users = User::where('role_id', 4)->get();
 
-        return view('users.index', data: [
-            'users' => $users,
-        ]);
+//        return view('users.index', data: [
+//            'users' => $users,
+//        ]);
+        return view('users.datatable');
+    }
+    public function getUsers()
+    {
+        if (request()->ajax()) {
+
+            $users = User::where('role_id', 4)->get();
+
+
+
+            return DataTables::of($users)
+                ->addIndexColumn()
+
+
+                ->addColumn('name',function($row){
+                    return $row->name;
+                })
+                ->addColumn('email',function($row){
+                    return $row->email;
+                })
+                ->addColumn('national_id',function($row){
+                    return $row->national_id;
+                })
+
+
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('users.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('users.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('users.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
     }
 
 
@@ -51,7 +102,6 @@ class UserController extends Controller
 
     public function GetGymNameFromCityName(Request $request)
     {
-
         $city_id = $request->get('city_id');
         $gyms = Gym::where('city_id', '=', $city_id)->get();
         return response()->json($gyms);
@@ -78,7 +128,7 @@ class UserController extends Controller
 
 
         // store new data into data base
-        User::create([
+        $newUser = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['passwd']),
@@ -91,7 +141,7 @@ class UserController extends Controller
             'city_id' =>  $request['city_id'],
             'gym_id' =>  $request['gym_id'],
         ]);
-
+        $newUser->assignRole('client');
         //redirection to posts.index
         return redirect()->route('users.index');
     }
