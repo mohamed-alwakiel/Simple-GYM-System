@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-             $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');
-        });
+        
+            if (Schema::hasColumn('bought_packages', 'name')){
+                Schema::table('bought_packages', function (Blueprint $table) {
+    
+                    $table->dropColumn('name');
+                });
+            }
     }
 
     /**
@@ -25,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
+        Schema::table('bought_packages', function (Blueprint $table) {
             //
         });
     }

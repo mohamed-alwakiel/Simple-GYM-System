@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\CityManager;
+use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,7 +28,9 @@ class UserSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        User::factory(3)->create();
+        CityManager::factory(1)->create();
+        GymManager::factory(1)->create();
+        User::factory(1)->create();
 
 
         // Assign Role --> Admin
@@ -57,6 +61,6 @@ class UserSeeder extends Seeder
             'model_type' => 'App\Models\User',
             'model_id' => 4,
         ]);
-        
+
     }
 }

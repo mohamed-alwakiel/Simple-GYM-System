@@ -31,4 +31,19 @@ class HomeController extends Controller
     {
         return view('dashboard');
     }
+
+
+
+
+    // for ban and unban users
+    
+
+
+
+
+
+
+
+
+
 }

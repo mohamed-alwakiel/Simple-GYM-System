@@ -8,6 +8,7 @@ use App\Models\Package;
 use App\Models\Attendance;
 use App\Models\CoachSession;
 use App\Models\TrainingSession;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

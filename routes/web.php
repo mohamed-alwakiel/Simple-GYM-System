@@ -11,6 +11,7 @@ use App\Http\Controllers\GymsController;
 use App\Http\Controllers\TrainingPackageController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\BuyPackageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TrainingSessionController;
 
 
@@ -33,6 +34,17 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+// --------------- Ban users
+Route::get('/banned', [HomeController::class, 'banView'])->name('banned');
+// Route::get('/notallowed', [HomeController::class , 'notallowedView'])->name('notallowed');
+
+Route::get('/home/{userId}/ban', 'HomeController@ban')->name('user.ban');
+Route::get('/home/{userId}/unban', 'HomeController@unban')->name('user.unban');
+
+
+// --------------------------------
 
 // --------------- CITY MANAGERS
 Route::middleware(['auth'])->group(function () {
@@ -100,17 +112,8 @@ Route::middleware(['auth'])->group(function () {
 
 // --------------- Training Packages
 Route::group(['middleware' => ['auth']], function () {
-
     Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
     Route::get('/trainingPackages/create', [TrainingPackageController::class, 'cereate'])->name('trainingPackages.create');
-    Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
-    Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
-    Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
-    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
-    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
-
-    Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
-    Route::get('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
     Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
     Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
     Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
@@ -149,10 +152,21 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->name('attenda
 
 
 // --------------- Buy Package
-Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index')->middleware('auth');
 Route::get('/getGymsBelongsToCity/{id}', [BuyPackageController::class, 'getGymsBelongsToCity']);
+Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index');
+    Route::get('/buyPackage/create', [BuyPackageController::class, 'create'])->name('buyPackage.create');
+    Route::get('/buyPackage/{package}', [BuyPackageController::class, 'show'])->name('buyPackage.show');
+    Route::get('/buyPackage/{package}/edit', [BuyPackageController::class, 'edit'])->name('buyPackage.edit');
+    Route::put('/buyPackage/{package}', [BuyPackageController::class, 'update'])->name('buyPackage.update');
+    Route::post('/buyPackage', [BuyPackageController::class, 'store'])->name('buyPackage.store');
+    Route::delete('/buyPackage/{package}', [BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
 
+    Route::post('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
+    Route::get('/buyPackage/create/success', [PaymentController::class, 'success'])->name('buyPackage.success');
+    Route::get('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
+});
 
 // --------------- Auth -> Login & Register
 Auth::routes();
