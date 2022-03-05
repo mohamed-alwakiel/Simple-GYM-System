@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
 
-            // $table->integer('user_id');
+            $table->integer('user_id');
 
              $table->integer('session_id');
 

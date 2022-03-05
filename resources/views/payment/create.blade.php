@@ -62,7 +62,7 @@
                         @endforeach
                     </select>
                 </div>
-
+z
                 <div class="d-flex justify-content-end">
 
                     <button type="submit" class="btn btn-success bg-success py-2 px-4">Buy</button>

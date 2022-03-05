@@ -63,4 +63,8 @@ class User extends Authenticatable
 
         return $this->hasMany(Attendance::class,'user_id');
     }
+    public function boughtPackages()
+    {
+        return $this->hasMany(User::class,'user_id');
+    }
 }
