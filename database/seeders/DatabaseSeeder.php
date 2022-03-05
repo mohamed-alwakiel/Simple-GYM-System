@@ -34,11 +34,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Package::factory(10)->create();
-         TrainingSession::factory(20)->create();
-         Coach::factory(20)->create();
-         CoachSession::factory(20)->create();
-         Attendance::factory(20)->create();
-         Gym::factory(20)->create();
+        TrainingSession::factory(20)->create();
+        Coach::factory(20)->create();
+        CoachSession::factory(20)->create();
+        Attendance::factory(20)->create();
+        Gym::factory(20)->create();
 
         // TrainingSession::factory()->count(20)->create();
         //  foreach(TrainingSession::all() as $session){

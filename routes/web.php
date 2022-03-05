@@ -114,7 +114,6 @@ Route::middleware(['auth'])->group(function () {
 
 // --------------- Training Packages
 Route::group(['middleware' => ['auth']], function () {
-
     Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
     Route::get('/trainingPackages/create', [TrainingPackageController::class, 'cereate'])->name('trainingPackages.create');
     Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
