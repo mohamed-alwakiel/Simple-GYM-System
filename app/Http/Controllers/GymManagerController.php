@@ -30,18 +30,22 @@ class GymManagerController extends Controller
         ]);
     }
 
-
     public function create()
     {
         // if admin
-        $cities = City::all();
-        return view('gymManagers.create', [ 'cities' => $cities ]);
-
-        // if city manager
-        // $city_id = Auth::user()->city_id;
-        // $gyms = Gym::where('city_id', $city_id)->get();
-        // return view('gymManagers.create', [ 'gyms' => $gyms ]);
-
+        // $role = Auth::user()->role_type;
+        // $role= auth()->user()->hasPermissionTo('create gym manager');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+        if ($roleAdmin) {
+            $cities = City::all();
+            return view('gymManagers.create', ['cities' => $cities]);
+        } elseif ($roleCityManager) {
+            // // if city manager
+            $city_id = Auth::user()->city_id;
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gymManagers.create', ['gyms' => $gyms]);
+        }
     }
 
     /**
@@ -93,12 +97,14 @@ class GymManagerController extends Controller
 
             'city_id' => $request['city_id'],
             'gym_id' => $request['gym_id'],
-            
+
             'role_type' => 'gymManager',
             'role_id' => 3,
         ]);
-        $newGymManager->assignRole('gymManager')->givePermissionTo(['create session','update session','delete session',
-        'read session', 'read coach','read package', 'assign coach']);
+        $newGymManager->assignRole('gymManager')->givePermissionTo([
+            'create session', 'update session', 'delete session',
+            'read session', 'read coach', 'read package', 'assign coach'
+        ]);
 
 
         return redirect()->route('gymManagers.index');
@@ -160,5 +166,31 @@ class GymManagerController extends Controller
     {
         GymManager::find($gymManager)->delete();
         return redirect()->route('gymManagers.index');
+    }
+
+
+    // for ban users
+    public function ban($gymManager)
+    {
+        GymManager::findOrFail($gymManager)->ban([
+            'comment' => 'Enjoy your ban!',
+        ]);
+        return redirect()->route('gymManagers.index');
+    }
+
+    // for unban users
+    public function unban($gymManager)
+    {
+        GymManager::findOrFail($gymManager)->unban();
+        return redirect()->route('gymManagers.index');
+    }
+
+    // for show bans users
+    public function banView()
+    {
+        $bannedManagers = GymManager::onlyBanned()->get();
+        return view('gymManagers.banned', [
+            "bannedManagers" => $bannedManagers
+        ]);
     }
 }

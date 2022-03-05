@@ -11,6 +11,7 @@ use App\Http\Controllers\GymsController;
 use App\Http\Controllers\TrainingPackageController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\BuyPackageController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TrainingSessionController;
 
@@ -36,19 +37,15 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
-// --------------- Ban users
-Route::get('/banned', [HomeController::class, 'banView'])->name('banned');
-// Route::get('/notallowed', [HomeController::class , 'notallowedView'])->name('notallowed');
-
-Route::get('/home/{userId}/ban', 'HomeController@ban')->name('user.ban');
-Route::get('/home/{userId}/unban', 'HomeController@unban')->name('user.unban');
 
 
 // --------------------------------
 
 // --------------- CITY MANAGERS
-Route::middleware(['auth'])->group(function () {
-    Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
+// Route::group(['middleware' => 'auth', 'forbid-banned-user','role:admin|citymanager'], function () {
+
+    Route::middleware(['auth'])->group(function () {
+        Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
 
     Route::GET('/cityManagers/create', [CityManagerController::class, 'create'])->name('cityManagers.create');
     Route::POST('/cityManagers', [CityManagerController::class, 'store'])->name('cityManagers.store');
@@ -65,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
 // --------------- GYM MANAGERS
 Route::middleware(['auth'])->group(function () {
     Route::GET('/gymManagers', [GymManagerController::class, 'index'])->name('gymManagers.index');
+    Route::get('/gymManagers/banned', [GymManagerController::class, 'banView'])->name('gymManagers.banned');    // show banned Mgr
 
     Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
     Route::POST('/gymManagers', [GymManagerController::class, 'store'])->name('gymManagers.store');
@@ -73,6 +71,10 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
 
     Route::DELETE('/gymManagers/{gymManager}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
+
+    // ban and unban actions
+    Route::Get('/gymManagers/{gymManager}/ban', [GymManagerController::class, 'ban'])->name('gymManagers.ban');
+    Route::get('/gymManagers/{gymManager}/unban', [GymManagerController::class, 'unban'])->name('gymManagers.unban');
 });
 
 
