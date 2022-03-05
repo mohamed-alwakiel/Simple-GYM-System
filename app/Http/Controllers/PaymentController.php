@@ -37,13 +37,14 @@ class PaymentController extends Controller
             'cancel_url' => $YOUR_DOMAIN . '/cancel',
         ]);
 
+
         header("HTTP/1.1 303 See Other");
         return redirect($checkout_session->url); 
     }
 
     public function success()
     {
- 
+        // return to_route('buyPackage.store');
         return view('payment.success');
     }
 

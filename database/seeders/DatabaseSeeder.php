@@ -33,18 +33,20 @@ class DatabaseSeeder extends Seeder
         // ]);
        
        
-        User::factory(10)->create();
+ 
         City::factory(10)->create();
         Gym::factory(10)->create();
+        User::factory(10)->create();
+        TrainingSession::factory(10)->create();
+        Coach::factory(10)->create();
+        CoachSession::factory(10)->create();
+        Attendance::factory(10)->create();
+       
         Package::factory(10)->create();
         BuyPackage::factory(10)->create();
 
        
-         TrainingSession::factory(20)->create();
-         Coach::factory(20)->create();
-         CoachSession::factory(20)->create();
-         Attendance::factory(20)->create();
-         Gym::factory(20)->create();
+        
 
          
         //  foreach(TrainingSession::all() as $session){
