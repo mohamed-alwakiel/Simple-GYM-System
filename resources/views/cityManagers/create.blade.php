@@ -7,7 +7,7 @@
 @section('content')
     <div class="pt-4">
 
-        <form class="mt-5 w-50 mx-auto" action="{{ route('cityManagers.store') }}" method="post">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('cityManagers.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             {{-- manager name --}}

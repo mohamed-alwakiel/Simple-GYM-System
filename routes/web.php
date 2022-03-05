@@ -38,10 +38,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
-    Route::GET('/cityManagers/{cityManager}/edit', [CityManagerController::class, 'edit'])->name('cityManagers.edit');
+    Route::GET('/cityManagers/edit/{cityManager}', [CityManagerController::class, 'edit'])->name('cityManagers.edit');
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
 
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
+    Route::get('/get-cityManagers-my-datatables', [CityManagerController    ::class, 'getCityManager'])->name('get.cityManager')->middleware('auth');
 });
 
 
@@ -56,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
 
     Route::DELETE('/gymManagers/{gymManager}', [GymManagerController::class, 'destroy'])->name('gymManagers.destroy');
+    Route::get('/get-gymManagers-my-datatables', [GymManagerController    ::class, 'getGymManager'])->name('get.gymManager')->middleware('auth');
 });
 
 
@@ -66,7 +68,7 @@ Route::post('/cities/store', [CitiesController::class, 'store'])->name('cities.s
 Route::get('/cities/edit/{city_id}', [CitiesController::class, 'edit'])->name('cities.edit')->middleware('auth');
 Route::patch('/cities/update/{city_id}', [CitiesController::class, 'update'])->name('cities.update')->middleware('auth');
 Route::delete('/cities/destroy/{city_id}', [CitiesController::class, 'destroy'])->name('cities.destroy')->middleware('auth');
-
+Route::get('/get-city-my-datatables', [CitiesController::class, 'getCity'])->name('get.city')->middleware('auth');
 
 
 
@@ -77,20 +79,25 @@ Route::post('/gyms/store', [GymsController::class, 'store'])->name('gyms.store')
 Route::get('/gyms/edit/{gym_id}', [GymsController::class, 'edit'])->name('gyms.edit')->middleware('auth');
 Route::patch('/gyms/update/{gym_id}', [GymsController::class, 'update'])->name('gyms.update')->middleware('auth');
 Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->name('gyms.destroy')->middleware('auth');
+Route::get('/get-gym-my-datatables', [GymsController::class, 'getGym'])->name('get.gym')->middleware('auth');
+//route::get('/test',function (){
+//    return view('gyms.datatable');
+//});
+
 
 
 // --------------- Users
 Route::middleware(['auth'])->group(function () {
     Route::GET('/users', [UserController::class, 'index'])->name('users.index');
     Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::GET('/users/{data}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::GET('/users/edit/{data}', [UserController::class, 'edit'])->name('users.edit');
     Route::POST('/users', [UserController::class, 'store'])->name('users.store');
 
     // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
+    Route::get('/get-users-my-datatables', [UserController::class, 'getUsers'])->name('get.users')->middleware('auth');
 
 
 
@@ -123,6 +130,7 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');
     Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
     Route::DELETE('/sessions/{id}', [TrainingSessionController::class, 'destroy'])->name('sessions.destroy');
+    Route::get('/sessionsTest', [TrainingSessionController::class, 'sessionDataTables'])->name('sessions.sessionsTest');
 });
 
 
@@ -132,9 +140,11 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/coaches', [CoachController::class, 'index'])->name('coaches.index');
     Route::GET('/coaches/create', [CoachController::class, 'create'])->name('coaches.create');
     Route::POST('/coaches', [CoachController::class, 'store'])->name('coaches.store');
-    Route::GET('/coaches/{id}/edit', [CoachController::class, 'edit'])->name('coaches.edit');
+    Route::GET('/coaches/edit/{id}', [CoachController::class, 'edit'])->name('coaches.edit');
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
+    Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
+
 });
 
 

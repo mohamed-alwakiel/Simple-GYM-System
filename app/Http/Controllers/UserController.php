@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gym;
+use App\Models\GymManager;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -9,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -24,6 +27,54 @@ class UserController extends Controller
         return view('users.index', data: [
             'users' => $users,
         ]);
+    }
+    public function getUsers()
+    {
+        if (request()->ajax()) {
+
+            $users = User::where('role_id', 4)->get();
+
+
+
+            return DataTables::of($users)
+                ->addIndexColumn()
+
+
+                ->addColumn('name',function($row){
+                    return $row->name;
+                })
+                ->addColumn('email',function($row){
+                    return $row->email;
+                })
+                ->addColumn('national_id',function($row){
+                    return $row->national_id;
+                })
+
+
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('users.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('users.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('users.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
     }
 
 

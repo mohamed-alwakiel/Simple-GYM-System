@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateGymManagerRequest;
+use App\Models\City;
+use App\Models\CityManager;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class GymManagerController extends Controller
 {
@@ -21,14 +24,64 @@ class GymManagerController extends Controller
      */
     public function index()
     {
-     
+
         $gymManagers = GymManager::where('role_id', 3)->get();
         $gyms = Gym::all();
 
-        return view('gymManagers.index', [
-            'gymManagers' => $gymManagers,
-            'gyms' => $gyms
-        ]);
+//        return view('gymManagers.index', [
+//            'gymManagers' => $gymManagers,
+//            'gyms' => $gyms
+//        ]);
+        return view('gymManagers.datatable');
+    }
+    public function getGymManager()
+    {
+        if (request()->ajax()) {
+            $gymManagers = GymManager::where('role_id', 3)->get();
+            $gyms = Gym::all();
+
+
+            return DataTables::of($gymManagers)
+                ->addIndexColumn()
+
+
+                ->addColumn('name',function($row){
+                    return $row->name;
+                })
+                ->addColumn('email',function($row){
+                    return $row->email;
+                })
+                ->addColumn('national_id',function($row){
+                    return $row->national_id;
+                })
+                ->addColumn('profile_img',function($row){
+                    return $row->profile_img;
+                })
+
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('gymManagers.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('gymManagers.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('gymManagers.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
     }
 
 

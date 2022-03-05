@@ -12,6 +12,19 @@ use App\Http\Requests\StoreTrainingSessionRequest;
 
 class TrainingSessionController extends Controller
 {
+    public function sessionDataTables() {
+
+
+        $sessions = TrainingSession::all();
+
+
+        return view(
+            'sessions.datatables',
+            [
+                'sessions' => $sessions,
+            ]
+        );
+    }
 
 
     public function index()
@@ -48,7 +61,7 @@ class TrainingSessionController extends Controller
         $requestedData = request()->all();
 
         $session =  TrainingSession::create($requestedData);
-        
+
         foreach ($requestedData['coach_id'] as $coach) {
             CoachSession::create(
                 array(
