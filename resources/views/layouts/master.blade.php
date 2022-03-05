@@ -352,7 +352,7 @@
                             </a>
                         </li>
 
-                        
+                        @hasanyrole('gymManager|cityManager|admin')
                         <li class="nav-item mb-5">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-money-bill"></i>
@@ -361,6 +361,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endhasanyrole
                         <!-- ---------------------------------------- -->
 
                     </ul>
@@ -370,7 +371,7 @@
             <!-- /.sidebar -->
         </aside>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper py-3">
             @yield('content')
         </div>
 
