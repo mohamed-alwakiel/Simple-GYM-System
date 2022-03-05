@@ -29,6 +29,7 @@ class BuyPackageFactory extends Factory
             // 'gym_id'=>$this->faker->numerify(),
             // 'user_id'=>$this->faker->numerify(),
             // 'package_id'=>$this->faker->numerify()
+            'remaining_sessions' => $this->faker->numerify(),
             'gym_id' => Gym::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'package_id' => Package::inRandomOrder()->first()->id

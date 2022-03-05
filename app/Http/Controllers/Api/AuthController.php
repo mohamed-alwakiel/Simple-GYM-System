@@ -16,19 +16,19 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|max:20',
             'confirmPassword' => 'required|same:password',
-            'profileImg' => 'required|image|mimes:jpg,jpeg',
+            // 'profileImg' => 'required|image|mimes:jpg,jpeg',
             'date_of_birth' => 'required|date',
             'national_id' => 'required|unique:users|digits_between:14,14',
             'gender' =>'required|in:male,female',
         ]);
-        $img= $data['profileImg'];
-        $imageName = time() . rand(1, 200) . '.' . $img->extension();
-        $img->move(public_path('imgs//' . 'client'), $imageName);
+        // $img= $data['profileImg'];
+        // $imageName = time() . rand(1, 200) . '.' . $img->extension();
+        // $img->move(public_path('imgs//' . 'client'), $imageName);
         $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'profile_img' => $imageName,
+            // 'profile_img' => $imageName,
             'date_of_birth' =>$data['date_of_birth'],
             'gender' => $data['gender'],
             'national_id'=> $data['national_id'],

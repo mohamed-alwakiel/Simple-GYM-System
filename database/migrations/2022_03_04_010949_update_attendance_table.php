@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-
-        Schema::table('attendance', function (Blueprint $table) {
-            // Schema::rename('attendance', 'attendances');
-
-
-        });
-
+        if (Schema::hasTable('attendance')) {
+            Schema::table('attendance', function (Blueprint $table) {
+                Schema::rename('attendance', 'attendances');
+            });
+        };
     }
 
     /**
