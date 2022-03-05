@@ -29,3 +29,4 @@ Route::middleware('auth:sanctum')->group(function () {
    
     
 });
+Route::put('users/{user}', action: [UserController::class , 'update']);

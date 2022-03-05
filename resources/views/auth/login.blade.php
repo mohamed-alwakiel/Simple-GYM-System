@@ -16,19 +16,6 @@
                         @csrf
 
                         <div class="form-group">
-                            <div class="mb-3">
-                                <label class="form-label">Role</label>
-                                <select id="roleSelect" name="role" class="form-control" onchange="ShowHideDiv()">
-                                    <!-- <option class="text-center" value=""> -- Select Role -- </option> -->
-                                    <option value="admin">Admin</option>
-                                    <option value="gymManager">Gym Manager</option>
-                                    <option value="cityManager">City Manager</option>
-                                    <option value="client" selected>Client</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label for="email">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter email">
 
@@ -71,8 +58,8 @@
                             <button type="submit" class="btn btn-info font-weight-bold">
                                 {{ __('Login') }}
                             </button>
-                            <div id="clientRoleValue" class="mt-3" style="display: block">
-                                <label>No Account ? <a class="text-info" href="{{ route('register') }}">Register</a></label>
+                            <div id="clientRoleValue" class="mt-3">
+                                <label>New Client ? <a class="text-info" href="{{ route('register') }}">Register</a></label>
                             </div>
                         </div>
                     </form>
@@ -82,11 +69,4 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function ShowHideDiv() {
-        var roleSelect = document.getElementById("roleSelect");
-        var clientRoleValue = document.getElementById("clientRoleValue");
-        clientRoleValue.style.display = roleSelect.value == "client" ? "block" : "none";
-    }
-</script>
 @endsection

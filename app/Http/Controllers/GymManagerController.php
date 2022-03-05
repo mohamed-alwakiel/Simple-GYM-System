@@ -82,7 +82,7 @@ class GymManagerController extends Controller
         //     $city_id ==
 
         // store new data into data base
-        GymManager::create([
+        $newGymManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
@@ -90,14 +90,17 @@ class GymManagerController extends Controller
             'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
 
-            'role_type' => 'Gym_Mgr',
-            'role_id' => 3,
 
             'city_id' => $request['city_id'],
-            'gym_id' => $request['gym_id']
+            'gym_id' => $request['gym_id'],
+            
+            'role_type' => 'gymManager',
+            'role_id' => 3,
         ]);
+        $newGymManager->assignRole('gymManager')->givePermissionTo(['create session','update session','delete session',
+        'read session', 'read coach','read package', 'assign coach']);
 
-        //redirection to posts.index
+
         return redirect()->route('gymManagers.index');
     }
 

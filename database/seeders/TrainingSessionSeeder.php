@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Coach;
 use App\Models\TrainingSession;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class TrainingSessionSeeder extends Seeder
 {

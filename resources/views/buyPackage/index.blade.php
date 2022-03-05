@@ -30,7 +30,7 @@ Buy Package
                 <td>{{ $package->number_of_sessions }}</td>
                 <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
                 <td>{{$package->user ? $package->user->name : 'not found'}}</td>
-                <td>{{$package->gym ? $package->gym->name : 'not found'}}</td>              
+                <td>{{$package->gym ? $package->gym->name : 'not found'}}</td>
                 <td class="py-2">
                     <a href="{{ route('buyPackage.show', ['package' => $package->id]) }}" class="btn btn-info"><i
                             class="fas fa-eye"></i>

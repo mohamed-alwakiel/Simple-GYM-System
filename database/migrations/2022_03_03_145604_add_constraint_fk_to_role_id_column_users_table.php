@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gyms', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('cover_img');
-            $table->timestamps();
+        // Schema::table('users', function (Blueprint $table) {
+        //     //
+        // });
 
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('roles');
+            // $table->foreign('role_type')->references('name')->on('roles');
         });
     }
 
@@ -29,6 +30,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gym');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
