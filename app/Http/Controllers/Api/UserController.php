@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
@@ -13,6 +12,11 @@ use App\Models\SessionAttendence;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Attendance;
+use App\Models\BuyPackage;
+use App\Models\Gym;
+use App\Models\Package;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -49,43 +53,33 @@ class UserController extends Controller
     public function remainingSessions()
     {
         $user = Auth::user();
-        $boughtPackages = BuyPackage::where('user_id', $user->id)->get();
-        $attendance = Attendance::where('user_id', $user->id)->get();
-    
-        $totalSession = 0;
-        foreach ($boughtPackages as $package) {
-            $package = Package::where('id', $package->package_id)->first();
-            die($package->number_of_sessions);
-            $totalSession = $package->number_of_sessions;
-        }
-    
-        $remainingSession = $totalSession;
-        foreach ($attendance as $attend) {
-            $remainingSession--;
-        }
-    
-        $user = User::where('id', $user->role_id)->first();
-        $user->update(['remaining_sessions' => $remainingSession]);
+        $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
+        $totalNumOfSession=$boughtPackage->number_of_sessions;
+        $remainingSessions=$boughtPackage->remaining_sessions;
+        
     
         return response()->json([
-    'Total Session' => $totalSession,
-    'Remaining Session' => $remainingSession,
+            'total_training_sessions'=> $totalNumOfSession,
+            'remaining__training_sessions'=> $remainingSessions,
     ], 200);
     }
     
     public function showAttendance()
     {
+        $user = Auth::user();
         // $number0fSession=User::find($id);
+        
         $response=[
-            'number_0f_Sessions' =>  Attendee::where('user_id', Auth::user()->id)->get('number_of_sessions'),
-            'remaining_Sessions' =>  Attendee::where('user_id', Auth::user()->id)->get('remaining_sessions'),
+            'number_0f_Sessions' =>  Attendee::where('user_id', $user->id)->get('number_of_sessions'),
+            'remaining_Sessions' =>  Attendee::where('user_id', $user->id)->get('remaining_sessions'),
         ];
         return response($response);
     }
     public function attend(Session $session, Request $request)
     {
-        Attendee::where('user_id', Auth::user()->id)->decrement('remaining_sessions');
-        //    DB::table('bought_packages')->where('user_id' ,Auth::user()->id )->decrement('remaining_session',1);
+        $user = Auth::user();
+        Attendee::where('user_id',$user->id)->decrement('remaining_sessions');
+        DB::table('bought_packages')->where('user_id' ,$user->id )->decrement('remaining_session',1);
         SessionAttendence::create([
             "session_id" => 1,
             "user_id" => Auth::user()->id,
@@ -96,4 +90,22 @@ class UserController extends Controller
             'message' => 'Session Attended'
         ], 201);
     }
+
+    // public function showAttendanceHistory()
+    // {
+    //     $user = Auth::user();
+        
+    //     $boughtPackage = BuyPackage::where('user_id', $user->id)->get();
+
+       
+    //     $trainingSession = Attendance::where('user_id',$user->id)->first();
+    //     $trainingSessionName= $trainingSession->name;
+
+        
+    
+    //     return response()->json([
+    //         'training_session_name'=> $trainingSessionName,
+    //         // 'gymName'=> $gymName,
+    // ], 200);
+    // }
 }

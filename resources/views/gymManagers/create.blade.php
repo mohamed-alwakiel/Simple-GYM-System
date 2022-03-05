@@ -61,6 +61,7 @@
             </div>
 
             {{-- select city and gym --}}
+            @role('admin')
             {{-- if role Admsin --}}
             <div class="form-group">
                 <label for="cityName">Select City</label>
@@ -84,9 +85,11 @@
             @error('gym_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+            @endrole
 
             {{-- if role city manager --}}
-            {{-- <div class="form-group">
+            @role('cityManager')
+            <div class="form-group">
                 <label for="gymName">Select Gym</label>
                 <select name="gym_id" class="form-control">
                     <option value="0" disable="true" selected="true">=== Select Gym ===</option>
@@ -97,7 +100,8 @@
             </div>
             @error('gym_id')
                 <div class="alert alert-danger">{{ $message }}</div>
-            @enderror --}}
+            @enderror
+            @endrole
 
 
             <div class="d-flex justify-content-end">

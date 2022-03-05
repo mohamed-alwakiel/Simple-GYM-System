@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
         //     GymManagerSeeder::class
         //     CityManagerSeeder::class
         // ]);
-       
-       
- 
+
+
+
         City::factory(10)->create();
         Gym::factory(10)->create();
         User::factory(10)->create();
@@ -41,14 +41,14 @@ class DatabaseSeeder extends Seeder
         Coach::factory(10)->create();
         CoachSession::factory(10)->create();
         Attendance::factory(10)->create();
-       
+
         Package::factory(10)->create();
         BuyPackage::factory(10)->create();
 
-       
-        
 
-         
+
+
+
         //  foreach(TrainingSession::all() as $session){
         //      $coaches=Coach::inRandomOrder()->take(rand(1,3));
         //      $session->coaches()->attach($coaches);}

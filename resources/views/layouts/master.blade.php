@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    @yield("meta")
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
+    @yield("style")
     <script nonce="2aa84745-1cac-4d38-821f-5aae87ac1574">
         (function(w, d) {
             ! function(a, e, t, r, z) {
@@ -352,7 +352,7 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="nav-item mb-5">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-money-bill"></i>
@@ -403,19 +403,16 @@
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
 
-    <!-- DataTables -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <!-- DataTables -->
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+
 
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
+    
+    @yield("plugins")
+    @yield("script")
 </body>
 
 </html>

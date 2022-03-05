@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
+use Cog\Laravel\Ban\Traits\Bannable;
+use Cog\Contracts\Ban\Bannable as BannableContract;
 
-class GymManager extends Model
+// class GymManager extends Model
+class GymManager extends model implements BannableContract
 {
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, Bannable;
 
     public $table = 'users';
     protected $guard_name ='web';
@@ -30,10 +33,9 @@ class GymManager extends Model
         return $this->belongsTo(Gym::class);
     }
 
-
-    // public function city()
-    // {
-    //     return $this->belongsTo(City::class);
-    // }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 
 }

@@ -30,6 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('show-sessions' ,action: [UserController::class , 'showAttendance']);
     Route::post('training-sessions/attend' ,action: [UserController::class , 'attend']);
-
+    Route::get('showAttendanceHistory',action: [UserController::class ,'showAttendanceHistory']);
 });
 Route::put('users/{user}', action: [UserController::class , 'update']);
