@@ -7,6 +7,12 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Models\Attendee;
+use App\Models\Session;
+use App\Models\SessionAttendence;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -39,5 +45,28 @@ class UserController extends Controller
         return response($response);
 
     }
+    public function showAttendance(){
+        // $number0fSession=User::find($id);
+        $response=[
+            'number_0f_Sessions' =>  Attendee::where('user_id' ,Auth::user()->id )->get('number_of_sessions'),
+            'remaining_Sessions' =>  Attendee::where('user_id' ,Auth::user()->id )->get('remaining_sessions'),
+        ];
+        return response($response);
+
+    }
+    public function attend(Session $session,Request $request){
+       Attendee::where('user_id' ,Auth::user()->id )->decrement('remaining_sessions');
+    //    DB::table('bought_packages')->where('user_id' ,Auth::user()->id )->decrement('remaining_session',1);
+        SessionAttendence::create([
+            "session_id" => 1,
+            "user_id" => Auth::user()->id,
+            "attendance_time" => Carbon::now()->toTimeString(),
+            "attendance_date" => Carbon::now()->toDateString(),
+        ]);
+        return response()->json([
+            'message' => 'Session Attended'
+        ] , 201);
+    }
+
 
 }
