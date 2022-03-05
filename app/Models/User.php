@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Attendance;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -27,11 +28,12 @@ class User extends Authenticatable
         'password',
         'date_of_birth',
         'gender',
-
         'national_id',
         'profile_img',
         'role_id',
-        'role_type'
+        'role_type',
+        'gym_id' ,
+        'city_id'
 
     ];
 
@@ -54,9 +56,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
+    public function attendances(){
+
+        return $this->hasMany(Attendance::class,'user_id');
     }
 }

@@ -7,7 +7,7 @@
 @section('content')
     <div class="pt-4">
 
-        <form class="mt-5 w-50 mx-auto" action="{{ route('users.update', $user->id) }}" method="post">
+        <form class="mt-5 w-50 mx-auto" action="{{ route('users.update', $user->id) }}" method="post"  enctype="multipart/form-data">
             @csrf
             @method('put')
 
@@ -42,8 +42,8 @@
                     </span>
                 </div>
 
-                <input name="date_of_birth" type="text" class="form-control" @error('date_of_birth') is-invalid @enderror"
-                    data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask value="{{ $user->date_of_birth }}">
+                    <input name="date_of_birth" type="text" class="form-control" data-inputmask-alias="datetime"
+                             data-inputmask-inputformat="yyyy-mm-dd" data-mask value="{{$user->date_of_birth}}">
 
             </div>
             @error('date_of_birth')
@@ -53,9 +53,9 @@
 
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="number" value="{{ $user->national_id }}" name="nationalId" class="form-control">
+                <input type="text" value="{{ $user->national_id }}" name="national_id" class="form-control">
             </div>
-            @error('nationalId')
+            @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 

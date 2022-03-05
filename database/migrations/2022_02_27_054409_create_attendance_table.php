@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendance', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
 
             // $table->integer('user_id');
 
-            // $table->integer('session_id');
+             $table->integer('session_id');
 
             $table->date('attendance_date');
             $table->time('attendance_time');

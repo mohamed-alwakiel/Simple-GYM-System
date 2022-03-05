@@ -1,0 +1,8 @@
+{
+  "connections": [
+    {
+      "name": "dev",
+      "command": "php artisan tinker"
+    }
+  ]
+}

@@ -88,10 +88,10 @@ Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->nam
 Route::middleware(['auth'])->group(function () {
     Route::GET('/users', [UserController::class, 'index'])->name('users.index');
     Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::get('/json-gym', [UserController::class, 'GetGymNameFromCityName']);
     Route::GET('/users/{data}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::POST('/users', [UserController::class, 'store'])->name('users.store');
-
-    // Route::GET('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    // Route::GET('/users/{user}', [PostController::class, 'show'])->name('users.show');
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
@@ -100,6 +100,14 @@ Route::middleware(['auth'])->group(function () {
 
 // --------------- Training Packages
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+    Route::get('/trainingPackages/create', [TrainingPackageController::class, 'cereate'])->name('trainingPackages.create');
+    Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+    Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
+    Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
+    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 
     Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
     Route::get('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
@@ -114,6 +122,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
+    Route::GET('/sessions/paginate', [TrainingSessionController::class, 'paginateFast'])->name('sessions.paginate');
     Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
     Route::POST('/sessions', [TrainingSessionController::class, 'store'])->name('sessions.store');
     Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');

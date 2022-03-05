@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Gym;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class GymSeeder extends Seeder
 {
@@ -15,6 +15,6 @@ class GymSeeder extends Seeder
      */
     public function run()
     {
-        Gym::factory(5)->create();
+        Gym::factory(20)->create();
     }
 }
