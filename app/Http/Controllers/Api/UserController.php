@@ -111,8 +111,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
-        $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->get('name');
-        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->get('name');
+        $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->select('name as gym_name')->get();
+        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->select('name as Training_session_name'->)get();
         $trainingSession = SessionAttendence::where('user_id', $user->id)->select('attendance_date', 'attendance_time')->get();
 
         $attendanceHistory = collect([
