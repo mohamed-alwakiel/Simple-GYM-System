@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-             $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');
+        Schema::create('coaches', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-            //
-        });
+        // Schema::dropIfExists('coach');
     }
 };

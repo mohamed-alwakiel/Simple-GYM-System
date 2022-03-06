@@ -11,7 +11,7 @@ class CityManager extends Model
     use HasFactory, HasRoles;
 
     public $table = 'users';
-    protected $guard_name ='web';
+    protected $guard_name = 'web';
 
     protected $fillable = [
         'name',
@@ -24,6 +24,7 @@ class CityManager extends Model
         'city_id'
     ];
 
+    
     public function city()
     {
         return $this->belongsTo(City::class);

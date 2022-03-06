@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('bought_packages', 'packege_id')) {
-            Schema::table('bought_packages', function (Blueprint $table) {
-                $table->renameColumn('packege_id', 'package_id');
-            });
-        };
+        Schema::create('coach_sessions', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-       
+        Schema::dropIfExists('coaches_sessions');
     }
 };

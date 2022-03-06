@@ -22,6 +22,10 @@ class BuyPackageFactory extends Factory
      */
     public function definition()
     {
+        $userID = User::inRandomOrder()->where('role_id', 4)->first()->id;
+        $gymID = User::where('id', $userID)->pluck('gym_id')[0];
+        $cityID = User::where('id', $userID)->pluck('city_id')[0];
+
         return [
             'name' => $this->faker->name,
             'price' => $this->faker->numerify(),

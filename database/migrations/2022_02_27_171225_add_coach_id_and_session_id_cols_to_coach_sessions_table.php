@@ -11,13 +11,13 @@ return new class extends Migration
      *
      * @return void
      */
-        public function up()
+    public function up()
     {
-        Schema::table('gyms', function (Blueprint $table) {
-            // $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('cascade');
+        Schema::table('coach_sessions', function (Blueprint $table) {
+            $table->foreignId('training_session_id')->references('id')->on('training_sessions')->onDelete('cascade');
+            $table->foreignId('coach_id')->references('id')->on('coaches');
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('gyms', function (Blueprint $table) {
+        Schema::table('coaches_sessions', function (Blueprint $table) {
             //
         });
     }
