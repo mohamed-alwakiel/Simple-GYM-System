@@ -13,6 +13,19 @@ use App\Http\Requests\StoreTrainingSessionRequest;
 
 class TrainingSessionController extends Controller
 {
+    public function sessionDataTables() {
+
+
+        $sessions = TrainingSession::all();
+
+
+        return view(
+            'sessions.datatables',
+            [
+                'sessions' => $sessions,
+            ]
+        );
+    }
 
 
     public function index()

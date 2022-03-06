@@ -3,15 +3,15 @@
 @section('content')
 
 <!-- Main content -->
-@hasanyrole('admin')
 <section class="content">
 
     <div class="container-fluid">
         <!-- 1st Row -->
-        <div class="row d-flex align-items-center">
+        <div class="row d-flex align-items-center justify-content-center">
             <!-- Profile -->
             <div class="col-md-8">
                 <!-- Widget: user widget style 1 -->
+                @role('admin|cityManager|gymManager')
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
@@ -25,8 +25,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">3,200</h5>
-                                    <span class="description-text">SALES</span>
+                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -38,10 +37,10 @@
                                     <span class="description-text">Owner Of X Gym</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text">{{ Auth::user()->city_id->name }} Cairo City Manager</span>
+                                    <span class="description-text">{{ auth()->user()->city }} City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text">{{ Auth::user()->gym_id->name }} 6 Oct. branch Manager</span>
+                                    <span class="description-text">{{ auth()->user()->gym }} branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->
@@ -49,8 +48,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4">
                                 <div class="description-block">
-                                    <h5 class="description-header">35</h5>
-                                    <span class="description-text">PRODUCTS</span>
+                                    <a href="{{ route('attendance.index') }}" class="btn btn-sm bg-dark">Show Attendance</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -59,10 +57,52 @@
                         <!-- /.row -->
                     </div>
                 </div>
+                @endrole
                 <!-- /.widget-user -->
+
+                @role('client')
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
+                        <!-- <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
+                        <h5 class="widget-user-desc text-right">Web Designer</h5> -->
+                    </div>
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="../dist/img/user2-160x160.jpg" alt="User Avatar">
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header text-warning">{{ Auth::user()->name }}</h5>
+                                    <span class="description-text">Welcome Back !!</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-4">
+                                <div class="description-block">
+                                    <a href="{{ route('attendance.index') }}" class="btn btn-sm bg-dark">Show Attendance</a>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+                @endrole
             </div>
 
             <!-- 3 Statistics  -->
+            @hasanyrole('admin|cityManager|gymManager')
             <div class="col-md-4">
                 <div class="col-12 col-sm-6 col-md-12">
                     <div class="info-box">
@@ -106,12 +146,14 @@
                 </div>
                 <!-- /.info-box -->
             </div>
+            @endhasanyrole
             <!-- /.col -->
         </div>
         <!-- fix for small devices only -->
         <div class="clearfix hidden-md-up"></div>
         <!-- /.row -->
 
+        @hasanyrole('admin|cityManager|gymManager')
 
         <!-- 2nd Row -->
         <div class="row">
@@ -273,69 +315,24 @@
                             <table class="table m-0">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Item</th>
-                                        <th>Status</th>
-                                        <th>Popularity</th>
+                                        <th>Client Name</th>
+                                        <th>Client Email</th>
+                                        <th>Package Name</th>
+                                        <th>Paid Price</th>
+                                        <!-- <th>Gym Branch</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($boughtPackages as $boughtPackage)
                                     <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                        </td>
+                                        <!-- <td><a href="pages/examples/invoice.html">OR9842</a></td> -->
+                                        <td>{{ $boughtPackage->user->name }}</td>
+                                        <td>{{ $boughtPackage->user->email }}</td>
+                                        <td>{{ $boughtPackage->name }}</td>
+                                        <td>{{ $boughtPackage->price }}</td>
+                                        <!-- <td>{{ $boughtPackage->gym->name }}</td> -->
                                     </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>iPhone 6 Plus</td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-info">Processing</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>iPhone 6 Plus</td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -343,8 +340,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                        <a href="{{ route('buyPackage.create') }}" class="btn btn-sm btn-info float-left">Place New Order</a>
+                        <a href="{{ route('revenue.index') }}" class="btn btn-sm btn-secondary float-right">View All Orders</a>
                     </div>
                     <!-- /.card-footer -->
                 </div>
@@ -396,20 +393,13 @@
             </div>
             <!-- /.col -->
         </div>
+        @endhasanyrole
+
         <!-- /.row -->
     </div>
     <!--/. container-fluid -->
 </section>
-@endrole
-@hasanyrole('cityManager')
-<h1>City Manager is here</h1>
-@endrole
-@hasanyrole('gymManager')
-<h1>Gym Manager is here</h1>
-@endrole
-@role('client')
-<h1>USER is here</h1>
-@endrole
+
 
 <!-- /.content -->
 @endsection

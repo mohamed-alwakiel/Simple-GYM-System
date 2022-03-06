@@ -6,17 +6,59 @@ use App\Http\Requests\GymRequest;
 use App\Models\City;
 use App\Models\Gym;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class GymsController extends Controller
 {
-    
+
     public function index()
     {
         $gyms=Gym::all();
         $cities = City::all();
-        return view('gyms.index', compact('gyms','cities'));
+//        dd($gyms);
+        return view('gyms.datatable', compact('gyms','cities'));
     }
 
+    public function getGym()
+    {
+        if (request()->ajax()) {
+            $data = Gym::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+
+                ->addColumn('cover',function($row){
+                    $url=$row->cover_img;
+
+                    return view('gyms.widget_cover',compact("url"));
+                })
+                ->addColumn('city',function($row){
+                    return $row->city->name;
+                })
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('gyms.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('gyms.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('gyms.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
+    }
 
 
     public function create() {

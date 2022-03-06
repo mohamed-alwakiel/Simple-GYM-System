@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class CityManagerController extends Controller
 {
@@ -25,10 +26,59 @@ class CityManagerController extends Controller
         $cityManagers = CityManager::where('role_id', 2)->get();
         $cities = City::all();
 
-        return view('cityManagers.index', [
-            'cityManagers' => $cityManagers,
-            'cities' => $cities
-        ]);
+//        return view('cityManagers.index', [
+//            'cityManagers' => $cityManagers,
+//            'cities' => $cities
+//        ]);
+        return view('cityManagers.datatable');
+    }
+    public function getCityManager()
+    {
+        if (request()->ajax()) {
+            $cityManagers = CityManager::where('role_id', 2)->get();
+            $cities = City::all();
+
+            return DataTables::of($cityManagers)
+                ->addIndexColumn()
+
+
+                ->addColumn('name',function($row){
+                    return $row->name;
+                })
+                ->addColumn('email',function($row){
+                    return $row->email;
+                })
+                ->addColumn('national_id',function($row){
+                    return $row->national_id;
+                })
+                ->addColumn('profile_img',function($row){
+                    return $row->profile_img;
+                })
+
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('cityManagers.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('cityManagers.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('cityManagers.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
     }
 
 
@@ -55,8 +105,9 @@ class CityManagerController extends Controller
      */
 
     // public function store(StoreGymManagerRequest $request)
-    public function store(StoreCityManagerRequest $request)
+    public function store(Request $request)
     {
+//        dd($request);
         //fetch request data
         $requestData = request()->all();
 

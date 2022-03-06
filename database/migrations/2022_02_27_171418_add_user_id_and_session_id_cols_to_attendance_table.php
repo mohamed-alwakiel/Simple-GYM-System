@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('attendance', function (Blueprint $table) {
-            $table->foreignId('user_id')->references('id')->on('users');
+            // $table->foreignId('user_id')->references('id')->on('users');
 
-            $table->foreignId('session_id')->references('id')->on('training_sessions');
+            // $table->foreignId('session_id')->references('id')->on('training_sessions');
         });
     }
 

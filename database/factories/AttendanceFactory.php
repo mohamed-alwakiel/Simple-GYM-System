@@ -20,7 +20,8 @@ class AttendanceFactory extends Factory
     {
 
             return [
-                'user_id'=>$this->faker->randomElement(User::all())['id'],
+                'user_id' => User::inRandomOrder()->first()->id,
+                // 'user_id'=>$this->faker->randomElement(User::all())['id'],
                 'training_session_id'=>$this->faker->randomElement(TrainingSession::all())['id'],
             ];
 
