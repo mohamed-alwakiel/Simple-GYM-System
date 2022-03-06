@@ -24,10 +24,14 @@
 
         </tbody>
     </table>
-    {{ $sessions->links() }}
+ 
     </div>
     <!-- /.content-wrapper -->
 @endsection
+
+
+@push('scripts')
+
 
     <script>
         $(document).ready(function() {

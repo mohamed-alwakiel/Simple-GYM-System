@@ -112,7 +112,7 @@ class TrainingSessionController extends Controller
          $session= TrainingSession::find($id);
         $session->gyms()->dissociate();
          $session->coaches()->detach();
-        //TODO:
+        
         $session->delete();
 
 

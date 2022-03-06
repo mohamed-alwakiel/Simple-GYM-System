@@ -1,29 +1,2812 @@
-$session= TrainingSession::find(10);
-$session= TrainingSession::find(10,['started_at']);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-var_dum
-  ($session);
-$session= TrainingSession::find(10,['started_at']);
-var_dum($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-$session= TrainingSession::find(20,['started_at']);
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $start  >$end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		var_dump( $oldStart);
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $start  >$end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }
+		 var_dump(  $oldStart
+			   );
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }else return $oldStart;
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; ;
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			  betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd)
+			  ||betweenForStart($start, $oldStart, $oldEnd)
+            ||betweenForEdnd( $end, $oldStart, $oldEnd) 
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 13:06:00";
+        $end ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 9:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 9:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+        foreach ($sessions as $session) {
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+		
+        }
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 9:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  $oldStart
+			   );
+               return true; 
+				 
+            }else var_dump( $oldStart);
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 9:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13
+		:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 13:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 1:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:06:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($time, $start, $end)
+    {
+        return $time >= $start && $time  < $end ;
+    }
+
+     function betweenForEdnd($time, $start, $end)
+    {
+        return $time > $start && $time <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  if($start>=$oldStart){ return var_dump('1-> true')};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 9:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+		  		  if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 12:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart && $start >  $oldEnd ){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart && $start >  $oldEnd ){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart && $start >  $oldEnd ){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	 if($start>=$oldStart && $start >  $oldEnd ){ return var_dump('1-> true');};		  		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))||
+			  
+			(  betweenForStart($start, $oldStart, $oldEnd)
+            && betweenForEdnd( $end, $oldStart, $oldEnd) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 12:06:00";
+        $end ="2022-03-06 12:07:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 11:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 11:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $start && $end <= $end;
+    }
+
+
+
+        $sessions = App\Models\TrainingSession::all();
+        $start = "2022-03-06 11:06:00";
+        $end ="2022-03-06 12:06:00";
+
+ 		$oldStart = "2022-03-06 11:06:00";
+        $oldEnd ="2022-03-06 1:06:00";
+
+
+
+       
+          
+	   		  
+
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)&&
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+			  &&
+			  
+			(  betweenForStart($oldStart, $start, $end)
+            && betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+             ) {
+			  var_dump(  "in"
+			   );
+               return true; 
+				 
+            }else var_dump("out");
