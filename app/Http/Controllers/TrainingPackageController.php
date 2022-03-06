@@ -15,6 +15,10 @@ class TrainingPackageController extends Controller
         $packageCollection = Package::paginate(10);
         return view('trainingPackages.index',['packageCollection' => $packageCollection]);
     }
+    public function trainingPackagesDatatables() {
+        $packageCollection = Package::all();
+        return view('trainingPackages.datatables-front',['packageCollection' => $packageCollection]);
+    }
 
     public function show(Package $Package)
     {

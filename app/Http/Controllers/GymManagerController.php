@@ -28,10 +28,10 @@ class GymManagerController extends Controller
 
         $gymManagers = GymManager::where('role_id', 3)->get();
 
-//        return view('gymManagers.index', [
-//            'gymManagers' => $gymManagers,
-//            'gyms' => $gyms
-//        ]);
+    //    return view('gymManagers.index', [
+    //        'gymManagers' => $gymManagers,
+    //        'gyms' => $gyms
+    //    ]);
         return view('gymManagers.datatable');
     }
     public function getGymManager()

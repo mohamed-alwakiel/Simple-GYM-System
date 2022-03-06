@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Cities')
+@section('title', 'Sessions')
 
 @section('style')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
@@ -10,6 +10,9 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="w-75 mx-auto pt-3 d-flex justify-content-end">
+                <a href="{{ route('sessions.create') }}" class="btn btn-success my-3">Add New session</a>
+            </div>
             <table id="table_id" class="display">
                 <thead>
                 <tr>
