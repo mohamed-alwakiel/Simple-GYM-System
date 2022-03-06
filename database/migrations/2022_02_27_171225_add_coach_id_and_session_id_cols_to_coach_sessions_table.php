@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coaches_sessions', function (Blueprint $table) {
-            $table->id();
-
-          // $table->integer('session_id');
-
-           // $table->integer('coach_id');
-
-            $table->timestamps();
+        Schema::table('coach_sessions', function (Blueprint $table) {
+            $table->foreignId('training_session_id')->references('id')->on('training_sessions')->onDelete('cascade');
+            $table->foreignId('coach_id')->references('id')->on('coaches');
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coaches_sessions');
+        Schema::table('coaches_sessions', function (Blueprint $table) {
+            //
+        });
     }
 };

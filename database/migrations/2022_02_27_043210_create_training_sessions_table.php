@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     /**
      * Run the migrations.
      *
@@ -15,15 +15,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('training_sessions', function (Blueprint $table) {
-
             $table->id();
             $table->string('name');
-            $table->date('day');
-            $table->timestamp('started_at');
-            $table->timestamp('finished_at');
-
-            // $table->integer('gym_id');
-
+            $table->string('day');
+            $table->dateTime('started_at');
+            $table->dateTime('finished_at');
+            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');     
             $table->timestamps();
         });
     }

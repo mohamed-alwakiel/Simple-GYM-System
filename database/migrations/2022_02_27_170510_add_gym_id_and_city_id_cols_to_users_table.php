@@ -15,11 +15,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            // $table->bigInteger('gym_id')->after('banned_at');
-            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade')->Nullable;
-
-            // // $table->bigInteger('city_id')->after('gym_id');
-            $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade')->Nullable;
+            $table->BigInteger('gym_id')->unsigned()->nullable();
+            $table->BigInteger('city_id')->unsigned()->nullable();
+ 
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }
 

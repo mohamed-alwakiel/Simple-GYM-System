@@ -40,15 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // 'Gym_Mgr' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
-        // 'City_Mgr' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
-
     ],
 
     /*
@@ -73,18 +64,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        // 'Gym_Mgr' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\GymManager::class,
-        // ],
-        // 'City_Mgr' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\CityManager::class,
-        // ],
-       // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

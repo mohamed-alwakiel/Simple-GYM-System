@@ -32,9 +32,9 @@ class UserController extends Controller
     {
         $users = User::where('role_id', 4)->get();
 
-//        return view('users.index', data: [
-//            'users' => $users,
-//        ]);
+        //        return view('users.index', data: [
+        //            'users' => $users,
+        //        ]);
         return view('users.datatable');
     }
     public function getUsers()
@@ -49,26 +49,26 @@ class UserController extends Controller
                 ->addIndexColumn()
 
 
-                ->addColumn('name',function($row){
+                ->addColumn('name', function ($row) {
                     return $row->name;
                 })
-                ->addColumn('email',function($row){
+                ->addColumn('email', function ($row) {
                     return $row->email;
                 })
-                ->addColumn('national_id',function($row){
+                ->addColumn('national_id', function ($row) {
                     return $row->national_id;
                 })
 
 
 
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
 
 
-                    $edit='<a href="'. route('users.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+                    $edit = '<a href="' . route('users.edit', $row->id) . '" class="btn btn-primary">Update</a>';
 
 
-                    $delete='
-                     <form action="'.route('users.destroy', $row->id).'" method="post">
+                    $delete = '
+                     <form action="' . route('users.destroy', $row->id) . '" method="post">
 
                             <button class="btn btn-danger" type="submit">
                                 Delete
@@ -77,13 +77,12 @@ class UserController extends Controller
                     ';
 
                     return $edit . ' ' . $delete;
-
                 })
 
                 ->make(true);
         }
         return view('users.datatable');
-//        return datatables()->of(Gym::with('city'))->toJson();
+        //        return datatables()->of(Gym::with('city'))->toJson();
     }
 
 
@@ -116,13 +115,13 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //fetch request data
-        $img= $request->profileImg;
+        $img = $request->profileImg;
         $request = request()->all();
 
-        if($img != null):
-        $imageName = time() . rand(1, 200) . '.' . $img->extension();
-        $img->move(public_path('imgs//' . 'client'), $imageName);
-        else:
+        if ($img != null) :
+            $imageName = time() . rand(1, 200) . '.' . $img->extension();
+            $img->move(public_path('imgs//' . 'client'), $imageName);
+        else :
             $imageName = 'user.png';
         endif;
 
@@ -134,7 +133,7 @@ class UserController extends Controller
             'password' => Hash::make($request['passwd']),
             'national_id' => $request['national_id'],
             'profile_img' => $imageName,
-            'date_of_birth' =>$request['date_of_birth'],
+            'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
             'role_type' => 'client',
             'role_id' => 4,
@@ -188,7 +187,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'national_id' => $request['national_id'],
-            'date_of_birth' =>$request['date_of_birth'],
+            'date_of_birth' => $request['date_of_birth'],
         ]);
         return redirect()->route('users.index');
     }
@@ -203,5 +202,18 @@ class UserController extends Controller
     {
         User::find($userId)->delete($request->all());
         return redirect()->route('users.index');
+    }
+
+
+
+    public function editProfile($userId)
+    {
+        $user = User::find($userId);
+        return view("users.editProfile", ['user' => $user]);
+    }
+    public function updateProfile(UpdateUserRequest $request, $id)
+    {
+        // $user = User::find($userId);
+        // return view("users.editProfile", ['user' => $user]);
     }
 }

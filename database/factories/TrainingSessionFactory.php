@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Gym;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,12 +19,12 @@ class TrainingSessionFactory extends Factory
     public function definition()
     {
         return [
-
             'name' => $this->faker->text(20),
-            'day' =>$this->faker->date,
-
-            'gym_id' =>Gym::all()->random()->id,
-
+            'day' => $this->faker->date,
+            'started_at' => date('Y-m-d H:i:s'),
+            'finished_at' => date('Y-m-d H:i:s'),
+            'gym_id' => Gym::all()->random()->id,
+            'package_id' =>Package::all()->random()->id,
         ];
     }
 }

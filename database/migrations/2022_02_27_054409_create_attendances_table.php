@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-            $table->dateTime('started_at')->change();
-            $table->dateTime('finished_at')->change();
+        Schema::create('attendances', function (Blueprint $table) {
+            $table->id();
+            $table->date('attendance_date');
+            $table->time('attendance_time');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('training_sessions', function (Blueprint $table) {
-            $table->timestamp('started_at')->change();
-            $table->timestamp('finished_at')->change();
-        });
+        Schema::dropIfExists('attendance');
     }
 };

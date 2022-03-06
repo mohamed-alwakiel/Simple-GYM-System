@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\CityManager;
-use App\Models\GymManager;
-use App\Models\User;
+use App\Models\CoachSession;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class UserSeeder extends Seeder
+class CoachSessionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,6 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-      }
+        CoachSession::factory(10)->create();
+    }
 }

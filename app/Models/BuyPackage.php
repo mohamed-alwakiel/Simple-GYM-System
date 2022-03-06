@@ -16,22 +16,25 @@ class BuyPackage extends Model
         'name',
         'price',
         'number_of_sessions',
+        'remaining_sessions',
         'package_id',
         'user_id',
-        'gym_id'
-
+        'gym_id',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function package()
     {
         return $this->belongsTo(Package::class);
     }
+    
     public function gym()
     {
         return $this->belongsTo(Gym::class);
     }
+    
 }

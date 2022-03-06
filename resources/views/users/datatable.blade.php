@@ -74,7 +74,7 @@
 
             "bLengthChange": true,
             'autoWidth'   : true,
-            ajax: '{!! route('get.users') !!}',
+            ajax: '{!! route("get.users") !!}',
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },

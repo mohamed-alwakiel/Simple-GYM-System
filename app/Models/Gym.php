@@ -11,6 +11,7 @@ class Gym extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'name',
         'cover_img',
         'created_at',
