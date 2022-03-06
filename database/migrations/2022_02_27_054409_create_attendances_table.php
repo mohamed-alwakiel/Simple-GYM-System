@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coaches_sessions', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-
-          // $table->integer('session_id');
-
-           // $table->integer('coach_id');
-
+            $table->integer('user_id');
+            $table->integer('training_session_id');
+            $table->date('attendance_date');
+            $table->time('attendance_time');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coaches_sessions');
+        Schema::dropIfExists('attendance');
     }
 };

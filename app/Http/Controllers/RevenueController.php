@@ -21,6 +21,7 @@ class RevenueController extends Controller
 {
     public function index()
     {
+
         return view('revenue.datatable');
     }
 
@@ -65,11 +66,11 @@ class RevenueController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             } elseif ($isCityManager) {
-                $gyms = Gym::where('city_id', auth()->user()->city_id)->pluck('id')->toArray();
-
-                $boughtPackages = BuyPackage::where('gym_id', auth()->user()->city_id);
-                // $boughtPackages = BuyPackage::all();
+                // $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym->gym_id)->get();
+                $boughtPackages = BuyPackage::all();
                 return DataTables::of($boughtPackages)
+                    // ->addIndexColumn()
+
                     ->addColumn('Client Name', function ($row) {
                         return $row->user->name;
                     })

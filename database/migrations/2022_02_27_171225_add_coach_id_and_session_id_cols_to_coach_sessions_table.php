@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bought_packages', function (Blueprint $table) {
-
-            $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->integer('number_of_sessions');
-            $table->timestamps();
+        Schema::table('coach_sessions', function (Blueprint $table) {
+            $table->foreignId('training_session_id')->references('id')->on('training_sessions')->onDelete('cascade');
+            $table->foreignId('coach_id')->references('id')->on('coaches');
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bought_package');
+        Schema::table('coaches_sessions', function (Blueprint $table) {
+            //
+        });
     }
 };

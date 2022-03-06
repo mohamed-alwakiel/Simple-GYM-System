@@ -32,9 +32,6 @@ return new class extends Migration
 
             $table->dateTime('last_login')->nullable();
 
-            // $table->integer('gym_id')->nullable();
-
-            // $table->integer('city_id');
 
             $table->rememberToken();
             $table->timestamps();

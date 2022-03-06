@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('coaches_sessions', function (Blueprint $table) {
-            $table->foreignId('session_id')->references('id')->on('training_sessions')->onDelete('cascade');
+        Schema::table('bought_packages', function (Blueprint $table) {
+            $table->integer('city_id')->change();
 
-            $table->foreignId('coach_id')->references('id')->on('coaches');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('coaches_sessions', function (Blueprint $table) {
+        Schema::table('bought_packages', function (Blueprint $table) {
             //
         });
     }

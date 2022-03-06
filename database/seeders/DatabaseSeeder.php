@@ -25,32 +25,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // create gym manager
-        // $this->call([
-        //     GitySeeder::class
-        //     GymManagerSeeder::class
-        //     CityManagerSeeder::class
-        // ]);
+        $this->call([
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            RolePermissionSeeder::class,
+            AssignAdminRoleSeeder::class,
 
+            CitySeeder::class,
+            GymSeeder::class,
 
+            CityManagerSeeder::class,
+            GymManagerSeeder::class,
+            UserSeeder::class,
 
-        City::factory(10)->create();
-        Gym::factory(10)->create();
-        User::factory(10)->create();
-        TrainingSession::factory(10)->create();
-        Coach::factory(10)->create();
-        CoachSession::factory(10)->create();
-        Attendance::factory(10)->create();
+            PackageSeeder::class,
+            BuyPackageSeeder::class,
 
-        Package::factory(10)->create();
-        BuyPackage::factory(10)->create();
+            CoachSeeder::class,
+            TrainingSessionSeeder::class,
+            CoachSessionSeeder::class,
 
-
-
-
-
-        //  foreach(TrainingSession::all() as $session){
-        //      $coaches=Coach::inRandomOrder()->take(rand(1,3));
-        //      $session->coaches()->attach($coaches);}
+            AttendanceSeeder::class
+        ]);
     }
 }
