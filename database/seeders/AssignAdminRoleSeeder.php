@@ -28,38 +28,11 @@ class AssignAdminRoleSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        // CityManager::factory(1)->create();
-        // GymManager::factory(1)->create();
-        // User::factory(1)->create();
-
-
         // Assign Role --> Admin
         DB::table('model_has_roles')->insert([
             'role_id' => 1,
             'model_type' => 'App\Models\User',
             'model_id' => 1,
         ]);
-
-        // // Assign Role --> City Manager Model
-
-        // DB::table('model_has_roles')->insert([
-        //     'role_id' => 2,
-        //     'model_type' => 'App\Models\User',
-        //     'model_id' => 2,
-        // ]);
-
-        // // Assign Role --> Gym Manager Model
-        // DB::table('model_has_roles')->insert([
-        //     'role_id' => 3,
-        //     'model_type' => 'App\Models\User',
-        //     'model_id' => 3,
-        // ]);
-
-        // // Assign Role --> User Model
-        // DB::table('model_has_roles')->insert([
-        //     'role_id' => 4,
-        //     'model_type' => 'App\Models\User',
-        //     'model_id' => 4,
-        // ]);
     }
 }

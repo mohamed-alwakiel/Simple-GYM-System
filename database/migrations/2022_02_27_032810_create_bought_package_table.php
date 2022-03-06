@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bought_packages', function (Blueprint $table) {
-
             $table->id();
             $table->string('name');
             $table->integer('price');

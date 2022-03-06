@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('gym_id')->references('id')->on('gyms');
             
             $table->foreignId('city_id')->references('id')->on('cities');
-
         });
     }
 
