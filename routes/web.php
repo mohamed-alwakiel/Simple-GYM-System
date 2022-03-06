@@ -14,6 +14,7 @@ use App\Http\Controllers\BuyPackageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RevenueController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TrainingSessionController;
 
 
@@ -58,9 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
 
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
-    Route::get('/get-cityManagers-my-datatables', [CityManagerController::class, 'getCityManager'])->name('get.cityManager')->middleware('auth');
-});
 
+});
 
 // --------------- GYM MANAGERS
 Route::middleware(['auth'])->group(function () {
@@ -124,17 +124,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Training Packages
-Route::group(['middleware' => ['auth'] ], function() {
-
-Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
-Route::get('/trainingPackages/create',[TrainingPackageController::class, 'create'])->name('trainingPackages.create');
-Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
-Route::get('/trainingPackages/{package}/edit',[TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
-Route::put('/trainingPackages/{package}',[TrainingPackageController::class, 'update'])->name('trainingPackages.update');
-Route::post('/trainingPackages',[TrainingPackageController::class, 'store'])->name('trainingPackages.store');
-Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
-Route::get('/trainingPackagesTest', [TrainingPackageController::class, 'trainingPackagesDatatables'])->name('trainingPackages.trainingPackagesTest');
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+    Route::get('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
+    Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+    Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
+    Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
+    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 });
 
 // --------------- Sessions
@@ -187,6 +184,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
     Route::get('/buyPackage/create/success', [PaymentController::class, 'success'])->name('buyPackage.success');
     Route::get('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
+
+    Route::get('/stripe-payment', [StripeController::class, 'handleGet']);
+    Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
+
 });
 
 // --------------- Auth -> Login & Register
