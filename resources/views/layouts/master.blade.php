@@ -352,15 +352,16 @@
                             </a>
                         </li>
 
-
-                        <li class="nav-item mb-5">
-                            <a href="#" class="nav-link">
+                        @hasanyrole('gymManager|cityManager|admin')
+                        <li class="nav-item mb-3">
+                            <a href="{{ route('revenue.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
                                     Revenue
                                 </p>
                             </a>
                         </li>
+                        @endhasanyrole
                         <!-- ---------------------------------------- -->
 
                     </ul>
@@ -370,7 +371,7 @@
             <!-- /.sidebar -->
         </aside>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper py-3">
             @yield('content')
         </div>
 
@@ -383,7 +384,6 @@
         </aside>
 
     </div>
-
 
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
@@ -410,7 +410,7 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
-    
+
     @yield("plugins")
     @yield("script")
 </body>

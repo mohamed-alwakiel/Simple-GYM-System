@@ -18,8 +18,7 @@ class BuyPackage extends Model
         'number_of_sessions',
         'package_id',
         'user_id',
-        'gym_id'
-
+        'gym_id',
     ];
 
     public function user()
@@ -36,4 +35,5 @@ class BuyPackage extends Model
     {
         return $this->belongsTo(Gym::class);
     }
+    
 }

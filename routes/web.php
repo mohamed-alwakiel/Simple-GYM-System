@@ -13,7 +13,9 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\BuyPackageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TrainingSessionController;
+
 
 
 
@@ -44,8 +46,8 @@ Route::get('/dashboard', function () {
 // --------------- CITY MANAGERS
 // Route::group(['middleware' => 'auth', 'forbid-banned-user','role:admin|citymanager'], function () {
 
-    Route::middleware(['auth'])->group(function () {
-        Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
+Route::middleware(['auth'])->group(function () {
+    Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
 
     Route::GET('/cityManagers/create', [CityManagerController::class, 'create'])->name('cityManagers.create');
     Route::POST('/cityManagers', [CityManagerController::class, 'store'])->name('cityManagers.store');
@@ -56,7 +58,7 @@ Route::get('/dashboard', function () {
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
 
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
-    Route::get('/get-cityManagers-my-datatables', [CityManagerController    ::class, 'getCityManager'])->name('get.cityManager')->middleware('auth');
+    Route::get('/get-cityManagers-my-datatables', [CityManagerController::class, 'getCityManager'])->name('get.cityManager')->middleware('auth');
 });
 
 
@@ -77,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::Get('/gymManagers/{gymManager}/ban', [GymManagerController::class, 'ban'])->name('gymManagers.ban');
     Route::get('/gymManagers/{gymManager}/unban', [GymManagerController::class, 'unban'])->name('gymManagers.unban');
 
-    Route::get('/get-gymManagers-my-datatables', [GymManagerController    ::class, 'getGymManager'])->name('get.gymManager')->middleware('auth');
+    Route::get('/get-gymManagers-my-datatables', [GymManagerController::class, 'getGymManager'])->name('get.gymManager')->middleware('auth');
 });
 
 
@@ -119,9 +121,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/get-users-my-datatables', [UserController::class, 'getUsers'])->name('get.users')->middleware('auth');
-
-
-
 });
 
 
@@ -160,7 +159,6 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
-
 });
 
 
@@ -189,3 +187,15 @@ Route::group(['middleware' => ['auth']], function () {
 // --------------- Auth -> Login & Register
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+
+
+Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], function () {
+    Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+    Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
+
+    Route::get('/getRevenue', [RevenueController::class, 'getRevenue'])->name('getRevenue')->middleware('auth');
+});
+
+// --------------- Edit Profile
+Route::get('/users/editProfile/{id}', [UserController::class, 'editProfile'])->name('users.editProfile')->middleware('auth');
+Route::patch('/users/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('users.updateProfile')->middleware('auth');
