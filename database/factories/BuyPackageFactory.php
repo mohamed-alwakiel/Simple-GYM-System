@@ -30,12 +30,10 @@ class BuyPackageFactory extends Factory
             'name' => $this->faker->name,
             'price' => $this->faker->numerify(),
             'number_of_sessions' => $this->faker->numerify(),
-            // 'gym_id'=>$this->faker->numerify(),
-            // 'user_id'=>$this->faker->numerify(),
-            // 'package_id'=>$this->faker->numerify()
             'remaining_sessions' => $this->faker->numerify(),
-            'gym_id' => Gym::inRandomOrder()->first()->id,
-            'user_id' => User::inRandomOrder()->first()->id,
+            'gym_id' => $gymID,
+            'city_id'=> $cityID,
+            'user_id' =>$userID,
             'package_id' => Package::inRandomOrder()->first()->id
 
         ];

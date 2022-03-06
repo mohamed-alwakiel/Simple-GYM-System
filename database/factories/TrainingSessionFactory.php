@@ -22,7 +22,6 @@ class TrainingSessionFactory extends Factory
         return [
             'name' => $this->faker->text(20),
             'day' =>$this->faker->date,
-            'package_id' =>Package::all()->random()->id,
             'gym_id' =>Gym::all()->random()->id,
             'started_at' => date('Y-m-d H:i:s'),
             'finished_at' => date('Y-m-d H:i:s'),
