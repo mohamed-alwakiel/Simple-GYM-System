@@ -21,108 +21,23 @@ class RevenueController extends Controller
 {
     public function index()
     {
-
-        return view('revenue.datatable');
-    }
-
-    public function getRevenue(Request $request)
-    {
         $isAdmin = auth()->user()->hasRole('admin');
         $isCityManager = auth()->user()->hasRole('cityManager');
         $isGymManager = auth()->user()->hasRole('gymManager');
 
-        if (request()->ajax()) {
-
-            if ($isAdmin) {
-                $boughtPackages = BuyPackage::all();
-
-                return DataTables::of($boughtPackages)
-                    ->addColumn('Client Name', function ($row) {
-                        return $row->user->name;
-                    })
-                    ->addColumn('Client Email', function ($row) {
-                        return $row->user->email;
-                    })
-                    ->addColumn('Package Name', function ($row) {
-                        return $row->name;
-                    })
-                    ->addColumn('Paid Price', function ($row) {
-                        return $row->price;
-                    })
-                    ->addColumn('Gym', function ($row) {
-                        return $row->gym->name;
-                    })
-                    ->addColumn('City', function ($row) {
-                        // return $row->gym->name;
-                        return $row->gym->city->name;
-                    })
-
-
-                    ->addColumn('action', function ($row) {
-                        $delete = '<button type="button" data-id="' . $row->id . '" data-toggle="modal" data-target="#DeleteProductModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-
-                        return $delete;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            } elseif ($isCityManager) {
-                // $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym->gym_id)->get();
-                $boughtPackages = BuyPackage::all();
-                return DataTables::of($boughtPackages)
-                    // ->addIndexColumn()
-
-                    ->addColumn('Client Name', function ($row) {
-                        return $row->user->name;
-                    })
-                    ->addColumn('Client Email', function ($row) {
-                        return $row->user->email;
-                    })
-                    ->addColumn('Package Name', function ($row) {
-                        return $row->name;
-                    })
-                    ->addColumn('Paid Price', function ($row) {
-                        return $row->price;
-                    })
-                    ->addColumn('Gym', function ($row) {
-                        return $row->gym->name;
-                    })
-
-                    ->addColumn('action', function ($row) {
-                        $delete = '<button type="button" data-id="' . $row->id . '" data-toggle="modal" data-target="#DeleteProductModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-
-                        return $delete;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            } elseif ($isGymManager) {
-                $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
-
-                return DataTables::of($boughtPackages)
-                    // ->addIndexColumn()
-
-                    ->addColumn('Client Name', function ($row) {
-                        return $row->user->name;
-                    })
-                    ->addColumn('Client Email', function ($row) {
-                        return $row->user->email;
-                    })
-                    ->addColumn('Package Name', function ($row) {
-                        return $row->name;
-                    })
-                    ->addColumn('Paid Price', function ($row) {
-                        return $row->price;
-                    })
-                    ->addColumn('action', function ($row) {
-                        $delete = '<button type="button" data-id="' . $row->id . '" data-toggle="modal" data-target="#DeleteProductModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
-                        return $delete;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
+        if ($isAdmin) {
+            $boughtPackages = BuyPackage::all();
+        } elseif ($isCityManager) {
+            $boughtPackages = BuyPackage::where('city_id', auth()->user()->city_id)->get();
+        } elseif ($isGymManager) {
+            $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
         }
-        return view('revenue.datatable');
-    }
 
+        return view('revenue.datatable', data:[
+            'boughtPackages'=>$boughtPackages,
+        ]);
+    }
+    
     public function destroy($id)
     {
         BuyPackage::find($id)->delete();

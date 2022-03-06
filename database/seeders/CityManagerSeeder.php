@@ -15,6 +15,11 @@ class CityManagerSeeder extends Seeder
      */
     public function run()
     {
-        CityManager::factory(5)->create();
+
+        $factories = CityManager::factory(5)->create();
+
+        foreach ($factories as $factory) {
+            $factory->assignRole('cityManager');
+        }
     }
 }

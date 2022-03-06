@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -35,8 +35,9 @@ class User extends Authenticatable
         'profile_img',
         'role_id',
         'role_type',
-        'gym_id',
-        'city_id'
+        'gym_id' ,
+        'city_id',
+        'last_login',
 
     ];
 
@@ -78,4 +79,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Gym::class, 'id');
     }
+
+
 }
