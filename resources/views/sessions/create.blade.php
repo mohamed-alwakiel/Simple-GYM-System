@@ -52,13 +52,24 @@
 
 
             <div class="mb-3 w-25">
-                <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-                <select multiple name="coach_id[]" class="form-control">
+                <label for="coach" class="form-label">Coaches</label>
+                <select multiple name="coach_id[]" id='coach'class="form-control">
                     @foreach ($coaches as $coach)
                         <option value="{{ $coach->id }}">{{ $coach->name }}</option>
                     @endforeach
 
                 </select>
+            </div>
+            <div class="mb-3 w-25">
+                <label for="gym2" class="form-label">Gym name</label>
+                <select  name="gym_id" id='gym2' class="form-control">
+                    @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
             {{-- <div class="mb-3 w-100">
                 <label for="gym_id" class="form-label">Gym id</label>
                 <input name="gym_id" type="text" class="form-control" id="gym_id">

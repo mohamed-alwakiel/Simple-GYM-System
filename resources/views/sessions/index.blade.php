@@ -24,7 +24,7 @@
 
             function paginateFast(page) {
 
-                /
+
                 $.ajax({
                     url: "{{ route('sessions.paginate') }}" + "?page=" + page,
                     method: "GET",
