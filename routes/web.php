@@ -58,9 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
 
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
-    Route::get('/get-cityManagers-my-datatables', [CityManagerController::class, 'getCityManager'])->name('get.cityManager')->middleware('auth');
+   
 });
-
 
 // --------------- GYM MANAGERS
 Route::middleware(['auth'])->group(function () {
