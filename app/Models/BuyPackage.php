@@ -35,5 +35,9 @@ class BuyPackage extends Model
     {
         return $this->belongsTo(Gym::class);
     }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
     
 }
