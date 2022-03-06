@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use App\Models\Gym;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;

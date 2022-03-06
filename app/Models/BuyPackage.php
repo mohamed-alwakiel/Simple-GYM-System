@@ -16,6 +16,7 @@ class BuyPackage extends Model
         'name',
         'price',
         'number_of_sessions',
+        'remaining_sessions',
         'package_id',
         'user_id',
         'gym_id',

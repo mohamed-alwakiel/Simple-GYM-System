@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Gym;
-use Carbon\Carbon;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,6 +24,7 @@ class TrainingSessionFactory extends Factory
             'started_at' => date('Y-m-d H:i:s'),
             'finished_at' => date('Y-m-d H:i:s'),
             'gym_id' => Gym::all()->random()->id,
+            'package_id' =>Package::all()->random()->id,
         ];
     }
 }

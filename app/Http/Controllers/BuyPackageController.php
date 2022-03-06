@@ -37,12 +37,6 @@ class BuyPackageController extends Controller
         $packages = DB::table('training_packages')->get();
         $users = User::where('role_id', 4)->get();
 
-        // return view('buyPackage.index', data: [
-        //     'cities' => $cities,
-        //     'packages' => $packages,
-        //     'users' => $users,
-        // ]);;
-
         // $users = User::all();
         // $packages = Package::all();
         // $gyms = Gym::all();

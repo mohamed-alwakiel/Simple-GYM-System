@@ -26,7 +26,9 @@ Route::post('register', action: [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', action: [AuthController::class, 'logout']);
     Route::get('users', action: [UserController::class, 'index']);
-   
-    
+    Route::get('users/remainingSessions', action: [UserController::class, 'remainingSessions']);
+    Route::get('show-sessions' ,action: [UserController::class , 'showAttendance']);
+    Route::post('training-sessions/attend' ,action: [UserController::class , 'attend']);
+    Route::get('showAttendanceHistory',action: [UserController::class ,'showAttendanceHistory']);
 });
-Route::put('users/{user}', action: [UserController::class , 'update']);
+// Route::put('users/{user}', action: [UserController::class , 'update']);
