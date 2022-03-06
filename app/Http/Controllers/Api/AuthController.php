@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\WelcomeEmailNotification;
+use Carbon\Carbon;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
@@ -37,12 +39,10 @@ class AuthController extends Controller
         ]);
 
         //sending mail to registered user
-        // $user->notify(new WelcomeEmailNotification($user));
-
-        $token = $user->createToken('GymProjectToken')->plainTextToken;
+        $user->sendEmailVerificationNotification();
         $response=[
             'user'=>$user,
-            'token'=>$token,
+            'message'=>'verify your mail'
         ];
         return response($response,201);
     }
@@ -65,6 +65,7 @@ class AuthController extends Controller
         }
         else{
             $token = $user->createToken('GymProjectTokenLogin')->plainTextToken;
+            $user->update(["last_login" => Carbon::now()->toDateTimeString()]);
             $response=[
                 'user'=>$user,
                 'token'=>$token,

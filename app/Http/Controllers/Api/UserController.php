@@ -28,6 +28,7 @@ class UserController extends Controller
     {
         // $users = User::where('role_id', 4)->get();
           $users = User::get();
+          $users = User::whereDate('last_login' ,'<' ,Carbon::now()->subDays(30)->toDateTimeString())->get();
         return   UserResource::collection($users);
     }
 
@@ -111,13 +112,13 @@ class UserController extends Controller
         $user = Auth::user();
 
         $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
-        $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->get('name');
-        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->get('name');
+        $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->select('name as Gym name')->get( );
+        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->get('name as Session name');
         $trainingSession = SessionAttendence::where('user_id', $user->id)->select('attendance_date', 'attendance_time')->get();
 
         $attendanceHistory = collect([
+            $gymName ,
             $sessionName,
-            $gymName,
             $trainingSession,
         ]);
 
