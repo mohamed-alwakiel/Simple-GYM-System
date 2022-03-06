@@ -18,6 +18,15 @@ class CoachController extends Controller
             'coaches' => $coaches
         ]);
     }
+
+    public function coachesDataTables() {
+        $coaches=Coach::all();
+        return view('coaches.datatables-front',
+            [
+                'coaches' => $coaches
+            ]);
+    }
+
     public function getCoaches()
     {
         if (request()->ajax()) {

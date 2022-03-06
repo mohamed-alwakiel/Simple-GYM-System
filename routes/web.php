@@ -125,14 +125,17 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Training Packages
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
-    Route::get('/trainingPackages/create', [TrainingPackageController::class, 'cereate'])->name('trainingPackages.create');
-    Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
-    Route::get('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
-    Route::put('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
-    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
-    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
+Route::group(['middleware' => ['auth'] ], function() {
+
+Route::get('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+Route::get('/trainingPackages/create',[TrainingPackageController::class, 'create'])->name('trainingPackages.create');
+Route::get('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+Route::get('/trainingPackages/{package}/edit',[TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
+Route::put('/trainingPackages/{package}',[TrainingPackageController::class, 'update'])->name('trainingPackages.update');
+Route::post('/trainingPackages',[TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
+Route::get('/trainingPackagesTest', [TrainingPackageController::class, 'trainingPackagesDatatables'])->name('trainingPackages.trainingPackagesTest');
+
 });
 
 // --------------- Sessions
@@ -159,6 +162,8 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
+    Route::get('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
+
 });
 
 
