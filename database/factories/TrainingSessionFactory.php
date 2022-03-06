@@ -19,11 +19,11 @@ class TrainingSessionFactory extends Factory
     public function definition()
     {
         return [
-
             'name' => $this->faker->text(20),
             'day' =>$this->faker->date,
             'gym_id' =>Gym::all()->random()->id,
-
+            'started_at' => date('Y-m-d H:i:s'),
+            'finished_at' => date('Y-m-d H:i:s'),
         ];
     }
 }

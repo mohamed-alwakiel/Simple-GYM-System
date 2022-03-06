@@ -22,7 +22,6 @@ class GymFactory extends Factory
             'cover_img'=>$this->faker->name,
             'created_at'=>$this->faker->date,
             'updated_at'=>$this->faker->date,
-            // 'city_id'=>$this->faker->numberBetween(1,10)
             'city_id' => City::inRandomOrder()->first()->id
         ];
     }

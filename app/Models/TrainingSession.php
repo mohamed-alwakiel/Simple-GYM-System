@@ -19,7 +19,6 @@ class TrainingSession extends Model
         'started_at',
         'finished_at',
          'gym_id',
-
     ];
 
     public function gyms(){

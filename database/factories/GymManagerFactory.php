@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Gym;
+use App\Models\GymManager;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +21,13 @@ class GymManagerFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+
     public function definition()
     {
         $password = 123456789;
+        $gymID = Gym::inRandomOrder()->first()->id;
+        $cityID = Gym::where('id', $gymID)->pluck('city_id')[0];
 
         return [
             'name' => $this->faker->name,
@@ -30,8 +36,13 @@ class GymManagerFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'GymMgr.Png',
-            // 'role_id' => 3,
-            // 'role_type' => 'Gym_Mgr'
+            'role_id' => 3,
+            'role_type' => 'gymManager',
+            'gym_id' => $gymID,
+            'city_id' => $cityID,
         ];
+
     }
+
+    
 }

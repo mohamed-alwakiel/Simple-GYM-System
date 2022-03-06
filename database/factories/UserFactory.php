@@ -25,6 +25,8 @@ class UserFactory extends Factory
     public function definition()
     {
         $password = 123456789;
+        $gymID = Gym::inRandomOrder()->first()->id;
+        $cityID = Gym::where('id', $gymID)->pluck('city_id')[0];
 
         return [
             'name' => $this->faker->name,
@@ -33,10 +35,10 @@ class UserFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'Client.Png',
-            'gym_id' => Gym::inRandomOrder()->first()->id,
-            'city_id' => City::inRandomOrder()->first()->id,
-            // 'role_id' => 4,
-            // 'role_type' => 'Client',
+            'role_id' => 4,
+            'role_type' => 'Client',
+            'gym_id' => $gymID,
+            'city_id' => $cityID,
         ];
     }
 

@@ -8,10 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeEmailNotification extends Notification
+class WelcomeEmailNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-
+    private $user;
     /**
      * Create a new notification instance.
      *
@@ -41,11 +41,13 @@ class WelcomeEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
+
         return (new MailMessage)
+
                     ->greeting('Hello, '.$this->user->name)
                     ->line('Welcome to our Gym.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for pay to play')
+                    ->salutation('Best Regards , Your Gym');
     }
 
     /**

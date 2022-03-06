@@ -14,18 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bought_packages', function (Blueprint $table) {
-
             $table->id();
             $table->string('name');
             $table->integer('price');
             $table->integer('number_of_sessions');
-
-            // $table->integer('packege_id');
-
-            // $table->integer('user_id');
-
-            // $table->integer('gym_id');
-
             $table->timestamps();
         });
     }
