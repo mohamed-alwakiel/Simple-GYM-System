@@ -70,7 +70,7 @@ class UserController extends Controller
         $user=Auth::user();
         $attendance_date= Attendance::where('user_id' ,$user->id )->get('attendance_date');
         $userData=DB::table('bought_packages')->where('user_id' ,$user->id)->first();
-        $start_date= TrainingSession::where('package_id' ,$userData->package_id )->get();
+        $start_date= TrainingSession::where('gym_id' ,$userData->gym_id )->get();
         $remaining_sessions=$userData->remaining_sessions;
         if($remaining_sessions != 0 ){
             foreach($start_date as $day){
