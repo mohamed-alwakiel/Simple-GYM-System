@@ -4,25 +4,19 @@
     Gym Managers
 @endsection
 
-@section('style')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-@endsection
-
 @section('content')
-    <div class="w-75 mx-auto pt-3 d-flex justify-content-end">
-        <div>
-            <a href="{{ route('gymManagers.banned') }}" class="btn btn-dark my-3 mr-3">Show Banned Managers</a>
-            <a href="{{ route('gymManagers.create') }}" class="btn btn-success my-3">Add New Manager</a>
-        </div>
-    </div>
-
-    {{-- <table class="w-75 mx-auto text-center table-bordered border-2 table-striped" id="table_id"> --}}
     <div class="container-fluid">
+        <div class="mx-auto pt-3 d-flex justify-content-end">
+            <div>
+                <a href="{{ route('gymManagers.banned') }}" class="btn btn-dark my-3 mr-3">Show Banned Managers</a>
+                <a href="{{ route('gymManagers.create') }}" class="btn btn-success my-3">Add New Manager</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Purchased Packages overall your Cities</h3>
+                        <h3 class="card-title">All Gym Managers</h3>
                     </div>
                     <div class="card-body">
                         <table id="table_id" class="table text-center ">
@@ -40,9 +34,9 @@
                                 </tr>
                             </thead>
 
-                            <tbody >
+                            <tbody>
 
-                                
+
 
                                 @foreach ($gymManagers as $manager)
                                     <tr class="bg-dark">
@@ -94,8 +88,6 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
     <script>
         $(document).ready(function() {
             $('#table_id').DataTable();

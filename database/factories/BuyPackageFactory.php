@@ -30,12 +30,11 @@ class BuyPackageFactory extends Factory
             'name' => $this->faker->name,
             'price' => $this->faker->numerify(),
             'number_of_sessions' => $this->faker->numerify(),
-            'remaining_sessions' => $this->faker->numerify(),
+            'remaining_sessions' => $this->faker->numerify(),       // if > num of session
+            'package_id' => Package::inRandomOrder()->first()->id,
+            'user_id' => $userID,
             'gym_id' => $gymID,
-            'city_id'=> $cityID,
-            'user_id' =>$userID,
-            'package_id' => Package::inRandomOrder()->first()->id
-
+            'city_id' => $cityID,
         ];
     }
 }
