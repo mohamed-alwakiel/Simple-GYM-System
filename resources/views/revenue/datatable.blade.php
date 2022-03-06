@@ -26,10 +26,29 @@
                                     @endrole
                                     @role('admin')
                                     <th class="text-center">City</th>
+                                    <th>Delete</th>
                                     @endrole
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach ($boughtPackages as $boughtPackage)
+                                <tr class="bg-dark">
+                                    <th>{{ $boughtPackage->user->name }}</th>
+                                    <th>{{ $boughtPackage->user->email }}</th>
+                                    <th>{{ $boughtPackage->name }}</th>
+                                    <th>{{ $boughtPackage->price }}</th>
+                                    @role('admin|cityManager')
+                                    <th>{{ $boughtPackage->gym->name }}</th>
+                                    @endrole
+                                    @role('admin')
+                                    <th>{{ $boughtPackage->city->name }}</th>
+                                    <th>
+                                        <button type="button" data-id="{{ $boughtPackage->id }}" data-toggle="modal" data-target="#DeleteProductModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
+                                    </th>
+                                    @endrole
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -59,57 +78,15 @@
 @endsection
 
 @section('script')
-@role('admin')
 <script>
     $(document).ready(function() {
-        $('#table').DataTable({
-            serverSide: true,
-            paging: true,
-            pageLength: 8,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            info: true,
-            responsive: true,
-            bLengthChange: true,
-            autoWidth: true,
+        $('#table').DataTable();
+    });
+</script>
 
-            ajax: '{{ route("getRevenue") }}',
-            columns: [{
-                    data: 'Client Name',
-                    name: 'Client Name'
-                },
-                {
-                    data: 'Client Email',
-                    name: 'Client Email'
-                },
-                {
-                    data: 'Package Name',
-                    name: 'Package Name'
-                },
-                {
-                    data: 'Paid Price',
-                    name: 'Paid Price'
-                },
-                {
-                    data: 'Gym',
-                    name: 'Gym'
-                },
-                {
-                    data: 'City',
-                    name: 'City'
-                },
 
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    serachable: false,
-                    sClass: 'text-center'
-                }
-            ],
-
-        });
+<script>
+    $(document).ready(function() {
         // Delete product Ajax request.
         var deleteID;
         $('body').on('click', '#getDeleteId', function() {
@@ -129,10 +106,10 @@
                 url: "revenue/" + id,
                 method: 'DELETE',
 
-
                 success: function() {
 
-                    $('#table').DataTable().ajax.reload();
+                    location.reload();
+
                     $('#DeleteProductModal').hide();
                 },
                 error: function(response) {
@@ -142,164 +119,5 @@
         });
     });
 </script>
-@endrole
-
-@role('cityManager')
-<script>
-    $(document).ready(function() {
-        $('#table').DataTable({
-            serverSide: true,
-            paging: true,
-            pageLength: 5,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            info: true,
-            responsive: true,
-            bLengthChange: true,
-            autoWidth: true,
-
-            ajax: '{{ route("getRevenue") }}',
-            columns: [{
-                    data: 'Client Name',
-                    name: 'Client Name'
-                },
-                {
-                    data: 'Client Email',
-                    name: 'Client Email'
-                },
-                {
-                    data: 'Package Name',
-                    name: 'Package Name'
-                },
-                {
-                    data: 'Paid Price',
-                    name: 'Paid Price'
-                },
-                {
-                    data: 'Gym',
-                    name: 'Gym'
-                },
-
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    serachable: false,
-                    sClass: 'text-center'
-                }
-            ],
-
-        });
-        // Delete product Ajax request.
-        var deleteID;
-        $('body').on('click', '#getDeleteId', function() {
-            deleteID = $(this).data('id');
-
-        })
-        $('#SubmitDeleteForm').click(function(e) {
-            e.preventDefault();
-
-            var id = deleteID;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "revenue/" + id,
-                method: 'DELETE',
-
-
-                success: function() {
-
-                    $('#table').DataTable().ajax.reload();
-                    $('#DeleteProductModal').hide();
-                },
-                error: function(response) {
-                    alert(' error');
-                }
-            });
-        });
-    });
-</script>
-@endrole
-
-@role('gymManager')
-<script>
-    $(document).ready(function() {
-        $('#table').DataTable({
-            serverSide: true,
-            paging: true,
-            pageLength: 8,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            info: true,
-            responsive: true,
-            bLengthChange: true,
-            autoWidth: true,
-
-            ajax: '{{ route("getRevenue") }}',
-            columns: [{
-                    data: 'Client Name',
-                    name: 'Client Name'
-                },
-                {
-                    data: 'Client Email',
-                    name: 'Client Email'
-                },
-                {
-                    data: 'Package Name',
-                    name: 'Package Name'
-                },
-                {
-                    data: 'Paid Price',
-                    name: 'Paid Price'
-                },
-
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    serachable: false,
-                    sClass: 'text-center'
-                }
-            ],
-
-        });
-        // Delete product Ajax request.
-        var deleteID;
-        $('body').on('click', '#getDeleteId', function() {
-            deleteID = $(this).data('id');
-
-        })
-        $('#SubmitDeleteForm').click(function(e) {
-            e.preventDefault();
-
-            var id = deleteID;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "revenue/" + id,
-                method: 'DELETE',
-
-
-                success: function() {
-
-                    $('#table').DataTable().ajax.reload();
-                    $('#DeleteProductModal').hide();
-                },
-                error: function(response) {
-                    alert(' error');
-                }
-            });
-        });
-    });
-</script>
-@endrole
 
 @endsection

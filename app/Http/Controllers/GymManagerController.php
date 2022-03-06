@@ -111,6 +111,8 @@ class GymManagerController extends Controller
             'city_id' => $request['city_id'],
             'gym_id' => $request['gym_id']
         ]);
+
+        
         $newGymManager->assignRole('gymManager')->givePermissionTo([
             'create session', 'update session', 'delete session',
             'read session', 'read coach', 'read package', 'assign coach'
