@@ -118,6 +118,7 @@ Route::get('/trainingPackages/{package}/edit',[TrainingPackageController::class,
 Route::put('/trainingPackages/{package}',[TrainingPackageController::class, 'update'])->name('trainingPackages.update');
 Route::post('/trainingPackages',[TrainingPackageController::class, 'store'])->name('trainingPackages.store');
 Route::delete('/trainingPackages/{package}',[TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
+Route::get('/trainingPackagesTest', [TrainingPackageController::class, 'trainingPackagesDatatables'])->name('trainingPackages.trainingPackagesTest');
 
 });
 
@@ -144,6 +145,7 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
+    Route::get('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
 
 });
 
