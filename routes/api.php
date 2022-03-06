@@ -29,9 +29,6 @@ Route::post('login', action: [AuthController::class, 'login']);
 Route::post('register', action: [AuthController::class, 'register']);
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'resend'])->middleware('auth:sanctum');
-// Route::post('email/resend', [EmailVerificationController::class, 'resend'])->name('verification.resend');
-// Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
-
 Route::get('email/verify/{id}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -41,5 +38,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('show-sessions' ,action: [UserController::class , 'showAttendance']);
     Route::post('training-sessions/attend' ,action: [UserController::class , 'attend']);
     Route::get('showAttendanceHistory',action: [UserController::class ,'showAttendanceHistory']);
+    Route::put('users', action: [UserController::class , 'update']);
 });
-// Route::put('users/{user}', action: [UserController::class , 'update']);

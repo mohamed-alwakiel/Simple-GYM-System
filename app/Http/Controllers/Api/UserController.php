@@ -21,6 +21,9 @@ use App\Models\BuyPackage;
 use App\Models\Gym;
 use App\Models\Package;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -58,52 +61,65 @@ class UserController extends Controller
     public function remainingSessions()
     {
         $user = Auth::user();
-        $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
-        $totalNumOfSession = $boughtPackage->number_of_sessions;
-        $remainingSessions = $boughtPackage->remaining_sessions;
-
-        return response()->json([
+        $userData = BuyPackage::where('user_id', $user->id)->first();
+        if (isset($userData->package_id)) {
+            $totalNumOfSession = $userData->number_of_sessions;
+            $remainingSessions = $userData->remaining_sessions;
+            return response()->json([
             'total_training_sessions' => $totalNumOfSession,
             'remaining__training_sessions' => $remainingSessions,
         ], 200);
-    }
-    public function attend(Session $session,Request $request){
-        $user=Auth::user();
-        $attendance_date= Attendance::where('user_id' ,$user->id )->get('attendance_date');
-        $userData=DB::table('bought_packages')->where('user_id' ,$user->id)->first();
-        $start_date= TrainingSession::where('gym_id' ,$userData->gym_id )->get();
-        $remaining_sessions=$userData->remaining_sessions;
-        if($remaining_sessions != 0 ){
-            foreach($start_date as $day){
-                $date2=date('Y-m-d', strtotime($day->started_at));
-                if(Carbon::today()->eq($date2)){
-                    Attendee::where('user_id' ,$user->id )->decrement('remaining_sessions');
-                    $sessionID= Attendance::where('user_id' ,$user->id )->get('training_session_id');
-                    SessionAttendence::create([
-                        "training_session_id" => $sessionID ,
-                        "user_id" => Auth::user()->id,
-                        "attendance_time" => Carbon::now()->toTimeString(),
-                        "attendance_date" => Carbon::now()->toDateString(),
-                    ]);
-                    return response()->json([
-                        'message' => 'Session Attended'
-                    ] , 201);
-                }
-                continue;
-
-            }
-            return response()->json([
-                'message' => 'You have no Session today',
-            ] , 201);
-
         }
         else{
             return response()->json([
-                'message' => 'pay to play',
-            ] , 201);
+                'message' => 'you must buy package first',
+            ], 201);
         }
-
-
+    }
+    public function attend(Session $session,Request $request){
+        $user=Auth::user();
+        $userData=DB::table('bought_packages')->where('user_id' ,$user->id)->first();
+        if (isset($userData->package_id)) {
+            $start_date= TrainingSession::where('gym_id', $userData->gym_id)->get();
+            $remaining_sessions=$userData->remaining_sessions;
+            if ($remaining_sessions != 0) {
+                foreach ($start_date as $day) {
+                    $date2=date('Y-m-d', strtotime($day->started_at));
+                    if (Carbon::today()->eq($date2)) {
+                        if (isset($sessionID)) {
+                            Attendee::where('user_id', $user->id)->decrement('remaining_sessions');
+                            $sessionID=$day->id;
+                            SessionAttendence::create([
+                            "training_session_id" => $sessionID ,
+                            "user_id" => Auth::user()->id,
+                            "attendance_time" => Carbon::now()->toTimeString(),
+                            "attendance_date" => Carbon::now()->toDateString(),
+                        ]);
+                            return response()->json([
+                            'message' => 'Session Attended'
+                        ], 201);
+                        } else {
+                            return response()->json([
+                            'message' => 'Invalid session '
+                        ], 201);
+                        }
+                    }
+                    continue;
+                }
+                return response()->json([
+                'message' => 'You have no Session today',
+            ], 201);
+            } else {
+                return response()->json([
+                'message' => 'pay to play',
+            ], 201);
+            }
+        }
+        else{
+            return response()->json([
+                'message' => 'you must buy package first',
+            ], 201);
+        }
 
     }
 
@@ -111,23 +127,28 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
-        $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->select('name as Gym name')->get( );
-        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->get('name as Session name');
-        $trainingSession = SessionAttendence::where('user_id', $user->id)->select('attendance_date', 'attendance_time')->get();
+        $userData = BuyPackage::where('user_id', $user->id)->first();
+        if (isset($userData->package_id)) {
+            $gymName = DB::table('gyms')->where('id', $userData->gym_id)->select('name as Gym name')->get();
+            $sessionName = DB::table('training_sessions')->where('gym_id', $userData->gym_id)->get('name as Session name');
+            $trainingSession = SessionAttendence::where('user_id', $user->id)->select('attendance_date', 'attendance_time')->get();
 
-        $attendanceHistory = collect([
+            $attendanceHistory = collect([
             $gymName ,
             $sessionName,
             $trainingSession,
         ]);
 
-        $arrayOfAttendanceHistory = $attendanceHistory->collapse();
+            $arrayOfAttendanceHistory = $attendanceHistory->collapse();
 
-        return response()->json(
-            $arrayOfAttendanceHistory->all()
-            ,
-            200
-        );
+            return response()->json(
+                $arrayOfAttendanceHistory->all(),
+                200
+            );
+        } else {
+            return response()->json([
+            'message' => 'you must buy package first',
+        ], 201);
+        }
     }
 }
