@@ -29,8 +29,8 @@ class CityManagerFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'CityMgr.Png',
-            'role_id' => 2,
-            'role_type' => 'City_Mgr'
+            // 'role_id' => 2,
+            // 'role_type' => 'City_Mgr'
         ];
     }
 }
