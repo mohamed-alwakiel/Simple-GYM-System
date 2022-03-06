@@ -79,7 +79,6 @@ Route::middleware(['auth'])->group(function () {
     Route::Get('/gymManagers/{gymManager}/ban', [GymManagerController::class, 'ban'])->name('gymManagers.ban');
     Route::get('/gymManagers/{gymManager}/unban', [GymManagerController::class, 'unban'])->name('gymManagers.unban');
 
-    Route::get('/get-gymManagers-my-datatables', [GymManagerController::class, 'getGymManager'])->name('get.gymManager')->middleware('auth');
 });
 
 
@@ -161,6 +160,7 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/coaches/edit/{id}', [CoachController::class, 'edit'])->name('coaches.edit');
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
+
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
     Route::get('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
 
