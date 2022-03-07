@@ -20,6 +20,7 @@ class BuyPackage extends Model
         'package_id',
         'user_id',
         'gym_id',
+        'city_id',
     ];
 
     public function user()

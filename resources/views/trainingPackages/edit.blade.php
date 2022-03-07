@@ -16,7 +16,7 @@
 
                 <label for="name">Name</label>
                 <input name="name" type="text" class="form-control" value="{{ $package->name }}" id="name"
-                    aria-describedby="titleHelp">
+                    aria-describedby="titleHelp" disabled>
 
 
             </div>

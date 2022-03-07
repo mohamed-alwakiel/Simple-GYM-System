@@ -6,14 +6,17 @@ use App\Models\City;
 use App\Models\BuyPackage;
 use App\Models\Gym;
 use App\Models\Package;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class BuyPackageController extends Controller
 {
     public function index()
     {
+        Paginator::useBootstrapFive();
         $boughtPackageCollection = BuyPackage::paginate(10);
         return view('buyPackage.index',['boughtPackageCollection' => $boughtPackageCollection]);
     }
@@ -51,19 +54,24 @@ class BuyPackageController extends Controller
 
  public function store(Request $requestObj)
     {
-        $requestData = $requestObj->all();
-        $package = DB::table('training_packages')->where('id', $requestObj->get('package_id'))->first();
+        // $requestData = $requestObj->all();
+         $test = Test::first();
+
+        $package = DB::table('training_packages')->where('id', $test->package_id)->first();
+       
 
         BuyPackage::create([
 
             'price' => $package->price,
             'number_of_sessions' => $package->number_of_sessions,
-            'package_id' => $requestObj->package_id,
-            'gym_id' => $requestObj->gym_id,
-            'user_id' => $requestObj->user_id,
-
+            'remaining_sessions'=>$package->number_of_sessions,
+            'package_id' => $test->package_id,
+            'gym_id' => $test->gym_id,
+            'user_id' => $test->user_id,
+            'city_id'=> $test->city_id,
         ]);
-   
+        DB::table('test')->delete();
+
         return to_route('buyPackage.index');
     }
 
@@ -73,5 +81,6 @@ class BuyPackageController extends Controller
     {
         echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
     }
+
 
 }
