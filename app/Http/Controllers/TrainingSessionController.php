@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Models\Coach;
-use App\Models\CoachSession;
+use Spatie\Period\Period;
 // use Illuminate\Support\Carbon;
+use App\Models\CoachSession;
+use Illuminate\Http\Request;
 use App\Models\TrainingSession;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Period\PeriodCollections;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
-use Illuminate\Support\Facades\DB;
-use Spatie\Period\PeriodCollections;
-use Spatie\Period\Period;
-use Carbon\Carbon;
 
 
 class TrainingSessionController extends Controller
@@ -37,9 +38,22 @@ class TrainingSessionController extends Controller
 
     public function index()
     {
+
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
+
+
+        if($roleAdmin){
         Paginator::useBootstrapFive();
         $sessions = TrainingSession::paginate(10);
-
+        }elseif($roleCityManager ){
+            $gym_id=Auth::user()->city_id->gyms;
+            $sessions = TrainingSession::find($gym_id);
+        }elseif($roleGymManager){
+            $gym_id = Auth::user()->gym_id;
+            $sessions = TrainingSession::find($gym_id);
+        }
 
         return view(
             'sessions.index',
@@ -47,6 +61,7 @@ class TrainingSessionController extends Controller
                 'sessions' => $sessions,
             ]
         );
+
     }
 
     public function create()
@@ -135,10 +150,11 @@ class TrainingSessionController extends Controller
 
     public function destroy($id)
     {
+
+
         $session = TrainingSession::find($id);
         $session->gyms()->dissociate();
         $session->coaches()->detach();
-        //TODO:
         $session->delete();
 
 
