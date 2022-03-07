@@ -43,13 +43,15 @@ class GymManagerController extends Controller
         // $role= auth()->user()->hasPermissionTo('create gym manager');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
-        
+
         if ($roleAdmin) {
             $cities = City::all();
             return view('gymManagers.create', ['cities' => $cities]);
         } elseif ($roleCityManager) {
             // // if city manager
+//            auth::user => user login session  id --- updated_at
             $city_id = Auth::user()->city_id;
+
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gymManagers.create', ['gyms' => $gyms]);
         }
@@ -75,7 +77,6 @@ class GymManagerController extends Controller
 
     public function store(StoreGymManagerRequest $request)
     {
-
         //fetch request data
         $requestData = request()->all();
 
@@ -112,7 +113,7 @@ class GymManagerController extends Controller
             'gym_id' => $request['gym_id']
         ]);
 
-        
+
         $newGymManager->assignRole('gymManager')->givePermissionTo([
             'create session', 'update session', 'delete session',
             'read session', 'read coach', 'read package', 'assign coach'

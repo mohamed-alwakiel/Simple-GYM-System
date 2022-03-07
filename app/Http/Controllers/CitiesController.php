@@ -14,8 +14,8 @@ class CitiesController extends Controller
     public function index()
     {
         $cities = City::all();
-            return view('cities.datatable');
-//        return view('cities.index', compact('cities'));
+//            return view('cities.datatable');
+        return view('cities.index', compact('cities'));
     }
     public function getCity()
     {

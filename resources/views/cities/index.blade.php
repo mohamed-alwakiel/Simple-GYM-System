@@ -5,24 +5,38 @@
 
 @section('content')
 
-
-    <div class="w-50 mx-auto pt-3 d-flex justify-content-end">
+    <div class="container w-50">
+        <div class="mx-auto pt-3 d-flex justify-content-end">
+            <div>
         <a href="{{ route('cities.create') }}" class="btn btn-success my-3">Add New City</a>
-    </div>
+            </div>
+        </div>
 
-    <table class="w-50 mx-auto text-center table-bordered border-2 table-striped ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Cities</h3>
+                    </div>
+                    <div class="card-body">
+                        <table id="table_id" class="table text-center ">
 
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Controllers</th>
-            </tr>
-        </thead>
 
-        <tbody>
+
+                            <thead>
+
+                            <tr>
+                                <th>Name</th>
+
+                                <th>Controllers</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
 
             @foreach ($cities as $city)
-                <tr>
+                <tr class="bg-dark">
                     <th>{{ $city->name }}</th>
 
                     <th class="d-flex justify-content-around py-2">
@@ -41,6 +55,18 @@
             @endforeach
         </tbody>
     </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#table_id').DataTable();
+        });
+    </script>
 @endsection

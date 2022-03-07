@@ -62,7 +62,6 @@
                                                 <a href="{{ route('gymManagers.ban', $manager->id) }}"
                                                     class="btn btn-dark">Ban</a>
                                             @endif
-
                                             <a href="{{ route('gymManagers.edit', $manager->id) }}"
                                                 class="btn btn-primary">Update</a>
 

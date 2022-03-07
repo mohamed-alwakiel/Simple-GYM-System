@@ -25,7 +25,7 @@ class GymRequest extends FormRequest
     {
         return [
             'name'=>['required', 'min:3'],
-            'city_id'=>['required']
+//            'city_id'=>['required']
         ];
     }
 
