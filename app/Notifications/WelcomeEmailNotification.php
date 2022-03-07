@@ -45,7 +45,7 @@ class WelcomeEmailNotification extends Notification implements ShouldQueue
         return (new MailMessage)
 
                     ->greeting('Hello, '.$this->user->name)
-                    ->action('Welcome to our Gym.', url('/dashboard')) 
+                    ->action('Welcome to our Gym.',url('/dashboard'))
                     ->line('Thank you for pay to play')
                     ->salutation('Best Regards , Your Gym');
     }
