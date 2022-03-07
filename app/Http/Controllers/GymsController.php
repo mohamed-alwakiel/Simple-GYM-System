@@ -12,95 +12,98 @@ use Yajra\DataTables\Facades\DataTables;
 class GymsController extends Controller
 {
 
-//    public function index()
-//    {
-//        $roleCityManager = auth()->user()->hasRole('cityManager');
-//        $roleAdmin = auth()->user()->hasRole('admin');
-//        if ($roleAdmin) {
-//            $gyms=Gym::all();
-//            return view('gyms.index', ['gyms' => $gyms]);
-//        } elseif ($roleCityManager) {
-//            // if city manager
-//
-//            $city_id = Auth::user()->city_id;
-//
-//            $gyms = Gym::where('city_id', $city_id)->get();
-//            return view('gyms.index', ['gyms' => $gyms]);
-//        }
-//    }
-//
-//    public function getGym()
-//    {
-//        if (request()->ajax()) {
-//            $data = Gym::all();
-//            return DataTables::of($data)
-//                ->addIndexColumn()
-//
-//                ->addColumn('cover',function($row){
-//                    $url=$row->cover_img;
-//
-//                    return view('gyms.widget_cover',compact("url"));
-//                })
-//                ->addColumn('city',function($row){
-//                    return $row->city->name;
-//                })
-//
-//                ->addColumn('action', function($row){
-//
-//
-//                    $edit='<a href="'. route('gyms.edit', $row->id) .'" class="btn btn-primary">Update</a>';
-//
-//
-//                    $delete='
-//                     <form action="'.route('gyms.destroy', $row->id).'" method="post">
-//
-//                            <button class="btn btn-danger" type="submit">
-//                                Delete
-//                            </button>
-//                        </form>
-//                    ';
-//
-//                    return $edit . ' ' . $delete;
-//
-//                })
-//
-//                ->make(true);
-//        }
-//        return view('gyms.datatable');
-////        return datatables()->of(Gym::with('city'))->toJson();
-//    }
-//
-//
-//    public function create() {
-//
-//        $roleCityManager = auth()->user()->hasRole('cityManager');
-//        $roleAdmin = auth()->user()->hasRole('admin');
-//        if ($roleAdmin) {
-//            $cities = City::all();
-//            return view('gyms.create', ['cities' => $cities]);
-//        } elseif ($roleCityManager) {
-//            // if city manager
-//
-//            $city_id = Auth::user()->city_id;
-//
-//            $gyms = Gym::where('city_id', $city_id)->get();
-//            return view('gyms.create', ['gyms' => $gyms]);
-//        }
-//
-//    }
-//
-//    public function store(GymRequest $request){
-//        $roleCityManager = auth()->user()->hasRole('cityManager');
-//        $roleAdmin = auth()->user()->hasRole('admin');
-//
-//        $image = $request->cover_img;
-//        $imageName = time() . rand(1, 200) . '.' . $image->extension();
-//        $image->move(public_path('imgs//' . 'gym'), $imageName);
-//        if($roleAdmin) {
-//            $city_id =  $request->city_id;
-//        } elseif($roleCityManager) {
-//            $city_id = Auth::user()->city_id;
-//        }
+
+    public function index()
+    {
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+
+        // if Role Admin
+        if ($roleAdmin) {
+            $gyms=Gym::all();
+            return view('gyms.index', ['gyms' => $gyms]);
+        } elseif ($roleCityManager) {
+            // if city manager
+
+            $city_id = Auth::user()->city_id;
+
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gyms.index', ['gyms' => $gyms]);
+        }
+    }
+
+    public function getGym()
+    {
+        if (request()->ajax()) {
+            $data = Gym::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+
+                ->addColumn('cover',function($row){
+                    $url=$row->cover_img;
+
+                    return view('gyms.widget_cover',compact("url"));
+                })
+                ->addColumn('city',function($row){
+                    return $row->city->name;
+                })
+
+                ->addColumn('action', function($row){
+
+
+                    $edit='<a href="'. route('gyms.edit', $row->id) .'" class="btn btn-primary">Update</a>';
+
+
+                    $delete='
+                     <form action="'.route('gyms.destroy', $row->id).'" method="post">
+
+                            <button class="btn btn-danger" type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    ';
+
+                    return $edit . ' ' . $delete;
+
+                })
+
+                ->make(true);
+        }
+        return view('gyms.datatable');
+//        return datatables()->of(Gym::with('city'))->toJson();
+    }
+
+
+    public function create() {
+
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+        if ($roleAdmin) {
+            $cities = City::all();
+            return view('gyms.create', ['cities' => $cities]);
+        } elseif ($roleCityManager) {
+            // if city manager
+
+            $city_id = Auth::user()->city_id;
+
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gyms.create', ['gyms' => $gyms]);
+        }
+
+    }
+
+    public function store(GymRequest $request){
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+
+        $image = $request->cover_img;
+        $imageName = time() . rand(1, 200) . '.' . $image->extension();
+        $image->move(public_path('imgs//' . 'gym'), $imageName);
+        if($roleAdmin) {
+            $city_id =  $request->city_id;
+        } elseif($roleCityManager) {
+            $city_id = Auth::user()->city_id;
+        }
 
 
 
