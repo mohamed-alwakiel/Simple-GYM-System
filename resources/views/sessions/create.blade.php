@@ -1,87 +1,130 @@
 @extends('layouts.master')
 
 @section('title')
-    Create
+Create
 @endsection
-
-
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>    @endif
-    <div class='container '>
-        <form method="POST" class='mt-5' action="{{ route('sessions.store') }}" class="mt-5"
-            enctype="multipart/form-data">
-            @csrf
-
-            <div class="mb-3  mt-5 w-25">
-                <label for="name" class="form-label">session name</label>
-                <input name="name" type="text" class="form-control" id="name">
-            </div>
-            <div class="input-group mb-3 w-25">
-                <label class="input-group-text" for="inputGroupSelect01">Day</label>
-                <select name="day" class="form-select" id="inputGroupSelect01">
-                    <option selected>choose</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                </select>
-            </div>
-            <div class="mb-3 w-25">
-                <label for="started_at" class="form-label">started at</label>
-                <input name="started_at" type="datetime-local" class="form-control" id="started_at">
-            </div>
-            <div class="mb-3 w-25">
-                <label for="finished_at" class="form-label">finished at</label>
-                <input name="finished_at" type="datetime-local" class="form-control" id="finished_at">
-            </div>
-
-
-
-
-
-            <div class="mb-3 w-25">
-                <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-                <select multiple name="coach_id[]" class="form-control">
-                    @foreach ($coaches as $coach)
-                        <option value="{{ $coach->id }}">{{ $coach->name }}</option>
-                    @endforeach
-
-                </select>
-            {{-- <div class="mb-3 w-100">
-                <label for="gym_id" class="form-label">Gym id</label>
-                <input name="gym_id" type="text" class="form-control" id="gym_id">
-            </div> --}}
-
-            {{-- <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Description</label>
-                <textarea name="description" class="form-control"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-                <select name="user_id" class="form-control">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-
-                </select>
-                <div>
-                    <label for="img" class="form-label">Large file input example</label>
-                    <input class="form-control form-control-lg" id="img" name='image' type="file">
-                </div>
-            </div> --}}
-            <button type="submit" class="btn btn-success">create</button>
-        </form>
+<div class='container'>
+    @if(session()->has('error'))
+    <div class="alert alert-danger col-md-12">
+        {{ session()->get('error') }}
     </div>
-@endsection
+    @endif
+    <form method="POST" action="{{ route('sessions.store') }}" enctype="multipart/form-data">
+        @csrf
+        <!-- Select City -->
+        @role('admin')
+        <div class="mb-3 w-50">
+            <label for="city" class="form-label">City</label>
+            <select class="form-control" name="city" id="citySelector">
+                <option value="0" disabled selected>Choose City</option>
+
+                @foreach ($cities as $city)
+                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+
+            </select>
+        </div>
+        @endrole
+
+        <!-- Select Gym -->
+        @hasanyrole('admin|cityManager')
+        <div class="mb-3 w-50">
+            <label for="gym" class="form-label">gym</label>
+            <select class="form-control" name="gym_id" id="gymSelector">
+
+            </select>
+        </div>
+        @endhasanyrole
+
+        <!-- Session Name -->
+        <div class="mb-3 w-50">
+            <label for="name" class="form-label">session name</label>
+            <input name="name" type="text" class="form-control" id="name">
+        </div>
+
+        <!-- Choose Day -->
+        <div class="mb-3 w-50">
+            <label class="form-label">Day</label>
+            <select name="day" class="form-control" id="inputGroupSelect01">
+                <option selected>choose</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+            </select>
+        </div>
+
+        <!-- Start -->
+        <div class="form-group mb-3 w-50">
+            <label class="form-label">Start Session</label>
+            <input class="form-control" type="date" id="started_at_date" name="started_at_date" value="{{\Carbon\Carbon::now()}}">
+            <input class="form-control" type="time" id="started_at_time" name="started_at_time" value="{{\Carbon\Carbon::now()}}">
+        </div>
+
+        <!-- Finish -->
+        <div class="form-group mb-3 w-50">
+            <label class="form-label">Finish Session</label>
+            <input class="form-control" type="date" id="finished_at_date" name="finished_at_date" value="{{\Carbon\Carbon::now()}}">
+            <input class="form-control" type="time" id="finished_at_time" name="finished_at_time" value="{{\Carbon\Carbon::now()}}">
+        </div>
+
+        <!-- Coaches -->
+        <div class="mb-3 w-50">
+            <label for="exampleInputPassword1" class="form-label">Coach</label>
+            <select multiple name="coach_id[]" class="form-control">
+                @foreach ($coaches as $coach)
+                <option value="{{ $coach->id }}">{{ $coach->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success mb-5">create</button>
+    </form>
+</div>
+
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#citySelector').on('change', function() {
+            let id = $(this).val();
+            $('#gymSelector').empty();
+            // $('#gymSelector').append('<option value="0" disabled selected>Processing</option>');
+            $.ajax({
+                url: '/getGymsBelongsToCity/' + id,
+
+                type: "GET",
+
+
+                success: function(response) {
+                    var response = JSON.parse(response);
+
+                    $('#gymSelector').empty();
+                    $('#gymSelector').append(
+                        '<option value="0" disabled selected>Select Sub Category</option>'
+                    );
+                    response.forEach(element => {
+                        $('#gymSelector').append(
+                            `<option value="${element['id']}">${element['name']}</option>`
+                        );
+                    });
+                }
+
+            });
+        });
+    });
+</script>
+@stop
