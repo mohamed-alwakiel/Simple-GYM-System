@@ -13,16 +13,16 @@
     </div>
 
     <div class="card-body ">
-        <form class="mt-5 w-50 mx-auto" action="{{ route('buyPackage.store') }}" method="post">
+        <form class="mt-2 w-50 mx-auto " action="{{ route('buyPackage.store') }}" method="post">
             @csrf
-            <div>
-                <h2>It is only step to join our Family</h2>
-                <h3>click Ok to confirm your payment</h3>
+            <div  class="text-info">
+                <div class="row">It is only step to join our Family &#128521;</div>
+                <div class="row mt-2">>> click Ok to confirm your payment</div>
             </div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-around mt-3">
 
-                <button type="submit" class="btn btn-success bg-success py-2 px-4">Ok</button>
-                <a class="btn btn-danger  bg-danger py-2 px-4"
+                <button type="submit" class="btn btn-success bg-success py-2 px-4 ">Ok</button>
+                <a class="btn btn-danger  bg-danger py-2 px-4 "
                         href="{{ route('buyPackage.cancel') }}">Back</a>
 
             </div>
