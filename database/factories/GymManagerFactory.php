@@ -14,17 +14,19 @@ use Illuminate\Support\Facades\Hash;
 class GymManagerFactory extends Factory
 {
 
-    protected $model = GymManager::class;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+
+
     public function definition()
     {
         $password = 123456789;
-        $gymID = Gym::inRandomOrder()->first()->id;
+        $gymID = Gym::inRandomOrder()->first()->id; 
         $cityID = Gym::where('id', $gymID)->pluck('city_id')[0];
 
         return [
@@ -39,5 +41,8 @@ class GymManagerFactory extends Factory
             'gym_id' => $gymID,
             'city_id' => $cityID,
         ];
+
     }
+
+    
 }

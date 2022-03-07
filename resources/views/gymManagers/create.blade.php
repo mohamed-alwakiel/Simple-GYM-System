@@ -48,60 +48,60 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            {{-- profile img --}}
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text bg-white" id="inputGroupFileAddon01">Profile Iamge</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" name="img" class="custom-file-input" id="inputGroupFile01"
-                        aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
-                </div>
-            </div>
-
             {{-- select city and gym --}}
             @role('admin')
-            {{-- if role Admsin --}}
-            <div class="form-group">
-                <label for="cityName">Select City</label>
-                <select name="city_id" class="form-control" id='cityName'>
-                    <option value="0" disable="true" selected="true">=== Select City ===</option>
-                    @foreach ($cities as $city)
-                        <option value="{{ $city->id }}"> {{ $city->name }} </option>
-                    @endforeach
-                </select>
-            </div>
-            @error('city_id')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+                {{-- if role Admsin --}}
+                <div class="form-group">
+                    <label for="cityName">Select City</label>
+                    <select name="city_id" class="form-control" id='cityName'>
+                        <option value="0" disable="true" selected="true">=== Select City ===</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}"> {{ $city->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('city_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
 
-            <div class="form-group">
-                <label for="gymName">Select Gym</label>
-                <select name="gym_id" class="form-control" id='gymName'>
+                <div class="form-group">
+                    <label for="gymName">Select Gym</label>
+                    <select name="gym_id" class="form-control" id='gymName'>
 
-                </select>
-            </div>
-            @error('gym_id')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+                    </select>
+                </div>
+                @error('gym_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             @endrole
 
             {{-- if role city manager --}}
             @role('cityManager')
-            <div class="form-group">
-                <label for="gymName">Select Gym</label>
-                <select name="gym_id" class="form-control">
-                    <option value="0" disable="true" selected="true">=== Select Gym ===</option>
-                    @foreach ($gyms as $gym)
-                        <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <label for="gymName">Select Gym</label>
+                    <select name="gym_id" class="form-control">
+                        <option value="0" disable="true" selected="true">=== Select Gym ===</option>
+                        @foreach ($gyms as $gym)
+                            <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('gym_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            @endrole
+
+            {{-- profile img --}}
+            <div class="">
+                <div class="w-100">
+                    <label for="">Profile Image</label>
+                    <input type="file" class="form-control-file w-100 bg-dark " name="img" aria-describedby="fileHelpId">
+                    <small id="fileHelpId" class="form-text text-muted">only : png or jpg</small>
+                </div>
             </div>
-            @error('gym_id')
+            @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            @endrole
 
 
             <div class="d-flex justify-content-end">
