@@ -46,7 +46,7 @@
 
 
                                         <th>
-                                            <img src="{{ url('imgs/GymMgr/' . $manager->profile_img) }} " width="50px"
+                                            <img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px"
                                                 height="50px" alt="not found" />
                                         </th>
 

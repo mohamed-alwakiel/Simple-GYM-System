@@ -40,7 +40,7 @@
                                         <th>{{ $manager->national_id }}</th>
 
                                         <th>
-                                            <img src="{{ url('imgs/CityMgr/' . $manager->profile_img) }} " width="50px"
+                                            <img src="{{ url('imgs/users/' . $manager->profile_img) }} " width="50px"
                                                 height="50px" alt="not found" />
                                         </th>
 
