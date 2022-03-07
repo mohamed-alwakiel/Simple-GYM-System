@@ -178,15 +178,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/buyPackage/{package}', [BuyPackageController::class, 'show'])->name('buyPackage.show');
     Route::get('/buyPackage/{package}/edit', [BuyPackageController::class, 'edit'])->name('buyPackage.edit');
     Route::put('/buyPackage/{package}', [BuyPackageController::class, 'update'])->name('buyPackage.update');
-    Route::post('/buyPackage', [BuyPackageController::class, 'store'])->name('buyPackage.store');
+    Route::post('/buy', [BuyPackageController::class, 'store'])->name('buyPackage.store');
     Route::delete('/buyPackage/{package}', [BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
 
     Route::post('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
     Route::get('/buyPackage/create/success', [PaymentController::class, 'success'])->name('buyPackage.success');
     Route::get('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
-
-    Route::get('/stripe-payment', [StripeController::class, 'handleGet']);
-    Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
 
 });
 

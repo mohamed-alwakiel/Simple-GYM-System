@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BuyPackage;
 use App\Models\Gym;
 use App\Models\Package;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -39,20 +40,21 @@ class PaymentController extends Controller
     }
     public function store(Request $requestObj)
     {
+        DB::table('test')->delete();
         $requestData = $requestObj->all();
         $package = DB::table('training_packages')->where('id', $requestObj->get('package_id'))->first();
 
-        BuyPackage::create([
+        Test::create([
 
             'price' => $package->price,
             'number_of_sessions' => $package->number_of_sessions,
             'package_id' => $requestObj->package_id,
             'gym_id' => $requestObj->gym_id,
             'user_id' => $requestObj->user_id,
-
+            'city_id' => $requestObj->city,
         ]);
    
-        return to_route('buyPackage.index');
+        return redirect()->away('https://buy.stripe.com/test_28o9D32OG3z0fT2144');
     }
     public function success()
     {
@@ -63,6 +65,8 @@ class PaymentController extends Controller
 
     public function cancel()
     {
-        return view('payment.cancel');
+        DB::table('test')->delete();
+
+        return to_route('buyPackage.index');
     }
 }

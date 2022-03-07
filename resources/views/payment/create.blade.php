@@ -12,10 +12,10 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body ">
-            <form class="mt-5 w-50 mx-auto" action="{{ route('buyPackage.store') }}" method="post">
+            <form class="mt-5 w-50 mx-auto" action="{{ route('payment.store') }}" method="post">
                 @csrf
                 <!-- Select City -->
-                @role('admin')
+                {{-- @role('admin') --}}
                     <div class="mb-3">
                         <label for="city" class="form-label">City</label>
                         <select class="form-control" name="city" id="citySelector">
@@ -27,20 +27,20 @@
 
                         </select>
                     </div>
-                @endrole
+                {{-- @endrole --}}
 
                 <!-- Select Gym -->
-                @hasanyrole('admin|cityManager')
+                {{-- @hasanyrole('admin|cityManager') --}}
                     <div class="mb-3">
                         <label for="gym" class="form-label">gym</label>
                         <select class="form-control" name="gym_id" id="gymSelector">
 
                         </select>
                     </div>
-                @endhasanyrole
+                {{-- @endhasanyrole --}}
 
                 <!-- Select User -->
-                @hasanyrole('admin|cityManager|gymManager')
+                {{-- @hasanyrole('admin|cityManager|gymManager') --}}
                     <div class="form-group">
                         <label>Select User</label>
                         <select id="selectedUser" name="user_id" class="form-control">
@@ -50,7 +50,7 @@
                             @endforeach
                         </select>
                     </div>
-                @endhasanyrole
+                {{-- @endhasanyrole --}}
 
                 <!-- Select Package -->
                 <div class="mb-3">
@@ -103,12 +103,12 @@
 
             <!-- Select Gym -->
             {{-- @hasanyrole('admin|cityManager') --}}
-                <div class="mb-3">
-                    <label for="gym" class="form-label">gym</label>
-                    <select class="form-control" name="gym_id" id="gymSelector">
+            <div class="mb-3">
+                <label for="gym" class="form-label">gym</label>
+                <select class="form-control" name="gym_id" id="gymSelector">
 
-                    </select>
-                </div>
+                </select>
+            </div>
             {{-- @endhasanyrole --}}
 
             <!-- Select User -->
@@ -134,7 +134,7 @@
                     @endforeach
                 </select>
             </div>
-                <a type="submit" id="checkout-button" href="https://buy.stripe.com/test_28o9D32OG3z0fT2144">Checkout</a>
+                <a type="submit" id="checkout-button" href="{{ route('payment.store') }}">Checkout</a>
             </form>
         </section>
     </div>
