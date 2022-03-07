@@ -112,7 +112,7 @@ class UserController extends Controller
 
         $boughtPackage = BuyPackage::where('user_id', $user->id)->first();
         $gymName = DB::table('gyms')->where('id', $boughtPackage->gym_id)->select('name as gym_name')->get();
-        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->select('name as Training_session_name'->)get();
+        $sessionName = DB::table('training_sessions')->where('gym_id', $boughtPackage->gym_id)->select('name as Training_session_name')->get(); // ')' was closed in a wrong way
         $trainingSession = SessionAttendence::where('user_id', $user->id)->select('attendance_date', 'attendance_time')->get();
 
         $attendanceHistory = collect([

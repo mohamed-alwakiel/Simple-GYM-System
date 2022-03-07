@@ -11,29 +11,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TrainingSession extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
 
         'id',
         'name',
         'day',
         'started_at',
         'finished_at',
-         'gym_id',
-         'package_id'
+        'gym_id',
+        // 'package_id'
     ];
 
-    public function gyms(){
-
-        return $this->belongsTo(Gym::class,'gym_id');
+    public function gyms()
+    {
+        return $this->belongsTo(Gym::class, 'gym_id');
     }
     public function coaches()
     {
-        return $this->belongsToMany(Coach::class, 'coach_sessions','training_session_id','coach_id');
+        return $this->belongsToMany(Coach::class, 'coach_sessions', 'training_session_id', 'coach_id');
     }
-    public function attendances(){
+    public function attendances()
+    {
 
-        return $this->hasMany(Attendance::class,'training_session_id');
+        return $this->hasMany(Attendance::class, 'training_session_id');
     }
-
-
 }
