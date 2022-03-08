@@ -26,7 +26,7 @@ class GymManagerFactory extends Factory
     public function definition()
     {
         $password = 123456789;
-        $gymID = Gym::inRandomOrder()->first()->id;
+        $gymID = Gym::inRandomOrder()->first()->id; 
         $cityID = Gym::where('id', $gymID)->pluck('city_id')[0];
 
         return [

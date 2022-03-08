@@ -31,16 +31,13 @@ use App\Http\Controllers\TrainingSessionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    if(Auth::check()){
+        return view('dashboard');
+    }else{
+        return view('welcome');
+    }
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-
-
 
 // --------------------------------
 
@@ -59,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
 
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
-
 });
 
 // --------------- GYM MANAGERS
@@ -78,7 +74,6 @@ Route::middleware(['auth'])->group(function () {
     // ban and unban actions
     Route::Get('/gymManagers/{gymManager}/ban', [GymManagerController::class, 'ban'])->name('gymManagers.ban');
     Route::get('/gymManagers/{gymManager}/unban', [GymManagerController::class, 'unban'])->name('gymManagers.unban');
-
 });
 
 
@@ -160,7 +155,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
     Route::get('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
-
 });
 
 
@@ -178,16 +172,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/buyPackage/{package}', [BuyPackageController::class, 'show'])->name('buyPackage.show');
     Route::get('/buyPackage/{package}/edit', [BuyPackageController::class, 'edit'])->name('buyPackage.edit');
     Route::put('/buyPackage/{package}', [BuyPackageController::class, 'update'])->name('buyPackage.update');
-    Route::post('/buyPackage', [BuyPackageController::class, 'store'])->name('buyPackage.store');
+    Route::post('/buy', [BuyPackageController::class, 'store'])->name('buyPackage.store');
     Route::delete('/buyPackage/{package}', [BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
 
     Route::post('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
     Route::get('/buyPackage/create/success', [PaymentController::class, 'success'])->name('buyPackage.success');
     Route::get('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
+    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+
 
     Route::get('/stripe-payment', [StripeController::class, 'handleGet']);
     Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
-
 });
 
 // --------------- Auth -> Login & Register
@@ -203,5 +198,10 @@ Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], func
 });
 
 // --------------- Edit Profile
-Route::get('/users/editProfile/{id}', [UserController::class, 'editProfile'])->name('users.editProfile')->middleware('auth');
-Route::patch('/users/updateProfile/{id}', [UserController::class, 'updateProfile'])->name('users.updateProfile')->middleware('auth');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+    Route::PUT('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+
+    Route::get('/profile/editPassword', [UserController::class, 'editPassword'])->name('profile.editPassword');
+    Route::PUT('/profile', [UserController::class, 'updatePassword'])->name('profile.updatePassword');
+});
