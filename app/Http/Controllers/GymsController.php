@@ -97,8 +97,13 @@ class GymsController extends Controller
         $roleAdmin = auth()->user()->hasRole('admin');
 
         $image = $request->cover_img;
+        if ($image != null) :
         $imageName = time() . rand(1, 200) . '.' . $image->extension();
         $image->move(public_path('imgs//' . 'gym'), $imageName);
+        else :
+            $imageName = 'gymMgr.png';
+        endif;
+        
         if($roleAdmin) {
             $city_id =  $request->city_id;
         } elseif($roleCityManager) {
