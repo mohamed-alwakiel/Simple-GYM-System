@@ -14,9 +14,9 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail,BannableContract
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Bannable;
 
     protected $table = 'users';
 

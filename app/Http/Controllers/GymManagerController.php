@@ -24,18 +24,16 @@ class GymManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
 
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
 
         if ($roleAdmin) {
-            $gymManagers = GymManager::where('role_id', 3)->get();
-        }
-        elseif ($roleCityManager)
-        {
+            $gymManagers = User::role('gymManager')->get();
+        } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
-            $gymManagers = GymManager::where('role_id', 3)->where('city_id', $city_id)->get();
+            $gymManagers = User::role('gymManager')->where('city_id', $city_id)->get();
         }
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
@@ -52,10 +50,7 @@ class GymManagerController extends Controller
             $cities = City::all();
             return view('gymManagers.create', ['cities' => $cities]);
         } elseif ($roleCityManager) {
-            // // if city manager
-//            auth::user => user login session  id --- updated_at
             $city_id = Auth::user()->city_id;
-
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gymManagers.create', ['gyms' => $gyms]);
         }

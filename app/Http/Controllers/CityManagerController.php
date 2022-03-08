@@ -22,8 +22,7 @@ class CityManagerController extends Controller
      */
     public function index()
     {
-
-        $cityManagers = CityManager::where('role_id', 2)->get();
+        $cityManagers = User::role('cityManager')->get();
         $cities = City::all();
 
        return view('cityManagers.index', [
