@@ -31,7 +31,7 @@ use App\Http\Controllers\TrainingSessionController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 // --------------------------------
 
