@@ -31,16 +31,13 @@ use App\Http\Controllers\TrainingSessionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    if(Auth::check()){
+        return view('dashboard');
+    }else{
+        return view('welcome');
+    }
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-
-
 
 // --------------------------------
 
