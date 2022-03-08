@@ -73,11 +73,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function city()
     {
-        return $this->hasMany(City::class, 'id');
+        return $this->belongsTo(City::class, 'id');
     }
     public function gym()
     {
-        return $this->hasMany(Gym::class, 'id');
+        return $this->belongsTo(Gym::class, 'id');
     }
 
 

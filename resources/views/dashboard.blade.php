@@ -37,10 +37,10 @@
                                     <span class="description-text">Owner Of X Gym</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text">{{ auth()->user()->city }} City Manager</span>
+                                    <span class="description-text">{{ auth()->user()->city->name }} City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text">{{ auth()->user()->gym }} branch Manager</span>
+                                    <span class="description-text">{{ auth()->user()->gym->name }} branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->

@@ -31,13 +31,7 @@ use App\Http\Controllers\TrainingSessionController;
 |
 */
 
-Route::get('/', function(){
-    if(Auth::check()){
-        return view('dashboard');
-    }else{
-        return view('welcome');
-    }
-});
+Route::get('/', [HomeController::class, 'index']);
 
 // --------------------------------
 
