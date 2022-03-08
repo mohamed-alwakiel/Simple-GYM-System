@@ -24,7 +24,7 @@ class GymManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
 
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
@@ -35,7 +35,7 @@ class GymManagerController extends Controller
         elseif ($roleCityManager)
         {
             $city_id = Auth::user()->city_id;
-            $gymManagers = GymManager::where('role_id', 3)->and('city_id', $city_id)->get();
+            $gymManagers = GymManager::where('role_id', 3)->where('city_id', $city_id)->get();
         }
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,

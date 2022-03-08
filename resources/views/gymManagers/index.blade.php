@@ -30,6 +30,10 @@
 
                                     <th>Gym Name</th>
 
+                                    @role('admin')
+                                    <th>City name</th>
+                                    @endrole
+
                                     <th>Controllers</th>
                                 </tr>
                             </thead>
@@ -52,6 +56,9 @@
 
                                         <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
 
+                                        @role('admin')
+                                        <td>{{ $manager->gym ? $manager->gym->city->name : 'Not Found !' }}</td>
+                                        @endrole
 
                                         <th class="d-flex justify-content-around py-2">
 
