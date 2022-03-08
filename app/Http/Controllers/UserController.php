@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -141,6 +142,7 @@ class UserController extends Controller
             'role_id' => 4,
             'city_id' =>  $request['city_id'],
             'gym_id' =>  $request['gym_id'],
+            'email_verified_at' =>  Carbon::now()->toDateTimeString(),
         ]);
         $newUser->assignRole('client');
         //redirection to posts.index

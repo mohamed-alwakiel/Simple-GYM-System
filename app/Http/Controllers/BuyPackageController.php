@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class BuyPackageController extends Controller
 {
@@ -39,16 +40,31 @@ class BuyPackageController extends Controller
         $cities = DB::table("cities")->get();
         $packages = DB::table('training_packages')->get();
         $users = User::where('role_id', 4)->get();
-
-        // $users = User::all();
-        // $packages = Package::all();
-        // $gyms = Gym::all();
-
+        
+       $user = Auth::user();
+       if($user->role_id==1){
         return view('payment.create', data: [
             'cities' => $cities,
             'packages' => $packages,
             'users' => $users,
         ]);
+       }elseif($user->role_id==2){
+        return view('payment.create', data: [
+            'cities' => DB::table("cities")->where('id',$user->city_id)->get(),
+            'packages' => $packages,
+            'users' => $users,
+        ]);
+       }
+    //    }elseif($user->role_id==3){
+        
+    //     $gymId = DB::table('gyms')->where('id',$user->gym_id)->select('city_id')->get();
+
+    //     return view('payment.create', data: [
+    //         'cities' => DB::table("cities")->where('id', $gymId)->get(),
+    //         'packages' => $packages,
+    //         'users' => $users,
+    //     ]);
+    //    }
     }
 
 
@@ -79,7 +95,12 @@ class BuyPackageController extends Controller
     public function getGymsBelongsToCity($id)
 
     {
+        // $user = Auth::user();
+        // if($user->role_id==3){
+        //     echo json_encode(DB::table('gyms')->where('id', $user->gym_id)->get());
+        // }else{
         echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
+        
     }
 
 

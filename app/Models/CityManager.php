@@ -21,7 +21,8 @@ class CityManager extends Model
         'profile_img',
         'role_id',
         'role_type',
-        'city_id'
+        'city_id',
+        'email_verified_at',
     ];
 
     

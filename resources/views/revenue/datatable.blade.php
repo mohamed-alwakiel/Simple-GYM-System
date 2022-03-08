@@ -38,7 +38,7 @@
                                     <th>{{ $boughtPackage->name }}</th>
                                     <th>{{ $boughtPackage->price }}</th>
                                     @role('admin|cityManager')
-                                    <th>{{ $boughtPackage->gym->name }}</th>
+                                    {{-- <th>{{ $boughtPackage->gym->name }}</th> --}}
                                     @endrole
                                     @role('admin')
                                     <th>{{ $boughtPackage->city->name }}</th>
