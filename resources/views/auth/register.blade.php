@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <h3 class="card-title mx-auto ">Join Us</h3>
                 </div>
-                <form id="quickForm" method="POST" action="{{ route('register') }}">
+                <form id="quickForm" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="card-body">
@@ -18,7 +18,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input name="name" type="text" class="form-control" placeholder="Name">
+                            <input name="name" type="text" class="form-control  @error('name') is-invalid @enderror " placeholder="Name">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <!-- email -->
@@ -26,7 +31,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required>
+                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" >
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -59,12 +64,38 @@
                             </div>
                         </div>
 
+                        <!-- national id -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input name="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" placeholder="national id" >
+                            @error('national_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+
+                        <!-- profile image -->
+
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="file" name="userImg" class="form-control @error('userImg') is-invalid @enderror" id="userImg">
+                        </div>
+                        @error('userImg')
+                        <span class=" alert-danger">{{ $message }}</span>
+                    @enderror
+                    </div>
+
+
                         <!-- Password -->
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required>
+                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" >
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -77,7 +108,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password" required autocomplete="new-password">
+                            <input id="password-confirm" name="confirmPassword" type="password" class="form-control  @error('confirmPassword') is-invalid @enderror" placeholder="Confirm Password"  autocomplete="new-password">
+                            @error('confirmPassword')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
 
@@ -120,7 +156,7 @@
 
 <!-- --------------------------- UNCOMMENT THIS SCRIPT AFTER UNCOMMENTING CITY & GYM DROPDOWN MENUS --------------------------- -->
 {{--
-<!-- 
+<!--
 <script>
     $(document).ready(function() {
         $('#city').on('change', function() {
