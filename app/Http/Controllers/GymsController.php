@@ -6,17 +6,30 @@ use App\Http\Requests\GymRequest;
 use App\Models\City;
 use App\Models\Gym;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class GymsController extends Controller
 {
 
+
     public function index()
     {
-        $gyms=Gym::all();
-        $cities = City::all();
-//        dd($gyms);
-        return view('gyms.datatable', compact('gyms','cities'));
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+
+        // if Role Admin
+        if ($roleAdmin) {
+            $gyms=Gym::all();
+            return view('gyms.index', ['gyms' => $gyms]);
+        } elseif ($roleCityManager) {
+            // if city manager
+
+            $city_id = Auth::user()->city_id;
+
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gyms.index', ['gyms' => $gyms]);
+        }
     }
 
     public function getGym()
@@ -62,27 +75,42 @@ class GymsController extends Controller
 
 
     public function create() {
-        $cities = City::all();
-        $gyms = Gym::all();
 
-        return view('gyms.create', [
-            'gyms' => $gyms,
-            'cities' => $cities,
-        ]);
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+        if ($roleAdmin) {
+            $cities = City::all();
+            return view('gyms.create', ['cities' => $cities]);
+        } elseif ($roleCityManager) {
+            // if city manager
+
+            $city_id = Auth::user()->city_id;
+
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('gyms.create', ['gyms' => $gyms]);
+        }
+
     }
 
     public function store(GymRequest $request){
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
 
         $image = $request->cover_img;
-
         $imageName = time() . rand(1, 200) . '.' . $image->extension();
         $image->move(public_path('imgs//' . 'gym'), $imageName);
+        if($roleAdmin) {
+            $city_id =  $request->city_id;
+        } elseif($roleCityManager) {
+            $city_id = Auth::user()->city_id;
+        }
+
 
 
         Gym::create([
             'name' => $request->name,
             'cover_img' => $imageName,
-            'city_id' => $request->city_id
+            'city_id' => $city_id
         ]);
         return redirect()->route('gyms.index');
     }
@@ -124,10 +152,11 @@ class GymsController extends Controller
         return redirect()->route('gyms.index');
     }
 
-    public function destroy($gym_id) {
+    public function destroy(Request $request) {
 
-        Gym::find($gym_id)->delete();
+        Gym::find($request->id)->delete();
+        return response()->json(['success' => 'Product deleted successfully']);
 
-        return redirect()->route('gyms.index');
+
     }
 }

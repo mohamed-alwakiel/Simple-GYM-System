@@ -53,7 +53,9 @@ class GymManagerController extends Controller
             return view('gymManagers.create', ['cities' => $cities]);
         } elseif ($roleCityManager) {
             // // if city manager
+//            auth::user => user login session  id --- updated_at
             $city_id = Auth::user()->city_id;
+
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gymManagers.create', ['gyms' => $gyms]);
         }
@@ -79,7 +81,6 @@ class GymManagerController extends Controller
 
     public function store(StoreGymManagerRequest $request)
     {
-
         //fetch request data
         $requestData = request()->all();
 

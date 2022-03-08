@@ -6,6 +6,9 @@
 
 @section('content')
     <div class="pt-4">
+        @error('name', 'cover_img', 'city_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <form class="mt-5 w-50 mx-auto" action="{{ route('gyms.store') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -30,7 +33,7 @@
                 </div>
             </div>
 
-
+            @role('admin')
             <div class="form-group">
                 <label for="exampleInputPassword1">City Name</label>
 
@@ -40,6 +43,9 @@
                     @endforeach
                 </select>
             </div>
+            @endrole
+
+
             <div class="d-flex justify-content-end">
 
                 <button type="submit" class="btn btn-success py-2 px-4">Save</button>

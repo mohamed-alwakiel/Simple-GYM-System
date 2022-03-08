@@ -77,7 +77,7 @@ Route::get('/cities/create', [CitiesController::class, 'create'])->name('cities.
 Route::post('/cities/store', [CitiesController::class, 'store'])->name('cities.store')->middleware('auth');
 Route::get('/cities/edit/{city_id}', [CitiesController::class, 'edit'])->name('cities.edit')->middleware('auth');
 Route::patch('/cities/update/{city_id}', [CitiesController::class, 'update'])->name('cities.update')->middleware('auth');
-Route::delete('/cities/destroy/{city_id}', [CitiesController::class, 'destroy'])->name('cities.destroy')->middleware('auth');
+Route::delete('/cities/destroy', [CitiesController::class, 'destroy'])->name('cities.destroy')->middleware('auth');
 Route::get('/get-city-my-datatables', [CitiesController::class, 'getCity'])->name('get.city')->middleware('auth');
 
 
@@ -88,7 +88,7 @@ Route::get('/gyms/create', [GymsController::class, 'create'])->name('gyms.create
 Route::post('/gyms/store', [GymsController::class, 'store'])->name('gyms.store')->middleware('auth');
 Route::get('/gyms/edit/{gym_id}', [GymsController::class, 'edit'])->name('gyms.edit')->middleware('auth');
 Route::patch('/gyms/update/{gym_id}', [GymsController::class, 'update'])->name('gyms.update')->middleware('auth');
-Route::delete('/gyms/destroy/{gym_id}', [GymsController::class, 'destroy'])->name('gyms.destroy')->middleware('auth');
+Route::delete('/gyms/destroy', [GymsController::class, 'destroy'])->name('gyms.destroy')->middleware('auth');
 Route::get('/get-gym-my-datatables', [GymsController::class, 'getGym'])->name('get.gym')->middleware('auth');
 //route::get('/test',function (){
 //    return view('gyms.datatable');

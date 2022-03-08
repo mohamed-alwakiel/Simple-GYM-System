@@ -6,6 +6,7 @@ use App\Models\City;
 
 use App\Http\Requests\CityRequest;
 use App\Models\Gym;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -14,8 +15,8 @@ class CitiesController extends Controller
     public function index()
     {
         $cities = City::all();
-            return view('cities.datatable');
-//        return view('cities.index', compact('cities'));
+//            return view('cities.datatable');
+        return view('cities.index', compact('cities'));
     }
     public function getCity()
     {
@@ -77,17 +78,18 @@ class CitiesController extends Controller
         return redirect()->route('cities.index');
 
     }
-    public function destroy($city_id) {
+    public function destroy(Request $request) {
 
-        $city = City::find($city_id);
+        $city = City::find($request->id);
 
         if ($city->gyms()) {
-            $imageOfGym = DB::table('gyms')->select('cover_img')->where('city_id', $city_id)->first()->cover_img; // find all image name belong to city
+            $imageOfGym = DB::table('gyms')->select('cover_img')->where('city_id', $city->id)->first()->cover_img; // find all image name belong to city
             $this->deleteMedia($imageOfGym, 'gym');
             $city->gyms()->delete(); //delete all gyms
         };
         $city->delete(); //delete city
-        return redirect()->back()->with('success', 'deleted done');
+        return response()->json(['success' => 'Product deleted successfully']);
+//        return redirect()->back()->with('success', 'deleted done');
 
     }
 
