@@ -48,10 +48,8 @@ class TrainingSessionController extends Controller
         if($roleAdmin){
         Paginator::useBootstrapFive();
         $sessions = TrainingSession::paginate(10);
-        // }elseif($roleCityManager ){
-        //     $city_id=Auth::user()->city_id;
-        //     $gyms_id=City::find($city_id)->gyms;
-        //     $sessions = TrainingSession::find($gym_id);
+        }elseif($roleCityManager ){
+            $sessions =Auth::user()->trainingSessions;
         }elseif($roleGymManager){
             $gym_id = Auth::user()->gym_id;
             $sessions = TrainingSession::find($gym_id);
