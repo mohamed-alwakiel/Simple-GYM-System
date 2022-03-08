@@ -330,7 +330,7 @@
                                         <td>{{ $boughtPackage->user->email }}</td>
                                         <td>{{ $boughtPackage->name }}</td>
                                         <td>{{ $boughtPackage->price }}</td>
-                                        {{--  <td>{{ $boughtPackage->gym->name }}</td>  --}}
+                                        {{-- <!-- <td>{{ $boughtPackage->gym->name }}</td> --> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

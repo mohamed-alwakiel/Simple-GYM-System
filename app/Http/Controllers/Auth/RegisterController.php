@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -50,10 +51,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|max:20',
+            'confirmPassword' => 'required|same:password',
+            'userImg' => 'image|mimes:jpg,jpeg',
+            'date_of_birth' => 'required|date',
+            'national_id' => 'required|unique:users|digits_between:14,14',
+            'gender' =>'required|in:male,female',
         ]);
+
     }
 
     /**
@@ -64,14 +71,39 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user =  User::create([
+        $img= $data['userImg'];
+        $imageName = time() . rand(1, 200) . '.' . $img->extension();
+        $img->move(public_path('imgs//' . 'client'), $imageName);
+        $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'profile_img' => $imageName,
+            'date_of_birth' =>$data['date_of_birth'],
+            'gender' => $data['gender'],
+            'national_id'=> $data['national_id'],
             'role_type' => 'client',
             'role_id' => 4,
         ]);
+
+
+        // $img= $data['userImg'];
+        // $imageName = time() . rand(1, 200) . '.' . $img->extension();
+        // $img->move(public_path('imgs//' . 'client'), $imageName);
+        // $user =  User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        //     'profile_img' => $imageName,
+        //     'date_of_birth' =>$data['date_of_birth'],
+        //     'gender' => $data['gender'],
+        //     'national_id'=> $data['national_id'],
+        //     'role_type' => 'client',
+        //     'role_id' => 4,
+        // ]);
         // $user->assignRole('client');
         return $user;
     }
 }
+
+
