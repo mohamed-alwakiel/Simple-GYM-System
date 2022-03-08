@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 
+use App\Models\City;
 use App\Models\Coach;
-use Spatie\Period\Period;
 // use Illuminate\Support\Carbon;
+use Spatie\Period\Period;
 use App\Models\CoachSession;
 use Illuminate\Http\Request;
 use App\Models\TrainingSession;
@@ -47,9 +48,10 @@ class TrainingSessionController extends Controller
         if($roleAdmin){
         Paginator::useBootstrapFive();
         $sessions = TrainingSession::paginate(10);
-        }elseif($roleCityManager ){
-            $gym_id=Auth::user()->city_id->gyms;
-            $sessions = TrainingSession::find($gym_id);
+        // }elseif($roleCityManager ){
+        //     $city_id=Auth::user()->city_id;
+        //     $gyms_id=City::find($city_id)->gyms;
+        //     $sessions = TrainingSession::find($gym_id);
         }elseif($roleGymManager){
             $gym_id = Auth::user()->gym_id;
             $sessions = TrainingSession::find($gym_id);
