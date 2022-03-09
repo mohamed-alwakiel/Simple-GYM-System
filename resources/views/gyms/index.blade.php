@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="container w-75">
+    <div class="container-fluid">
         <div class="mx-auto pt-3 d-flex justify-content-end">
             <div>
                 <a href="{{ route('gyms.create') }}" class="btn btn-success my-3">Add New Gym</a>
@@ -26,6 +26,7 @@
             <tr>
                 <th>Name</th>
                 <th>Cover Image</th>
+                <th>Created At</th>
                 @role('admin')
                 <th>City Name</th>
                 <th>City Manager</th>
@@ -37,12 +38,13 @@
 
         <tbody>
             @foreach ($gyms as $gym)
-                <tr class="offerRow bg-dark">
+                <tr class="offerRow{{$gym -> id}}  bg-dark">
                     <th>{{ $gym->name }}</th>
 
                     <th>
                         <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" />
                     </th>
+                    <td>{{ \Carbon\Carbon::parse($gym->created_at)->format('Y-m-d') }} </td>
                     @role('admin')
                     <th>
                         {{ $gym->city->name }}
