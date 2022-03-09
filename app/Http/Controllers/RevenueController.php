@@ -41,6 +41,6 @@ class RevenueController extends Controller
     public function destroy($id)
     {
         BuyPackage::find($id)->delete();
-        return response()->json(['success' => 'Product deleted successfully']);
+        return response()->json(['success' => 'Bought Package deleted successfully']);
     }
 }

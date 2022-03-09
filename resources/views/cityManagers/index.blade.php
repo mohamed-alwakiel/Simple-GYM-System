@@ -34,7 +34,7 @@
                             <tbody>
 
                                 @foreach ($cityManagers as $manager)
-                                    <tr class="bg-dark">
+                                    <tr>
                                         <th>{{ $manager->name }}</th>
                                         <th>{{ $manager->email }}</th>
                                         <th>{{ $manager->national_id }}</th>

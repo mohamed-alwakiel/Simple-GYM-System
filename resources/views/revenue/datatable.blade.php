@@ -32,7 +32,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($boughtPackages as $boughtPackage)
-                                <tr class="bg-dark">
+                                <tr>
                                     <th>{{ $boughtPackage->user->name }}</th>
                                     <th>{{ $boughtPackage->user->email }}</th>
                                     <th>{{ $boughtPackage->name }}</th>
