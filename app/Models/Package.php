@@ -18,4 +18,6 @@ class Package extends Model
         'number_of_sessions'
 
     ];
+
+    
 }

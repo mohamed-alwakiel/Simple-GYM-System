@@ -59,7 +59,6 @@ class TrainingPackageController extends Controller
     public function destroy(Package $package)
     {
         $package->delete();
-
         return to_route('trainingPackages.index')
             ->with('success', 'package deleted successfully');
     }

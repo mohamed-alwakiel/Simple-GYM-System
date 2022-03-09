@@ -194,7 +194,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], function () {
     Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
     Route::get('/revenue/{id}', [RevenueController::class, 'show'])->name('revenue.show');
-    Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
+    Route::delete('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
 });
 
 // --------------- Edit Profile
