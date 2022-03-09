@@ -21,6 +21,7 @@ class Gym extends Model
         'city_id'
     ];
 
+    // gym under one city
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');

@@ -50,10 +50,9 @@
                                         @role('admin')
                                             <th>
                                                 {{ $gym->city ? $gym->city->name : 'Not Found ! '}}
-
                                             </th>
                                             <th>
-                                                {{ $gym->city->user ? $gym->city->user->name : 'Not Found !' }}
+                                                {{ $gym->city->manager ? $gym->city->manager->name : 'Not Found !' }}
                                             </th>
                                         @endrole
 

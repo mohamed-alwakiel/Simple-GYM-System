@@ -24,9 +24,9 @@ class CityManager extends Model
         'city_id'
     ];
 
-    
+    // only one manager for one city
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }
