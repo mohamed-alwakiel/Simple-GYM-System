@@ -12,13 +12,15 @@ class TrainingPackageController extends Controller
 {
     public function index()
     {
-        Paginator::useBootstrapFive();
-        $packageCollection = Package::paginate(10);
-        return view('trainingPackages.index',['packageCollection' => $packageCollection]);
-    }
-    public function trainingPackagesDatatables() {
+        // Paginator::useBootstrapFive();
         $packageCollection = Package::all();
-        return view('trainingPackages.datatables-front',['packageCollection' => $packageCollection]);
+        return view('trainingPackages.index', ['packageCollection' => $packageCollection]);
+    }
+
+    public function trainingPackagesDatatables()
+    {
+        $packageCollection = Package::all();
+        return view('trainingPackages.datatables-front', ['packageCollection' => $packageCollection]);
     }
 
     public function show(Package $Package)
@@ -45,13 +47,13 @@ class TrainingPackageController extends Controller
         );
     }
 
-    public function update($package_id,UpdatePackageRequest $requestObj)
+    public function update($package_id, UpdatePackageRequest $requestObj)
     {
         $package =  Package::findOrFail($package_id);
         $package->update($requestObj->all());
         $package->save();
         return to_route('trainingPackages.show', ['package' => $package])
-        ->with('success', 'Package Updated Successfully');
+            ->with('success', 'Package Updated Successfully');
     }
 
     public function destroy(Package $package)
@@ -60,7 +62,5 @@ class TrainingPackageController extends Controller
 
         return to_route('trainingPackages.index')
             ->with('success', 'package deleted successfully');
-       
     }
 }
-

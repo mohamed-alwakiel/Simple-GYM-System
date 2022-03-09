@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('title', 'Gym Club Dashboard')
 @section('content')
 
 <!-- Main content -->
@@ -19,7 +19,7 @@
                         <h5 class="widget-user-desc text-riauthght">Web Designer</h5> -->
                     </div>
                     <div class="widget-user-image">
-                        <img class="img-circle" src="../dist/img/user2-160x160.jpg" alt="User Avatar">
+                        <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -34,13 +34,13 @@
                                 <div class="description-block">
                                     <h5 class="description-header text-warning">{{ Auth::user()->name }}</h5>
                                     @role('admin')
-                                    <span class="description-text">Owner Of X Gym</span>
+                                    <span class="description-text text-secondary">Owner Of Gym Club</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text">{{ auth()->user()->city->name }} <br><b>City Manager</b></span>
+                                    <span class="description-text text-secondary"><b>{{ auth()->user()->city->name }}</b> City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text">{{ auth()->user()->gym->name }} <br><b>Branch Manager</b></span>
+                                    <span class="description-text text-secondary">{{ auth()->user()->gym->name }} branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->
@@ -68,13 +68,13 @@
                         <h5 class="widget-user-desc text-right">Web Designer</h5> -->
                     </div>
                     <div class="widget-user-image">
-                        <img class="img-circle" src="../dist/img/user2-160x160.jpg" alt="User Avatar">
+                        <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <a href="{{ route('profile.edit') }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -330,7 +330,7 @@
                                         <td>{{ $boughtPackage->user->email }}</td>
                                         <td>{{ $boughtPackage->name }}</td>
                                         <td>{{ $boughtPackage->price }}</td>
-                                        {{-- <!-- <td>{{ $boughtPackage->gym->name }}</td> --> --}}
+                                        <!-- <td>{{ $boughtPackage->gym->name }}</td> -->
                                     </tr>
                                     @endforeach
                                 </tbody>
