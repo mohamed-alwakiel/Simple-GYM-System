@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card my-5">
-                <!-- <div class="card-header">{{ __('Login') }}</div> -->
-                <section class="content-header col-md-12">
-                    <h1 class="text-center text-info">Login</h1>
+                <section class="content-header col-md-12 mt-3">
+                    <h1 class="text-center text-info font-weight-bold">Login</h1>
                 </section>
                 <div class="card-body">
                     <form id="quickForm" method="POST" action="{{ route('login') }}">
@@ -59,7 +56,7 @@
                                 {{ __('Login') }}
                             </button>
                             <div id="clientRoleValue" class="mt-3">
-                                <label>New Client ? <a class="text-info" href="{{ route('register') }}">Register</a></label>
+                                <label class="font-weight-light">New Client ? <a class="text-info" href="{{ route('register') }}">Register</a></label>
                             </div>
                         </div>
                     </form>

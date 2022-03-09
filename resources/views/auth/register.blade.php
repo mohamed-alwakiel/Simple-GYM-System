@@ -1,192 +1,113 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4">
-    <!-- Input addon -->
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card card-info ">
-                <div class="card-header">
-                    <h3 class="card-title mx-auto ">Join Us</h3>
+            <div class="card">
+                <section class="content-header col-md-12 mt-3 pb-0">
+                    <h1 class="text-center text-info font-weight-bold">Register</h1>
+                </section>
+                <div class="card-body">
+                    <form id="quickForm" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <!-- username -->
+                            <div class="form-group">
+                                <input name="name" type="text" class="form-control  @error('name') is-invalid @enderror " placeholder="Name">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- email -->
+                            <div class="form-group">
+                                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- DOB -->
+                            <div class="form-group">
+                                <input name="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror">
+                                @error('date_of_birth')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="input-group my-4 mx-3">
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="gender" value="male" checked>
+                                    <label for="customRadio1" class="custom-control-label mr-4">Male</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio2" name="gender" value="female">
+                                    <label for="customRadio2" class="custom-control-label mr-4">Female</label>
+                                </div>
+                            </div>
+
+                            <!-- national id -->
+                            <div class="form-group">
+                                <input name="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" placeholder="national id">
+                                @error('national_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- profile image -->
+                            <div class="form-group">
+                                <!-- <div class="input-group-prepend"> -->
+                                <input type="file" name="userImg" class="form-control @error('userImg') is-invalid @enderror" id="userImg">
+                                <!-- </div> -->
+                                @error('userImg')
+                                <span class=" alert-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="form-group">
+                                <input id="password-confirm" name="confirmPassword" type="password" class="form-control  @error('confirmPassword') is-invalid @enderror" placeholder="Confirm Password" autocomplete="new-password">
+                                @error('confirmPassword')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group text-center mb-0">
+                                <button type="submit" class="btn btn-primary font-weight-bold mt-3">
+                                    {{ __('Register') }}
+                                </button>
+                                <div class="mt-3">
+                                    <label class="font-weight-light">Have Account ? <a class="text-info" href="{{ route('login') }}">Login</a></label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <form id="quickForm" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                    @csrf
-
-                    <div class="card-body">
-                        <!-- username -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input name="name" type="text" class="form-control  @error('name') is-invalid @enderror " placeholder="Name">
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- email -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            </div>
-                            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" >
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- DOB -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                            </div>
-                            <input name="date_of_birth" type="text" class="form-control @error('date_of_birth') is-invalid @enderror" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="Date of Birth">
-                            @error('date_of_birth')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Gender -->
-                        <div class="input-group my-4">
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="gender" value="male" checked>
-                                <label for="customRadio1" class="custom-control-label mr-4">Male</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio2" name="gender" value="female">
-                                <label for="customRadio2" class="custom-control-label mr-4">Female</label>
-                            </div>
-                        </div>
-
-                        <!-- national id -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input name="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" placeholder="national id" >
-                            @error('national_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-
-                        <!-- profile image -->
-
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <input type="file" name="userImg" class="form-control @error('userImg') is-invalid @enderror" id="userImg">
-                        </div>
-                        @error('userImg')
-                        <span class=" alert-danger">{{ $message }}</span>
-                    @enderror
-                    </div>
-
-
-                        <!-- Password -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" >
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input id="password-confirm" name="confirmPassword" type="password" class="form-control  @error('confirmPassword') is-invalid @enderror" placeholder="Confirm Password"  autocomplete="new-password">
-                            @error('confirmPassword')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-
-                        <!-- --------------------------- UNCOMMENT & EDIT ACCORDING TO DATABASE TABLES --------------------------- -->
-                        <!-- Select City -->
-                        {{--
-                        <!-- <div class="input-group mb-3">
-                        <div class="mb-3">
-                            <label for="city" class="form-label">City</label>
-                            <select class="form-control" name="city" id="city">
-                                <option hidden>Choose City</option>
-                                @foreach ($cities as $city)
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                        @endforeach
-                        </select>
-                        </div>
-                        <div class="mb-3">
-                        <label for="branch" class="form-label">Branch</label>
-                        <select class="form-control" name="branch" id="branch"></select>
-                        </div>
-                        </div> -->
-                        --}}
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary font-weight-bold mt-3">
-                                {{ __('Register') }}
-                            </button>
-                            <div class="mt-3">
-                                <label>Have Account ? <a class="text-info" href="{{ route('login') }}">Login</a></label>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-
             </div>
         </div>
     </div>
 </div>
 
-
-<!-- --------------------------- UNCOMMENT THIS SCRIPT AFTER UNCOMMENTING CITY & GYM DROPDOWN MENUS --------------------------- -->
-{{--
-<!--
-<script>
-    $(document).ready(function() {
-        $('#city').on('change', function() {
-            var cityID = $(this).val();
-            if (cityID) {
-                $.ajax({
-                    url: '/getbranch/' + cityID,
-                    type: "GET",
-                    data: {
-                        "_token": "{{ csrf_token() }}"
-},
-dataType: "json",
-success: function(data) {
-if (data) {
-$('#branch').empty();
-$('#branch').append('<option hidden>Choose branch</option>');
-$.each(data, function(key, branch) {
-$('select[name="branch"]').append('<option value="' + key + '">' + branch.name + '</option>');
-});
-} else {
-$('#branch').empty();
-}
-}
-});
-} else {
-$('#branch').empty();
-}
-});
-});
-</script> -->
---}}
-
-@endsection
+@stop
