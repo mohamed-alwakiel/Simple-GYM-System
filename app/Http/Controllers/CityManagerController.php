@@ -23,11 +23,9 @@ class CityManagerController extends Controller
     public function index()
     {
         $cityManagers = User::role('cityManager')->get();
-        $cities = City::all();
 
        return view('cityManagers.index', [
            'cityManagers' => $cityManagers,
-           'cities' => $cities
        ]);
     }
 
@@ -155,6 +153,7 @@ class CityManagerController extends Controller
     public function destroy($cityManager)
     {
         CityManager::find($cityManager)->delete();
-        return redirect()->route('cityManagers.index');
+        return response()->json(['success' => 'Record deleted successfully']);
+        // return redirect()->route('cityManagers.index');
     }
 }

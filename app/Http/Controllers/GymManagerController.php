@@ -181,7 +181,7 @@ class GymManagerController extends Controller
     public function destroy($gymManager)
     {
         GymManager::find($gymManager)->delete();
-        return redirect()->route('gymManagers.index');
+        return response()->json(['success' => 'Record deleted successfully']);
     }
 
 

@@ -42,7 +42,7 @@
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
                 <input type="text" name="national_id" class="form-control"
-                    onkeypress="return event.charCode > 47 && event.charCode < 58;" />
+                    onkeypress="return event.charCode > 47 && event.charCode < 58;" value="{{old('national_id','')}}"/>
             </div>
             @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
