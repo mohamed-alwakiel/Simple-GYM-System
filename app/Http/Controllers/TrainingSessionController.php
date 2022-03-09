@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 
 use App\Models\City;
-use App\Models\Coach;
+use App\Models\User;
 // use Illuminate\Support\Carbon;
+use App\Models\Coach;
 use Spatie\Period\Period;
 use App\Models\CoachSession;
 use Illuminate\Http\Request;
@@ -45,14 +46,16 @@ class TrainingSessionController extends Controller
         $roleGymManager = auth()->user()->hasRole('gymManager');
 
 
+
         if($roleAdmin){
         Paginator::useBootstrapFive();
         $sessions = TrainingSession::paginate(10);
         }elseif($roleCityManager ){
-            $sessions =Auth::user()->trainingSessions;
+            $sessions =Auth::user()->city->trainingSessions;
+
         }elseif($roleGymManager){
-            $gym_id = Auth::user()->gym_id;
-            $sessions = TrainingSession::find($gym_id);
+           
+            $sessions =Auth::user()->city->trainingSessions;
         }
 
         return view(
@@ -134,16 +137,15 @@ class TrainingSessionController extends Controller
         );
     }
 
-    public function update($id, TrainingSessionRequest $request)
+    public function update($id)
     {
         $formDAta = request()->all();
 
         $session = TrainingSession::find($id)->update($formDAta);
 
         $session = TrainingSession::find($id)->update($formDAta);
-        $session = TrainingSession::find($id);
 
-        $session->coaches()->sync($formDAta['coach_id']);
+
         return redirect()->route('sessions.index');
     }
 
