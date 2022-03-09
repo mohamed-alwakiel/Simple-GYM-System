@@ -50,7 +50,6 @@ class UserController extends Controller
         return view('users.index', data: [
             'users' => $users,
         ]);
-        // return view('users.datatable');
     }
 
 
@@ -117,17 +116,23 @@ class UserController extends Controller
         if ($roleAdmin) {
             $cities = City::all();
             return view('users.create', ['cities' => $cities]);
-        }
-        elseif ($roleCityManager)
-        {
+        } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('users.create', ['gyms' => $gyms]);
-        }
-        elseif ($roleGymManager)
-        {
+        } elseif ($roleGymManager) {
             return view('users.create');
         }
+    }
+
+    public function show($userID)
+    {
+        // $userID=$user->id;
+        $user = User::findOrFail($userID);
+        return view('users.show', ['user' => $user]);
+
+        // $user = User::findOrFail($userID);
+        // return view('users.show', ['user' => $user]);
     }
 
     public function GetGymNameFromCityName(Request $request)
@@ -164,12 +169,10 @@ class UserController extends Controller
         if ($roleAdmin) {
             $city_id = $request['city_id'];
             $gym_id = $request['gym_id'];
-        }
-        elseif ($roleCityManager) {
+        } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
             $gym_id = $request['gym_id'];
-        }
-        elseif($roleGymManager) {
+        } elseif ($roleGymManager) {
             $city_id = Auth::user()->city_id;
             $gym_id = Auth::user()->gym_id;
         }
@@ -229,8 +232,7 @@ class UserController extends Controller
 
         if ($roleAdmin || $roleCityManager) {
             $gym_id = $request['gym_id'];
-        }
-        elseif($roleGymManager) {
+        } elseif ($roleGymManager) {
             $gym_id = Auth::user()->gym_id;
         }
 
@@ -242,7 +244,7 @@ class UserController extends Controller
             'date_of_birth' => $request['date_of_birth'],
             'gym_id' => $gym_id
         ]);
-        
+
         return redirect()->route('users.index');
     }
 
@@ -252,9 +254,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $userId)
+    public function destroy($userId)
     {
-        User::find($userId)->delete($request->all());
+        User::find($userId)->delete();
         return redirect()->route('users.index');
     }
 

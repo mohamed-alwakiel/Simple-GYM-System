@@ -6,15 +6,15 @@
 
 <div class="container-fluid">
 
-            @error('msg')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    @role('admin')
-    <div class="d-flex justify-content-center mb-3">
-        <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
-    </div>
-    @endrole
     <div class="col-md-12 px-4">
+        @error('msg')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        @role('admin')
+        <div class="d-flex justify-content-center mb-3">
+            <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
+        </div>
+        @endrole
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">All Packages</h3>

@@ -103,6 +103,7 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/users', [UserController::class, 'index'])->name('users.index');
 
     Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::GET('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
     Route::get('/json-gym', [UserController::class, 'GetGymNameFromCityName']);
 
@@ -110,10 +111,9 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/users/edit/{data}', [UserController::class, 'edit'])->name('users.edit');
     Route::POST('/users', [UserController::class, 'store'])->name('users.store');
 
-    // Route::GET('/users/{user}', [PostController::class, 'show'])->name('users.show');
     Route::PUT('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
-    Route::DELETE('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::DELETE('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/get-users-my-datatables', [UserController::class, 'getUsers'])->name('get.users');
 });

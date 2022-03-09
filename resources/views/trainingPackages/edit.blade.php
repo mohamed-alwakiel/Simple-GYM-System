@@ -5,7 +5,7 @@ Edit "{{ $package->name }}" Package
 
 @section('content')
 <div class=" d-flex justify-content-center">
-    <div class="card card-warning w-50 mt-5">
+    <div class="card card-warning w-50 mt-3">
         <div class="card-header">
             <h3 class="card-title">Edit Package: <b>{{ $package->name }}</b></h3>
         </div>
