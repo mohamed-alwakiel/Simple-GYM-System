@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CityManager;
 use App\Models\GymManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,7 @@ class AssignAdminRoleSeeder extends Seeder
             'date_of_birth' => '1990-01-01',
             'role_type' => 'admin',
             'role_id' => 1,
+            'email_verified_at' => now(),
         ]);
 
         // Assign Role --> Admin
