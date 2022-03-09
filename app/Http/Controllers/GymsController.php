@@ -152,10 +152,11 @@ class GymsController extends Controller
         return redirect()->route('gyms.index');
     }
 
-    public function destroy($gym_id) {
+    public function destroy(Request $request) {
 
-        Gym::find($gym_id)->delete();
+        Gym::find($request->id)->delete();
+        return response()->json(['success' => 'Product deleted successfully']);
 
-        return redirect()->route('gyms.index');
+
     }
 }

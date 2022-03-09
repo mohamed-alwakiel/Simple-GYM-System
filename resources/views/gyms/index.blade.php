@@ -28,6 +28,7 @@
                 <th>Cover Image</th>
                 @role('admin')
                 <th>City Name</th>
+                <th>City Manager</th>
                 @endrole
                 <th>Controllers</th>
             </tr>
@@ -36,7 +37,7 @@
 
         <tbody>
             @foreach ($gyms as $gym)
-                <tr class="bg-dark">
+                <tr class="offerRow bg-dark">
                     <th>{{ $gym->name }}</th>
 
                     <th>
@@ -47,17 +48,20 @@
                         {{ $gym->city->name }}
 
                     </th>
+                    <th>
+                        {{ $gym->city->user ? $gym->city->user->name : 'Not Found !' }}
+                    </th>
                     @endrole
 
                     <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-primary">Update</a>
-
-                        <form action="{{ route('gyms.destroy', $gym->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger" type="submit">
-                                Delete
-                            </button>
+                        <a  data-toggle="modal" data-target="#DeleteProductModal"  gym_id="{{$gym -> id}}"  class="delete_btn btn btn-danger"> Delete </a>
+{{--                        <form action="{{ route('gyms.destroy', $gym->id) }}" method="post">--}}
+{{--                            @csrf--}}
+{{--                            @method('delete')--}}
+{{--                            <button class="btn btn-danger" type="submit">--}}
+{{--                                Delete--}}
+{{--                            </button>--}}
                         </form>
 
                     </th>
@@ -72,7 +76,24 @@
             </div>
         </div>
     </div>
-
+    <!-- Delete Product Modal -->
+    <div class="modal fade" id="DeleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this Gym</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="SubmitDeleteForm" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -81,4 +102,28 @@
             $('#table_id').DataTable();
         });
     </script>
+
+
+    <script>
+        $(document).on('click', '#SubmitDeleteForm', function (e) {
+            e.preventDefault();
+            var gym_id =  $('.delete_btn').attr('gym_id');
+            $.ajax({
+                type: 'delete',
+                url: "{{route('gyms.destroy')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :gym_id
+                },
+                success: function (data) {
+                    if(data.status == true){
+                        $('#success_msg').show();
+                    }
+                    $('.offerRow'+data.id).remove();
+                }, error: function (reject) {
+                }
+            });
+        });
+    </script>
+
 @endsection

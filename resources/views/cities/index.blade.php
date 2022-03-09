@@ -36,19 +36,19 @@
                             <tbody>
 
             @foreach ($cities as $city)
-                <tr class="bg-dark">
+                <tr class="offerRow bg-dark">
                     <th>{{ $city->name }}</th>
 
                     <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-primary">Update</a>
-
-                        <form action="{{ route('cities.destroy', $city->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger" type="submit">
-                                Delete
-                            </button>
-                        </form>
+                        <a  data-toggle="modal" data-target="#DeleteProductModal"  city_id="{{$city -> id}}"  class="delete_btn btn btn-danger"> Delete </a>
+{{--                        <form action="{{ route('cities.destroy', $city->id) }}" method="post">--}}
+{{--                            @csrf--}}
+{{--                            @method('delete')--}}
+{{--                            <button class="btn btn-danger" type="submit">--}}
+{{--                                Delete--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
 
                     </th>
                 </tr>
@@ -60,13 +60,51 @@
             </div>
         </div>
     </div>
-
+    <!-- Delete Product Modal -->
+    <div class="modal fade" id="DeleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this City</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="SubmitDeleteForm" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 @section('script')
     <script>
         $(document).ready(function() {
             $('#table_id').DataTable();
+        });
+    </script>
+    <script>
+        $(document).on('click', '#SubmitDeleteForm', function (e) {
+            e.preventDefault();
+            var city_id =  $('.delete_btn').attr('city_id');
+            $.ajax({
+                type: 'delete',
+                url: "{{route('cities.destroy')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'id' :city_id
+                },
+                success: function (data) {
+                    if(data.status == true){
+                        $('#success_msg').show();
+                    }
+                    $('.offerRow'+data.id).remove();
+                }, error: function (reject) {
+                }
+            });
         });
     </script>
 @endsection
