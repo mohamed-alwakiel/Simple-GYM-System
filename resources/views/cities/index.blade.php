@@ -36,7 +36,7 @@
                             <tbody>
 
             @foreach ($cities as $city)
-                <tr class="offerRow bg-dark">
+                <tr class="offerRow{{$city -> id}} bg-dark">
                     <th>{{ $city->name }}</th>
 
                     <th class="d-flex justify-content-around py-2">
