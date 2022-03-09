@@ -25,9 +25,9 @@ class CityManager extends Model
         'email_verified_at',
     ];
 
-    
+    // only one manager for one city
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }

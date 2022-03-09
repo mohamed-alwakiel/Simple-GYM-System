@@ -10,6 +10,8 @@ class Gym extends Model
 {
     use HasFactory;
 
+    protected$table='gyms';
+
     protected $fillable = [
         'id',
         'name',
@@ -18,12 +20,28 @@ class Gym extends Model
         'updated_at',
         'city_id'
     ];
-    protected$table='gyms';
 
-    public function city() {
+    // gym under one city
+    public function city()
+    {
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
-    public function TrainingSessions(){
+
+    // as a manager
+    public function manager()
+    {
+        return $this->hasMany(GymManager::class, 'gym_id');
+    }
+
+
+    // as a client
+    public function user()
+    {
+        return $this->hasMany(User::class, 'gym_id');
+    }
+
+    public function TrainingSessions()
+    {
         return $this->hasMany(TrainingSession::class,'gym_id');
     }
 }

@@ -33,13 +33,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', 4)->get();
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
 
-        //        return view('users.index', data: [
-        //            'users' => $users,
-        //        ]);
-        return view('users.datatable');
+        if ($roleAdmin) {
+            $users = User::role('client')->get();
+        } elseif ($roleCityManager) {
+            $city_id = Auth::user()->city_id;
+            $users = User::role('client')->where('city_id', $city_id)->get();
+        } elseif ($roleGymManager) {
+            $gym_id = Auth::user()->gym_id;
+            $users = User::role('client')->where('gym_id', $gym_id)->get();
+        }
+
+        return view('users.index', data: [
+            'users' => $users,
+        ]);
+        // return view('users.datatable');
     }
+
+
     public function getUsers()
     {
         if (request()->ajax()) {
@@ -96,10 +110,24 @@ class UserController extends Controller
      */
     public function create()
     {
-        $cities = City::all();
-        return view('users.create', data: [
-            'cities' => $cities,
-        ]);
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
+
+        if ($roleAdmin) {
+            $cities = City::all();
+            return view('users.create', ['cities' => $cities]);
+        }
+        elseif ($roleCityManager)
+        {
+            $city_id = Auth::user()->city_id;
+            $gyms = Gym::where('city_id', $city_id)->get();
+            return view('users.create', ['gyms' => $gyms]);
+        }
+        elseif ($roleGymManager)
+        {
+            return view('users.create');
+        }
     }
 
     public function GetGymNameFromCityName(Request $request)
@@ -125,9 +153,26 @@ class UserController extends Controller
             $imageName = time() . rand(1, 200) . '.' . $img->extension();
             $img->move(public_path('imgs//' . 'users'), $imageName);
         else :
-            $imageName = 'user.png';
+            $imageName = 'Client.Png';
         endif;
 
+        // handle creator
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
+
+        if ($roleAdmin) {
+            $city_id = $request['city_id'];
+            $gym_id = $request['gym_id'];
+        }
+        elseif ($roleCityManager) {
+            $city_id = Auth::user()->city_id;
+            $gym_id = $request['gym_id'];
+        }
+        elseif($roleGymManager) {
+            $city_id = Auth::user()->city_id;
+            $gym_id = Auth::user()->gym_id;
+        }
 
         // store new data into data base
         $newUser = User::create([
@@ -149,21 +194,7 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show($userId)
-    {
-        // $user =User::find($userId);
-        // $gym=Gym::find($user->gym_id);
-        // $city=City::find($user->city_id);
-        // return view("users.edit",[
-        //     'user'=> $user,
-        // ]);
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -174,7 +205,12 @@ class UserController extends Controller
     public function edit($userId)
     {
         $user = User::find($userId);
-        return view("users.edit", ['user' => $user,]);
+        $gyms = Gym::where('city_id', $user->city_id)->get();
+
+        return view("users.edit", [
+            'user' => $user,
+            'gyms' => $gyms
+        ]);
     }
 
     /**
@@ -186,13 +222,27 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        // handle creator
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
+
+        if ($roleAdmin || $roleCityManager) {
+            $gym_id = $request['gym_id'];
+        }
+        elseif($roleGymManager) {
+            $gym_id = Auth::user()->gym_id;
+        }
+
         $request = request()->all();
         User::find($id)->update([
             'name' => $request['name'],
             'email' => $request['email'],
             'national_id' => $request['national_id'],
             'date_of_birth' => $request['date_of_birth'],
+            'gym_id' => $gym_id
         ]);
+        
         return redirect()->route('users.index');
     }
 
@@ -276,10 +326,7 @@ class UserController extends Controller
 
             DB::table('users')->where('id', '=', $userid)->update(['password' => $newPassword]);
             return redirect()->route('dashboard');
-
-        }
-        else
-        {
+        } else {
             $msg = 'please enter your old password correctly';
             return view('profile.editPassword', ['msg' => $msg]);
         }

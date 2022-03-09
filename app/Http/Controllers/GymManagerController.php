@@ -25,18 +25,16 @@ class GymManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
 
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
 
         if ($roleAdmin) {
-            $gymManagers = GymManager::where('role_id', 3)->get();
-        }
-        elseif ($roleCityManager)
-        {
+            $gymManagers = User::role('gymManager')->get();
+        } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
-            $gymManagers = GymManager::where('role_id', 3)->where('city_id', $city_id)->get();
+            $gymManagers = User::role('gymManager')->where('city_id', $city_id)->get();
         }
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
@@ -53,7 +51,6 @@ class GymManagerController extends Controller
             $cities = City::all();
             return view('gymManagers.create', ['cities' => $cities]);
         } elseif ($roleCityManager) {
-            // // if city manager
             $city_id = Auth::user()->city_id;
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gymManagers.create', ['gyms' => $gyms]);
@@ -80,7 +77,6 @@ class GymManagerController extends Controller
 
     public function store(StoreGymManagerRequest $request)
     {
-
         //fetch request data
         $requestData = request()->all();
 
@@ -187,7 +183,7 @@ class GymManagerController extends Controller
     public function destroy($gymManager)
     {
         GymManager::find($gymManager)->delete();
-        return redirect()->route('gymManagers.index');
+        return response()->json(['success' => 'Record deleted successfully']);
     }
 
 

@@ -14,9 +14,9 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail,BannableContract
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Bannable;
 
     protected $table = 'users';
 
@@ -63,9 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function attendances()
     {
-
         return $this->hasMany(Attendance::class, 'user_id');
     }
+
     public function boughtPackages()
     {
         return $this->hasMany(User::class, 'user_id');
@@ -73,11 +73,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function city()
     {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
+    
     public function gym()
     {
-        return $this->belongsTo(Gym::class, 'gym_id');
+        return $this->belongsTo(Gym::class, 'gym_id', 'id');
     }
 
 

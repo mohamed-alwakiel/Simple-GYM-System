@@ -43,6 +43,7 @@
 
                         {{-- <td><a href="{{ route('sessions.show', ['id' => $session->id]) }}" class="btn btn-info">View</a></td> --}}
                         <td class="d-flex justify-content-around py-2">
+                            @if ( count($session->attendances)==0)
                             <a href="{{ route('sessions.edit', ['id' => $session->id]) }}" class="btn btn-success">Edite</a>
 
                             <form method="POST" action="{{ route('sessions.destroy', ['id' => $session->id]) }}">
@@ -52,6 +53,7 @@
                                 <input class='btn btn-danger' type="submit" onclick=" return confirm('are you sure ?')"
                                        value="Delete">
                             </form>
+                            @endif
                         </td>
 
                     </tr>

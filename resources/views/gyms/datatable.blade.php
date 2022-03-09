@@ -58,6 +58,7 @@
 
 @endsection
 
+
 @section('script')
 <script>
     // let $  = require( 'jquery' );

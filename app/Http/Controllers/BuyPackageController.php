@@ -85,7 +85,7 @@ class BuyPackageController extends Controller
 
         BuyPackage::create([
 
-            'price' => $package->price,
+            'price' => ($package->price / 100 ),
             'number_of_sessions' => $package->number_of_sessions,
             'remaining_sessions'=>$package->number_of_sessions,
             'package_id' => $paymentData->package_id,
