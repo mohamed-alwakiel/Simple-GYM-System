@@ -9,6 +9,7 @@ use App\Models\CityManager;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -115,7 +116,8 @@ class GymManagerController extends Controller
             'role_id' => 3,
 
             'city_id' => $city_id,
-            'gym_id' => $request['gym_id']
+            'gym_id' => $request['gym_id'],
+            'email_verified_at'=>  Carbon::now()->toDateTimeString(),
         ]);
 
 

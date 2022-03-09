@@ -5,6 +5,10 @@
 @section('content')
 
 <div class="container-fluid">
+
+            @error('msg')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     @role('admin')
     <div class="d-flex justify-content-center mb-3">
         <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
@@ -29,7 +33,7 @@
                     @foreach ($packageCollection as $package)
                     <tr>
                         <td>{{ $package->name }}</td>
-                        <td>{{ $package->price }}</td>
+                        <td>{{ $package->price /100 }} $</td>
                         <td>{{ $package->number_of_sessions }}</td>
                         <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
                         <td class="d-flex justify-content-center">

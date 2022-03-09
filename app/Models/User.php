@@ -38,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail,BannableContract
         'gym_id' ,
         'city_id',
         'last_login',
-
+        'email_verified_at',
     ];
 
     /**
@@ -71,13 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail,BannableContract
         return $this->hasMany(User::class, 'user_id');
     }
 
-    // as a client
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
     
-    // as a client
     public function gym()
     {
         return $this->belongsTo(Gym::class, 'gym_id', 'id');

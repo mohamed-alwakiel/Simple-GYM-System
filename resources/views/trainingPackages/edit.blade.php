@@ -17,8 +17,8 @@ Edit "{{ $package->name }}" Package
                 <input type="hidden" name="package_id" value="{{ $package->id }}">
 
                 <div class="form-group mb-3">
-                    <label for="Desc">Price</label>
-                    <input name="price" type="text" class="form-control" value="{{ $package->price }}" id="price" aria-describedby="titleHelp">
+                    <label for="Desc">Price $</label>
+                    <input name="price" type="text" class="form-control" value="{{ $package->price /100 }} " id="price" aria-describedby="titleHelp">
                 </div>
                 @error('price')
                 <div class="alert alert-danger">{{ $message }}</div>

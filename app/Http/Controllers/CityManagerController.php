@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCityManagerRequest;
 use App\Models\City;
 use App\Models\CityManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -83,6 +84,7 @@ class CityManagerController extends Controller
             'city_id' => $request['city_id'],
             'role_type' => 'cityManager',
             'role_id' => 2,
+            'email_verified_at'=> Carbon::now()->toDateTimeString(),
 
         ]);
         $newCityManager->assignRole('cityManager')->givePermissionTo(['create gym','create gym manager','create coach','create session',

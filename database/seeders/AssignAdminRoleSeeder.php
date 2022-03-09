@@ -25,6 +25,7 @@ class AssignAdminRoleSeeder extends Seeder
             'password' => '$2y$10$uQ/WIjMbfSOsAjlg0xj1E.MxED2Lef0S50uXuKEsPRTYLszqczdbG',
             'date_of_birth' => '1990-01-01',
             'profile_img' => 'admin.png',
+            'email_verified_at' => now(),
 
         ]);
 

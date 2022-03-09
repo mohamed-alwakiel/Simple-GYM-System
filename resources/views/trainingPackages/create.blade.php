@@ -20,7 +20,7 @@
                 @enderror
 
                 <div class="form-group mb-3">
-                    <label for="Desc">Price</label>
+                    <label for="Desc">Price  $</label>
                     <input name="price" type="text" class="form-control" id="price" aria-describedby="titleHelp">
                 </div>
                 @error('price')

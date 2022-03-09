@@ -24,7 +24,7 @@ View "{{ $package->name }}" Package
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{ $package->name }}</span> </p>
-            <p class="card-text text-secondary">Price : <span class="text-light font-weight-bold">{{$package->price}}</span> </p>
+            <p class="card-text text-secondary">Price : <span class="text-light font-weight-bold">{{$package->price /100 }} $</span> </p>
             <p class="card-text text-secondary">Number Of Sessions : <span class="text-light font-weight-bold">{{$package->number_of_sessions}}</span> </p>
             <p class="card-text text-secondary">Created at :<span class="text-light font-weight-bold">{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </span> </p>
         </div>
