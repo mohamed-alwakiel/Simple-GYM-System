@@ -29,7 +29,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
@@ -426,7 +426,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- DataTables -->
 
-   
+
 
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
 

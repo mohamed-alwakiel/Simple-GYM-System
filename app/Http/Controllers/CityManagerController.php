@@ -31,7 +31,7 @@ class CityManagerController extends Controller
            'cities' => $cities
        ]);
     }
-  
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +67,7 @@ class CityManagerController extends Controller
 
         if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
-            $image->move(public_path('imgs//' . 'CityMgr'), $imageName);
+            $image->move(public_path('imgs//' . 'users/'), $imageName);
         else :
             $imageName = 'cityMgr.png';
         endif;

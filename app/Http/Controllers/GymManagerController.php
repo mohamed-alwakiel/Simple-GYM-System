@@ -24,23 +24,27 @@ class GymManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
 
-        $gymManagers = GymManager::where('role_id', 3)->get();
-        $gyms = Gym::all();
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
 
-       return view('gymManagers.index', [
-           'gymManagers' => $gymManagers,
-           'gyms' => $gyms
-       ]);
+        if ($roleAdmin) {
+            $gymManagers = GymManager::where('role_id', 3)->get();
+        }
+        elseif ($roleCityManager)
+        {
+            $city_id = Auth::user()->city_id;
+            $gymManagers = GymManager::where('role_id', 3)->where('city_id', $city_id)->get();
+        }
+        return view('gymManagers.index', [
+            'gymManagers' => $gymManagers,
+        ]);
     }
 
 
     public function create()
     {
-        // if admin
-        // $role = Auth::user()->role_type;
-        // $role= auth()->user()->hasPermissionTo('create gym manager');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
 
@@ -84,14 +88,20 @@ class GymManagerController extends Controller
         $image = $request->img;
         if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
-            $image->move(public_path('imgs//' . 'GymMgr'), $imageName);
+            $image->move(public_path('imgs//' . 'users/'), $imageName);
         else :
             $imageName = 'gymMgr.png';
         endif;
 
-        // // handle creator
-        // if(Auth::user()->role_id == 1):
-        //     $city_id ==
+        // handle creator
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleAdmin = auth()->user()->hasRole('admin');
+
+        if ($roleAdmin) {
+            $city_id = $request['city_id'];
+        } elseif ($roleCityManager) {
+            $city_id = Auth::user()->city_id;
+        }
 
         // store new data into data base
         $newGymManager = User::create([
@@ -109,7 +119,7 @@ class GymManagerController extends Controller
             'role_type' => 'gymManager',
             'role_id' => 3,
 
-            'city_id' => $request['city_id'],
+            'city_id' => $city_id,
             'gym_id' => $request['gym_id']
         ]);
 
@@ -124,7 +134,6 @@ class GymManagerController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -134,7 +143,7 @@ class GymManagerController extends Controller
     public function edit($gymManagerID)
     {
         $gymManager = GymManager::find($gymManagerID);
-        $gyms = Gym::all();
+        $gyms = Gym::where('city_id', $gymManager->city_id)->get();
 
         return view('gymManagers.edit', [
             'gymManager' => $gymManager,
@@ -157,7 +166,6 @@ class GymManagerController extends Controller
 
         // update new data into data base
         GymManager::find($gymManagerID)->update([
-
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'national_id' => $requestData['national_id'],

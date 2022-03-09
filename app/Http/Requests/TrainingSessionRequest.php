@@ -23,20 +23,19 @@ class TrainingSessionRequest extends FormRequest
      */
     public function rules()
     {
-        $id= request()->all()['id'] ?? '';
-        
-        $validation= [
-           
+        $id = request()->all()['id'] ?? '';
 
-            'name'=>['required','min:3'],
-            'day' =>['required'],
-            'started_at' =>['required'],
-            'finished_at' =>['required'],
-            
-        
-            ];
+        $validation = [
+            'gym_id' => ['required'],
+            'name' => ['required', 'min:3'],
+            'day' => ['required'],
+            'started_at_date' => ['required'],
+            'started_at_time' => ['required'],
+            'finished_at_date' => ['required'],
+            'finished_at_time' => ['required'],
+        ];
 
-          
-            return $validation;
+
+        return $validation;
     }
 }

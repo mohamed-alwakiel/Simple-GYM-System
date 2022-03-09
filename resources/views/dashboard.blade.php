@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                    <a href="{{ route('profile.edit') }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -37,10 +37,10 @@
                                     <span class="description-text">Owner Of X Gym</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text">{{ auth()->user()->city }} City Manager</span>
+                                    <span class="description-text">{{ auth()->user()->city->name }} City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text">{{ auth()->user()->gym }} branch Manager</span>
+                                    <span class="description-text">{{ auth()->user()->gym->name }} branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->
@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                    <a href="{{ route('profile.edit') }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -330,7 +330,7 @@
                                         <td>{{ $boughtPackage->user->email }}</td>
                                         <td>{{ $boughtPackage->name }}</td>
                                         <td>{{ $boughtPackage->price }}</td>
-                                        <!-- <td>{{ $boughtPackage->gym->name }}</td> -->
+                                        {{-- <!-- <td>{{ $boughtPackage->gym->name }}</td> --> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageRequest;
+use App\Http\Requests\UpdatePackageRequest;
 use Illuminate\Http\Request;
 use App\Models\Package;
 use Illuminate\Pagination\Paginator;
@@ -44,7 +45,7 @@ class TrainingPackageController extends Controller
         );
     }
 
-    public function update($package_id,StorePackageRequest $requestObj)
+    public function update($package_id,UpdatePackageRequest $requestObj)
     {
         $package =  Package::findOrFail($package_id);
         $package->update($requestObj->all());

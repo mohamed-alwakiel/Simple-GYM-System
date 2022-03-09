@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Contracts\Validation\Rule;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,7 @@ use Illuminate\Validation\Rules\Exists;
 // use Illuminate\Support\Facades\Request;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -120,7 +122,7 @@ class UserController extends Controller
 
         if ($img != null) :
             $imageName = time() . rand(1, 200) . '.' . $img->extension();
-            $img->move(public_path('imgs//' . 'client'), $imageName);
+            $img->move(public_path('imgs//' . 'users'), $imageName);
         else :
             $imageName = 'user.png';
         endif;
@@ -205,15 +207,79 @@ class UserController extends Controller
     }
 
 
-
-    public function editProfile($userId)
+    // update profile data
+    public function editProfile()
     {
-        $user = User::find($userId);
-        return view("users.editProfile", ['user' => $user]);
+        return view('profile.editProfile');
     }
-    public function updateProfile(UpdateUserRequest $request, $id)
+
+    public function updateProfile(Request $request)
     {
-        // $user = User::find($userId);
-        // return view("users.editProfile", ['user' => $user]);
+        $userID = $request->id;
+
+        $validated = $request->validate([
+            'name' => 'required|max:50|min:3',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $userID],
+            'national_id' => ['required', 'min:14', 'max:14', 'unique:users,national_id,' . $userID],
+        ]);
+
+        // deal with image
+        $oldimg = $request->oldimg;
+
+        if ($request->newimg) {
+            $request->validate([
+                'newimg' => 'image | mimes:jpg,jpeg',
+            ]);
+
+            $imageName = time() . '.' . $request->file('newimg')->extension();
+            $request->newimg->move(public_path('imgs//' . 'users'), $imageName);
+
+            DB::table('users')->where('id', '=', $userID)->update(['profile_img' => $imageName]);
+
+            // to delete old image
+            if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
+                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+            }
+        }
+
+        User::find($userID)->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'national_id' => $validated['national_id'],
+        ]);
+        return redirect()->route('dashboard');
+    }
+
+    // update password
+    public function editPassword()
+    {
+        $msg = 0;
+        return view('profile.editPassword', ["msg" => $msg]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $userid = Auth::id();
+
+        $data = $request->validate([
+            'newpassword'  => 'required|min:6',
+            'oldpassword'  => 'required|min:6'
+        ]);
+
+        $userPassword = Auth::user()->password;
+
+        $newPassword = Hash::make($data['newpassword']);
+
+        if (Hash::check($data['oldpassword'], $userPassword)) {     // check if enter old password correct or not
+
+            DB::table('users')->where('id', '=', $userid)->update(['password' => $newPassword]);
+            return redirect()->route('dashboard');
+
+        }
+        else
+        {
+            $msg = 'please enter your old password correctly';
+            return view('profile.editPassword', ['msg' => $msg]);
+        }
     }
 }

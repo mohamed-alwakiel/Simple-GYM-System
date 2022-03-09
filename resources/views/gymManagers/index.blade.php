@@ -30,6 +30,10 @@
 
                                     <th>Gym Name</th>
 
+                                    @role('admin')
+                                    <th>City name</th>
+                                    @endrole
+
                                     <th>Controllers</th>
                                 </tr>
                             </thead>
@@ -46,12 +50,15 @@
 
 
                                         <th>
-                                            <img src="{{ url('imgs/GymMgr/' . $manager->profile_img) }} " width="50px"
+                                            <img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px"
                                                 height="50px" alt="not found" />
                                         </th>
 
                                         <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
 
+                                        @role('admin')
+                                        <td>{{ $manager->gym ? $manager->gym->city->name : 'Not Found !' }}</td>
+                                        @endrole
 
                                         <th class="d-flex justify-content-around py-2">
 
