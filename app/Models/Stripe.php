@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class Stripe extends Model
 {
     use HasFactory;
+
+    public $table = 'stripe';
+
     protected $fillable = [
         'id',
         'name',
-        'created_at',
-        'updated_at'
+        'price',
+        'number_of_sessions',
+        'package_id',
+        'user_id',
+        'gym_id',
+        'city_id',
     ];
 
-
-    public function gyms() {
-        return $this->hasMany(Gym::class, 'city_id', 'id');
-    }
-
+    
 }

@@ -1,29 +1,1127 @@
-$session= TrainingSession::find(10);
-$session= TrainingSession::find(10,['started_at']);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-var_dum
-  ($session);
-$session= TrainingSession::find(10,['started_at']);
-var_dum($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(10,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-dd($session);
-$session= TrainingSession::find(20,['started_at']);
-$session= TrainingSession::find(20,['started_at']);
+$date2=date('Y-m-d H:i:s', strtotime(now());
+$date2=date('Y-m-d H:i:s', strtotime(now());
+			$date2=date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')
+$date2=date('Y-m-d H:i:s', strtotime(now());
+$date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')
+$date2=date('Y-m-d H:i:s', strtotime(now()),
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;
+}
+$date2=date('Y-m-d H:i:s', strtotime(now()),
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true }
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true }
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', strtotime('2022-03-08 22:31:45')){
+return true ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:31:45')){
+return ;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:31:45')){
+return 0;}
+$date2=date('Y-m-d H:i:s', strtotime(now()));
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:31:45')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+if($date2==date('Y-m-d H:i:s', ('2022-03-08 22:36:00')){
+return 0;}
+$date2=date('Y-m-d H:i:s', now());
+$date2=date('Y-m-d H:i:s', now()));
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:38:26";
+$ti2="2022-03-08 22:38:26"
+  
+  if($ti==$ti2){return true;}else{return false;}
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:38:26";
+$ti2="2022-03-08 22:38:26";
+  
+  if($ti==$ti2){return true;}else{return false;}
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:38:26";
+$ti2="2022-03-08 22:38:00";
+  
+  if($ti==$ti2){return true;}else{return false;}
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 || $ti>$ti3){return true;}else{return false;}
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+$t=Carbon::now();
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+$t=Carbon::now();
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon
+
+$t=Carbon::now();
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+$t=Carbon::now();
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+$t=Carbon::now();
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+
+Carbon::now();
+use Illuminate\Support\Carbon;
+
+$t=Carbon::now();
+$date2=date('Y-m-d H:i:s',strtotime( now()));
+
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	return $session->started_at 
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	return $session->started_at ;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	 return dd($session->started_at) ;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  return true;
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	  dd($session->started_at) ;
+  
+}
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	
+  
+}
+  dd($session->started_at) ;
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	
+  
+}
+var_dump($session->started_at);
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-08 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  	if(){}
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-00 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  	if(){}
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-01 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-01 22:50:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-08 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-07 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-08 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-07 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  
+  
+}
+
+
+$ti="2022-03-07 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-07 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  	var_dump($session->finished_at);
+
+  
+  
+}
+
+
+$ti="2022-03-07 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-07 23:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  	var_dump($session->finished_at);
+
+  
+  
+}
+
+
+$ti="2022-03-07 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-08 00:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  	var_dump($session->finished_at);
+
+  
+  
+}
+
+
+$ti="2022-03-07 22:38:26";
+$ti2="2022-03-08 22:38:00";
+$ti3="2022-03-08 00:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  
+	var_dump($session->started_at);
+  	var_dump($session->finished_at);
+
+  
+  
+}
+
+
+$ti="2022-03-07 22:38:26";
+$ti2="2022-03-07 22:38:00";
+$ti3="2022-03-08 00:38:00";
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at";
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;}
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+  else{
+  return false;
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at";
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at;
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	}
+  else{
+  return false;
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at";
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}?>
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at;
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	}
+  else{
+  return false;
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at;
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at;
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	}
+  else{
+  return false;
+	 var_dump($session->started_at);
+  	var_dump($session->finished_at);
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at;
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at;
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	}
+  else{
+	 var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	
+  return false;
+
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at;
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
+use Illuminate\Support\Carbon;
+
+
+
+$currentDateTime=date('Y-m-d H:i:s',strtotime( now()));
+
+$sessions=User::find(8)->gym->trainingSessions;
+foreach($sessions as $session){
+	
+  $start=$session->started_at;
+
+	$end=$session->finished_at;
+
+  if($currentDateTime>=$start && $currentDateTime<$end){
+  return true;
+  var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	}
+  else{
+	var_dump($currentDateTime);
+	 var_dump($session->started_at);
+  	var_dump($session->finished_at);
+	
+  return false;
+
+  }
+	
+
+  
+  
+}
+
+
+
+$start=$session->started_at;
+$end=$session->finished_at;
+
+  
+  if($ti>=$ti2 && $ti<$ti3){return true;}else{return false;}
