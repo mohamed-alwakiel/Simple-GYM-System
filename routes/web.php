@@ -183,12 +183,11 @@ Route::group(['middleware' => ['auth']], function () {
 Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-
+// --------------- Revenue
 Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], function () {
     Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+    Route::get('/revenue/{id}', [RevenueController::class, 'show'])->name('revenue.show');
     Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
-
-    Route::get('/getRevenue', [RevenueController::class, 'getRevenue'])->name('getRevenue')->middleware('auth');
 });
 
 // --------------- Edit Profile

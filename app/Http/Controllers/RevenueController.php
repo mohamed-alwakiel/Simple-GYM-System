@@ -33,9 +33,14 @@ class RevenueController extends Controller
             $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
         }
 
-        return view('revenue.datatable', data:[
+        return view('revenue.index', data:[
             'boughtPackages'=>$boughtPackages,
         ]);
+    }
+    
+    public function show(BuyPackage $boughtPackage)
+    {
+        return view('revenue.show', ['boughtPackage' => $boughtPackage]);
     }
     
     public function destroy($id)
