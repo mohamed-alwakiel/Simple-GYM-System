@@ -22,7 +22,7 @@
                         <th scope="col">Coach</th>
                         <th scope="col">started_at</th>
                         <th scope="col">finished_at </th>
-                        @role('gymManager | admin | cityManager')
+                        @role('gymManager|admin|cityManager')
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         @endrole
@@ -46,7 +46,7 @@
 
 
                         <!-- {{-- <td><a href="{{ route('sessions.show', ['id' => $session->id]) }}" class="btn btn-info">View</a></td> --}} -->
-                        @role('gymManager | admin | cityManager')
+                        @role('gymManager|admin|cityManager')
 
 
                         <td> @if ( count($session->attendances)==0)<a href="{{ route('sessions.edit', ['id' => $session->id]) }}" class="btn btn-md btn-success ">Edit</a></td>
