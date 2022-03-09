@@ -53,11 +53,24 @@
 
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="text" value="{{ $user->national_id }}" name="national_id" class="form-control">
+                <input type="text" name="national_id" class="form-control" value="{{ $user->national_id }}"
+                    onkeypress="return event.charCode > 47 && event.charCode < 58;" />
             </div>
             @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+
+            @role('admin|cityManager')
+            <div class="mb-3">
+                <label class="form-label">Gym</label>
+                <select name="gym_id" class="form-control">
+                    @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}" {{ $user->gym_id == $gym->id ? 'SELECTED' : '' }}>
+                            {{ $gym->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endrole
 
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success py-2 px-4">Update</button>

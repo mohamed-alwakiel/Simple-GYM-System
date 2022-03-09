@@ -41,6 +41,7 @@
 
                     <th class="d-flex justify-content-around py-2">
                         <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-primary">Update</a>
+
                         <a  data-toggle="modal" data-target="#DeleteProductModal"  city_id="{{$city -> id}}"  class="delete_btn btn btn-danger"> Delete </a>
 {{--                        <form action="{{ route('cities.destroy', $city->id) }}" method="post">--}}
 {{--                            @csrf--}}

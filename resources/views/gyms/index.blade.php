@@ -22,64 +22,69 @@
 
 
 
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Cover Image</th>
-                <th>Created At</th>
-                @role('admin')
-                <th>City Name</th>
-                <th>City Manager</th>
-                @endrole
-                <th>Controllers</th>
-            </tr>
-        </thead>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Cover Image</th>
+                                    <th>Created At</th>
+                                    @role('admin')
+                                        <th>City Name</th>
+                                        <th>City Manager</th>
+                                    @endrole
+                                    <th>Controllers</th>
+                                </tr>
+                            </thead>
 
 
-        <tbody>
-            @foreach ($gyms as $gym)
-                <tr class="offerRow{{$gym -> id}}  bg-dark">
-                    <th>{{ $gym->name }}</th>
+                            <tbody>
+                                @foreach ($gyms as $gym)
+                                    <tr class="offerRow{{ $gym->id }}  bg-dark">
+                                        <th>{{ $gym->name }}</th>
 
-                    <th>
-                        <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" />
-                    </th>
-                    <td>{{ \Carbon\Carbon::parse($gym->created_at)->format('Y-m-d') }} </td>
-                    @role('admin')
-                    <th>
-                        {{ $gym->city->name }}
+                                        <th>
+                                            <img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px"
+                                                height="50px" alt="not found" />
+                                        </th>
+                                        <td>{{ \Carbon\Carbon::parse($gym->created_at)->format('Y-m-d') }} </td>
 
-                    </th>
-                    <th>
-                        {{ $gym->city->user ? $gym->city->user->name : 'Not Found !' }}
-                    </th>
-                    @endrole
+                                        @role('admin')
+                                            <th>
+                                                {{ $gym->city ? $gym->city->name : 'Not Found ! '}}
 
-                    <th class="d-flex justify-content-around py-2">
-                        <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-primary">Update</a>
-                        <a  data-toggle="modal" data-target="#DeleteProductModal"  gym_id="{{$gym -> id}}"  class="delete_btn btn btn-danger"> Delete </a>
-{{--                        <form action="{{ route('gyms.destroy', $gym->id) }}" method="post">--}}
-{{--                            @csrf--}}
-{{--                            @method('delete')--}}
-{{--                            <button class="btn btn-danger" type="submit">--}}
-{{--                                Delete--}}
-{{--                            </button>--}}
-                        </form>
+                                            </th>
+                                            <th>
+                                                {{ $gym->city->user ? $gym->city->user->name : 'Not Found !' }}
+                                            </th>
+                                        @endrole
 
-                    </th>
+                                        <th class="d-flex justify-content-around py-2">
+                                            <a href="{{ route('gyms.edit', $gym->id) }}"
+                                                class="btn btn-primary">Update</a>
+                                            <a data-toggle="modal" data-target="#DeleteProductModal"
+                                                gym_id="{{ $gym->id }}" class="delete_btn btn btn-danger"> Delete </a>
+                                            {{-- <form action="{{ route('gyms.destroy', $gym->id) }}" method="post"> --}}
+                                            {{-- @csrf --}}
+                                            {{-- @method('delete') --}}
+                                            {{-- <button class="btn btn-danger" type="submit"> --}}
+                                            {{-- Delete --}}
+                                            {{-- </button> --}}
+                                            </form>
 
-                </tr>
-            @endforeach
+                                        </th>
 
-        </tbody>
-    </table>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Delete Product Modal -->
-    <div class="modal fade" id="DeleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="DeleteProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -107,23 +112,23 @@
 
 
     <script>
-        $(document).on('click', '#SubmitDeleteForm', function (e) {
+        $(document).on('click', '#SubmitDeleteForm', function(e) {
             e.preventDefault();
-            var gym_id =  $('.delete_btn').attr('gym_id');
+            var gym_id = $('.delete_btn').attr('gym_id');
             $.ajax({
                 type: 'delete',
-                url: "{{route('gyms.destroy')}}",
+                url: "{{ route('gyms.destroy') }}",
                 data: {
-                    '_token': "{{csrf_token()}}",
-                    'id' :gym_id
+                    '_token': "{{ csrf_token() }}",
+                    'id': gym_id
                 },
-                success: function (data) {
-                    if(data.status == true){
+                success: function(data) {
+                    if (data.status == true) {
                         $('#success_msg').show();
                     }
-                    $('.offerRow'+data.id).remove();
-                }, error: function (reject) {
-                }
+                    $('.offerRow' + data.id).remove();
+                },
+                error: function(reject) {}
             });
         });
     </script>

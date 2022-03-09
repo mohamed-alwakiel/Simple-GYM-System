@@ -63,21 +63,24 @@ class User extends Authenticatable implements MustVerifyEmail,BannableContract
 
     public function attendances()
     {
-
         return $this->hasMany(Attendance::class, 'user_id');
     }
+
     public function boughtPackages()
     {
         return $this->hasMany(User::class, 'user_id');
     }
 
+    // as a client
     public function city()
     {
-        return $this->belongsTo(City::class, 'id');
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
+    
+    // as a client
     public function gym()
     {
-        return $this->belongsTo(Gym::class, 'id');
+        return $this->belongsTo(Gym::class, 'gym_id', 'id');
     }
 
 

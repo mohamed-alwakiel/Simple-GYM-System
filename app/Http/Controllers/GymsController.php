@@ -22,11 +22,10 @@ class GymsController extends Controller
         if ($roleAdmin) {
             $gyms=Gym::all();
             return view('gyms.index', ['gyms' => $gyms]);
-        } elseif ($roleCityManager) {
+        }
+        elseif ($roleCityManager) {
             // if city manager
-
             $city_id = Auth::user()->city_id;
-
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gyms.index', ['gyms' => $gyms]);
         }
@@ -103,7 +102,7 @@ class GymsController extends Controller
         else :
             $imageName = 'gymMgr.png';
         endif;
-        
+
         if($roleAdmin) {
             $city_id =  $request->city_id;
         } elseif($roleCityManager) {

@@ -17,7 +17,7 @@ use App\Models\City; --}}
             {{-- manager name --}}
             <div class="mb-3">
                 <label class="form-label"> Client Name </label>
-                <input type="text" name="name" class="form-control" value="{{old('name','')}}">
+                <input type="text" name="name" class="form-control" value="{{ old('name', '') }}">
             </div>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -26,7 +26,7 @@ use App\Models\City; --}}
             {{-- email --}}
             <div class="mb-3">
                 <label class="form-label"> Email </label>
-                <input type="email" name="email" class="form-control" value="{{old('email','')}}">
+                <input type="email" name="email" class="form-control" value="{{ old('email', '') }}">
             </div>
             @error('email')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -43,7 +43,8 @@ use App\Models\City; --}}
                 </div>
 
                 <input name="date_of_birth" type="text" class="form-control" data-inputmask-alias="datetime"
-                     data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="Date of Birth" value="{{old('date_of_birth','')}}">
+                    data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="Date of Birth"
+                    value="{{ old('date_of_birth', '') }}">
 
             </div>
             @error('date_of_birth')
@@ -63,7 +64,7 @@ use App\Models\City; --}}
             {{-- password --}}
             <div class="mb-3">
                 <label class="form-label"> Password </label>
-                <input type="password" name="passwd" class="form-control" value="{{old('passwd','')}}">
+                <input type="password" name="passwd" class="form-control" value="{{ old('passwd', '') }}">
             </div>
             @error('passwd')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -71,7 +72,8 @@ use App\Models\City; --}}
 
             <div class="mb-3">
                 <label class="form-label">Confirm Password </label>
-                <input type="password" name="confirmPassword" class="form-control" value="{{old('confirmPassword','')}}">
+                <input type="password" name="confirmPassword" class="form-control"
+                    value="{{ old('confirmPassword', '') }}">
             </div>
             @error('confirmPassword')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -80,51 +82,71 @@ use App\Models\City; --}}
             {{-- national id --}}
             <div class="mb-3">
                 <label class="form-label"> National ID </label>
-                <input type="text" name="national_id" class="form-control" value="{{old('national_id','')}}">
+                <input type="text" name="national_id" class="form-control"
+                    onkeypress="return event.charCode > 47 && event.charCode < 58;"
+                    value="{{ old('national_id', '') }}" />
             </div>
             @error('national_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text bg-white" id="inputGroupFileAddon01">Profile Iamge</span>
+            {{-- select city and gym --}}
+            @role('admin')
+                {{-- if role Admsin --}}
+                <div class="form-group">
+                    <label for="cityName">Select City</label>
+                    <select name="city_id" class="form-control" id='cityName'>
+                        <option value="0" disable="true" selected="true">=== Select City ===</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}"> {{ $city->name }} </option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="custom-file">
-                    <input type="file" name="profileImg" class="custom-file-input" id="inputGroupFile01"
-                        aria-describedby="inputGroupFileAddon01" value="{{old('profileImg','')}}">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose iamge</label>
+                @error('city_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
+                <div class="form-group">
+                    <label for="gymName">Select Gym</label>
+                    <select name="gym_id" class="form-control" id='gymName'>
+
+                    </select>
+                </div>
+                @error('gym_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            @endrole
+
+            {{-- if role city manager --}}
+            @role('cityManager')
+                <div class="form-group">
+                    <label for="gymName">Select Gym</label>
+                    <select name="gym_id" class="form-control">
+                        <option value="0" disable="true" selected="true">=== Select Gym ===</option>
+                        @foreach ($gyms as $gym)
+                            <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('gym_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            @endrole
+
+            {{-- profile img --}}
+            <div class="">
+                <div class="w-100">
+                    <label for="">Profile Image</label>
+                    <input type="file" class="form-control-file w-100 bg-dark " name="profileImg"
+                        aria-describedby="fileHelpId" value="{{ old('profileImg', '') }}">
+                    <small id="fileHelpId" class="form-text text-muted">only : png or jpg</small>
                 </div>
             </div>
-            @error('profileImg')
+            @error('img')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-
-            <div class="form-group">
-                <label for="cityName">Select City</label>
-                <select name="city_id" class="form-control" id='cityName'>
-                    <option value="0" disable="true" selected="true">=== Select City ===</option>
-                    @foreach ($cities as $city)
-                    <option value="{{ $city->id }}"> {{ $city->name }} </option>
-                    @endforeach
-                </select>
-            </div>
-            @error('city_id')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-
-            <div class="form-group">
-                <label for="gymName">Select Gym</label>
-                <select name="gym_id" class="form-control" id='gymName'>
-
-                </select>
-            </div>
-            @error('gym_id')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
 
             <div class="d-flex justify-content-end">

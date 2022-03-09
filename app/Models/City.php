@@ -19,7 +19,14 @@ class City extends Model
         return $this->hasMany(Gym::class, 'city_id', 'id');
     }
 
-    public function user(){
-        return $this->hasOne(CityManager::class);
+    // as a manager
+    public function manager(){
+        return $this->hasOne(CityManager::class,);
     }
+
+    // as a client
+    public function user(){
+        return $this->hasMany(CityManager::class, 'city_id');
+    }
+
 }
