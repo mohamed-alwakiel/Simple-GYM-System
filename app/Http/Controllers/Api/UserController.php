@@ -29,7 +29,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        // $users = User::where('role_id', 4)->get();
           $users = User::get();
           $users = User::whereDate('last_login' ,'<' ,Carbon::now()->subDays(30)->toDateTimeString())->get();
         return   UserResource::collection($users);
@@ -76,6 +75,8 @@ class UserController extends Controller
             ], 201);
         }
     }
+    
+
     public function attend(Session $session,Request $request){
         $user=Auth::user();
         $userData=DB::table('bought_packages')->where('user_id' ,$user->id)->first();
@@ -86,9 +87,9 @@ class UserController extends Controller
                 foreach ($start_date as $day) {
                     $date2=date('Y-m-d', strtotime($day->started_at));
                     if (Carbon::today()->eq($date2)) {
+                        $sessionID=$day->id;
                         if (isset($sessionID)) {
                             Attendee::where('user_id', $user->id)->decrement('remaining_sessions');
-                            $sessionID=$day->id;
                             SessionAttendence::create([
                             "training_session_id" => $sessionID ,
                             "user_id" => Auth::user()->id,

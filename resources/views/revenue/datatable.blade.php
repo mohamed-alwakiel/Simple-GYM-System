@@ -32,13 +32,13 @@
                             </thead>
                             <tbody>
                                 @foreach ($boughtPackages as $boughtPackage)
-                                <tr class="bg-dark">
+                                <tr>
                                     <th>{{ $boughtPackage->user->name }}</th>
                                     <th>{{ $boughtPackage->user->email }}</th>
                                     <th>{{ $boughtPackage->name }}</th>
                                     <th>{{ $boughtPackage->price }}</th>
                                     @role('admin|cityManager')
-                                    <th>{{ $boughtPackage->gym->name }}</th>
+                                    {{-- <th>{{ $boughtPackage->gym->name }}</th> --}}
                                     @endrole
                                     @role('admin')
                                     <th>{{ $boughtPackage->city->name }}</th>

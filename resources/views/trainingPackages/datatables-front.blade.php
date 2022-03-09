@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ $package->id }}</td>
                         <td>{{ $package->name }}</td>
-                        <td>{{ $package->price }}</td>
+                        <td>{{ $package->price }} $</td>
                         <td>{{ $package->number_of_sessions }}</td>
                         <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
                         <td class="d-flex justify-content-around py-2">

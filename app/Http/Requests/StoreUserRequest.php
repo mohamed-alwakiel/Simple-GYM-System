@@ -32,8 +32,8 @@ class StoreUserRequest extends FormRequest
             'confirmPassword' => 'required|same:passwd',
             'profileImg' => 'image|mimes:jpg,jpeg',
             'date_of_birth' => 'required|date',
-            'gym_id' =>'required|exists:gyms,id',
-            'city_id' =>'required|exists:cities,id',
+            'gym_id' =>'exists:gyms,id',
+            'city_id' =>'exists:cities,id',
         ];
     }
 

@@ -24,8 +24,9 @@ class AssignAdminRoleSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => '$2y$10$uQ/WIjMbfSOsAjlg0xj1E.MxED2Lef0S50uXuKEsPRTYLszqczdbG',
             'date_of_birth' => '1990-01-01',
-            'role_type' => 'admin',
-            'role_id' => 1,
+            'profile_img' => 'admin.png',
+            'email_verified_at' => now(),
+
         ]);
 
         // Assign Role --> Admin

@@ -18,8 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -28,10 +27,35 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/5.0.7/sweetalert2.min.css" rel="stylesheet">
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+    <style>
+        body {
+            background-image: url("{{ asset('dist/img/bg.png') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_processing,
+        .dataTables_wrapper .dataTables_paginate {
+            color: white;
+        }
+
+        table.dataTable tbody td {
+            position: initial;
+            vertical-align: middle;
+        }
+
+        table.dataTable tbody tr {
+            background: rgb(52, 58, 64, 0);
+        }
+    </style>
 
     @yield("style")
     <script nonce="2aa84745-1cac-4d38-821f-5aae87ac1574">
@@ -65,13 +89,18 @@
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="150" width="150">
+        </div>
+
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-dark">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
@@ -98,8 +127,7 @@
                     <div class="navbar-search-block">
                         <form class="form-inline">
                             <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                                 <div class="input-group-append">
                                     <button class="btn btn-navbar" type="submit">
                                         <i class="fas fa-search"></i>
@@ -123,13 +151,11 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="{{ asset('dist/img/user1-128x128.jpg') }}" alt="User Avatar"
-                                    class="img-size-50 mr-3 img-circle">
+                                <img src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i
-                                                class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">Call me whenever you can...</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -141,13 +167,11 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
+                                <img src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
-                                        <span class="float-right text-sm text-muted"><i
-                                                class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">I got your message bro</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -159,13 +183,11 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
+                                <img src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">The subject goes here</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -218,15 +240,12 @@
         </nav>
         <!-- /.navbar -->
 
-
-
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ route('dashboard') }}" class="brand-link">
-                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">GYM</span>
+                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle">
+                <span class="brand-text">GYM CLUB</span>
             </a>
 
             <!-- Sidebar -->
@@ -234,8 +253,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        <img src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block font-weight-bold">{{ Auth::user()->name }}</a>
@@ -245,8 +263,7 @@
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -257,57 +274,56 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- <li class="nav-item /*menu-open"> -->
                         @role('admin')
-                            <li class="nav-item">
-                                <a href="{{ route('cityManagers.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-user-tie"></i>
-                                    <p>
-                                        City Managers
-                                        <!-- <i class="fas fa-angle-left right"></i> -->
-                                        <!-- <span class="badge badge-info right">6</span> -->
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="{{ route('cityManagers.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
+                                <p>
+                                    City Managers
+                                    <!-- <i class="fas fa-angle-left right"></i> -->
+                                    <!-- <span class="badge badge-info right">6</span> -->
+                                </p>
+                            </a>
+                        </li>
                         @endrole
 
                         @hasanyrole('cityManager|admin')
-                            <li class="nav-item">
-                                <!-- <a href="#" class="nav-link active"> -->
-                                <a href="{{ route('gymManagers.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-user-tie"></i>
-                                    <p>
-                                        Gym Managers
-                                        <!-- <i class="right fas fa-angle-left"></i> -->
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <!-- <a href="#" class="nav-link active"> -->
+                            <a href="{{ route('gymManagers.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
+                                <p>
+                                    Gym Managers
+                                    <!-- <i class="right fas fa-angle-left"></i> -->
+                                </p>
+                            </a>
+                        </li>
                         @endhasanyrole
 
                         @role('admin')
-                            <li class="nav-item">
-                                <a href="{{ route('cities.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-city"></i>
-                                    <p>
-                                        Cities
-                                        <!-- <i class="fas fa-angle-left right"></i> -->
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="{{ route('cities.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-city"></i>
+                                <p>
+                                    Cities
+                                    <!-- <i class="fas fa-angle-left right"></i> -->
+                                </p>
+                            </a>
+                        </li>
                         @endrole
 
                         @hasanyrole('cityManager|admin')
-                            <li class="nav-item">
-                                <a href="{{ route('gyms.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-dumbbell"></i>
-                                    <p>
-                                        Gyms
-                                        <!-- <i class="fas fa-angle-left right"></i> -->
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="{{ route('gyms.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-dumbbell"></i>
+                                <p>
+                                    Gyms
+                                    <!-- <i class="fas fa-angle-left right"></i> -->
+                                </p>
+                            </a>
+                        </li>
                         @endhasanyrole
 
                         <li class="nav-item">
@@ -371,14 +387,14 @@
                         </li>
 
                         @hasanyrole('gymManager|cityManager|admin')
-                            <li class="nav-item mb-3">
-                                <a href="{{ route('revenue.index') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-money-bill"></i>
-                                    <p>
-                                        Revenue
-                                    </p>
-                                </a>
-                            </li>
+                        <li class="nav-item mb-3">
+                            <a href="{{ route('revenue.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-money-bill"></i>
+                                <p>
+                                    Revenue
+                                </p>
+                            </a>
+                        </li>
                         @endhasanyrole
                         <!-- ---------------------------------------- -->
 
@@ -389,7 +405,8 @@
             <!-- /.sidebar -->
         </aside>
 
-        <div class="content-wrapper py-3">
+        <!-- Main Content -->
+        <div id="bg" class="content-wrapper py-3">
             @yield('content')
         </div>
 
@@ -421,12 +438,9 @@
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- DataTables -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
 

@@ -24,14 +24,12 @@ Buy Package
             </div>
         </div>
         <div class="card-body">
-            <p class="card-title mb-3"><b>Name:- </b> {{ $package->name }}</p>
+            <p class="card-title mb-3"><b>Name:- </b>  {{$package->package ? $package->package->name : 'not found'}}</p>
             <p class="card-text"><b>Price:- </b> {{$package->price}}</p>
             <p class="card-text"><b>Number Of Sessions:- </b> {{$package->number_of_sessions}}</p>
             <p class="card-text"><b>Created at:- </b> {{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</p>
             <p class="card-title mb-3"><b>Trainee :- </b> {{$package->user ? $package->user->name : 'not found'}}</p>
             <p class="card-text"><b>Gym :- </b>{{$package->gym ? $package->gym->name : 'not found'}}</p>
-            <p class="card-text"><b>package:- </b> {{$package->package ? $package->package->name : 'not found'}}</p>
-       
        
         </div>
     </div>

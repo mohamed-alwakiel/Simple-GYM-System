@@ -40,3 +40,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('showAttendanceHistory',action: [UserController::class ,'showAttendanceHistory']);
     Route::put('users', action: [UserController::class , 'update']);
 });
+ 

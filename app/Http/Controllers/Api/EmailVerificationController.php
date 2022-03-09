@@ -20,7 +20,7 @@ class EmailVerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
 
-            return response(['message'=>'Already verified , check your mail for greeting message']);
+            return response(['message'=>'Already verified ']);
         }
          $request->user()->sendEmailVerificationNotification();
 
@@ -46,10 +46,13 @@ class EmailVerificationController extends Controller
             $token = $user->createToken('GymProjectToken')->plainTextToken;
             $user->notify(new WelcomeEmailNotification($user));
             return response()->json([
-                $token,
-            ] , 201);
+                'token'=> $token,
+                'message'=> 'check your mail for greeting message'
+               ] , 201  );
+          
         }
 
+        ;
     }
 
 
