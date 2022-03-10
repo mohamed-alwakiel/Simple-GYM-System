@@ -16,6 +16,7 @@
                 </form>
                 @endrole
             </div>
+            @endrole
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Package Name : <span class="text-light font-weight-bold">{{$package->package ? $package->package->name : 'not found'}}</span> </p>
@@ -27,7 +28,6 @@
         </div>
     </div>
 </div>
-
 @stop
 
 @section('script')

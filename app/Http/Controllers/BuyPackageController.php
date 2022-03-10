@@ -21,11 +21,25 @@ class BuyPackageController extends Controller
     {
         Paginator::useBootstrapFive();
         $boughtPackageCollection = BuyPackage::paginate(10);
-        return view('buyPackage.index', ['boughtPackageCollection' => $boughtPackageCollection]);
+        $isAdmin = auth()->user()->hasRole('admin');
+        $isCityManager = auth()->user()->hasRole('cityManager');
+        $isGymManager = auth()->user()->hasRole('gymManager');
+
+        if ($isAdmin) {
+            $boughtPackageCollection = BuyPackage::all();
+        } elseif ($isCityManager) {
+            $boughtPackageCollection = BuyPackage::where('city_id', auth()->user()->city_id)->get();
+        } elseif ($isGymManager) {
+            $boughtPackageCollection = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
+        }else{
+            $boughtPackageCollection = BuyPackage::where('user_id', auth()->user()->id)->get();
+        }
+        return view('buyPackage.index',['boughtPackageCollection' => $boughtPackageCollection]);
     }
 
     public function show(BuyPackage $Package)
     {
+
         return view('buyPackage.show', ['package' => $Package]);
     }
 
@@ -86,11 +100,12 @@ class BuyPackageController extends Controller
             'number_of_sessions' => $package->number_of_sessions,
             'remaining_sessions' => $package->number_of_sessions,
             'package_id' => $paymentData->package_id,
+            'name' =>  $paymentData->name,
             'gym_id' => $paymentData->gym_id,
             'user_id' => $paymentData->user_id,
             'city_id' => $paymentData->city_id,
         ]);
-        DB::table('test')->delete();
+        DB::table('stripe')->delete();
 
         return to_route('buyPackage.index');
     }

@@ -32,6 +32,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+    
+
     <style>
         body {
             background-image: url("{{ asset('dist/img/bg.png') }}");
@@ -377,7 +379,7 @@
                             </a>
                         </li>
                         
-                        @hasanyrole('gymManager|cityManager|admin')
+                        @hasanyrole('gymManager|cityManager|admin|client')
                         <li class="nav-item">
                             <a href="{{ route('buyPackage.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-money-check"></i>

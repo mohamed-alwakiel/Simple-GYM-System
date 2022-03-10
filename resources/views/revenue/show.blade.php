@@ -21,7 +21,7 @@
             <p class="card-text text-secondary">Client Name : <span class="text-light font-weight-bold">{{$boughtPackage->user->name}}</span> </p>
             <p class="card-text text-secondary">Client Email : <span class="text-light font-weight-bold">{{$boughtPackage->user->email}}</span> </p>
             <p class="card-text text-secondary">Package Name : <span class="text-light font-weight-bold">{{$boughtPackage->name}}</span> </p>
-            <p class="card-text text-secondary">Paid Price : <span class="text-light font-weight-bold">{{$boughtPackage->price}}</span> </p>
+            <p class="card-text text-secondary">Paid Price : <span class="text-light font-weight-bold">{{$boughtPackage->price / 100}} $</span> </p>
             <p class="card-text text-secondary">Number Of Sessions : <span class="text-light font-weight-bold">{{$boughtPackage->number_of_sessions}}</span> </p>
             <p class="card-text text-secondary">Gym : <span class="text-light font-weight-bold">{{$boughtPackage->gym->name}}</span> </p>
             <p class="card-text text-secondary">City : <span class="text-light font-weight-bold">{{$boughtPackage->city->name}}</span> </p>

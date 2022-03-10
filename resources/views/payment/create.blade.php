@@ -80,8 +80,8 @@
 </div>
 @stop
 
-@role('admin')
 @section('script')
+@role('admin')
 <script type="text/javascript">
     $('#cityName').on('change', function(e) {
         var city_id = e.target.value;
@@ -97,5 +97,22 @@
         });
     });
 </script>
-@endsection
 @endrole
+
+@error('message')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(window).on('load', function() {
+            swal({
+                title: "You can't buy this package",
+                text: "Complete your form Data",
+                icon: "error",
+                type: "error",
+                confirmButtonColor: '#8CD4F5',
+                confirmButtonText: 'Ok',
+            });
+        });
+    });
+</script>
+@enderror
+@endsection
