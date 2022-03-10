@@ -22,15 +22,15 @@ class BuyPackageFactory extends Factory
      */
     public function definition()
     {
-        $userID = User::inRandomOrder()->where('role_id', 4)->first()->id;
+        $userID = User::inRandomOrder()->role('client')->first()->id;
         $gymID = User::where('id', $userID)->pluck('gym_id')[0];
         $cityID = User::where('id', $userID)->pluck('city_id')[0];
 
         return [
             'name' => $this->faker->name,
-            'price' => $this->faker->numerify(),
-            'number_of_sessions' => $this->faker->numerify(),
-            'remaining_sessions' => $this->faker->numerify(),       // if > num of session
+            'price' => $this->faker->numerify('###'),
+            'number_of_sessions' => 50,
+            'remaining_sessions' => 40,       // if > num of session
             'package_id' => Package::inRandomOrder()->first()->id,
             'user_id' => $userID,
             'gym_id' => $gymID,

@@ -28,12 +28,16 @@ class UserFactory extends Factory
         $gymID = Gym::inRandomOrder()->first()->id;
         $cityID = Gym::where('id', $gymID)->pluck('city_id')[0];
 
+        $gender = $this->faker->randomElement(['male', 'female']);
+
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name($gender),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
+            'date_of_birth' => $this->faker->dateTimeBetween('1990-01-01', '2004-12-31')->format('Y/m/d'),
+            'gender' => $gender,
             'profile_img' => 'Client.Png',
             'gym_id' => $gymID,
             'city_id' => $cityID,

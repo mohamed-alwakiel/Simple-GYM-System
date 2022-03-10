@@ -228,5 +228,5 @@ class UserController extends Controller
             return view('profile.editPassword', ['msg' => $msg]);
         }
     }
-    
+
 }

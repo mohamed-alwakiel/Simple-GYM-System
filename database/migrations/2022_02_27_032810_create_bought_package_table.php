@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('number_of_sessions');
+            $table->integer('remaining_sessions');
             $table->timestamps();
         });
     }

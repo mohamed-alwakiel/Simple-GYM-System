@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('profile_img')->nullable();
             $table->bigInteger('national_id')->nullable();
 
-            $table->morphs('role');     // for permissions
             $table->timestamp('banned_at')->nullable(); // for ban user
 
             $table->dateTime('last_login')->nullable();
