@@ -35,8 +35,6 @@ class UserFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'Client.Png',
-            'role_id' => 4,
-            'role_type' => 'Client',
             'gym_id' => $gymID,
             'city_id' => $cityID,
         ];

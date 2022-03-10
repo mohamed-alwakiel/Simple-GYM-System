@@ -22,8 +22,6 @@ class GymManager extends model implements BannableContract
         'password',
         'national_id',
         'profile_img',
-        'role_id',
-        'role_type',
         'gym_id',
         'city_id',
         'email_verified_at'

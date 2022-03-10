@@ -85,8 +85,6 @@ class CityManagerController extends Controller
             'national_id' => $requestData['national_id'],
 
             'city_id' => $request['city_id'],
-            'role_type' => 'cityManager',
-            'role_id' => 2,
             'email_verified_at' => Carbon::now()->toDateTimeString(),
 
         ]);

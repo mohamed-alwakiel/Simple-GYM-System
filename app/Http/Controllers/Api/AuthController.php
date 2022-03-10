@@ -34,8 +34,6 @@ class AuthController extends Controller
             'date_of_birth' =>$data['date_of_birth'],
             'gender' => $data['gender'],
             'national_id'=> $data['national_id'],
-            'role_type' => 'client',
-            'role_id' => 4,
         ]);
 
         //sending mail to registered user

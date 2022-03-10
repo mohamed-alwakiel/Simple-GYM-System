@@ -36,8 +36,6 @@ class GymManagerFactory extends Factory
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
             'profile_img' => 'GymMgr.Png',
-            'role_id' => 3,
-            'role_type' => 'gymManager',
             'gym_id' => $gymID,
             'city_id' => $cityID,
         ];
