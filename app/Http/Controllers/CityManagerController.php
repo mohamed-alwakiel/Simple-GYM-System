@@ -25,9 +25,9 @@ class CityManagerController extends Controller
     {
         $cityManagers = User::role('cityManager')->get();
 
-       return view('cityManagers.index', [
-           'cityManagers' => $cityManagers,
-       ]);
+        return view('cityManagers.index', [
+            'cityManagers' => $cityManagers,
+        ]);
     }
 
     /**
@@ -44,6 +44,11 @@ class CityManagerController extends Controller
         ]);
     }
 
+    public function show($managerID)
+    {
+        $manager = User::findOrFail($managerID);
+        return view('cityManagers.show', ['manager' => $manager]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +60,7 @@ class CityManagerController extends Controller
     // public function store(StoreGymManagerRequest $request)
     public function store(Request $request)
     {
-//        dd($request);
+        //        dd($request);
         //fetch request data
         $requestData = request()->all();
 
@@ -71,8 +76,6 @@ class CityManagerController extends Controller
         endif;
 
 
-
-        // store new data into data base
         $newCityManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
@@ -84,18 +87,16 @@ class CityManagerController extends Controller
             'city_id' => $request['city_id'],
             'role_type' => 'cityManager',
             'role_id' => 2,
-            'email_verified_at'=> Carbon::now()->toDateTimeString(),
+            'email_verified_at' => Carbon::now()->toDateTimeString(),
 
         ]);
-        $newCityManager->assignRole('cityManager')->givePermissionTo(['create gym','create gym manager','create coach','create session',
-
-        'update gym manager','update gym','update coach','update session',
-
-        'delete gym manager','delete gym','delete coach','delete session',
-
-        'read gym manager','read gym','read coach','read package',
-
-        'read session','assign coach']);
+        $newCityManager->assignRole('cityManager')->givePermissionTo([
+            'create gym', 'create gym manager', 'create coach', 'create session',
+            'update gym manager', 'update gym', 'update coach', 'update session',
+            'delete gym manager', 'delete gym', 'delete coach', 'delete session',
+            'read gym manager', 'read gym', 'read coach', 'read package',
+            'read session', 'assign coach'
+        ]);
 
         return redirect()->route('cityManagers.index');
     }
@@ -141,7 +142,6 @@ class CityManagerController extends Controller
             'city_id' => $requestData['city_id']
         ]);
 
-        //redirection to posts.index
         return redirect()->route('cityManagers.index');
     }
 
@@ -152,10 +152,9 @@ class CityManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cityManager)
+    public function destroy($cityManagerID)
     {
-        CityManager::find($cityManager)->delete();
-        return response()->json(['success' => 'Record deleted successfully']);
-        // return redirect()->route('cityManagers.index');
+        User::findOrFail($cityManagerID)->delete();
+        return redirect()->route('cityManagers.index');
     }
 }

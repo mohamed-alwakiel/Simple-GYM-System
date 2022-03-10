@@ -19,40 +19,6 @@ class CitiesController extends Controller
         $cities = City::all();
         return view('cities.index', compact('cities'));
     }
-    public function getCity()
-    {
-        if (request()->ajax()) {
-            $data = City::all();
-            return DataTables::of($data)
-                ->addIndexColumn()
-
-
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-
-                ->addColumn('action', function ($row) {
-
-
-                    $edit = '<a href="' . route('cities.edit', $row->id) . '" class="btn btn-primary">Update</a>';
-
-
-                    $delete = '
-                     <form action="' . route('cities.destroy', $row->id) . '" method="post">
-
-                            <button class="btn btn-danger" type="submit">
-                                Delete
-                            </button>
-                        </form>
-                    ';
-
-                    return $edit . ' ' . $delete;
-                })
-
-                ->make(true);
-        }
-        return view('cities.datatable');
-    }
 
     public function create()
     {

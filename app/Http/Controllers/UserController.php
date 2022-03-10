@@ -3,38 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gym;
-use App\Models\GymManager;
 use App\Models\User;
 use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Carbon\Carbon;
-use Illuminate\Contracts\Validation\Rule;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use Illuminate\Validation\Rules\Exists;
-
-// use Illuminate\Support\Facades\Request;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
 
         if ($roleAdmin) {
@@ -52,61 +42,6 @@ class UserController extends Controller
         ]);
     }
 
-
-    public function getUsers()
-    {
-        if (request()->ajax()) {
-
-            $users = User::where('role_id', 4)->get();
-
-
-
-            return DataTables::of($users)
-                ->addIndexColumn()
-
-
-                ->addColumn('name', function ($row) {
-                    return $row->name;
-                })
-                ->addColumn('email', function ($row) {
-                    return $row->email;
-                })
-                ->addColumn('national_id', function ($row) {
-                    return $row->national_id;
-                })
-
-
-
-                ->addColumn('action', function ($row) {
-
-
-                    $edit = '<a href="' . route('users.edit', $row->id) . '" class="btn btn-primary">Update</a>';
-
-
-                    $delete = '
-                     <form action="' . route('users.destroy', $row->id) . '" method="post">
-
-                            <button class="btn btn-danger" type="submit">
-                                Delete
-                            </button>
-                        </form>
-                    ';
-
-                    return $edit . ' ' . $delete;
-                })
-
-                ->make(true);
-        }
-        return view('users.datatable');
-        //        return datatables()->of(Gym::with('city'))->toJson();
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roleAdmin = auth()->user()->hasRole('admin');
@@ -138,15 +73,8 @@ class UserController extends Controller
         return response()->json($gyms);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreUserRequest $request)
     {
-        //fetch request data
         $img = $request->profileImg;
         $request = request()->all();
 
@@ -193,14 +121,6 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit($userId)
     {
         $user = User::find($userId);
@@ -212,16 +132,8 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateUserRequest $request, $id)
     {
-        // handle creator
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
@@ -244,20 +156,12 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($userId)
     {
         User::findOrFail($userId)->delete();
         return redirect()->route('users.index');
     }
 
-
-    // update profile data
     public function editProfile()
     {
         return view('profile.editProfile');
@@ -273,7 +177,6 @@ class UserController extends Controller
             'national_id' => ['required', 'min:14', 'max:14', 'unique:users,national_id,' . $userID],
         ]);
 
-        // deal with image
         $oldimg = $request->oldimg;
 
         if ($request->newimg) {
@@ -300,7 +203,6 @@ class UserController extends Controller
         return redirect()->route('dashboard');
     }
 
-    // update password
     public function editPassword()
     {
         $msg = 0;

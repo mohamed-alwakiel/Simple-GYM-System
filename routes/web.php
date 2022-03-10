@@ -18,8 +18,6 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TrainingSessionController;
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,13 +31,13 @@ use App\Http\Controllers\TrainingSessionController;
 
 Route::GET('/', [HomeController::class, 'index'])->name('dashboard');
 
+
 // --------------- Auth -> Login & Register
 Auth::routes();
 Route::GET('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-// --------------- CITY MANAGERS
-// Route::group(['middleware' => 'auth', 'forbid-banned-user','role:admin|citymanager'], function () {
 
+// --------------- CITY MANAGERS
 Route::middleware(['auth'])->group(function () {
     Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
     Route::GET('/cityManagers/create', [CityManagerController::class, 'create'])->name('cityManagers.create');
@@ -49,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/cityManagers/{cityManager}', [CityManagerController::class, 'update'])->name('cityManagers.update');
     Route::DELETE('/cityManagers/{cityManager}', [CityManagerController::class, 'destroy'])->name('cityManagers.destroy');
 });
+
 
 // --------------- GYM MANAGERS
 Route::middleware(['auth'])->group(function () {
@@ -117,8 +116,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::DELETE('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 });
 
-// --------------- Sessions
 
+// --------------- Sessions
 Route::middleware(['auth'])->group(function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
     Route::GET('/sessions/paginate', [TrainingSessionController::class, 'paginateFast'])->name('sessions.paginate');
@@ -129,7 +128,6 @@ Route::middleware(['auth'])->group(function () {
     Route::DELETE('/sessions/{id}', [TrainingSessionController::class, 'destroy'])->name('sessions.destroy');
     Route::GET('/sessionsTest', [TrainingSessionController::class, 'sessionDataTables'])->name('sessions.sessionsTest');
 });
-
 
 
 // --------------- Coaches
@@ -147,7 +145,6 @@ Route::middleware(['auth'])->group(function () {
 
 // --------------- Attendance
 Route::GET('/attendance', [AttendanceController::class, 'index'])->name('attendance.index')->middleware('auth');
-
 
 
 // --------------- Buy Package
@@ -179,6 +176,7 @@ Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], func
     Route::GET('/revenue/{id}', [RevenueController::class, 'show'])->name('revenue.show');
     Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
 });
+
 
 // --------------- Edit Profile
 Route::group(['middleware' => ['auth']], function () {
