@@ -118,6 +118,9 @@ class TrainingSessionController extends Controller
 
 
         return redirect()->route('sessions.index');
+        // return response()->json([
+        //     'message' => 'Data deleted successfully!'
+        //   ]);
     }
 
 

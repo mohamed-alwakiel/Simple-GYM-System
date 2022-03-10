@@ -4,6 +4,7 @@
 
 
 @section('content')
+
 <div class="d-flex justify-content-center mb-3">
     <a href="{{ route('sessions.create') }}" class="btn btn-success ">Create session</a>
 </div>
@@ -74,9 +75,16 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script>
+     $(function () {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
     $(document).ready(function() {
         $('#table').DataTable();
     });
+    
 
     $('.show-alert-delete-box').click(function(event){
         var form =  $(this).closest("form");
@@ -93,9 +101,11 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((willDelete) => {
             if (willDelete) {
+
                 form.submit();
             }
         });
     });
+
 </script>
 @endsection

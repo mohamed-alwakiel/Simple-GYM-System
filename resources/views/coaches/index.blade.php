@@ -5,10 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="w-50 mx-auto pt-3 d-flex justify-content-end">
+
+<div class="card ">
+    <h5 class="card-header">Coaches</h5>
+
+
+    <div class="w-50  pt-3 d-flex card-header">
         <a href="{{ route('coaches.create') }}" class="btn btn-success my-3">Add New Coach</a>
     </div>
-
+    <div class="card-body">
     <table id="table" class="table text-center ">
 
 
@@ -51,6 +56,8 @@
             @endforeach
         </tbody>
     </table>
+</div>
+</div>
 @endsection
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
