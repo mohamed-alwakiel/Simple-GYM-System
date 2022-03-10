@@ -89,11 +89,12 @@ class BuyPackageController extends Controller
             'number_of_sessions' => $package->number_of_sessions,
             'remaining_sessions'=>$package->number_of_sessions,
             'package_id' => $paymentData->package_id,
+            'name' =>  $paymentData->name,
             'gym_id' => $paymentData->gym_id,
             'user_id' => $paymentData->user_id,
             'city_id'=> $paymentData->city_id,
         ]);
-        DB::table('test')->delete();
+        DB::table('stripe')->delete();
 
         return to_route('buyPackage.index');
     }

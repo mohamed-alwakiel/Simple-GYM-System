@@ -183,7 +183,8 @@ return [
         yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
-
+  
+    
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
@@ -194,10 +195,12 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
+ 
+   
     'aliases' => Facade::defaultAliases()->merge([
         // ...,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
     ])->toArray(),
 
 ];

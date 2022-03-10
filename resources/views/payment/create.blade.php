@@ -85,8 +85,10 @@
     </div>
     <!-- /.card -->
 
+     @endsection
 
-    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+     @section('script')
+     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
     @role('admin')
     <script>
         $(document).ready(function() {
@@ -119,4 +121,28 @@
         });
     </script>
      @endrole
-@endsection
+     
+@error('message')
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(window).on('load', function() {
+
+    swal({
+            title: "You can't buy this package",
+            text:"Complete your form Data",
+            icon: "error",
+            type: "error",
+            confirmButtonColor: '#8CD4F5',
+            confirmButtonText: 'Ok',
+
+        });
+
+});
+});
+</script>
+@enderror
+@stop
+
+
+

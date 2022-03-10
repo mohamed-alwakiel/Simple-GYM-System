@@ -1,108 +1,101 @@
 @extends('layouts.master')
 
 @section('title')
-Training Packages
+    Training Packages
 @endsection
 
-@section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="container-fluid">
 
-            @error('msg')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    @role('admin')
-    <div class="d-flex justify-content-center mb-3">
-        <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
-    </div>
-    @endrole
-    <div class="col-md-12 px-4">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">All Packages</h3>
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="container-fluid">
+        
+        @role('admin')
+            <div class="d-flex justify-content-center mb-3">
+                <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
             </div>
-            <div class="card-body">
-                <table id="table" class="table text-center ">
-                    <thead>
-                        <tr>
-                            <th class="col-2">name</th>
-                            <th class="col-2">price</th>
-                            <th class="col-2">Number Of Sessions</th>
-                            <th class="col-2">Created At</th>
-                            <th class="col-2">Actions</th>
-                        </tr>
-                    </thead>
-                    @foreach ($packageCollection as $package)
-                    <tr     >
-                        <td>{{ $package->name }}</td>
-                        <td>{{ $package->price /100 }} $</td>
-                        <td>{{ $package->number_of_sessions }}</td>
-                        <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
-                        <td class="d-flex justify-content-around py-4">
-                            <!-- Show Button -->
-                            <a href="{{ route('trainingPackages.show', ['package' => $package->id]) }}" class="btn btn-md btn-info"><i class="fas fa-eye"></i></a>
-                            
-                            <!-- Edit & Delete Buttons -->
-                            @role('admin')
-                            <a href="{{ route('trainingPackages.edit', ['package' => $package->id]) }}" class="btn btn-md btn-warning"><i class="fas fa-edit"></i></a>
-                            <form class="col-md-4" action="{{ route('trainingPackages.destroy',$package->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
-                            </form>
-                            @endrole
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
+        @endrole
+        <div class="col-md-12 px-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Packages</h3>
+                </div>
+                <div class="card-body">
+                    <table id="table" class="table text-center ">
+                        <thead>
+                            <tr>
+                                <th class="col-2">name</th>
+                                <th class="col-2">price</th>
+                                <th class="col-2">Number Of Sessions</th>
+                                <th class="col-2">Created At</th>
+                                <th class="col-2">Actions</th>
+                            </tr>
+                        </thead>
+                        @foreach ($packageCollection as $package)
+                            <tr>
+                                <td>{{ $package->name }}</td>
+                                <td>{{ $package->price / 100 }} $</td>
+                                <td>{{ $package->number_of_sessions }}</td>
+                                <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
+                                <td class="d-flex justify-content-around py-4">
+                                    <!-- Show Button -->
+                                    <a href="{{ route('trainingPackages.show', ['package' => $package->id]) }}"
+                                        class="btn btn-md btn-info"><i class="fas fa-eye"></i></a>
+
+                                    <!-- Edit & Delete Buttons -->
+                                    @role('admin')
+                                        <a href="{{ route('trainingPackages.edit', ['package' => $package->id]) }}"
+                                            class="btn btn-md btn-warning"><i class="fas fa-edit"></i></a>
+                                        <form class="col-md-4"
+                                            action="{{ route('trainingPackages.destroy', $package->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-md btn-danger show-alert-delete-box"
+                                                data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
+                                        </form>
+                                    @endrole
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @section('script')
-<script>
-    $(document).ready(function() {
-        $('#table').DataTable();
-    });
-</script>
-
-<script type="text/javascript">
-    $('.show-alert-delete-box').click(function(event) {
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            title: "Are you sure you want to delete this Package ?",
-            icon: "warning",
-            type: "warning",
-            buttons: ["Cancel", "Yes!"],
-            confirmButtonColor: '#8CD4F5',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: "No, cancel plz!",
-        }).then((willDelete) => {
-            if (willDelete) {
-                form.submit();
-                
-            } else {
-                swal("Cancelled", "Your Package is safe :)", "error");
-            }
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
         });
-    });
-</script>
+    </script>
 
-@if($errors->any())
-<h4>{{$errors->first()}}</h4>
-@endif
+    <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: "Are you sure you want to delete this Package ?",
+                icon: "warning",
+                type: "warning",
+                buttons: ["Cancel", "Yes!"],
+                confirmButtonColor: '#8CD4F5',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: "No, cancel plz!",
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
 
-{{-- @die($alert);
-@if ($alert=Session::get('sussers'));
-@endif --}}
-<!--{{-- <script type="text/javascript">
+                } else {
+                    swal("Cancelled", "Your Package is safe :)", "info");
+                }
+            });
+        });
+
+@error('message')
 $(document).ready(function() {
     $(window).on('load', function() {
-    // alert('this is no delete here');
     swal({
             title: "You can't delete this package",
             text:"you have user bought this package",
@@ -112,10 +105,14 @@ $(document).ready(function() {
             confirmButtonText: 'Ok',
 
         });
+
 });
 });
-</script> --}}-->
-<!-- /.content-wrapper -->
+@enderror
+
+</script>
+
+    <!-- /.content-wrapper -->
 @stop
 
 @stop

@@ -55,7 +55,7 @@ View "{{ $package->name }}" Package
             if (willDelete) {
                 form.submit();
             } else {
-                swal("Cancelled", "Your Package is safe :)", "error");
+                swal("Cancelled", "Your Package is safe :)", "info");
             }
         });
 
@@ -63,7 +63,26 @@ View "{{ $package->name }}" Package
 
 
     });
+
+
+@error('message')
+
+$(document).ready(function() {
+    $(window).on('load', function() {
+    swal({
+            title: "You can't delete this package",
+            text:"you have user bought this package",
+            icon: "error",
+            type: "error",
+            confirmButtonColor: '#8CD4F5',
+            confirmButtonText: 'Ok',
+
+        });
+
+});
+});
 </script>
+@enderror
 @stop
 
 @stop
