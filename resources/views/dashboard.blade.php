@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                    <a href="{{ route('profile.edit',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>

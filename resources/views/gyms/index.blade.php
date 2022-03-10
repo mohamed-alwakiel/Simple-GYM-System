@@ -38,14 +38,12 @@
                         @endrole
                         <th class="d-flex justify-content-center">
                             <a href="{{ route('gyms.show', $gym->id) }}" class="btn btn-md btn-info mr-3"><i class="fas fa-eye"></i></a>
-                            @role('admin')
                             <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-md btn-warning mr-3"><i class="fas fa-edit"></i></a>
                             <form action="{{ route('gyms.destroy', $gym->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                             </form>
-                            @endrole
                         </th>
                     </tr>
                     @endforeach

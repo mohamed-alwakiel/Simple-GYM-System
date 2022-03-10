@@ -107,7 +107,6 @@ class GymsController extends Controller
             $image = $request->cover_img;
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'gym'), $imageName);
-            $data['cover_img'] = $imageName;
         }
 
         Gym::find($gym_id)->update([
@@ -128,4 +127,5 @@ class GymsController extends Controller
             return redirect()->route('gyms.index');
         }
     }
+    
 }

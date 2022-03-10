@@ -112,9 +112,9 @@ class UserController extends Controller
             'gender' => $request['gender'],
             'role_type' => 'client',
             'role_id' => 4,
-            'city_id' =>  $request['city_id'],
-            'gym_id' =>  $request['gym_id'],
-            'email_verified_at' =>  Carbon::now()->toDateTimeString(),
+            'city_id' =>  $city_id,
+            'gym_id' =>  $gym_id,
+            'email_verified_at' =>  now(),
         ]);
         $newUser->assignRole('client');
         //redirection to posts.index
@@ -231,4 +231,5 @@ class UserController extends Controller
             return view('profile.editPassword', ['msg' => $msg]);
         }
     }
+    
 }

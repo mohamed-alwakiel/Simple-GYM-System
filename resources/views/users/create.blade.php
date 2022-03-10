@@ -118,7 +118,7 @@
                 <div class="">
                     <div class="w-100">
                         <label for="">Profile Image</label>
-                        <input type="file" class="form-control w-100 bg-dark " name="profileImg" aria-describedby="fileHelpId" value="{{ old('profileImg', '') }}">
+                        <input type="file" class="form-control w-100 bg-dark pt-1" name="profileImg" aria-describedby="fileHelpId" value="{{ old('profileImg', '') }}">
                         <small id="fileHelpId" class="form-text text-muted">only : png or jpg</small>
                     </div>
                 </div>
