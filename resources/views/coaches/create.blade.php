@@ -14,7 +14,16 @@
                 <label for="name" class="form-label">Coach name</label>
                 <input name="name" type="text" class="form-control" id="name">
             </div>
-            
+              <!-- gyms -->
+        <div class="mb-3 w-50">
+            <label for="gym_id" class="form-label">Gym name</label>
+            <select  name="gym_id" class="form-control">
+                @foreach ($gyms as $gym)
+                <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror

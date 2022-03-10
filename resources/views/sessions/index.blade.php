@@ -4,6 +4,7 @@
 
 
 @section('content')
+
 <div class="d-flex justify-content-center mb-3">
     <a href="{{ route('sessions.create') }}" class="btn btn-success ">Create session</a>
 </div>
@@ -22,10 +23,10 @@
                         <th scope="col">Coach</th>
                         <th scope="col">started_at</th>
                         <th scope="col">finished_at </th>
-                        @if (auth()->user()->hasRole('gymManager'))
+                        @role('gymManager|admin|cityManager')
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
-                        @endif
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +47,7 @@
 
 
                         <!-- {{-- <td><a href="{{ route('sessions.show', ['id' => $session->id]) }}" class="btn btn-info">View</a></td> --}} -->
-                        @if (auth()->user()->hasRole('gymManager'))
+                        @role('gymManager|admin|cityManager')
 
 
                         <td> @if ( count($session->attendances)==0)<a href="{{ route('sessions.edit', ['id' => $session->id]) }}" class="btn btn-md btn-success ">Edit</a></td>
@@ -61,7 +62,7 @@
                             <button type="submit" class="btn btn-md btn-danger  show-alert-delete-box  " data-toggle="tooltip" title='Delete'>Delete</button>
                             </form> @endif
                         </td>
-                        @endif
+                        @endrole
                     </tr>
                     @endforeach
                 </tbody>
@@ -74,9 +75,16 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script>
+     $(function () {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
     $(document).ready(function() {
         $('#table').DataTable();
     });
+    
 
     $('.show-alert-delete-box').click(function(event){
         var form =  $(this).closest("form");
@@ -93,9 +101,11 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((willDelete) => {
             if (willDelete) {
+
                 form.submit();
             }
         });
     });
+
 </script>
 @endsection
