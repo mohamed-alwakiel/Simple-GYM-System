@@ -7,13 +7,8 @@ Buy Package
     <div class="card card-danger ">
         <div class="card-header">
             <h3 class="card-title">Package Info</h3>
-
+            @role('admin')
             <div class="card-tools row">
-                <!-- This will cause the card to maximize when clicked -->
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                </div>
-        
                 <!-- This will cause the card to be removed when clicked -->
                 <form class="col-md-4" action="{{ route('buyPackage.destroy',$package->id) }}" method="POST">
                     @csrf
@@ -22,15 +17,20 @@ Buy Package
                     <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-tool" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                 </form>
             </div>
+            @endrole
         </div>
         <div class="card-body">
             <p class="card-title mb-3"><b>Name:- </b>  {{$package->package ? $package->package->name : 'not found'}}</p>
-            <p class="card-text"><b>Price:- </b> {{$package->price}}</p>
+            <p class="card-text"><b>Price:- </b> {{$package->price / 100}}</p>
             <p class="card-text"><b>Number Of Sessions:- </b> {{$package->number_of_sessions}}</p>
             <p class="card-text"><b>Created at:- </b> {{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</p>
-            <p class="card-title mb-3"><b>Trainee :- </b> {{$package->user ? $package->user->name : 'not found'}}</p>
-            <p class="card-text"><b>Gym :- </b>{{$package->gym ? $package->gym->name : 'not found'}}</p>
-       
+            <p class="card-text"><b>Trainee :- </b> {{$package->user ? $package->user->name : 'not found'}}</p>
+            @hasanyrole('admin|cityManager')
+            <p class="card-text"><b>Gym :- </b> {{$package->gym ? $package->gym->name : 'not found'}}</p>
+            @endhasanyrole
+            @role('admin')
+            <p class="card-text"><b>Gity :- </b> {{$package->city ? $package->city->name : 'not found'}}</p>
+            @endrole
         </div>
     </div>
 </div>

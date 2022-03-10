@@ -8,7 +8,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="container-fluid">
-        
+
         @role('admin')
             <div class="d-flex justify-content-center mb-3">
                 <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
@@ -93,24 +93,23 @@
             });
         });
 
-@error('message')
-$(document).ready(function() {
-    $(window).on('load', function() {
-    swal({
+        @error('message')
+            $(document).ready(function() {
+            $(window).on('load', function() {
+            swal({
             title: "You can't delete this package",
             text:"you have user bought this package",
             icon: "error",
             type: "error",
             confirmButtonColor: '#8CD4F5',
             confirmButtonText: 'Ok',
-
-        });
-
-});
-});
-@enderror
-
-</script>
+        
+            });
+        
+            });
+            });
+        @enderror
+    </script>
 
     <!-- /.content-wrapper -->
 @stop

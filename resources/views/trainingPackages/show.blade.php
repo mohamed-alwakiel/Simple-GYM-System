@@ -8,7 +8,7 @@ View "{{ $package->name }}" Package
     <div class="card card-info">
         <div class="card-header">
             <h3 class="card-title">Package Info</h3>
-
+            @role('admin')
             <div class="card-tools row">
                 <!-- This will cause the card to be Edited when clicked -->
                 <div class="col-md-4">
@@ -21,6 +21,7 @@ View "{{ $package->name }}" Package
                     <button type="submit" class="btn btn-md btn-info show-alert-delete-box btn-tool" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                 </form>
             </div>
+            @endrole
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{ $package->name }}</span> </p>

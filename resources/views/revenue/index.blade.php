@@ -33,7 +33,7 @@
                             <th>{{ $boughtPackage->user->name }}</th>
                             <th>{{ $boughtPackage->user->email }}</th>
                             <th>{{ $boughtPackage->name }}</th>
-                            <th>{{ $boughtPackage->price }}</th>
+                            <th>{{ $boughtPackage->price / 100}} $</th>
                             @role('admin|cityManager')
                             <th>{{ $boughtPackage->gym->name }}</th>
                             @endrole

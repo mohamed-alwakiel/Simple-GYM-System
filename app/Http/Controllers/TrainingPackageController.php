@@ -24,6 +24,7 @@ class TrainingPackageController extends Controller
     public function trainingPackagesDatatables()
     {
         $packageCollection = Package::all();
+     
         return view('trainingPackages.datatables-front', ['packageCollection' => $packageCollection]);
     }
 

@@ -21,11 +21,25 @@ class BuyPackageController extends Controller
     {
         Paginator::useBootstrapFive();
         $boughtPackageCollection = BuyPackage::paginate(10);
+        $isAdmin = auth()->user()->hasRole('admin');
+        $isCityManager = auth()->user()->hasRole('cityManager');
+        $isGymManager = auth()->user()->hasRole('gymManager');
+
+        if ($isAdmin) {
+            $boughtPackageCollection = BuyPackage::all();
+        } elseif ($isCityManager) {
+            $boughtPackageCollection = BuyPackage::where('city_id', auth()->user()->city_id)->get();
+        } elseif ($isGymManager) {
+            $boughtPackageCollection = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
+        }else{
+            $boughtPackageCollection = BuyPackage::where('user_id', auth()->user()->id)->get();
+        }
         return view('buyPackage.index',['boughtPackageCollection' => $boughtPackageCollection]);
     }
 
     public function show(BuyPackage $Package)
     {
+
         return view('buyPackage.show', ['package' => $Package]);
     }
 
