@@ -111,13 +111,22 @@ class CoachController extends Controller
     public function edit($id)
     {
         $coach= Coach::find($id);
-        return view('coaches.update', [
-            'coaches' => $coach
+
+      $gyms=$this->getCoachesAndGymsData()[1];
+      $cities=$this->getCoachesAndGymsData()[2];
+
+
+        return view('coaches.update',
+        [
+            'coaches' => $coach,
+            'gyms' => $gyms,
+            'cities' => $cities,
         ]);
+
 
     }
 
-    public function update( $id)
+    public function update( $id,CoachRequest $request)
     {
         $formDAta=request()->all();
 
