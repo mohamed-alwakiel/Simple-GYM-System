@@ -139,7 +139,7 @@ class GymsController extends Controller
             $city_id = Auth::user()->city_id;
         }
 
-        
+
         // handle image
         $gym = Gym::find($gym_id);
         $data = $request->except('cover_img');
@@ -158,8 +158,6 @@ class GymsController extends Controller
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             // move image to public folder
             $image->move(public_path('imgs//' . 'gym'), $imageName);
-            // add image to data
-            $data['cover_img'] = $imageName;
         }
 
         // update gym ;
@@ -181,4 +179,5 @@ class GymsController extends Controller
             return redirect()->route('gyms.index');
         }
     }
+    
 }
