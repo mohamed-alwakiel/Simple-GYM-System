@@ -23,6 +23,7 @@ View "{{ $city->name }}" City
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{ $city->name }}</span> </p>
+            <p class="card-text text-secondary">Manager : <span class="text-light font-weight-bold">{{ $city->manager ? $city->manager->name : 'No Manager !' }}</span> </p>
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@ View "{{ $package->name }}" Package
     <div class="card card-info">
         <div class="card-header">
             <h3 class="card-title">Package Info</h3>
-
+            @role('admin')
             <div class="card-tools row">
                 <!-- This will cause the card to be Edited when clicked -->
                 <div class="col-md-4">
@@ -21,6 +21,7 @@ View "{{ $package->name }}" Package
                     <button type="submit" class="btn btn-md btn-info show-alert-delete-box btn-tool" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                 </form>
             </div>
+            @endrole
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{ $package->name }}</span> </p>
@@ -33,7 +34,53 @@ View "{{ $package->name }}" Package
 
 
 @section('script')
-@include('layouts.alertScript')
+
+<script type="text/javascript">
+    $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to delete this Package ?",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#8CD4F5',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: "No, cancel plz!",
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            } else {
+                swal("Cancelled", "Your Package is safe :)", "info");
+            }
+        });
+
+
+
+
+    });
+
+
+@error('message')
+
+$(document).ready(function() {
+    $(window).on('load', function() {
+    swal({
+            title: "You can't delete this package",
+            text:"you have user bought this package",
+            icon: "error",
+            type: "error",
+            confirmButtonColor: '#8CD4F5',
+            confirmButtonText: 'Ok',
+
+        });
+
+});
+});
+</script>
+@enderror
 @stop
 
 

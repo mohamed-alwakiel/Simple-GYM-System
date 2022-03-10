@@ -37,7 +37,7 @@
                             <td>{{ $manager->name }}</td>
                             <td>{{ $manager->email }}</td>
                             <td>{{ $manager->national_id }}</td>
-                            <td><img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px" height="50px" alt="not found" /></th>
+                            <td><img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px" height="50px" alt="not found" /></td>
                             <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
                             @role('admin')
                             <td>{{ $manager->gym ? $manager->gym->city->name : 'Not Found !' }}</td>

@@ -3,7 +3,7 @@
 @section('title', 'Cities')
 
 @section('content')
-<div class="container-fluid w-50">
+<div class="container-fluid">
     <div class="px-4">
         @error('msg')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -20,13 +20,16 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Manager</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     @foreach ($cities as $city)
                     <tr>
-                        <th>{{ $city->name }}</th>
-                        <th class="d-flex justify-content-center">
+                        <td>{{ $city->name }}</td>
+                        <td>{{ $city->manager ? $city->manager->name : 'No Manager !' }}</td>
+
+                        <td class="d-flex justify-content-center">
                             <a href="{{ route('cities.show', $city->id) }}" class="btn btn-md btn-info mr-3"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('cities.edit', $city->id) }}" class="btn btn-md btn-warning mr-3"><i class="fas fa-edit"></i></a>
                             <form action="{{ route('cities.destroy', $city->id) }}" method="POST">
@@ -34,7 +37,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                             </form>
-                        </th>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

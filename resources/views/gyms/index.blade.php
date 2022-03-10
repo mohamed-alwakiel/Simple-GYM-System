@@ -30,13 +30,13 @@
                     </thead>
                     @foreach ($gyms as $gym)
                     <tr>
-                        <th>{{ $gym->name }}</th>
-                        <th><img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" /></th>
+                        <td>{{ $gym->name }}</td>
+                        <td><img src="{{ url('imgs/gym/' . $gym->cover_img) }} " width="50px" height="50px" alt="not found" /></td>
                         @role('admin')
-                        <th>{{ $gym->city ? $gym->city->name : 'Not Found ! '}}</th>
-                        <th>{{ $gym->city->manager ? $gym->city->manager->name : 'Not Found !' }}</th>
+                        <td>{{ $gym->city ? $gym->city->name : 'Not Found ! '}}</td>
+                        <td>{{ $gym->city->manager ? $gym->city->manager->name : 'Not Found !' }}</td>
                         @endrole
-                        <th class="d-flex justify-content-center">
+                        <td class="d-flex justify-content-center">
                             <a href="{{ route('gyms.show', $gym->id) }}" class="btn btn-md btn-info mr-3"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('gyms.edit', $gym->id) }}" class="btn btn-md btn-warning mr-3"><i class="fas fa-edit"></i></a>
                             <form action="{{ route('gyms.destroy', $gym->id) }}" method="POST">
@@ -44,7 +44,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                             </form>
-                        </th>
+                        </td>
                     </tr>
                     @endforeach
                 </table>
