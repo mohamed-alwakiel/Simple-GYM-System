@@ -92,18 +92,18 @@ class TrainingSessionController extends Controller
         $formDAta = request()->all();
 
 
-        $start=$formDAta['started_at'];
-        $end=$formDAta['finished_at'];
-       $checkOverlap= $this->CheckOverlap($start,$end);
+        $start = $formDAta['started_at'];
+        $end = $formDAta['finished_at'];
+        $checkOverlap = $this->CheckOverlap($start, $end);
 
-    if ($checkOverlap==0) {
-        $session = TrainingSession::find($id)->update($formDAta);
+        if ($checkOverlap == 0) {
+            $session = TrainingSession::find($id)->update($formDAta);
 
-        return redirect()->route('sessions.index');
-    } else {
-        return back()->with('error', 'Session date will Overlap another session, Choose different Date');
-    }
+            return redirect()->route('sessions.index');
+        } else {
+            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
 
+        }
     }
 
 
@@ -141,11 +141,11 @@ class TrainingSessionController extends Controller
     public function store(TrainingSessionRequest $request)
     {
 
-            $start=$request['started_at'];
-            $end=$request['finished_at'];
-           $checkOverlap= $this->CheckOverlap($start,$end);
+        $start = $request['started_at'];
+        $end = $request['finished_at'];
+        $checkOverlap = $this->CheckOverlap($start, $end);
 
-        if ($checkOverlap==0) {
+        if ($checkOverlap == 0) {
             $requestedData =
                 [
                     'gym_id' => $request->gym_id,
@@ -174,7 +174,7 @@ class TrainingSessionController extends Controller
     {
         echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
     }
-// ========================> to retrieve data from database<=============================//
+    // ========================> to retrieve data from database<=============================//
 
     public function getSessionsCoachesAndGymsData()
     {
@@ -203,23 +203,23 @@ class TrainingSessionController extends Controller
     }
 
 
-// ========================> to check time overlap<=============================//
-    public function CheckOverlap($start,$end)
+    // ========================> to check time overlap<=============================//
+    public function CheckOverlap($start, $end)
     {
 
 
         $sessions = $this->getSessionsCoachesAndGymsData()[0];
-        $start = date('Y-m-d H:i:s',strtotime($start));
-        $end = date('Y-m-d H:i:s',strtotime($end));
-        $errors=0;
+        $start = date('Y-m-d H:i:s', strtotime($start));
+        $end = date('Y-m-d H:i:s', strtotime($end));
+        $errors = 0;
         foreach ($sessions as $session) {
-            $oldStart = date('Y-m-d H:i:s',strtotime($session->started_at));
-            $oldEnd =  date('Y-m-d H:i:s',strtotime($session->finished_at));
+            $oldStart = date('Y-m-d H:i:s', strtotime($session->started_at));
+            $oldEnd =  date('Y-m-d H:i:s', strtotime($session->finished_at));
 
 
             if (
-                ($this->betweenForStart($start, $oldStart, $oldEnd)||
-                $this->betweenForEdnd($end, $oldStart, $oldEnd))
+                ($this->betweenForStart($start, $oldStart, $oldEnd) ||
+                    $this->betweenForEdnd($end, $oldStart, $oldEnd))
 
                 ||
                 ($this->betweenForStart($oldStart, $start, $end)
@@ -228,14 +228,9 @@ class TrainingSessionController extends Controller
 
             ) {
                 $errors++;
-
             }
         }
-            return $errors;
-
-
-
-
+        return $errors;
     }
     function betweenForStart($start, $oldstart, $oldend)
     {
