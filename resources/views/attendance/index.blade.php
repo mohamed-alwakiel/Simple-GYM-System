@@ -32,18 +32,19 @@ Attendance
                 <tr>
 
                     <td>{{ $attendance->users->name}}</td>
-                    <td>{{$attendance->users->email}}</td>
-                    <td>{{ $attendance->trainingSessions->name}}</td>
+                    <td>{{ $attendance->users->email}}</td>
+                    
+                    <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->name : 'Not Found !'}}</td>
                     {{-- TODO: only for admin --}}
-                    <td>{{ $attendance->trainingSessions->gyms->city->name}}</td>
+                    <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->gyms->city->name : 'Not Found !'}}</td>
                     {{-- TODO: only for gym manager --}}
 
-                    <td>{{$attendance->trainingSessions->gyms->name}}</td>
+                    <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->gyms->name : 'Not Found !'}}</td>
 
 
 
-                    <td>{{ $attendance->trainingSessions->started_at}}</td>
-                    <td>{{ $attendance->trainingSessions->started_at}}</td>
+                    <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->started_at : 'Not Found !'}}</td>
+                    <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->started_at : 'Not Found !'}}</td>
                     {{-- <td>{{ $session->started_at }}</td> --}}
 
                 </tr>

@@ -38,7 +38,7 @@
                         <td>
                             <ul style="list-style: none;" class="list-group list-group-flush">
                                 @foreach($session->coaches as $coach)
-                                <li class="list-group-item">{{ $coach->name }}</li>
+                                    <li class="list-group-item">{{ $coach->name }}</li>
                                 @endforeach
                             </ul>
                         </td>
@@ -84,7 +84,7 @@
     $(document).ready(function() {
         $('#table').DataTable();
     });
-    
+
 
     $('.show-alert-delete-box').click(function(event){
         var form =  $(this).closest("form");

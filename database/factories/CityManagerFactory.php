@@ -23,15 +23,17 @@ class CityManagerFactory extends Factory
     {
         $password = 123456789;
 
+        $gender = $this->faker->randomElement(['male', 'female']);
+
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name($gender),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make($password),
             'national_id' => $this->faker->numerify('##############'),
+            'date_of_birth' => $this->faker->dateTimeBetween('1990-01-01', '2004-12-31')->format('Y/m/d'),
+            'gender' => $gender,
             'profile_img' => 'CityMgr.Png',
-            'role_id' => 2,
-            'role_type' => 'cityManager',
             'city_id' => City::inRandomOrder()->first()->id,
         ];
     }

@@ -32,7 +32,7 @@
                 <tr>
                     <th scope="row">{{ $coach->id }}</th>
                     <td>{{ $coach->name }}</td>
-                    <td>{{ $coach->gym->name }}</td>
+                    <td>{{ $coach->gym ? $coach->gym->name : 'Not Found !' }}</td>
 
 
 

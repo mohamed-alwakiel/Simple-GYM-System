@@ -92,8 +92,6 @@ class GymManagerController extends Controller
             'national_id' => $requestData['national_id'],
             'city_id' => $request['city_id'],
             'gym_id' => $request['gym_id'],
-            'role_type' => 'gymManager',
-            'role_id' => 3,
             'city_id' => $city_id,
             'gym_id' => $request['gym_id'],
             'email_verified_at' =>  Carbon::now()->toDateTimeString(),

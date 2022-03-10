@@ -34,15 +34,15 @@
                     <tbody>
                         @foreach ($gymManagers as $manager)
                         <tr>
-                            <th>{{ $manager->name }}</th>
-                            <th>{{ $manager->email }}</th>
-                            <th>{{ $manager->national_id }}</th>
-                            <th><img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px" height="50px" alt="not found" /></th>
+                            <td>{{ $manager->name }}</td>
+                            <td>{{ $manager->email }}</td>
+                            <td>{{ $manager->national_id }}</td>
+                            <td><img src="{{ url('imgs/users/' . $manager->profile_img) }}" width="50px" height="50px" alt="not found" /></th>
                             <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
                             @role('admin')
                             <td>{{ $manager->gym ? $manager->gym->city->name : 'Not Found !' }}</td>
                             @endrole
-                            <th class="d-flex justify-content-center">
+                            <td class="d-flex justify-content-center">
                                 @if ($manager->isBanned())
                                 <a href="{{ route('gymManagers.unban', $manager->id) }}" class="btn btn-md btn-light mr-2" title="UnBan"><i class="fas fa-user-slash"></i></a>
                                 @elseif ($manager->isNotBanned())
@@ -55,7 +55,7 @@
                                     @method('delete')
                                     <button type="submit" class="btn btn-md btn-danger show-alert-delete-box px-3" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                                 </form>
-                            </th>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
