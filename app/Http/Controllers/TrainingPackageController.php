@@ -15,7 +15,6 @@ class TrainingPackageController extends Controller
 {
     public function index()
     {
-        // Paginator::useBootstrapFive();
         $packageCollection = Package::all();
         return view('trainingPackages.index', ['packageCollection' => $packageCollection]);
     }

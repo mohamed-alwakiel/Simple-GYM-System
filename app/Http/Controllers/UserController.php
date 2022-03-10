@@ -25,7 +25,6 @@ class UserController extends Controller
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
-        $roleGymManager = auth()->user()->hasRole('gymManager');
 
         if ($roleAdmin) {
             $users = User::role('client')->get();
