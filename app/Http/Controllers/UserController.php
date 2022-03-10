@@ -127,12 +127,8 @@ class UserController extends Controller
 
     public function show($userID)
     {
-        // $userID=$user->id;
         $user = User::findOrFail($userID);
         return view('users.show', ['user' => $user]);
-
-        // $user = User::findOrFail($userID);
-        // return view('users.show', ['user' => $user]);
     }
 
     public function GetGymNameFromCityName(Request $request)

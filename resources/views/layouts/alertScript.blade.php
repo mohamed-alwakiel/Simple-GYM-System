@@ -4,7 +4,7 @@
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: "Are you sure you want to delete this Package ?",
+            title: "Are you sure you want to delete ?",
             icon: "warning",
             type: "warning",
             buttons: ["Cancel", "Yes!"],
@@ -14,9 +14,14 @@
             cancelButtonText: "No, cancel plz!",
         }).then((willDelete) => {
             if (willDelete) {
-                form.submit();
+                try {
+                    form.submit();
+                }
+                catch($e){
+                    swal("Not deleted");
+                }
             } else {
-                swal("Cancelled", "Your Package is safe :)", "error");
+                swal("Cancelled", "Your Data is safe :)", "error");
             }
         });
     });

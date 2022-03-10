@@ -35,7 +35,6 @@ Edit "{{ $package->name }}" Package
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-warning py-2 px-4">Update</button>
                 </div>
-
             </form>
         </div>
     </div>
