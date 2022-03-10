@@ -15,8 +15,7 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
-                        <!-- <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                        <h5 class="widget-user-desc text-riauthght">Web Designer</h5> -->
+
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">

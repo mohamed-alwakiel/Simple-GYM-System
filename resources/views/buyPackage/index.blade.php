@@ -1,8 +1,5 @@
 @extends('layouts.master')
-
-@section('title')
-Buy Package
-@endsection
+@section('title', 'Purchased Packages')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -55,10 +52,4 @@ Buy Package
         </tbody>
     </table>
 
-
-    </div>
-
-
-    <!-- /.content-wrapper -->
-
-@endsection
+@stop

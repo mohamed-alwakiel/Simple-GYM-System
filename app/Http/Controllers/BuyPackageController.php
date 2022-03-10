@@ -60,53 +60,50 @@ class BuyPackageController extends Controller
         $roleGymManager = Auth::user()->hasRole('gymManager');
 
         $loggedInUser = Auth::user();
-        $user = User::role('cityManager')->get()->where('id',$loggedInUser->id)->where('city_id', $loggedInUser->city_id );
-        
-       
-        if($roleAdmin){
-        $cities = DB::table("cities")->get();
+        $user = User::role('cityManager')->get()->where('id', $loggedInUser->id)->where('city_id', $loggedInUser->city_id);
+
+
+        if ($roleAdmin) {
+            $cities = DB::table("cities")->get();
+            return view('payment.create', data: [
+                'cities' => $cities,
+                'packages' => $packages,
+                'users' => $users,
+            ]);
+        } elseif ($roleCityManager) {
+            $city_id = $loggedInUser->city_id;
+            $gym_id = Gym::where('city_id', $city_id)->get();
+        } elseif ($roleGymManager) {
+            $gym_id = $loggedInUser->gym_id;
+            $city_id = $loggedInUser->city_id;
+        }
+
         return view('payment.create', data: [
-            'cities' => $cities,
+            'cities' => $city_id,
             'packages' => $packages,
             'users' => $users,
+            'gyms' => $gym_id,
         ]);
-       }elseif($roleCityManager){
-        $city_id = $loggedInUser->city_id;
-        $gym_id = Gym::where('city_id',$city_id)->get();
-       }elseif($roleGymManager){
-        $gym_id=$loggedInUser->gym_id;
-        $city_id=$loggedInUser->city_id;
-       }
-
-       return view('payment.create', data: [
-        'cities' => $city_id,
-        'packages' => $packages,
-        'users' => $users,
-        'gyms' => $gym_id,
-    ]);
-
-
-     
     }
 
 
- public function store(Request $requestObj)
+    public function store(Request $requestObj)
     {
-         $paymentData = Stripe::first();
+        $paymentData = Stripe::first();
 
         $package = DB::table('training_packages')->where('id', $paymentData->package_id)->first();
-       
+
 
         BuyPackage::create([
 
-            'price' => ($package->price / 100 ),
+            'price' => ($package->price / 100),
             'number_of_sessions' => $package->number_of_sessions,
-            'remaining_sessions'=>$package->number_of_sessions,
+            'remaining_sessions' => $package->number_of_sessions,
             'package_id' => $paymentData->package_id,
             'name' =>  $paymentData->name,
             'gym_id' => $paymentData->gym_id,
             'user_id' => $paymentData->user_id,
-            'city_id'=> $paymentData->city_id,
+            'city_id' => $paymentData->city_id,
         ]);
         DB::table('stripe')->delete();
 
@@ -117,9 +114,6 @@ class BuyPackageController extends Controller
     public function getGymsBelongsToCity($id)
 
     {
-            echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
-        
-    
+        echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
     }
-
 }

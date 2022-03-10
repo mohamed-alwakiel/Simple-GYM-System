@@ -3,7 +3,6 @@
 @section('title', 'Revenue')
 
 @section('content')
-
 <div class="container-fluid">
     <div class="col-md-12 px-4">
         <div class="card">
@@ -35,12 +34,12 @@
                             <th>{{ $boughtPackage->name }}</th>
                             <th>{{ $boughtPackage->price / 100}} $</th>
                             @role('admin|cityManager')
-                            <th>{{ $boughtPackage->gym->name }}</th>
+                            <td>{{ $boughtPackage->gym->name }}</td>
                             @endrole
                             @role('admin')
-                            <th>{{ $boughtPackage->city->name }}</th>
+                            <td>{{ $boughtPackage->city->name }}</td>
                             @endrole
-                            <th class="d-flex justify-content-center">
+                            <td class="d-flex justify-content-center">
                                 <a href="{{ route('revenue.show', $boughtPackage->id) }}" class="btn btn-md btn-info"><i class="fas fa-eye"></i></a>
                                 @role('admin')
                                 <form class="col-md-4" action="{{ route('revenue.destroy', $boughtPackage->id) }}" method="POST">
@@ -49,7 +48,7 @@
                                     <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                                 </form>
                                 @endrole
-                            </th>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -58,6 +57,7 @@
         </div>
     </div>
 </div>
+@stop
 
 @section('script')
 <script>
@@ -67,6 +67,5 @@
 </script>
 
 @include('layouts.alertScript')
-@stop
 
 @stop

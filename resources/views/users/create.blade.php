@@ -78,7 +78,7 @@
                 <div class="form-group mb-3">
                     <label for="cityName">Select City</label>
                     <select name="city_id" class="form-control" id='cityName'>
-                        <option value="0" disable="true" selected="true">=== Select City ===</option>
+                        <option value="0" disable selected="true">=== Select City ===</option>
                         @foreach ($cities as $city)
                         <option value="{{ $city->id }}"> {{ $city->name }} </option>
                         @endforeach

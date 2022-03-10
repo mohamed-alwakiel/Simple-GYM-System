@@ -134,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::GET('/coaches', [CoachController::class, 'index'])->name('coaches.index');
     Route::GET('/coaches/create', [CoachController::class, 'create'])->name('coaches.create');
+    Route::GET('/coaches/{id}', [CoachController::class, 'show'])->name('coaches.show');
     Route::POST('/coaches', [CoachController::class, 'store'])->name('coaches.store');
     Route::GET('/coaches/edit/{id}', [CoachController::class, 'edit'])->name('coaches.edit');
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
