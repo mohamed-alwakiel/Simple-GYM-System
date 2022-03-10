@@ -67,6 +67,12 @@ class GymManagerController extends Controller
         return response()->json($gyms);
     }
 
+    public function show($managerID)
+    {
+        $manager = User::findOrFail($managerID);
+        return view('gymManagers.show', ['manager' => $manager]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -117,7 +123,7 @@ class GymManagerController extends Controller
 
             'city_id' => $city_id,
             'gym_id' => $request['gym_id'],
-            'email_verified_at'=>  Carbon::now()->toDateTimeString(),
+            'email_verified_at' =>  Carbon::now()->toDateTimeString(),
         ]);
 
 
@@ -180,12 +186,11 @@ class GymManagerController extends Controller
      * @param  \App\Models\GymManager  $gymManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy($gymManager)
+    public function destroy($gymManagerID)
     {
-        GymManager::find($gymManager)->delete();
-        return response()->json(['success' => 'Record deleted successfully']);
+        User::findOrFail($gymManagerID)->delete();
+        return redirect()->route('gymManagers.index');
     }
-
 
     // for ban users
     public function ban($gymManager)
