@@ -18,10 +18,12 @@
                 </form>
             </div>
         </div>
+
         <div class="card-body">
             <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{$coach->name}}</span> </p>
             <p class="card-text text-secondary">Gym : <span class="text-light font-weight-bold">{{$coach->gym->name}}</span> </p>
         </div>
+        
     </div>
 </div>
 @stop

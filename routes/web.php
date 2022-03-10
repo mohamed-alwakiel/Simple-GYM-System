@@ -120,13 +120,14 @@ Route::group(['middleware' => ['auth']], function () {
 // --------------- Sessions
 Route::middleware(['auth'])->group(function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
-    Route::GET('/sessions/paginate', [TrainingSessionController::class, 'paginateFast'])->name('sessions.paginate');
     Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
+    Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
     Route::POST('/sessions', [TrainingSessionController::class, 'store'])->name('sessions.store');
     Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');
     Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
     Route::DELETE('/sessions/{id}', [TrainingSessionController::class, 'destroy'])->name('sessions.destroy');
-    Route::GET('/sessionsTest', [TrainingSessionController::class, 'sessionDataTables'])->name('sessions.sessionsTest');
+    Route::GET('/json-coach', [TrainingSessionController::class, 'GetCoachNameFromGymName']);
+
 });
 
 
@@ -140,7 +141,6 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
     Route::GET('/GET-coaches-my-datatables', [CoachController::class, 'GETCoaches'])->name('GET.coaches')->middleware('auth');
-    Route::GET('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
 });
 
 

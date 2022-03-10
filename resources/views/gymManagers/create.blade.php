@@ -53,7 +53,7 @@
                 <div class="form-group mb-3">
                     <label for="cityName">Select City</label>
                     <select name="city_id" class="form-control" id='cityName'>
-                        <option value="0" disable="true" selected="true">=== Select City ===</option>
+                        <option value="0" disabled selected="true">=== Select City ===</option>
                         @foreach ($cities as $city)
                         <option value="{{ $city->id }}"> {{ $city->name }} </option>
                         @endforeach
@@ -78,7 +78,7 @@
                 <div class="form-group mb-3">
                     <label for="gymName">Select Gym</label>
                     <select name="gym_id" class="form-control">
-                        <option value="0" disable="true" selected="true">=== Select Gym ===</option>
+                        <option value="0" disabled selected="true">=== Select Gym ===</option>
                         @foreach ($gyms as $gym)
                         <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
                         @endforeach
@@ -114,13 +114,11 @@
 @section('script')
 <script type="text/javascript">
     $('#cityName').on('change', function(e) {
-        console.log(e);
         var city_id = e.target.value;
         $.get('/json-gym?city_id=' + city_id, function(data) {
-            console.log(data);
             $('#gymName').empty();
             $('#gymName').append(
-                '<option value="0" disable="true" selected="true">=== Select Gym ===</option>');
+                '<option value="0" disabled selected="true">=== Select Gym ===</option>');
 
             $.each(data, function(index, gymObj) {
                 $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +

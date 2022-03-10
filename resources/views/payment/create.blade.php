@@ -31,13 +31,13 @@
                 <!-- Select Gym -->
                 @hasanyrole('admin|cityManager')
                 <div class="form-group mb-3">
-                    <label for="gym">gym</label>
+                    <label for="gym">Gym</label>
                     <select class="form-control" name="gym_id" id="gymName">
                         @role('cityManager')
-                            <option value="0" disabled selected>=== Select Gym ===</option>
-                            @foreach ($gyms as $gym)
-                                <option value="{{ $gym->id }}">{{ $gym->name }}</option>
-                            @endforeach
+                        <option value="0" disabled selected>=== Select Gym ===</option>
+                        @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                        @endforeach
                         @endrole
                     </select>
                 </div>
@@ -81,23 +81,21 @@
 @stop
 
 @role('admin')
-    @section('script')
-    <script type="text/javascript">
-        $('#cityName').on('change', function(e) {
-            console.log(e);
-            var city_id = e.target.value;
-            $.get('/json-gym?city_id=' + city_id, function(data) {
-                console.log(data);
-                $('#gymName').empty();
-                $('#gymName').append(
-                    '<option value="0" disable="true" selected="true">=== Select Gym ===</option>');
-                
-                $.each(data, function(index, gymObj) {
-                    $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +
-                        '</option>');
-                })
-            });
+@section('script')
+<script type="text/javascript">
+    $('#cityName').on('change', function(e) {
+        var city_id = e.target.value;
+        $.get('/json-gym?city_id=' + city_id, function(data) {
+            $('#gymName').empty();
+            $('#gymName').append(
+                '<option value="0" disabled selected="true">=== Select Gym ===</option>');
+
+            $.each(data, function(index, gymObj) {
+                $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +
+                    '</option>');
+            })
         });
-    </script>
-    @stop
+    });
+</script>
+@endsection
 @endrole

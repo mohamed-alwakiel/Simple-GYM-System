@@ -2,7 +2,7 @@
 @section('title')
 Edit "{{ $coaches->name }}" info
 @endsection
-@section('content')
+
 @section('content')
 <div class=" d-flex justify-content-center">
     <div class="card card-warning w-50 mt-3">
@@ -36,4 +36,4 @@ Edit "{{ $coaches->name }}" info
         </div>
     </div>
 </div>
-@endsection
+@stop
