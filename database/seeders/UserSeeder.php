@@ -18,6 +18,10 @@ class UserSeeder extends Seeder
    */
   public function run()
   {
-    User::factory(10)->create();
+    $factories = User::factory(10)->create();
+
+    foreach ($factories as $factory) {
+        $factory->assignRole('client');
+    }
   }
 }

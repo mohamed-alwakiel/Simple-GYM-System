@@ -15,7 +15,7 @@
             <form class="mt-5 w-50 mx-auto" action="{{ route('payment.store') }}" method="post">
                 @csrf
                 <!-- Select City -->
-                {{-- @role('admin') --}}
+                @role('admin')
                     <div class="mb-3">
                         <label for="city" class="form-label">City</label>
                         <select class="form-control" name="city" id="citySelector">
@@ -27,20 +27,32 @@
 
                         </select>
                     </div>
-                {{-- @endrole --}}
+                @endrole
 
                 <!-- Select Gym -->
-                {{-- @hasanyrole('admin|cityManager') --}}
+                @hasanyrole('admin|cityManager')
                     <div class="mb-3">
                         <label for="gym" class="form-label">gym</label>
                         <select class="form-control" name="gym_id" id="gymSelector">
+                            @hasanyrole('cityManager')
+                            <option value="0" disabled selected>Choose Gym</option>
 
+                            @foreach ($gyms as $gym)
+                                <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                            @endforeach
+                            @endhasanyrole
                         </select>
                     </div>
-                {{-- @endhasanyrole --}}
+                @endhasanyrole
 
                 <!-- Select User -->
-                {{-- @hasanyrole('admin|cityManager|gymManager') --}}
+                @hasanyrole('admin|cityManager|gymManager')
+                @hasanyrole('cityManager|gymManager')
+                <input type="text" hidden name="city"  value="{{ $cities}}" id="citySelector" />
+                @endhasanyrole
+                @hasanyrole('gymManager')
+                <input type="text" hidden name="gym_id"  value="{{ $gyms }}" />
+                @endhasanyrole
                     <div class="form-group">
                         <label>Select User</label>
                         <select id="selectedUser" name="user_id" class="form-control">
@@ -50,7 +62,7 @@
                             @endforeach
                         </select>
                     </div>
-                {{-- @endhasanyrole --}}
+                @endhasanyrole
 
                 <!-- Select Package -->
                 <div class="mb-3">
@@ -73,8 +85,9 @@
     </div>
     <!-- /.card -->
 
-    +++
+
     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+    @role('admin')
     <script>
         $(document).ready(function() {
             $('#citySelector').on('change', function() {
@@ -101,10 +114,9 @@
                         });
                     }
 
-
-
                 });
             });
         });
     </script>
+     @endrole
 @endsection

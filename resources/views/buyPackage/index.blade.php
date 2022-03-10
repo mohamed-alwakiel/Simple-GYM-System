@@ -26,7 +26,7 @@ Buy Package
         @foreach ($boughtPackageCollection as $package)
             <tr>
             <td>{{$package->package ? $package->package->name : 'not found'}}</td>
-                <td>{{ $package->price }}</td>
+                <td>{{ $package->price * 100 }} $</td>
                 <td>{{ $package->number_of_sessions }}</td>
                 <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
                 <td>{{$package->user ? $package->user->name : 'not found'}}</td>

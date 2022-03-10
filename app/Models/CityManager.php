@@ -21,12 +21,13 @@ class CityManager extends Model
         'profile_img',
         'role_id',
         'role_type',
-        'city_id'
+        'city_id',
+        'email_verified_at',
     ];
 
-    
+    // only one manager for one city
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCityManagerRequest;
 use App\Models\City;
 use App\Models\CityManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -22,13 +23,10 @@ class CityManagerController extends Controller
      */
     public function index()
     {
-
-        $cityManagers = CityManager::where('role_id', 2)->get();
-        $cities = City::all();
+        $cityManagers = User::role('cityManager')->get();
 
        return view('cityManagers.index', [
            'cityManagers' => $cityManagers,
-           'cities' => $cities
        ]);
     }
 
@@ -86,6 +84,7 @@ class CityManagerController extends Controller
             'city_id' => $request['city_id'],
             'role_type' => 'cityManager',
             'role_id' => 2,
+            'email_verified_at'=> Carbon::now()->toDateTimeString(),
 
         ]);
         $newCityManager->assignRole('cityManager')->givePermissionTo(['create gym','create gym manager','create coach','create session',
@@ -156,6 +155,7 @@ class CityManagerController extends Controller
     public function destroy($cityManager)
     {
         CityManager::find($cityManager)->delete();
-        return redirect()->route('cityManagers.index');
+        return response()->json(['success' => 'Record deleted successfully']);
+        // return redirect()->route('cityManagers.index');
     }
 }

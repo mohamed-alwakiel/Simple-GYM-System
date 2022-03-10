@@ -9,6 +9,7 @@ use App\Models\CityManager;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,12 +31,10 @@ class GymManagerController extends Controller
         $roleAdmin = auth()->user()->hasRole('admin');
 
         if ($roleAdmin) {
-            $gymManagers = GymManager::where('role_id', 3)->get();
-        }
-        elseif ($roleCityManager)
-        {
+            $gymManagers = User::role('gymManager')->get();
+        } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
-            $gymManagers = GymManager::where('role_id', 3)->and('city_id', $city_id)->get();
+            $gymManagers = User::role('gymManager')->where('city_id', $city_id)->get();
         }
         return view('gymManagers.index', [
             'gymManagers' => $gymManagers,
@@ -52,7 +51,6 @@ class GymManagerController extends Controller
             $cities = City::all();
             return view('gymManagers.create', ['cities' => $cities]);
         } elseif ($roleCityManager) {
-            // // if city manager
             $city_id = Auth::user()->city_id;
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gymManagers.create', ['gyms' => $gyms]);
@@ -79,7 +77,6 @@ class GymManagerController extends Controller
 
     public function store(StoreGymManagerRequest $request)
     {
-
         //fetch request data
         $requestData = request()->all();
 
@@ -119,7 +116,8 @@ class GymManagerController extends Controller
             'role_id' => 3,
 
             'city_id' => $city_id,
-            'gym_id' => $request['gym_id']
+            'gym_id' => $request['gym_id'],
+            'email_verified_at'=>  Carbon::now()->toDateTimeString(),
         ]);
 
 
@@ -185,7 +183,7 @@ class GymManagerController extends Controller
     public function destroy($gymManager)
     {
         GymManager::find($gymManager)->delete();
-        return redirect()->route('gymManagers.index');
+        return response()->json(['success' => 'Record deleted successfully']);
     }
 
 
