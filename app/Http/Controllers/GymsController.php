@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GymRequest;
 use App\Models\City;
 use App\Models\Gym;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -171,10 +172,13 @@ class GymsController extends Controller
         return redirect()->route('gyms.index');
     }
 
-    public function destroy(Request $request)
+    public function destroy($gymID)
     {
-
-        Gym::find($request->id)->delete();
-        return response()->json(['success' => 'Product deleted successfully']);
+        try {
+            Gym::findOrFail($gymID)->delete();
+            return redirect()->route('gyms.index');
+        } catch (QueryException $e) {
+            return redirect()->route('gyms.index');
+        }
     }
 }

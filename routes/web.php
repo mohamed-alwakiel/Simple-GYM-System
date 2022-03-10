@@ -71,10 +71,10 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/cities', [CitiesController::class, 'index'])->name('cities.index');
     Route::GET('/cities/create', [CitiesController::class, 'create'])->name('cities.create');
     Route::GET('/cities/{id}', [CitiesController::class, 'show'])->name('cities.show');
-    Route::post('/cities/store', [CitiesController::class, 'store'])->name('cities.store');
+    Route::POST('/cities/store', [CitiesController::class, 'store'])->name('cities.store');
     Route::GET('/cities/edit/{city_id}', [CitiesController::class, 'edit'])->name('cities.edit');
     Route::PUT('/cities/update/{city_id}', [CitiesController::class, 'update'])->name('cities.update');
-    Route::delete('/cities/{id}', [CitiesController::class, 'destroy'])->name('cities.destroy');
+    Route::DELETE('/cities/{id}', [CitiesController::class, 'destroy'])->name('cities.destroy');
 });
 
 
@@ -82,11 +82,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::GET('/gyms', [GymsController::class, 'index'])->name('gyms.index');
     Route::GET('/gyms/create', [GymsController::class, 'create'])->name('gyms.create');
-    Route::post('/gyms/store', [GymsController::class, 'store'])->name('gyms.store');
+    Route::GET('/gyms/{id}', [GymsController::class, 'show'])->name('gyms.show');
+    Route::POST('/gyms/store', [GymsController::class, 'store'])->name('gyms.store');
     Route::GET('/gyms/edit/{gym_id}', [GymsController::class, 'edit'])->name('gyms.edit');
     Route::PUT('/gyms/update/{gym_id}', [GymsController::class, 'update'])->name('gyms.update');
-    Route::delete('/gyms/destroy', [GymsController::class, 'destroy'])->name('gyms.destroy');
-    Route::GET('/GET-gym-my-datatables', [GymsController::class, 'GETGym'])->name('GET.gym');
+    Route::DELETE('/gyms/{id}', [GymsController::class, 'destroy'])->name('gyms.destroy');
 });
 
 
@@ -112,8 +112,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::GET('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
     Route::GET('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
     Route::PUT('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
-    Route::post('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
-    Route::delete('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
+    Route::POST('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
+    Route::DELETE('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 });
 
 // --------------- Sessions
@@ -158,17 +158,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::GET('/buyPackage/{package}', [BuyPackageController::class, 'show'])->name('buyPackage.show');
     Route::GET('/buyPackage/{package}/edit', [BuyPackageController::class, 'edit'])->name('buyPackage.edit');
     Route::PUT('/buyPackage/{package}', [BuyPackageController::class, 'update'])->name('buyPackage.update');
-    Route::post('/buy', [BuyPackageController::class, 'store'])->name('buyPackage.store');
-    Route::delete('/buyPackage/{package}', [BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
+    Route::POST('/buy', [BuyPackageController::class, 'store'])->name('buyPackage.store');
+    Route::DELETE('/buyPackage/{package}', [BuyPackageController::class, 'destroy'])->name('buyPackage.destroy');
 
-    Route::post('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
+    Route::POST('/create-checkout-session', [PaymentController::class, 'stripe'])->name('payment.stripe');
     Route::GET('/buyPackage/create/success', [PaymentController::class, 'success'])->name('buyPackage.success');
     Route::GET('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
-    Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+    Route::POST('/payment', [PaymentController::class, 'store'])->name('payment.store');
 
 
     Route::GET('/stripe-payment', [StripeController::class, 'handleGET']);
-    Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('stripe.payment');
+    Route::POST('/stripe-payment', [StripeController::class, 'handlePOST'])->name('stripe.payment');
 });
 
 
@@ -176,7 +176,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
     Route::GET('/revenue/{id}', [RevenueController::class, 'show'])->name('revenue.show');
-    Route::delete('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
+    Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
 });
 
 // --------------- Edit Profile

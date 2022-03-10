@@ -8,11 +8,9 @@
         @error('msg')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        @role('admin')
         <div class="d-flex justify-content-center mb-3">
             <a href="{{ route('cities.create') }}" class="btn btn-success">Add New City</a>
         </div>
-        @endrole
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">All Cities</h3>
@@ -52,30 +50,6 @@
         $('#table').DataTable();
     });
 </script>
+
 @include('layouts.alertScript')
-
-<script type="text/javascript">
-    $('.show-alert-delete-box').click(function(event) {
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            title: "Are you sure you want to delete ?",
-            icon: "warning",
-            type: "warning",
-            buttons: ["Cancel", "Yes!"],
-            confirmButtonColor: '#8CD4F5',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: "No, cancel plz!",
-        }).then((willDelete) => {
-            if (willDelete) {
-                form.submit();
-            } else {
-                swal("Cancelled", "Your Data is safe :)", "error");
-            }
-        });
-    });
-</script>
-
 @stop
