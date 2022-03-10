@@ -43,7 +43,7 @@
                             @role('admin|cityManager')
                             <td>{{ $user->gym ? $user->gym->name : 'Not Found !' }}</td>
                             @endrole
-                            <th class="d-flex justify -content-center">
+                            <th class="d-flex justify-content-center">
                                 <a href="{{ route('users.show',  $user->id) }}" class="btn btn-md btn-info mr-2"><i class="fas fa-eye"></i></a>
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-md btn-warning"><i class="fas fa-edit"></i></a>
                                 <form class="col-md-4" action="{{ route('users.destroy', $user->id) }}" method="post">

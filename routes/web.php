@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/gymManagers', [GymManagerController::class, 'index'])->name('gymManagers.index');
     Route::GET('/gymManagers/banned', [GymManagerController::class, 'banView'])->name('gymManagers.banned');    // show banned Mgr
     Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
+    Route::GET('/gymManagers/{id}', [GymManagerController::class, 'show'])->name('gymManagers.show');
     Route::POST('/gymManagers', [GymManagerController::class, 'store'])->name('gymManagers.store');
     Route::GET('/gymManagers/{gymManager}/edit', [GymManagerController::class, 'edit'])->name('gymManagers.edit');
     Route::PUT('/gymManagers/{gymManager}', [GymManagerController::class, 'update'])->name('gymManagers.update');
