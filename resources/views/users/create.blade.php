@@ -168,10 +168,10 @@ use App\Models\City; --}}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $('#cityName').on('change', function(e) {
-            console.log(e);
+
             var city_id = e.target.value;
             $.get('/json-gym?city_id=' + city_id, function(data) {
-                console.log(data);
+
                 $('#gymName').empty();
                 $('#gymName').append(
                     '<option value="0" disable="true" selected="true">=== Select Gym ===</option>');

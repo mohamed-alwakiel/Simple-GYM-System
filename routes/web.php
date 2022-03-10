@@ -153,6 +153,7 @@ Route::middleware(['auth'])->group(function () {
     Route::GET('/coaches/edit/{id}', [CoachController::class, 'edit'])->name('coaches.edit');
     Route::PUT('/coaches/{id}', [CoachController::class, 'update'])->name('coaches.update');
     Route::DELETE('/coaches/{id}', [CoachController::class, 'destroy'])->name('coaches.destroy');
+    
 
     Route::get('/get-coaches-my-datatables', [CoachController::class, 'getCoaches'])->name('get.coaches')->middleware('auth');
     Route::get('/coachesTest', [CoachController::class, 'coachesDataTables'])->name('coaches.coachesTest');
