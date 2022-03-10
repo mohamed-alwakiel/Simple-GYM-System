@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('attendances', function (Blueprint $table) {
-            $table->foreignId('user_id')->references('id')->on('users');        // cascade
-            $table->foreignId('training_session_id')->references('id')->on('training_sessions');    // set null
+        Schema::table('coaches', function (Blueprint $table) {
+            $table->BigInteger('gym_id')->unsigned()->nullable();
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('attendance', function (Blueprint $table) {
+        Schema::table('coaches', function (Blueprint $table) {
             //
         });
     }

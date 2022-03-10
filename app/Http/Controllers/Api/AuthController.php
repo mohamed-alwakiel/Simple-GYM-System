@@ -39,6 +39,7 @@ class AuthController extends Controller
         ]);
 
         //sending mail to registered user
+        $user->assignRole('client');
         $user->sendEmailVerificationNotification();
         $response=[
             'user'=>$user,

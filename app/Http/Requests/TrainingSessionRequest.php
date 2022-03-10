@@ -29,10 +29,9 @@ class TrainingSessionRequest extends FormRequest
             'gym_id' => ['required'],
             'name' => ['required', 'min:3'],
             'day' => ['required'],
-            'started_at_date' => ['required'],
-            'started_at_time' => ['required'],
-            'finished_at_date' => ['required'],
-            'finished_at_time' => ['required'],
+            'started_at' => ['required'],
+            'finished_at' => ['required'],
+
         ];
 
 

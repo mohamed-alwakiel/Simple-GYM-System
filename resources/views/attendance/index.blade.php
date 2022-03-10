@@ -2,13 +2,16 @@
 @extends('layouts.master')
 
 @section('title')
-Sessions
+Attendance
 @endsection
 
 @section('content')
+
 <div class='container dark:bg-gray-900 w-70' id='session_data'>
 
-
+    <div class="card ">
+        <h5 class="card-header">Attendance</h5>
+        <div class="card-body">
     <table class="table">
         <thead>
             <tr>
@@ -47,7 +50,8 @@ Sessions
             @endforeach
         </tbody>
     </table>
-
+</div>
+    </div>
 </div>
 @endsection
 <!-- /.content-wrapper -->

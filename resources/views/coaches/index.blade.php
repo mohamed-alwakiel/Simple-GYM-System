@@ -5,17 +5,25 @@
 @endsection
 
 @section('content')
-    <div class="w-50 mx-auto pt-3 d-flex justify-content-end">
+
+<div class="card ">
+    <h5 class="card-header">Coaches</h5>
+
+
+    <div class="w-50  pt-3 d-flex card-header">
         <a href="{{ route('coaches.create') }}" class="btn btn-success my-3">Add New Coach</a>
     </div>
-
-    <table class="w-50 mx-auto text-center table-bordered border-2 table-striped ">
+    <div class="card-body">
+    <table id="table" class="table text-center ">
 
 
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">name</th>
+                <th scope="col">Gym name</th>
+
+                <th>Edit</th>
 
             </tr>
         </thead>
@@ -24,8 +32,10 @@
                 <tr>
                     <th scope="row">{{ $coach->id }}</th>
                     <td>{{ $coach->name }}</td>
+                    <td>{{ $coach->gym->name }}</td>
 
-                    {{-- <td><a href="{{ route('coaches.show', ['id' => $coach->id]) }}" class="btn btn-info">View</a></td> --}}
+
+
                     <td class="d-flex justify-content-around py-2">
                         <a href="{{ route('coaches.edit', ['id' => $coach->id]) }}" class="btn btn-success">
                             Edite
@@ -38,10 +48,23 @@
                             <input class='btn btn-danger' type="submit" onclick=" return confirm('are you sure ?')"
                                 value="Delete">
                         </form>
+                    </td>
 
-                        </th>
+
+
                 </tr>
             @endforeach
         </tbody>
     </table>
+</div>
+</div>
+@endsection
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+
+</script>
 @endsection

@@ -14,7 +14,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Actions</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody style=" color: #0a0e14">
@@ -37,7 +37,7 @@
                                         value="Delete">
                                 </form>
 
-                                </th>
+                            </td>
                         </tr>
                     @endforeach
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 
+use App\Models\Gym;
 use App\Models\City;
-use App\Models\Coach;
 // use Illuminate\Support\Carbon;
+use App\Models\User;
+use App\Models\Coach;
 use Spatie\Period\Period;
 use App\Models\CoachSession;
 use Illuminate\Http\Request;
@@ -40,87 +42,36 @@ class TrainingSessionController extends Controller
     public function index()
     {
 
-        $roleAdmin = auth()->user()->hasRole('admin');
-        $roleCityManager = auth()->user()->hasRole('cityManager');
-        $roleGymManager = auth()->user()->hasRole('gymManager');
-
-
-        if($roleAdmin){
-        Paginator::useBootstrapFive();
-        $sessions = TrainingSession::paginate(10);
-        // }elseif($roleCityManager ){
-        //     $city_id=Auth::user()->city_id;
-        //     $gyms_id=City::find($city_id)->gyms;
-        //     $sessions = TrainingSession::find($gym_id);
-        }elseif($roleGymManager){
-            $gym_id = Auth::user()->gym_id;
-            $sessions = TrainingSession::find($gym_id);
-        }
-
+        $sessions = $this->getSessionsCoachesAndGymsData()[0];
         return view(
             'sessions.index',
             [
                 'sessions' => $sessions,
             ]
         );
-
     }
 
     public function create()
     {
-        $sessions = TrainingSession::all();
-        $coaches = Coach::all();
-        $cities = DB::table("cities")->get();
+
+
+        $sessions = $this->getSessionsCoachesAndGymsData()[0];
+        $coaches = $this->getSessionsCoachesAndGymsData()[1];
+        $gyms = $this->getSessionsCoachesAndGymsData()[2];
+
+
 
         return view(
             'sessions.create',
             [
                 'sessions' => $sessions,
                 'coaches' => $coaches,
-                'cities' => $cities,
+                'gyms' => $gyms,
             ]
         );
     }
 
-    public function store(TrainingSessionRequest $request)
-    {
-        $started_at_date = explode('-', $request->started_at_date);
-        $started_at_time = explode(':', $request->started_at_time);
 
-        $finished_at_date = explode('-', $request->finished_at_date);
-        $finished_at_time = explode(':', $request->finished_at_time);
-
-        $started_at = Carbon::create((int)$started_at_date[0], (int)$started_at_date[1], (int)$started_at_date[2], (int)$started_at_time[0], (int)$started_at_time[1], 00);
-        $finished_at = Carbon::create((int)$finished_at_date[0], (int)$finished_at_date[1], (int)$finished_at_date[2], (int)$finished_at_time[0], (int)$finished_at_time[1], 00);
-
-        $selectedGym = $request->gym_id;
-
-        $isSessionTimeValid = !($this->isSessionOverlap($started_at, $finished_at, $selectedGym));
-        // dd($isSessionTimeValid);
-        if ($isSessionTimeValid) {
-            $requestedData =
-                [
-                    'gym_id' => $request->gym_id,
-                    'name' => $request->name,
-                    'day' => $request->day,
-                    'started_at' => $started_at,
-                    'finished_at' => $finished_at,
-                ];
-
-            $newSession =  TrainingSession::create($requestedData);
-            foreach ($request->coach_id as $coach) {
-                CoachSession::create(
-                    array(
-                        'training_session_id' => $newSession['id'],
-                        'coach_id' => $coach,
-                    )
-                );
-            }
-            return redirect()->route('sessions.index');
-        } else {
-            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
-        }
-    }
 
     public function edit($id)
     {
@@ -136,17 +87,23 @@ class TrainingSessionController extends Controller
         );
     }
 
-    public function update($id, TrainingSessionRequest $request)
+    public function update($id)
     {
         $formDAta = request()->all();
 
-        $session = TrainingSession::find($id)->update($formDAta);
 
-        $session = TrainingSession::find($id)->update($formDAta);
-        $session = TrainingSession::find($id);
+        $start = $formDAta['started_at'];
+        $end = $formDAta['finished_at'];
+        $checkOverlap = $this->CheckOverlap($start, $end);
 
-        $session->coaches()->sync($formDAta['coach_id']);
-        return redirect()->route('sessions.index');
+        if ($checkOverlap == 0) {
+            $session = TrainingSession::find($id)->update($formDAta);
+
+            return redirect()->route('sessions.index');
+        } else {
+            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+
+        }
     }
 
 
@@ -161,6 +118,9 @@ class TrainingSessionController extends Controller
 
 
         return redirect()->route('sessions.index');
+        // return response()->json([
+        //     'message' => 'Data deleted successfully!'
+        //   ]);
     }
 
 
@@ -181,24 +141,107 @@ class TrainingSessionController extends Controller
         }
     }
 
-    private function isSessionOverlap($started_at, $finished_at, $gym)
+    public function store(TrainingSessionRequest $request)
     {
-        $newSessionTime = Period::make($started_at, $finished_at);
-        // dd($newSessionTime);
-        $gymSessions = TrainingSession::where('gym_id', $gym)->get();
-        // dd($gymSessions);
-        foreach ($gymSessions as $session) {
-            // dd($session);
-            $oldSession = Period::make(new Carbon($session->started_at), new Carbon($session->finished_at));
-            // dd($newSessionTime,$oldSession);
-            return $newSessionTime->overlapsWith($oldSession);
+
+        $start = $request['started_at'];
+        $end = $request['finished_at'];
+        $checkOverlap = $this->CheckOverlap($start, $end);
+
+        if ($checkOverlap == 0) {
+            $requestedData =
+                [
+                    'gym_id' => $request->gym_id,
+                    'name' => $request->name,
+                    'day' => $request->day,
+                    'started_at' => $start,
+                    'finished_at' => $end,
+                ];
+
+            $newSession =  TrainingSession::create($requestedData);
+            foreach ($request->coach_id as $coach) {
+                CoachSession::create(
+                    array(
+                        'training_session_id' => $newSession['id'],
+                        'coach_id' => $coach,
+                    )
+                );
+            }
+            return redirect()->route('sessions.index');
+        } else {
+            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
         }
-        // dd('Nooooooooooooooo overlapssssss');
-        return false;
     }
 
     public function getGymsBelongsToCity($id)
     {
         echo json_encode(DB::table('gyms')->where('city_id', $id)->get());
+    }
+    // ========================> to retrieve data from database<=============================//
+
+    public function getSessionsCoachesAndGymsData()
+    {
+
+        $roleAdmin = auth()->user()->hasRole('admin');
+        $roleCityManager = auth()->user()->hasRole('cityManager');
+        $roleGymManager = auth()->user()->hasRole('gymManager');
+
+
+
+        if ($roleAdmin) {
+            $sessions = TrainingSession::all();
+            $coaches = Coach::all();
+            $gyms = Gym::all();
+        } elseif ($roleCityManager) {
+            $sessions = Auth::user()->city->trainingSessions;
+            $coaches = Auth::user()->city->coaches;
+            $gyms = Auth::user()->city->gyms;
+        } elseif ($roleGymManager) {
+            $sessions = Auth::user()->gym->trainingSessions;
+            $coaches = Auth::user()->gym->coaches;
+            $gyms = Auth::user()->gym;
+        }
+
+        return [$sessions, $coaches, $gyms];
+    }
+
+
+    // ========================> to check time overlap<=============================//
+    public function CheckOverlap($start, $end)
+    {
+
+
+        $sessions = $this->getSessionsCoachesAndGymsData()[0];
+        $start = date('Y-m-d H:i:s', strtotime($start));
+        $end = date('Y-m-d H:i:s', strtotime($end));
+        $errors = 0;
+        foreach ($sessions as $session) {
+            $oldStart = date('Y-m-d H:i:s', strtotime($session->started_at));
+            $oldEnd =  date('Y-m-d H:i:s', strtotime($session->finished_at));
+
+
+            if (
+                ($this->betweenForStart($start, $oldStart, $oldEnd) ||
+                    $this->betweenForEdnd($end, $oldStart, $oldEnd))
+
+                ||
+                ($this->betweenForStart($oldStart, $start, $end)
+                    || $this->betweenForEdnd($oldEnd, $start, $end))
+
+
+            ) {
+                $errors++;
+            }
+        }
+        return $errors;
+    }
+    function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend;
+    }
+
+    function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
     }
 }
