@@ -14,8 +14,12 @@
             <input type="hidden" name='id' value="{{ $coaches->id }}">
 
             <div class="mb-3">
-                <label for="name" class="form-label">Title</label>
+                <label for="name" class="form-label">Name</label>
                 <input name="name" id='name' type="text" value="{{ $coaches['name'] }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="gym_id" class="form-label">Gym</label>
+                <input name="gym_id" id='name' type="text" value="{{ $coaches['gym_id'] }}" class="form-control">
             </div>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>

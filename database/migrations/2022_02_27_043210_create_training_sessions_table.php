@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('day');
             $table->dateTime('started_at');
             $table->dateTime('finished_at');
-            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');     
+            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');  // cascade --> set null ?? 
             $table->timestamps();
         });
     }

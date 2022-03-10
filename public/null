@@ -14,8 +14,12 @@ function betweenForStart($start, $oldstart, $oldend)
 		  $start = "2022-03-06 11:30:00";
 		  $end ="2022-03-06 12:06:00";
 
- 		$oldStart = "2022-03-06 11:06:00";
-        $oldEnd ="2022-03-06 12:06:00";
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
 		
             if ( 
 			 ( betweenForStart($start, $oldStart, $oldEnd)&&
@@ -26,9 +30,1663 @@ function betweenForStart($start, $oldstart, $oldend)
             && betweenForEdnd( $oldEnd, $start, $end) )
             
            
-             ) {
-			  var_dump(  "in"
-			   );
-               return true; 
-				 
+             ) 
+				 $counter++;
             }else var_dump("out");
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-06 11:30:00";
+		  $end ="2022-03-06 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-09 20:50:00";
+		  $end ="2022-03-09 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-09 20:50:00";
+		  $end ="2022-03-09 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-09 20:50:00";
+		  $end ="2022-03-09 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-09 20:50:00";
+		  $end ="2022-03-09 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-09 20:50:00";
+		  $end ="2022-03-09 12:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-
+		  13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump("out");
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter++;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter+=1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll');
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($oldStart);
+		}
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 2:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($start,$oldStart);
+		}
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 3:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump('llllllllllllll
+			   ');
+            }else var_dump($start,$oldStart);
+		}
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 03:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			   var_dump($counter);
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 03:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 03:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 03:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);
+function betweenForStart($start, $oldstart, $oldend)
+    {
+        return $start >= $oldstart && $start < $oldend ;
+    }
+
+     function betweenForEdnd($end, $oldstart, $oldend)
+    {
+        return $end > $oldstart && $end <= $oldend;
+    }
+
+
+
+        $sessions = TrainingSession::all();
+		  $start = "2022-03-13 02:50:00";
+		  $end ="2022-03-13 03:06:00";
+
+ 		
+       
+$counter=0;
+        foreach ($sessions as $session) {
+            $oldStart = $session->started_at;
+            $oldEnd = $session->finished_at;
+		
+            if ( 
+			 ( betweenForStart($start, $oldStart, $oldEnd)||
+			  betweenForEdnd( $end, $oldStart, $oldEnd))
+			  
+||			  
+			(  betweenForStart($oldStart, $start, $end)
+            || betweenForEdnd( $oldEnd, $start, $end) )
+            
+           
+            ) {
+				 $counter=$counter+1;
+			
+            }else var_dump($oldStart);
+		}
+    var_dump($counter);

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->BigInteger('gym_id')->unsigned()->nullable();
             $table->BigInteger('city_id')->unsigned()->nullable();
  
-            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');    // cascade ---> set null
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade'); // cascade ---> set null
         });
     }
 

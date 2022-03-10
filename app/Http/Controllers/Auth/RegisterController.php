@@ -87,21 +87,7 @@ class RegisterController extends Controller
         ]);
 
 
-        // $img= $data['userImg'];
-        // $imageName = time() . rand(1, 200) . '.' . $img->extension();
-        // $img->move(public_path('imgs//' . 'client'), $imageName);
-        // $user =  User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        //     'profile_img' => $imageName,
-        //     'date_of_birth' =>$data['date_of_birth'],
-        //     'gender' => $data['gender'],
-        //     'national_id'=> $data['national_id'],
-        //     'role_type' => 'client',
-        //     'role_id' => 4,
-        // ]);
-        // $user->assignRole('client');
+        $user->assignRole('client');
         return $user;
     }
 }
