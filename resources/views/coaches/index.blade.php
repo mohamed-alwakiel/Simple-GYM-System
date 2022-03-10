@@ -30,14 +30,13 @@
                         <tr>
                             <td>{{ $coach->id }}</td>
                             <td>{{ $coach->name }}</td>
-                            <td>{{ $coach->gym->name }}</td>
+                            <td>{{ $coach->gym->name ?? " " }}</td>
                             <td class="d-flex justify-content-center">
                                 <a href="{{ route('coaches.show',  $coach->id) }}" class="btn btn-md btn-info mr-2" title="show"><i class="fas fa-eye"></i></a>
                                 <a href="{{ route('coaches.edit', ['id' => $coach->id]) }}" class="btn btn-md btn-warning mr-2" title="Edit"><i class="fas fa-edit"></i></a>
                                 <form method="POST" action="{{ route('coaches.destroy', ['id' => $coach->id]) }}">
                                     @csrf
                                     @method('delete')
-                                    <!-- <input class='btn btn-danger' type="submit" onclick=" return confirm('are you sure ?')" value="Delete"> -->
                                     <button type="submit" class="btn btn-md btn-danger show-alert-delete-box px-3" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                                 </form>
                             </td>

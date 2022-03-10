@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CoachRequest;
 use App\Models\Gym;
 use App\Models\City;
 use App\Models\Coach;
@@ -13,24 +14,29 @@ class CoachController extends Controller
 {
     public function index()
     {
-        $coaches = $this->getCoachesAndGymsData()[0];
-        return view('coaches.index', [
+      $coaches=$this->getCoachesAndGymsData()[0];
+
+        return view('coaches.index',
+        [
             'coaches' => $coaches
         ]);
     }
 
     public function create()
     {
-        $coaches = $this->getCoachesAndGymsData()[0];
-        $gyms = $this->getCoachesAndGymsData()[1];
+      $coaches=$this->getCoachesAndGymsData()[0];
+      $gyms=$this->getCoachesAndGymsData()[1];
+      $cities=$this->getCoachesAndGymsData()[2];
+
 
         return view('coaches.create', [
             'coaches' => $coaches,
             'gyms' => $gyms,
+            'cities' => $cities,
         ]);
     }
 
-    public function store()
+    public function store(CoachRequest $request)
     {
         $requestedData = request()->all();
         Coach::create($requestedData);
@@ -79,17 +85,26 @@ class CoachController extends Controller
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
 
-        if ($roleAdmin) {
-            $coaches = Coach::all();
-            $gyms = Gym::all();
-        } elseif ($roleCityManager) {
-            $coaches = Auth::user()->city->coaches;
-            $gyms = Auth::user()->city->gyms;
-        } elseif ($roleGymManager) {
-            $coaches = Auth::user()->gym->coaches;
-            $gyms = Auth::user()->gym;
+        if($roleAdmin){
+            $coaches=Coach::all();
+            $cities=City::all();
+            $gyms=Gym::all();
+
+        }elseif($roleCityManager ){
+           $coaches =Auth::user()->city->coaches;
+           $gyms =Auth::user()->city->gyms;
+           $cities=Auth::user()->city;
+
+
+
+        }elseif($roleGymManager){
+
+            $coaches =Auth::user()->gym->coaches;
+           $gyms =Auth::user()->gym;
+           $cities=Auth::user()->city;
+
         }
 
-        return [$coaches, $gyms];
+        return [$coaches,$gyms,$cities];
     }
 }

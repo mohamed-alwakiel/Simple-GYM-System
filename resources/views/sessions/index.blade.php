@@ -79,32 +79,7 @@
     $(document).ready(function() {
         $('#table').DataTable();
     });
-<<<<<<< HEAD
 
-
-    $('.show-alert-delete-box').click(function(event){
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            title: "Are you sure you want to delete this record?",
-            text: "If you delete this, it will be gone forever.",
-            icon: "warning",
-            type: "warning",
-            buttons: ["Cancel","Yes!"],
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((willDelete) => {
-            if (willDelete) {
-
-                form.submit();
-            }
-        });
-    });
-
-=======
->>>>>>> 44c0ff59e95f1c9bb18c98449b7be8917f9edd61
 </script>
 
 @include('layouts.alertScript')
