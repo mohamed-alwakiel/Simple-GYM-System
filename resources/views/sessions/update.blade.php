@@ -16,6 +16,7 @@
             </ul>
         </div>
     @endif
+
     <div class='container '>
         <form method="POST" action="{{ route('sessions.update', ['id' => $session['id']]) }}" class="mt-5">
             @csrf

@@ -41,11 +41,14 @@ Create
         <!-- Select Gym -->
         @hasanyrole('admin|cityManager')
         <div class="mb-3 w-50">
-            <label for="gym" class="form-label">gym</label>
-            <select class="form-control" name="gym_id" id="gymSelector">
-
+            <label for="gym_id" class="form-label">Gym name</label>
+            <select  name="gym_id" class="form-control">
+                @foreach ($gyms as $gym)
+                <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                @endforeach
             </select>
         </div>
+
         @endhasanyrole
 
         <!-- Session Name -->
@@ -72,15 +75,13 @@ Create
         <!-- Start -->
         <div class="form-group mb-3 w-50">
             <label class="form-label">Start Session</label>
-            <input class="form-control" type="date" id="started_at_date" name="started_at_date" value="{{\Carbon\Carbon::now()}}">
-            <input class="form-control" type="time" id="started_at_time" name="started_at_time" value="{{\Carbon\Carbon::now()}}">
+            <input class="form-control" type="datetime-local"  name="started_at">
         </div>
 
         <!-- Finish -->
         <div class="form-group mb-3 w-50">
             <label class="form-label">Finish Session</label>
-            <input class="form-control" type="date" id="finished_at_date" name="finished_at_date" value="{{\Carbon\Carbon::now()}}">
-            <input class="form-control" type="time" id="finished_at_time" name="finished_at_time" value="{{\Carbon\Carbon::now()}}">
+            <input class="form-control" type="datetime-local"  name="finished_at" >
         </div>
 
         <!-- Coaches -->
