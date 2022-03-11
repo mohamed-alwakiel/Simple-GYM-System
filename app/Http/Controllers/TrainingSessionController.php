@@ -70,7 +70,7 @@ class TrainingSessionController extends Controller
         $session = TrainingSession::find($id);
         $coaches = Coach::all();
 
-        return view('sessions.update', [
+        return view('sessions.edit', [
             'session' => $session,
             'coaches' => $coaches
         ]);

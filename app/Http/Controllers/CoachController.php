@@ -14,19 +14,21 @@ class CoachController extends Controller
 {
     public function index()
     {
-      $coaches=$this->getCoachesAndGymsData()[0];
+        $coaches = $this->getCoachesAndGymsData()[0];
 
-        return view('coaches.index',
-        [
-            'coaches' => $coaches
-        ]);
+        return view(
+            'coaches.index',
+            [
+                'coaches' => $coaches
+            ]
+        );
     }
 
     public function create()
     {
-      $coaches=$this->getCoachesAndGymsData()[0];
-      $gyms=$this->getCoachesAndGymsData()[1];
-      $cities=$this->getCoachesAndGymsData()[2];
+        $coaches = $this->getCoachesAndGymsData()[0];
+        $gyms = $this->getCoachesAndGymsData()[1];
+        $cities = $this->getCoachesAndGymsData()[2];
 
 
         return view('coaches.create', [
@@ -54,16 +56,23 @@ class CoachController extends Controller
     public function edit($id)
     {
         $coach = Coach::find($id);
-        return view('coaches.edit', ['coaches' => $coach]);
+        $gyms = $this->getCoachesAndGymsData()[1];
+        $cities = $this->getCoachesAndGymsData()[2];
 
+        return view(
+            'coaches.edit',
+            [
+                'coaches' => $coach,
+                'gyms' => $gyms,
+                'cities' => $cities,
+            ]
+        );
     }
 
-    public function update($id)
+    public function update($id, CoachRequest $request)
     {
         $formDAta = request()->all();
-
         $coach = Coach::find($id)->update($formDAta);
-
         return redirect()->route('coaches.index');
     }
 
@@ -73,7 +82,6 @@ class CoachController extends Controller
         $coach = Coach::find($id);
         $coach->gym()->dissociate();
         $coach->trainingSessions()->detach();
-
         $coach->delete();
         return redirect()->route('coaches.index');
     }
@@ -85,26 +93,21 @@ class CoachController extends Controller
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
 
-        if($roleAdmin){
-            $coaches=Coach::all();
-            $cities=City::all();
-            $gyms=Gym::all();
+        if ($roleAdmin) {
+            $coaches = Coach::all();
+            $cities = City::all();
+            $gyms = Gym::all();
+        } elseif ($roleCityManager) {
+            $coaches = Auth::user()->city->coaches;
+            $gyms = Auth::user()->city->gyms;
+            $cities = Auth::user()->city;
+        } elseif ($roleGymManager) {
 
-        }elseif($roleCityManager ){
-           $coaches =Auth::user()->city->coaches;
-           $gyms =Auth::user()->city->gyms;
-           $cities=Auth::user()->city;
-
-
-
-        }elseif($roleGymManager){
-
-            $coaches =Auth::user()->gym->coaches;
-           $gyms =Auth::user()->gym;
-           $cities=Auth::user()->city;
-
+            $coaches = Auth::user()->gym->coaches;
+            $gyms = Auth::user()->gym;
+            $cities = Auth::user()->city;
         }
 
-        return [$coaches,$gyms,$cities];
+        return [$coaches, $gyms, $cities];
     }
 }
