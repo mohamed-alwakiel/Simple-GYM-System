@@ -38,7 +38,7 @@ Route::GET('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 
 
 // --------------- CITY MANAGERS
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin'], function () {
     Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
     Route::GET('/cityManagers/create', [CityManagerController::class, 'create'])->name('cityManagers.create');
     Route::GET('/cityManagers/{id}', [CityManagerController::class, 'show'])->name('cityManagers.show');
@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- GYM MANAGERS
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager'], function () {
     Route::GET('/gymManagers', [GymManagerController::class, 'index'])->name('gymManagers.index');
     Route::GET('/gymManagers/banned', [GymManagerController::class, 'banView'])->name('gymManagers.banned');    // show banned Mgr
     Route::GET('/gymManagers/create', [GymManagerController::class, 'create'])->name('gymManagers.create');
@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Cities
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin'], function () {
     Route::GET('/cities', [CitiesController::class, 'index'])->name('cities.index');
     Route::GET('/cities/create', [CitiesController::class, 'create'])->name('cities.create');
     Route::GET('/cities/{id}', [CitiesController::class, 'show'])->name('cities.show');
@@ -79,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- GYMS
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager'], function () {
     Route::GET('/gyms', [GymsController::class, 'index'])->name('gyms.index');
     Route::GET('/gyms/create', [GymsController::class, 'create'])->name('gyms.create');
     Route::GET('/gyms/{id}', [GymsController::class, 'show'])->name('gyms.show');
@@ -91,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Users
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/users', [UserController::class, 'index'])->name('users.index');
     Route::GET('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::GET('/users/{id}', [UserController::class, 'show'])->name('users.show');
@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Training Packages
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
     Route::GET('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
     Route::GET('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
     Route::GET('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // --------------- Sessions
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
     Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
     Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
@@ -127,12 +127,11 @@ Route::middleware(['auth'])->group(function () {
     Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
     Route::DELETE('/sessions/{id}', [TrainingSessionController::class, 'destroy'])->name('sessions.destroy');
     Route::GET('/json-coach', [TrainingSessionController::class, 'GetCoachNameFromGymName']);
-
 });
 
 
 // --------------- Coaches
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/coaches', [CoachController::class, 'index'])->name('coaches.index');
     Route::GET('/coaches/create', [CoachController::class, 'create'])->name('coaches.create');
     Route::GET('/coaches/{id}', [CoachController::class, 'show'])->name('coaches.show');
@@ -144,12 +143,13 @@ Route::middleware(['auth'])->group(function () {
 
 
 // --------------- Attendance
-Route::GET('/attendance', [AttendanceController::class, 'index'])->name('attendance.index')->middleware('auth');
-
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
+    Route::GET('/attendance', [AttendanceController::class, 'index'])->name('attendance.index')->middleware('auth');
+});
 
 // --------------- Buy Package
-Route::GET('/GETGymsBelongsToCity/{id}', [BuyPackageController::class, 'GETGymsBelongsToCity']);
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
+    Route::GET('/GETGymsBelongsToCity/{id}', [BuyPackageController::class, 'GETGymsBelongsToCity']);
 
     Route::GET('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index');
     Route::GET('/buyPackage/create', [BuyPackageController::class, 'create'])->name('buyPackage.create');
@@ -164,14 +164,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::GET('/buyPackage/create/cancel', [PaymentController::class, 'cancel'])->name('buyPackage.cancel');
     Route::POST('/payment', [PaymentController::class, 'store'])->name('payment.store');
 
-
     Route::GET('/stripe-payment', [StripeController::class, 'handleGET']);
     Route::POST('/stripe-payment', [StripeController::class, 'handlePOST'])->name('stripe.payment');
 });
 
 
 // --------------- Revenue
-Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
     Route::GET('/revenue/{id}', [RevenueController::class, 'show'])->name('revenue.show');
     Route::DELETE('/revenue/{id}', [RevenueController::class, 'destroy'])->name('revenue.destroy');
@@ -179,7 +178,7 @@ Route::group(['middleware' => 'auth', 'role:admin|cityManager|gymManager'], func
 
 
 // --------------- Edit Profile
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
     Route::GET('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
     Route::PUT('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 
