@@ -33,17 +33,17 @@ class City extends Model
     public function user(){
         return $this->hasMany(CityManager::class, 'city_id');
     }
-    public function trainingSessions() {
 
+    public function trainingSessions() {
         return $this->hasManyThrough(TrainingSession::class, Gym::class);
     }
-    public function attendances() {
 
+    public function attendances() {
         return $this->hasManyThrough(Attendance::class, User::class);
     }
 
-    public function coaches() {
-
+    public function coaches()
+    {
         return $this->hasManyThrough(Coach::class, Gym::class);
     }
 

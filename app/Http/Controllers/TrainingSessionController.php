@@ -192,7 +192,7 @@ class TrainingSessionController extends Controller
         }
         return $errors;
     }
-    
+
     function betweenForStart($start, $oldstart, $oldend)
     {
         return $start >= $oldstart && $start < $oldend;
