@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 class AttendanceController extends Controller
 {
 
-
     public function index()
     {
 
@@ -41,34 +40,4 @@ class AttendanceController extends Controller
         ]
     );
     }
-
-    // public function attend($userId,$trainingSessionId) {
-
-
-
-    //   $start=TrainingSession::find($trainingSessionId,['started_at']);
-    //  $end=TrainingSession::find($trainingSessionId,['finished_at']);
-
-    //     ////===>Session data:
-    //     $start=date('H',strtotime($start));
-    //     $end=date('H',strtotime($end));
-    //     ////===>Current date and time:
-    //     $dateNow=date('Y-m-d',strtotime(now()));
-    //     $timeNow=date('H',strtotime(now()));
-
-
-
-    //     if ($timeNow >= $start  && $timeNow <= $end){
-    //     Attendance::create([
-
-    //         'user_id'=>$userId,
-    //         'training_session_id'=>$trainingSessionId,
-    //         'attendance_time'=> $timeNow,
-    //         'attendance_date'=>  $dateNow,
-    //     ]);
-    // }else{$errors="session not available";}
-
-    //     return redirect()->route('attendance.index');
-    // }
 }
-
