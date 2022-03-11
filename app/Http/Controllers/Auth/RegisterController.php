@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'date_of_birth' => 'required|date',
             'national_id' => 'required|unique:users|digits_between:14,14',
             'gender' =>'required|in:male,female',
+            'city_id' =>'exists:cities,id',
         ]);
 
     }
@@ -82,12 +83,14 @@ class RegisterController extends Controller
             'date_of_birth' =>$data['date_of_birth'],
             'gender' => $data['gender'],
             'national_id'=> $data['national_id'],
+            'city_id' =>  $data['city_id'],
         ]);
 
 
         $user->assignRole('client');
         return $user;
     }
+
 }
 
 

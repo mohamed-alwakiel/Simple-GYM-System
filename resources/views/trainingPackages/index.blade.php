@@ -57,7 +57,7 @@ Training Packages
         </div>
     </div>
 </div>
-@stop
+
 
 
 @section('script')

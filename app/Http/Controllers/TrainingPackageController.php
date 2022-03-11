@@ -46,7 +46,7 @@ class TrainingPackageController extends Controller
             'name' => $requestObj->name,
             'price' => $requestObj->price *100,
             'number_of_sessions' => $requestObj->number_of_sessions,
- 
+
         ]);
         return to_route('trainingPackages.index');
     }

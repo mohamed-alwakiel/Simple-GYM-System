@@ -57,7 +57,7 @@ class PaymentController extends Controller
 
             ]);
             return redirect()->away('https://buy.stripe.com/test_28o9D32OG3z0fT2144');
-        // }
+        }
 
 
         
