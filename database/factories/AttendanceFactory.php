@@ -19,7 +19,7 @@ class AttendanceFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::inRandomOrder()->where('role_id', 4)->first()->id,
+            'user_id' => User::inRandomOrder()->role('client')->first()->id,
             'training_session_id' => $this->faker->randomElement(TrainingSession::all())['id'],
         ];
     }

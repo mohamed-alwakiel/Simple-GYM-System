@@ -6,7 +6,6 @@ use Carbon\Carbon;
 
 use App\Models\Gym;
 use App\Models\City;
-// use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\Coach;
 use Spatie\Period\Period;
@@ -19,79 +18,67 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Period\PeriodCollections;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
-
+use App\Models\Session;
 
 class TrainingSessionController extends Controller
 {
-    public function sessionDataTables()
-    {
-
-
-        $sessions = TrainingSession::all();
-
-
-        return view(
-            'sessions.datatables',
-            [
-                'sessions' => $sessions,
-            ]
-        );
-    }
-
-
     public function index()
     {
-
         $sessions = $this->getSessionsCoachesAndGymsData()[0];
-        return view(
-            'sessions.index',
-            [
-                'sessions' => $sessions,
-            ]
-        );
+        return view('sessions.index', [
+            'sessions' => $sessions,
+        ]);
     }
 
     public function create()
     {
-
-
         $sessions = $this->getSessionsCoachesAndGymsData()[0];
         $coaches = $this->getSessionsCoachesAndGymsData()[1];
         $gyms = $this->getSessionsCoachesAndGymsData()[2];
+        $cities = $this->getSessionsCoachesAndGymsData()[3];
 
-
-
-        return view(
-            'sessions.create',
-            [
-                'sessions' => $sessions,
-                'coaches' => $coaches,
-                'gyms' => $gyms,
-            ]
-        );
+        return view('sessions.create', [
+            'sessions' => $sessions,
+            'coaches' => $coaches,
+            'gyms' => $gyms,
+            'cities' => $cities,
+        ]);
     }
 
+    public function GetGymNameFromCityName(Request $request)
+    {
+        $city_id = $request->get('city_id');
+        $gyms = Gym::where('city_id', '=', $city_id)->get();
+        return response()->json($gyms);
+    }
 
+    public function GetCoachNameFromGymName(Request $request)
+    {
+        $gym_id = $request->get('gym_id');
+        $coachs = Coach::where('gym_id', '=', $gym_id)->get();
+        return response()->json($coachs);
+    }
+
+    public function show($sessionID)
+    {
+        $session = TrainingSession::findOrFail($sessionID);
+        return view('sessions.show', ['session' => $session]);
+    }
 
     public function edit($id)
     {
         $session = TrainingSession::find($id);
         $coaches = Coach::all();
 
-        return view(
-            'sessions.update',
-            [
-                'session' => $session,
-                'coaches' => $coaches
-            ]
-        );
+        return view('sessions.edit', [
+            'session' => $session,
+            'coaches' => $coaches
+        ]);
     }
 
     public function update($id)
     {
         $formDAta = request()->all();
-
-
         $start = $formDAta['started_at'];
         $end = $formDAta['finished_at'];
         $checkOverlap = $this->CheckOverlap($start, $end);
@@ -102,43 +89,18 @@ class TrainingSessionController extends Controller
             return redirect()->route('sessions.index');
         } else {
             return back()->with('error', 'Session date will Overlap another session, Choose different Date');
-
         }
     }
 
 
     public function destroy($id)
     {
-
-
         $session = TrainingSession::find($id);
         $session->gyms()->dissociate();
         $session->coaches()->detach();
         $session->delete();
 
-
         return redirect()->route('sessions.index');
-        // return response()->json([
-        //     'message' => 'Data deleted successfully!'
-        //   ]);
-    }
-
-
-    public function paginateFast(Request $request)
-    {
-
-        if ($request->ajax()) {
-            Paginator::useBootstrapFive();
-            $sessions = TrainingSession::paginate(10);
-
-            return view(
-                'sessions.index_child',
-                [
-                    'sessions' => $sessions,
-
-                ]
-            )->render();
-        }
     }
 
     public function store(TrainingSessionRequest $request)
@@ -181,36 +143,35 @@ class TrainingSessionController extends Controller
 
     public function getSessionsCoachesAndGymsData()
     {
-
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
-
-
+        $roleClient = auth()->user()->hasRole('client');
 
         if ($roleAdmin) {
             $sessions = TrainingSession::all();
             $coaches = Coach::all();
             $gyms = Gym::all();
+            $cities = City::all();
         } elseif ($roleCityManager) {
             $sessions = Auth::user()->city->trainingSessions;
             $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
-        } elseif ($roleGymManager) {
+            $cities = Auth::user()->city_id;
+        } elseif ($roleGymManager || $roleClient) {
             $sessions = Auth::user()->gym->trainingSessions;
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
+            $cities = Auth::user()->city_id;
         }
 
-        return [$sessions, $coaches, $gyms];
+        return [$sessions, $coaches, $gyms, $cities];
     }
 
 
     // ========================> to check time overlap<=============================//
     public function CheckOverlap($start, $end)
     {
-
-
         $sessions = $this->getSessionsCoachesAndGymsData()[0];
         $start = date('Y-m-d H:i:s', strtotime($start));
         $end = date('Y-m-d H:i:s', strtotime($end));
@@ -218,8 +179,6 @@ class TrainingSessionController extends Controller
         foreach ($sessions as $session) {
             $oldStart = date('Y-m-d H:i:s', strtotime($session->started_at));
             $oldEnd =  date('Y-m-d H:i:s', strtotime($session->finished_at));
-
-
             if (
                 ($this->betweenForStart($start, $oldStart, $oldEnd) ||
                     $this->betweenForEdnd($end, $oldStart, $oldEnd))
@@ -227,14 +186,13 @@ class TrainingSessionController extends Controller
                 ||
                 ($this->betweenForStart($oldStart, $start, $end)
                     || $this->betweenForEdnd($oldEnd, $start, $end))
-
-
             ) {
                 $errors++;
             }
         }
         return $errors;
     }
+
     function betweenForStart($start, $oldstart, $oldend)
     {
         return $start >= $oldstart && $start < $oldend;

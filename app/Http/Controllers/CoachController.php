@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CoachRequest;
 use App\Models\Gym;
 use App\Models\City;
 use App\Models\Coach;
@@ -14,23 +15,29 @@ class CoachController extends Controller
     public function index()
     {
         $coaches = $this->getCoachesAndGymsData()[0];
-        return view('coaches.index', [
-            'coaches' => $coaches
-        ]);
+
+        return view(
+            'coaches.index',
+            [
+                'coaches' => $coaches
+            ]
+        );
     }
 
     public function create()
     {
-        $coaches = $this->getCoachesAndGymsData()[0];
         $gyms = $this->getCoachesAndGymsData()[1];
+        $cities = $this->getCoachesAndGymsData()[2];
+
+        // dd($gyms->id);
 
         return view('coaches.create', [
-            'coaches' => $coaches,
             'gyms' => $gyms,
+            'cities' => $cities,
         ]);
     }
 
-    public function store()
+    public function store(CoachRequest $request)
     {
         $requestedData = request()->all();
         Coach::create($requestedData);
@@ -48,16 +55,23 @@ class CoachController extends Controller
     public function edit($id)
     {
         $coach = Coach::find($id);
-        return view('coaches.edit', ['coaches' => $coach]);
+        $gyms = $this->getCoachesAndGymsData()[1];
+        $cities = $this->getCoachesAndGymsData()[2];
 
+        return view(
+            'coaches.edit',
+            [
+                'coaches' => $coach,
+                'gyms' => $gyms,
+                'cities' => $cities,
+            ]
+        );
     }
 
-    public function update($id)
+    public function update($id, CoachRequest $request)
     {
         $formDAta = request()->all();
-
         $coach = Coach::find($id)->update($formDAta);
-
         return redirect()->route('coaches.index');
     }
 
@@ -67,7 +81,6 @@ class CoachController extends Controller
         $coach = Coach::find($id);
         $coach->gym()->dissociate();
         $coach->trainingSessions()->detach();
-
         $coach->delete();
         return redirect()->route('coaches.index');
     }
@@ -81,15 +94,20 @@ class CoachController extends Controller
 
         if ($roleAdmin) {
             $coaches = Coach::all();
+            $cities = City::all();
             $gyms = Gym::all();
-        } elseif ($roleCityManager) {
+        }
+        elseif ($roleCityManager) {
             $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
-        } elseif ($roleGymManager) {
+            $cities = Auth::user()->city;
+        }
+        elseif ($roleGymManager) {
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
+            $cities = Auth::user()->city;
         }
 
-        return [$coaches, $gyms];
+        return [$coaches, $gyms, $cities];
     }
 }

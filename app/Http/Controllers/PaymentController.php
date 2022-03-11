@@ -42,9 +42,9 @@ class PaymentController extends Controller
         $package_id = $requestObj->package_id;
         $city = $requestObj->city;
 
-        if ($gym_id == null ||  $user_id == null ||  $package_id == null  || $city == null) {
-            return Redirect::back()->withErrors(['message' => 'complete your data']);
-        } else {
+        // if ($gym_id == null ||  $user_id == null ||  $package_id == null  || $city == null) {
+        //     return Redirect::back()->withErrors(['message' => 'complete your data']);
+        // } else {
 
             Stripe::create([
                 'price' => $package->price,
@@ -57,7 +57,7 @@ class PaymentController extends Controller
 
             ]);
             return redirect()->away('https://buy.stripe.com/test_28o9D32OG3z0fT2144');
-        }
+        // }
 
 
         

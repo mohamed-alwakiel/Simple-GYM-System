@@ -109,8 +109,6 @@ class UserController extends Controller
             'profile_img' => $imageName,
             'date_of_birth' => $request['date_of_birth'],
             'gender' => $request['gender'],
-            'role_type' => 'client',
-            'role_id' => 4,
             'city_id' =>  $city_id,
             'gym_id' =>  $gym_id,
             'email_verified_at' =>  now(),
@@ -230,5 +228,5 @@ class UserController extends Controller
             return view('profile.editPassword', ['msg' => $msg]);
         }
     }
-    
+
 }

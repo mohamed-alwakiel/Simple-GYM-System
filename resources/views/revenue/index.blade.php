@@ -29,10 +29,10 @@
                     <tbody>
                         @foreach ($boughtPackages as $boughtPackage)
                         <tr>
-                            <th>{{ $boughtPackage->user->name }}</th>
-                            <th>{{ $boughtPackage->user->email }}</th>
-                            <th>{{ $boughtPackage->name }}</th>
-                            <th>{{ $boughtPackage->price / 100}} $</th>
+                            <td>{{ $boughtPackage->user->name }}</td>
+                            <td>{{ $boughtPackage->user->email }}</td>
+                            <td>{{ $boughtPackage->name }}</td>
+                            <td>{{ $boughtPackage->price / 100}} $</td>
                             @role('admin|cityManager')
                             <td>{{ $boughtPackage->gym->name }}</td>
                             @endrole

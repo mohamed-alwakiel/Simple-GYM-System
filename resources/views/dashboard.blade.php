@@ -31,15 +31,15 @@
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header text-warning">{{ Auth::user()->name }}</h5>
+                                    <h3 class="description-header text-warning">{{ Auth::user()->name }}</h3>
                                     @role('admin')
                                     <span class="description-text text-secondary">Owner Of Gym Club</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text text-secondary"><b>{{ auth()->user()->city->name }}</b> City Manager</span>
+                                    <span class="description-text text-secondary"><b>{{ auth()->user()->city->name }}</b><br> City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text text-secondary">{{ auth()->user()->gym->name }} branch Manager</span>
+                                    <span class="description-text text-secondary">{{ auth()->user()->gym->name }} <br> Branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->
@@ -63,8 +63,6 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
-                        <!-- <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                        <h5 class="widget-user-desc text-right">Web Designer</h5> -->
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">
@@ -108,10 +106,9 @@
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-text">Revenue</span>
                             <span class="info-box-number">
-                                10
-                                <small>%</small>
+                                $ {{$paidPrice}}
                             </span>
                         </div>
                         <!-- /.info-box-content -->
@@ -121,11 +118,12 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-12">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                    <!-- <i class="fad fa-credit-card-front"></i> -->
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-credit-card"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">Purchased Packages</span>
+                            <span class="info-box-number">{{$boughtPackagesCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -137,8 +135,8 @@
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">Trainees</span>
+                            <span class="info-box-number">{{$allClientsCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -186,7 +184,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <p class="text-center">
-                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                    <!-- <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong> -->
                                 </p>
 
                                 <div class="chart">

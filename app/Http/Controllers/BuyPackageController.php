@@ -58,6 +58,7 @@ class BuyPackageController extends Controller
         $roleAdmin  = Auth::user()->hasRole('admin');
         $roleCityManager = Auth::user()->hasRole('cityManager');
         $roleGymManager = Auth::user()->hasRole('gymManager');
+        $roleClient = Auth::user()->hasRole('client');
 
         $loggedInUser = Auth::user();
         $user = User::role('cityManager')->get()->where('id', $loggedInUser->id)->where('city_id', $loggedInUser->city_id);
@@ -76,6 +77,16 @@ class BuyPackageController extends Controller
         } elseif ($roleGymManager) {
             $gym_id = $loggedInUser->gym_id;
             $city_id = $loggedInUser->city_id;
+        }else{
+            $gym_id = $loggedInUser->gym_id;
+            $city_id = $loggedInUser->city_id;
+            $user_id = $loggedInUser->id;
+            return view('payment.create', data: [
+                'cities' => $city_id,
+                'packages' => $packages,
+                'users' => $user_id,
+                'gyms' => $gym_id,
+            ]);
         }
 
         return view('payment.create', data: [

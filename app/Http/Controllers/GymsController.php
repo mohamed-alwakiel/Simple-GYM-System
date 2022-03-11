@@ -58,7 +58,7 @@ class GymsController extends Controller
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'gym'), $imageName);
         else :
-            $imageName = 'gymMgr.png';
+            $imageName = 'gym.png';
         endif;
 
         if ($roleAdmin) {
@@ -127,5 +127,5 @@ class GymsController extends Controller
             return redirect()->route('gyms.index');
         }
     }
-    
+
 }

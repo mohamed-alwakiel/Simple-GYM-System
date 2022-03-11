@@ -14,13 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::table('bought_packages', function (Blueprint $table) {
-            $table->foreignId('package_id')->references('id')->on('training_packages');     // set null
-
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignId('gym_id')->references('id')->on('gyms')->onDelete('cascade');   // cascade --> set null
+            $table->BigInteger('gym_id')->unsigned()->nullable();
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('set null');
 
-            $table->foreignId('city_id')->references('id')->on('cities')->onDelete('cascade');  // cascade --> set null
+            $table->BigInteger('city_id')->unsigned()->nullable();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
+
+            $table->BigInteger('package_id')->unsigned()->nullable();
+            $table->foreign('package_id')->references('id')->on('training_packages')->onDelete('set null');;
         });
     }
 

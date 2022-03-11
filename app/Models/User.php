@@ -33,8 +33,6 @@ class User extends Authenticatable implements MustVerifyEmail,BannableContract
         'gender',
         'national_id',
         'profile_img',
-        'role_id',
-        'role_type',
         'gym_id' ,
         'city_id',
         'last_login',
@@ -75,7 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail,BannableContract
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
-    
+
     public function gym()
     {
         return $this->belongsTo(Gym::class, 'gym_id', 'id');

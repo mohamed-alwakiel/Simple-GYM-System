@@ -19,9 +19,7 @@ class GymFactory extends Factory
     {
         return [
             'name'=>$this->faker->name,
-            'cover_img'=>$this->faker->name,
-            'created_at'=>$this->faker->date,
-            'updated_at'=>$this->faker->date,
+            'cover_img'=> 'gym.png',
             'city_id' => City::inRandomOrder()->first()->id
         ];
     }

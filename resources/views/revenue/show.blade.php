@@ -29,9 +29,9 @@
         </div>
     </div>
 </div>
+@stop
 
 @section('script')
 @include('layouts.alertScript')
 @stop
 
-@stop
