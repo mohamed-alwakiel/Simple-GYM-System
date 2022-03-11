@@ -7,9 +7,8 @@
 <div class="container-fluid">
 
     <div class="col-md-12 px-4">
-        @error('msg')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
+
         @role('admin')
         <div class="d-flex justify-content-center mb-3">
             <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
@@ -58,12 +57,49 @@
 </div>
 
 @section('script')
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#table').DataTable();
     });
+
+    $('.show-alert-delete-box').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: "Are you sure you want to delete this Package ?",
+            icon: "warning",
+            type: "warning",
+            buttons: ["Cancel", "Yes!"],
+            confirmButtonColor: '#8CD4F5',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: "No, cancel plz!",
+        }).then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            } else {
+                swal("Cancelled", "Your Package is safe :)", "error");
+            }
+        });
+    });
+{{-- // @include('layouts.alertScript') --}}
+@error('msg')
+    $(document).ready(function() {
+     $(window).on('load', function() {
+          swal({
+        title: "you can't delete this package",
+        icon: "error",
+        type: "error",
+        confirmButtonColor: '#8CD4F5',
+        confirmButtonText: 'Ok',
+             });
+     });
+});
+@enderror
 </script>
-@include('layouts.alertScript')
+
+
 @stop
 
 @stop
