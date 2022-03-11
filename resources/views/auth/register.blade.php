@@ -94,6 +94,19 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group mb-3">
+                                <label for="cityName">Select City</label>
+                                <select name="city_id" class="form-control" id='cityName'>
+                                    <option value="0" disable selected="true">=== Select City ===</option>
+                                    @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}"> {{ $city->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('city_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                             <div class="form-group text-center mb-0">
                                 <button type="submit" class="btn btn-primary font-weight-bold mt-3">
                                     {{ __('Register') }}
@@ -111,3 +124,4 @@
 </div>
 
 @stop
+
