@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CityManager;
 use App\Models\GymManager;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

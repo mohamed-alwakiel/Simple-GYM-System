@@ -1,122 +1,122 @@
 @extends('layouts.master')
-@section('title')
-    Payment
-@endsection
+@section('title', 'Buy Package')
 
 @section('content')
-
-    <div class="card card-primary w-50 my-5 mx-auto">
-
-        <div class="card-header bg-success">
-            <h3 class="card-title">Buy Package</h3>
+<div class=" d-flex justify-content-center">
+    <div class="card card-success w-50 mt-3">
+        <div class="card-header">
+            <h3 class="card-title">Buy Package:</h3>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body ">
-            <form class="mt-5 w-50 mx-auto" action="{{ route('payment.store') }}" method="post">
+        <div class="card-body">
+            <form class="px-5 py-3" action="{{ route('payment.store') }}" method="post">
                 @csrf
+
                 <!-- Select City -->
                 @role('admin')
-                    <div class="mb-3">
-                        <label for="city" class="form-label">City</label>
-                        <select class="form-control" name="city" id="citySelector">
-                            <option value="0" disabled selected>Choose City</option>
+                <div class="form-group mb-3">
+                    <label for="city">City</label>
+                    <select class="form-control" name="city" id="cityName">
+                        <option value="0" disabled selected>=== Select City ===</option>
+                        @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @endrole
 
-                            @foreach ($cities as $city)
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
-                            @endforeach
-
-                        </select>
-                    </div>
+                @role('cityManager|gymManager|client')
+                <input type="text" hidden name="city" value="{{$cities}}" id="cityName" />
                 @endrole
 
                 <!-- Select Gym -->
                 @hasanyrole('admin|cityManager')
-                    <div class="mb-3">
-                        <label for="gym" class="form-label">gym</label>
-                        <select class="form-control" name="gym_id" id="gymSelector">
-                            @hasanyrole('cityManager')
-                            <option value="0" disabled selected>Choose Gym</option>
-
-                            @foreach ($gyms as $gym)
-                                <option value="{{ $gym->id }}">{{ $gym->name }}</option>
-                            @endforeach
-                            @endhasanyrole
-                        </select>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="gym">Gym</label>
+                    <select class="form-control" name="gym_id" id="gymName">
+                        @role('cityManager')
+                        <option value="0" disabled selected>=== Select Gym ===</option>
+                        @foreach ($gyms as $gym)
+                        <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                        @endforeach
+                        @endrole
+                    </select>
+                </div>
                 @endhasanyrole
+
+                @role('gymManager|client')
+                <input type="text" hidden name="gym_id" value="{{$gyms}}" />
+                @endrole
 
                 <!-- Select User -->
                 @hasanyrole('admin|cityManager|gymManager')
-                @hasanyrole('cityManager|gymManager')
-                <input type="text" hidden name="city"  value="{{ $cities}}" id="citySelector" />
-                @endhasanyrole
-                @hasanyrole('gymManager')
-                <input type="text" hidden name="gym_id"  value="{{ $gyms }}" />
-                @endhasanyrole
-                    <div class="form-group">
-                        <label>Select User</label>
-                        <select id="selectedUser" name="user_id" class="form-control">
-                            <option value="0" disabled selected>Choose User</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="form-group mb-3">
+                    <label>Select User</label>
+                    <select id="selectedUser" name="user_id" class="form-control">
+                        <option value="0" disabled selected>=== Select User ===</option>
+                        @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 @endhasanyrole
 
+                @role('client')
+                <input type="text" hidden name="user_id" value="{{$users}}" />
+                @endrole
+
                 <!-- Select Package -->
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label>Select Package</label>
                     <select id="selectedPackage" name="package_id" class="form-control">
-                        <option value="0" disabled selected>Choose Package</option>
+                        <option value="0" disabled selected>=== Select Package ===</option>
                         @foreach ($packages as $package)
-                            <option value="{{ $package->id }}">{{ $package->name }}</option>
+                        <option value="{{ $package->id }}">{{ $package->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="d-flex justify-content-end">
-
-                    <button type="submit" class="btn btn-success bg-success py-2 px-4">Buy</button>
+                    <button type="submit" class="btn btn-success py-2 px-4">Buy</button>
                 </div>
             </form>
         </div>
-        <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+</div>
+@stop
 
+@section('script')
+@role('admin')
+<script type="text/javascript">
+    $('#cityName').on('change', function(e) {
+        var city_id = e.target.value;
+        $.get('/json-gym?city_id=' + city_id, function(data) {
+            $('#gymName').empty();
+            $('#gymName').append(
+                '<option value="0" disabled selected="true">=== Select Gym ===</option>');
 
-    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-    @role('admin')
-    <script>
-        $(document).ready(function() {
-            $('#citySelector').on('change', function() {
-                let id = $(this).val();
-                $('#gymSelector').empty();
-                // $('#gymSelector').append('<option value="0" disabled selected>Processing</option>');
-                $.ajax({
-                    url: '/getGymsBelongsToCity/' + id,
+            $.each(data, function(index, gymObj) {
+                $('#gymName').append('<option value="' + gymObj.id + '">' + gymObj.name +
+                    '</option>');
+            })
+        });
+    });
+</script>
+@endrole
 
-                    type: "GET",
-
-
-                    success: function(response) {
-                        var response = JSON.parse(response);
-
-                        $('#gymSelector').empty();
-                        $('#gymSelector').append(
-                            '<option value="0" disabled selected>Select Sub Category</option>'
-                            );
-                        response.forEach(element => {
-                            $('#gymSelector').append(
-                                `<option value="${element['id']}">${element['name']}</option>`
-                                );
-                        });
-                    }
-
-                });
+@error('message')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(window).on('load', function() {
+            swal({
+                title: "You can't buy this package",
+                text: "Complete your form Data",
+                icon: "error",
+                type: "error",
+                confirmButtonColor: '#8CD4F5',
+                confirmButtonText: 'Ok',
             });
         });
-    </script>
-     @endrole
+    });
+</script>
+@enderror
 @endsection

@@ -15,8 +15,7 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
-                        <!-- <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                        <h5 class="widget-user-desc text-riauthght">Web Designer</h5> -->
+
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">
@@ -32,15 +31,15 @@
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header text-warning">{{ Auth::user()->name }}</h5>
+                                    <h3 class="description-header text-warning">{{ Auth::user()->name }}</h3>
                                     @role('admin')
                                     <span class="description-text text-secondary">Owner Of Gym Club</span>
                                     @endrole
                                     @role('cityManager')
-                                    <span class="description-text text-secondary"><b>{{ auth()->user()->city->name }}</b> City Manager</span>
+                                    <span class="description-text text-secondary"><b>{{ auth()->user()->city->name }}</b><br> City Manager</span>
                                     @endrole
                                     @role('gymManager')
-                                    <span class="description-text text-secondary">{{ auth()->user()->gym->name }} branch Manager</span>
+                                    <span class="description-text text-secondary">{{ auth()->user()->gym->name }} <br> Branch Manager</span>
                                     @endrole
                                 </div>
                                 <!-- /.description-block -->
@@ -64,8 +63,6 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
-                        <!-- <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                        <h5 class="widget-user-desc text-right">Web Designer</h5> -->
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="{{ asset('imgs/users/' . Auth::user()->profile_img) }}" alt="User Avatar">
@@ -74,7 +71,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <a href="{{ route('users.editProfile',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
+                                    <a href="{{ route('profile.edit',auth()->user()->id) }}" class="btn btn-sm bg-dark">Edit Profile</a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -109,10 +106,9 @@
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-text">Revenue</span>
                             <span class="info-box-number">
-                                10
-                                <small>%</small>
+                                $ {{$paidPrice}}
                             </span>
                         </div>
                         <!-- /.info-box-content -->
@@ -122,11 +118,12 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-12">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                    <!-- <i class="fad fa-credit-card-front"></i> -->
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-credit-card"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">Purchased Packages</span>
+                            <span class="info-box-number">{{$boughtPackagesCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -138,8 +135,8 @@
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">Trainees</span>
+                            <span class="info-box-number">{{$allClientsCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -187,7 +184,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <p class="text-center">
-                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                                    <!-- <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong> -->
                                 </p>
 
                                 <div class="chart">
@@ -291,108 +288,6 @@
         </div>
         <!-- /.row -->
 
-        <!-- 3rd Row -->
-        <div class="row">
-            <!-- Left col -->
-            <div class="col-md-8">
-
-                <!-- TABLE: LATEST PURCHASES -->
-                <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Latest Purchases </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Client Name</th>
-                                        <th>Client Email</th>
-                                        <th>Package Name</th>
-                                        <th>Paid Price</th>
-                                        <!-- <th>Gym Branch</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($boughtPackages as $boughtPackage)
-                                    <tr>
-                                        <!-- <td><a href="pages/examples/invoice.html">OR9842</a></td> -->
-                                        <td>{{ $boughtPackage->user->name }}</td>
-                                        <td>{{ $boughtPackage->user->email }}</td>
-                                        <td>{{ $boughtPackage->name }}</td>
-                                        <td>{{ $boughtPackage->price }}</td>
-                                        <!-- <td>{{ $boughtPackage->gym->name }}</td> -->
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer clearfix">
-                        <a href="{{ route('buyPackage.create') }}" class="btn btn-sm btn-info float-left">Place New Order</a>
-                        <a href="{{ route('revenue.index') }}" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-                    </div>
-                    <!-- /.card-footer -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-
-            <div class="col-md-4">
-                <!-- CURRENT PACKAGES CARD LIST -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Current Packages</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                        <ul class="products-list product-list-in-card pl-2 pr-2">
-                            @foreach ($packages as $package)
-                            <li class="item">
-                                <div class="product-img">
-                                    <img src="{{ asset('dist/img/default-150x150.png') }}" alt="Product Image" class="img-size-50">
-                                </div>
-                                <div class="product-info">
-                                    <a href="javascript:void(0)" class="product-title text-light">{{ $package->name }}
-                                        <span class="badge badge-warning float-right">${{ $package->price }}</span>
-                                    </a>
-                                    <span class="product-description"> Enjoy {{ $package->number_of_sessions }} in this package!</span>
-                                </div>
-                            </li>
-                            @endforeach
-
-                        </ul>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer text-center ">
-                        <a href="{{ route('trainingPackages.index') }}" class="uppercase text-warning">View All Packages</a>
-                    </div>
-                    <!-- /.card-footer -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-        </div>
         @endhasanyrole
 
         <!-- /.row -->

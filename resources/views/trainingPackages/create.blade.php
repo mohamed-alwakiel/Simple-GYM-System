@@ -3,7 +3,7 @@
 
 @section('content')
 <div class=" d-flex justify-content-center">
-    <div class="card card-success w-50 mt-5">
+    <div class="card card-success w-50 mt-3">
         <div class="card-header">
             <h3 class="card-title">Create Package:</h3>
         </div>
@@ -42,4 +42,4 @@
         </div>
     </div>
 </div>
-@endsection
+@stop

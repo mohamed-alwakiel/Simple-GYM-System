@@ -1,66 +1,39 @@
 @extends('layouts.master')
-@section('title')
-Buy Package
-@endsection
+@section('title', 'Buy Package')
+
 @section('content')
 <div class="container p-5">
-    <div class="card card-danger ">
+    <div class="card card-info ">
         <div class="card-header">
-            <h3 class="card-title">Package Info</h3>
+            <h3 class="card-title">Purchase Info</h3>
 
             <div class="card-tools row">
-                <!-- This will cause the card to maximize when clicked -->
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                </div>
-        
-                <!-- This will cause the card to be removed when clicked -->
-                <form class="col-md-4" action="{{ route('buyPackage.destroy',$package->id) }}" method="POST">
+                @role('admin')
+                <form class="col-md-4" action="{{ route('buyPackage.destroy', $package->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <!-- <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-tool"><i class="fas fa-times"></i></button> -->
-                    <button type="submit" class="btn btn-xs btn-danger btn-flat show-alert-delete-box btn-tool" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
+                    <button type="submit" class="btn btn-md btn-info show-alert-delete-box btn-tool" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
                 </form>
+                @endrole
             </div>
         </div>
         <div class="card-body">
-            <p class="card-title mb-3"><b>Name:- </b>  {{$package->package ? $package->package->name : 'not found'}}</p>
-            <p class="card-text"><b>Price:- </b> {{$package->price}}</p>
-            <p class="card-text"><b>Number Of Sessions:- </b> {{$package->number_of_sessions}}</p>
-            <p class="card-text"><b>Created at:- </b> {{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</p>
-            <p class="card-title mb-3"><b>Trainee :- </b> {{$package->user ? $package->user->name : 'not found'}}</p>
-            <p class="card-text"><b>Gym :- </b>{{$package->gym ? $package->gym->name : 'not found'}}</p>
-       
+            <p class="card-text text-secondary">Package Name : <span class="text-light font-weight-bold">{{$package->package ? $package->package->name : 'not found'}}</span> </p>
+            <p class="card-text text-secondary">Paid Price : <span class="text-light font-weight-bold">{{$package->price / 100}} $</span> </p>
+            <p class="card-text text-secondary">Number of Sessions : <span class="text-light font-weight-bold">{{$package->number_of_sessions}}</span> </p>
+            <p class="card-text text-secondary">Purchased at : <span class="text-light font-weight-bold">{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</span> </p>
+            <p class="card-text text-secondary">Client : <span class="text-light font-weight-bold">{{$package->user ? $package->user->name : 'not found'}}</span> </p>
+            @hasanyrole('admin|cityManager')
+            <p class="card-text text-secondary">Gym : <span class="text-light font-weight-bold">{{$package->gym ? $package->gym->name : 'not found'}}</span> </p>
+            @endhasanyrole
+            @role('admin')
+            <p class="card-text text-secondary">City : <span class="text-light font-weight-bold">{{$package->city ? $package->city->name : 'not found'}}</span> </p>
+            @endrole
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script type="text/javascript">
-    $('.show-alert-delete-box').click(function(event) {
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            title: "Are you sure you want to delete this Package ?",
-            icon: "warning",
-            type: "warning",
-            buttons: ["Cancel", "Yes!"],
-            confirmButtonColor: '#8CD4F5',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: "No, cancel plz!",
-        }).then((willDelete) => {
-            if (willDelete) {
-                form.submit();
-            } else {
-                swal("Cancelled", "Your Package is safe :)", "error");
-            }
-        });
+@stop
 
-
-
-
-    });
-</script>
-@endsection
+@section('script')
+@include('layouts.alertScript')
+@stop

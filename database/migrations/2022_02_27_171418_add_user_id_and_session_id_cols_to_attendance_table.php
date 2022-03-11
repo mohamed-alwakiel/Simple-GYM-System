@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('attendances', function (Blueprint $table) {
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('training_session_id')->references('id')->on('training_sessions');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->BigInteger('training_session_id')->unsigned()->nullable();
+            $table->foreign('training_session_id')->references('id')->on('training_sessions')->onDelete('set null');
         });
     }
 
