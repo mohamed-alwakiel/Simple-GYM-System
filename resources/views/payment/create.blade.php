@@ -90,7 +90,6 @@
             $('#citySelector').on('change', function() {
                 let id = $(this).val();
                 $('#gymSelector').empty();
-                // $('#gymSelector').append('<option value="0" disabled selected>Processing</option>');
                 $.ajax({
                     url: '/getGymsBelongsToCity/' + id,
 
