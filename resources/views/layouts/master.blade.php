@@ -284,8 +284,6 @@
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     City Managers
-                                    <!-- <i class="fas fa-angle-left right"></i> -->
-                                    <!-- <span class="badge badge-info right">6</span> -->
                                 </p>
                             </a>
                         </li>
@@ -298,7 +296,6 @@
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     Gym Managers
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
                         </li>
@@ -310,7 +307,6 @@
                                 <i class="nav-icon fas fa-city"></i>
                                 <p>
                                     Cities
-                                    <!-- <i class="fas fa-angle-left right"></i> -->
                                 </p>
                             </a>
                         </li>
@@ -322,7 +318,6 @@
                                 <i class="nav-icon fas fa-dumbbell"></i>
                                 <p>
                                     Gyms
-                                    <!-- <i class="fas fa-angle-left right"></i> -->
                                 </p>
                             </a>
                         </li>
@@ -333,7 +328,6 @@
                                 <i class="nav-icon fas fa-running"></i>
                                 <p>
                                     Users
-                                    <!-- <i class="right fas fa-angle-left"></i> -->
                                 </p>
                             </a>
                         </li>
@@ -345,7 +339,6 @@
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Training Packages
-                                    <!-- <i class="fas fa-angle-left right"></i> -->
                                 </p>
                             </a>
                         </li>
@@ -355,20 +348,20 @@
                                 <i class="nav-icon fas fa-calendar-alt "></i>
                                 <p>
                                     Sessions
-                                    <!-- <span class="badge badge-info right">2</span> -->
                                 </p>
                             </a>
                         </li>
 
+                        @hasanyrole('gymManager|cityManager|admin|client')
                         <li class="nav-item">
                             <a href="{{ route('coaches.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-bolt"></i>
                                 <p>
                                     Coaches
-                                    <!-- <span class="badge badge-info right">2</span> -->
                                 </p>
                             </a>
                         </li>
+                        @endhasanyrole
 
                         <li class="nav-item">
                             <a href="{{ route('attendance.index') }}" class="nav-link">
@@ -413,7 +406,6 @@
         <div id="bg" class="content-wrapper py-3">
             @yield('content')
         </div>
-
 
         <aside class="control-sidebar control-sidebar-dark">
             <div class="p-3">
