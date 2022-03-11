@@ -146,6 +146,7 @@ class TrainingSessionController extends Controller
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
+        $roleClient = auth()->user()->hasRole('client');
 
         if ($roleAdmin) {
             $sessions = TrainingSession::all();
@@ -157,7 +158,7 @@ class TrainingSessionController extends Controller
             $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
             $cities = Auth::user()->city_id;
-        } elseif ($roleGymManager) {
+        } elseif ($roleGymManager || $roleClient) {
             $sessions = Auth::user()->gym->trainingSessions;
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
@@ -191,6 +192,7 @@ class TrainingSessionController extends Controller
         }
         return $errors;
     }
+    
     function betweenForStart($start, $oldstart, $oldend)
     {
         return $start >= $oldstart && $start < $oldend;
