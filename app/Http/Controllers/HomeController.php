@@ -21,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -35,18 +35,38 @@ class HomeController extends Controller
         $isAdmin = auth()->user()->hasRole('admin');
         $isCityManager = auth()->user()->hasRole('cityManager');
         $isGymManager = auth()->user()->hasRole('gymManager');
+        $isClient = auth()->user()->hasRole('client');
 
-        if ($isAdmin) {
-            $boughtPackages = BuyPackage::all();
-        } elseif ($isCityManager) {
-            // $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym->gym_id)->get();
-            $boughtPackages = BuyPackage::all();
+        if (!$isClient) {
+            if ($isAdmin) {
+                $boughtPackages = BuyPackage::all();
+                $boughtPackagesCount = count($boughtPackages);
+                $allClients = User::role('client')->get();
+            } elseif ($isCityManager) {
+                $boughtPackages = BuyPackage::where('city_id', auth()->user()->city_id)->get();
+                $boughtPackagesCount = count($boughtPackages);
+                $allClients = User::role('client')->where('city_id', auth()->user()->city_id)->get();
+            } elseif ($isGymManager) {
+                $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
+                $boughtPackagesCount = count($boughtPackages);
+                $allClients = User::role('client')->where('gym_id', auth()->user()->gym_id)->get();
+            }
+
+            $paidPrice = ($boughtPackages->sum('price') / 100);
+            $allClientsCount = count($allClients);
+
+            return view('dashboard', data: [
+                'packages' => $packages,
+                'boughtPackages' => $boughtPackages,
+                'boughtPackagesCount' => $boughtPackagesCount,
+                'allClientsCount' => $allClientsCount,
+                'paidPrice' => $paidPrice,
+            ]);
         } else {
-            $boughtPackages = BuyPackage::where('gym_id', auth()->user()->gym_id)->get();
+            $boughtPackages = BuyPackage::where('user_id', auth()->user()->id)->get();
+            return view('dashboard', data: [
+                'boughtPackages' => $boughtPackages,
+            ]);
         }
-        return view('dashboard', data: [
-            'packages' => $packages,
-            'boughtPackages' => $boughtPackages,
-        ]);
     }
 }
