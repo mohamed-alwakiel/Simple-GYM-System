@@ -37,26 +37,16 @@ class CoachController extends Controller
     {
         if (request()->ajax()) {
             $coaches=Coach::all();
-
-
             return DataTables::of($coaches)
                 ->addIndexColumn()
-
-
                 ->addColumn('name',function($row){
                     return $row->name;
                 })
-
                 ->addColumn('action', function($row){
-
-
-                    $edit='<a href="'. route('coaches.edit', $row->id) .'" class="btn btn-primary">Update</a>';
-
-
+                   $edit='<a href="'. route('coaches.edit', $row->id) .'" class="btn btn-primary">Update</a>';
                     $delete='
                      <form action="'.route('coaches.destroy', $row->id).'" method="post">
-
-                            <button class="btn btn-danger" type="submit">
+                           <button class="btn btn-danger" type="submit">
                                 Delete
                             </button>
                         </form>
