@@ -1,47 +1,61 @@
 @extends('layouts.master')
 
-@section('title')
-    Coaches
-@endsection
+@section('title', 'Coaches')
 
 @section('content')
-    <div class="w-50 mx-auto pt-3 d-flex justify-content-end">
-        <a href="{{ route('coaches.create') }}" class="btn btn-success my-3">Add New Coach</a>
+<div class="container-fluid">
+    <div class="px-4">
+        @error('msg')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <div class="d-flex justify-content-center mb-3">
+            <a href="{{ route('coaches.create') }}" class="btn btn-success my-3">Add New Coach</a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">All Coaches</h3>
+            </div>
+            <div class="card-body">
+                <table id="table" class="table text-center table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Gym</th>
+                            <th>Controllers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($coaches as $coach)
+                        <tr>
+                            <td>{{ $coach->id }}</td>
+                            <td>{{ $coach->name }}</td>
+                            <td>{{ $coach->gym->name ?? " " }}</td>
+                            <td class="d-flex justify-content-center">
+                                <a href="{{ route('coaches.show',  $coach->id) }}" class="btn btn-md btn-info mr-2" title="show"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('coaches.edit', ['id' => $coach->id]) }}" class="btn btn-md btn-warning mr-2" title="Edit"><i class="fas fa-edit"></i></a>
+                                <form method="POST" action="{{ route('coaches.destroy', ['id' => $coach->id]) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-md btn-danger show-alert-delete-box px-3" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+</div>
+@stop
 
-    <table class="w-50 mx-auto text-center table-bordered border-2 table-striped ">
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+</script>
 
-
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($coaches as $coach)
-                <tr>
-                    <th scope="row">{{ $coach->id }}</th>
-                    <td>{{ $coach->name }}</td>
-
-                    {{-- <td><a href="{{ route('coaches.show', ['id' => $coach->id]) }}" class="btn btn-info">View</a></td> --}}
-                    <td class="d-flex justify-content-around py-2">
-                        <a href="{{ route('coaches.edit', ['id' => $coach->id]) }}" class="btn btn-success">
-                            Edite
-                        </a>
-
-                        <form method="POST" action="{{ route('coaches.destroy', ['id' => $coach->id]) }}">
-                            @CSRF
-
-                            @method('delete')
-                            <input class='btn btn-danger' type="submit" onclick=" return confirm('are you sure ?')"
-                                value="Delete">
-                        </form>
-
-                        </th>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endsection
+@include('layouts.alertScript')
+@stop

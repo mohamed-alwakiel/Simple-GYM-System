@@ -15,6 +15,6 @@ class CoachSessionSeeder extends Seeder
      */
     public function run()
     {
-        CoachSession::factory(10)->create();
+        CoachSession::factory(20)->create();
     }
 }

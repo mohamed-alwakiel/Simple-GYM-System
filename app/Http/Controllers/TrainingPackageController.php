@@ -10,12 +10,13 @@ use Illuminate\Http\Request;
 use App\Models\Package;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TrainingPackageController extends Controller
 {
     public function index()
     {
-        // Paginator::useBootstrapFive();
         $packageCollection = Package::all();
         return view('trainingPackages.index', ['packageCollection' => $packageCollection]);
     }
@@ -23,6 +24,7 @@ class TrainingPackageController extends Controller
     public function trainingPackagesDatatables()
     {
         $packageCollection = Package::all();
+     
         return view('trainingPackages.datatables-front', ['packageCollection' => $packageCollection]);
     }
 
@@ -69,6 +71,7 @@ class TrainingPackageController extends Controller
             ->with('success', 'Package Updated Successfully');
     }
 
+ 
     public function destroy(Package $package)
     {
         $id=$package->id;
@@ -78,8 +81,7 @@ class TrainingPackageController extends Controller
             return to_route('trainingPackages.index')
                 ->with('success', 'package deleted successfully');
         }else{
-            $alert="you can't delete this package you have user here";
-            return Redirect::back()->withErrors(['msg' => $alert]);
+            return Redirect::back()->withErrors(['message' =>'delete' ]);
         }
 
     }

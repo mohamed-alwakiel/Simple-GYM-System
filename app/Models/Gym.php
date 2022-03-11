@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Coach;
 use App\Models\TrainingSession;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,5 +44,10 @@ class Gym extends Model
     public function TrainingSessions()
     {
         return $this->hasMany(TrainingSession::class,'gym_id');
+    }
+    
+    public function coaches()
+    {
+        return $this->hasMany(Coach::class, 'gym_id');
     }
 }

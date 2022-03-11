@@ -1,11 +1,19 @@
 @extends('layouts.master')
 
-@section('title', 'Training Packages')
+@section('title')
+Training Packages
+@endsection
+
 
 @section('content')
-
+<!-- Content Wrapper. Contains page content -->
 <div class="container-fluid">
 
+    @role('admin')
+    <div class="d-flex justify-content-center mb-3">
+        <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
+    </div>
+    @endrole
     <div class="col-md-12 px-4">
 
 
@@ -19,7 +27,7 @@
                 <h3 class="card-title">All Packages</h3>
             </div>
             <div class="card-body">
-                <table id="table" class="table text-center table-hover">
+                <table id="table" class="table text-center ">
                     <thead>
                         <tr>
                             <th class="col-2">name</th>
@@ -32,16 +40,17 @@
                     @foreach ($packageCollection as $package)
                     <tr>
                         <td>{{ $package->name }}</td>
-                        <td>{{ $package->price /100 }} $</td>
+                        <td>{{ $package->price / 100 }} $</td>
                         <td>{{ $package->number_of_sessions }}</td>
                         <td>{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }} </td>
                         <td class="d-flex justify-content-center">
                             <!-- Show Button -->
-                            <a href="{{ route('trainingPackages.show', ['package' => $package->id]) }}" class="btn btn-md btn-info mr-3"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('trainingPackages.show', ['package' => $package->id]) }}" class="btn btn-md btn-info mr-2"><i class="fas fa-eye"></i></a>
+
                             <!-- Edit & Delete Buttons -->
                             @role('admin')
-                            <a href="{{ route('trainingPackages.edit', ['package' => $package->id]) }}" class="btn btn-md btn-warning"><i class="fas fa-edit"></i></a>
-                            <form class="col-md-4" action="{{ route('trainingPackages.destroy',$package->id) }}" method="POST">
+                            <a href="{{ route('trainingPackages.edit', ['package' => $package->id]) }}" class="btn btn-md btn-warning mr-2"><i class="fas fa-edit"></i></a>
+                            <form action="{{ route('trainingPackages.destroy', $package->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-md btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'><i class="fas fa-times"></i></button>
@@ -55,6 +64,7 @@
         </div>
     </div>
 </div>
+@stop
 
 @section('script')
 <script type="text/javascript">

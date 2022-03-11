@@ -5,25 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateGymManagerRequest;
 use App\Models\City;
-use App\Models\CityManager;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\Facades\DataTables;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class GymManagerController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
@@ -41,7 +35,6 @@ class GymManagerController extends Controller
         ]);
     }
 
-
     public function create()
     {
         $roleCityManager = auth()->user()->hasRole('cityManager');
@@ -57,9 +50,6 @@ class GymManagerController extends Controller
         }
     }
 
-    /**
-     * function to get all gyms by city name or id
-     */
     public function GetGymNameFromCityName(Request $request)
     {
         $city_id = $request->get('city_id');
@@ -67,21 +57,17 @@ class GymManagerController extends Controller
         return response()->json($gyms);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGymManagerRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function show($managerID)
+    {
+        $manager = User::findOrFail($managerID);
+        return view('gymManagers.show', ['manager' => $manager]);
+    }
 
     public function store(StoreGymManagerRequest $request)
     {
-        //fetch request data
         $requestData = request()->all();
-
-        // deal with image
         $image = $request->img;
+
         if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'users/'), $imageName);
@@ -89,7 +75,6 @@ class GymManagerController extends Controller
             $imageName = 'gymMgr.png';
         endif;
 
-        // handle creator
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
 
@@ -99,44 +84,27 @@ class GymManagerController extends Controller
             $city_id = Auth::user()->city_id;
         }
 
-        // store new data into data base
         $newGymManager = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
             'password' => Hash::make($requestData['password']),
-
             'profile_img' => $imageName,
             'national_id' => $requestData['national_id'],
-
-
             'city_id' => $request['city_id'],
             'gym_id' => $request['gym_id'],
-
-            'role_type' => 'gymManager',
-            'role_id' => 3,
-
             'city_id' => $city_id,
             'gym_id' => $request['gym_id'],
-            'email_verified_at'=>  Carbon::now()->toDateTimeString(),
+            'email_verified_at' =>  Carbon::now()->toDateTimeString(),
         ]);
-
 
         $newGymManager->assignRole('gymManager')->givePermissionTo([
             'create session', 'update session', 'delete session',
             'read session', 'read coach', 'read package', 'assign coach'
         ]);
 
-
         return redirect()->route('gymManagers.index');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
     public function edit($gymManagerID)
     {
         $gymManager = GymManager::find($gymManagerID);
@@ -148,14 +116,6 @@ class GymManagerController extends Controller
         ]);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGymManagerRequest  $request
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateGymManagerRequest $request, $gymManagerID)
     {
         //fetch request data
@@ -173,21 +133,12 @@ class GymManagerController extends Controller
         return redirect()->route('gymManagers.index');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($gymManager)
+    public function destroy($gymManagerID)
     {
-        GymManager::find($gymManager)->delete();
-        return response()->json(['success' => 'Record deleted successfully']);
+        User::findOrFail($gymManagerID)->delete();
+        return redirect()->route('gymManagers.index');
     }
 
-
-    // for ban users
     public function ban($gymManager)
     {
         GymManager::findOrFail($gymManager)->ban([
@@ -196,14 +147,12 @@ class GymManagerController extends Controller
         return redirect()->route('gymManagers.index');
     }
 
-    // for unban users
     public function unban($gymManager)
     {
         GymManager::findOrFail($gymManager)->unban();
         return redirect()->route('gymManagers.index');
     }
 
-    // for show bans users
     public function banView()
     {
         $bannedManagers = GymManager::onlyBanned()->get();

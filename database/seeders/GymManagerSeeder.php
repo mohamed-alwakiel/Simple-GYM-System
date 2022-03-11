@@ -17,7 +17,7 @@ class GymManagerSeeder extends Seeder
      */
     public function run()
     {
-        $factories = GymManager::factory(5)->create();
+        $factories = GymManager::factory(15)->create();
 
         foreach ($factories as $factory) {
             $factory->assignRole('gymManager');

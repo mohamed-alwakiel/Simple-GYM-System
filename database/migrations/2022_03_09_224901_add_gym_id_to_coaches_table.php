@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bought_packages', function (Blueprint $table) {
-            $table->integer('remaining_sessions')->after('number_of_sessions');
+        Schema::table('coaches', function (Blueprint $table) {
+            $table->BigInteger('gym_id')->unsigned()->nullable();
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('set null');
         });
     }
 
@@ -25,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bought_packages', function (Blueprint $table) {
+        Schema::table('coaches', function (Blueprint $table) {
             //
         });
     }

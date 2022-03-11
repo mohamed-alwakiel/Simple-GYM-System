@@ -78,7 +78,7 @@
                 <div class="form-group mb-3">
                     <label for="cityName">Select City</label>
                     <select name="city_id" class="form-control" id='cityName'>
-                        <option value="0" disable="true" selected="true">=== Select City ===</option>
+                        <option value="0" disable selected="true">=== Select City ===</option>
                         @foreach ($cities as $city)
                         <option value="{{ $city->id }}"> {{ $city->name }} </option>
                         @endforeach
@@ -118,7 +118,7 @@
                 <div class="">
                     <div class="w-100">
                         <label for="">Profile Image</label>
-                        <input type="file" class="form-control w-100 bg-dark " name="profileImg" aria-describedby="fileHelpId" value="{{ old('profileImg', '') }}">
+                        <input type="file" class="form-control w-100 bg-dark pt-1" name="profileImg" aria-describedby="fileHelpId" value="{{ old('profileImg', '') }}">
                         <small id="fileHelpId" class="form-text text-muted">only : png or jpg</small>
                     </div>
                 </div>
@@ -137,8 +137,6 @@
 
 {{-- scripts --}}
 @section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $('#cityName').on('change', function(e) {
         console.log(e);

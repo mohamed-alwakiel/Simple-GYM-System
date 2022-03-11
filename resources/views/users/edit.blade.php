@@ -41,7 +41,7 @@ Edit "{{ $user->name }}" info
                     <input class="form-control" type="date" name="date_of_birth" value="{{$user->date_of_birth}}">
                 </div>
                 @error('date_of_birth')
-                <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <div class="form-group mb-3">

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Gym;
 use App\Models\Coach;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +23,7 @@ class CoachFactory extends Factory
 
         return [
             'name' => $this->faker->name,
+            'gym_id' =>Gym::all()->random()->id,
         ];
     }
 }
