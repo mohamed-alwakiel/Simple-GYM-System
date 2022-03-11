@@ -374,7 +374,7 @@
                             </a>
                         </li>
 
-                        @hasanyrole('gymManager|cityManager|admin')
+                        @hasanyrole('gymManager|cityManager|admin|client')
                         <li class="nav-item">
                             <a href="{{ route('buyPackage.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-money-check"></i>

@@ -148,7 +148,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gy
 });
 
 // --------------- Buy Package
-Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
     Route::GET('/GETGymsBelongsToCity/{id}', [BuyPackageController::class, 'GETGymsBelongsToCity']);
 
     Route::GET('/buyPackage', [BuyPackageController::class, 'index'])->name('buyPackage.index');

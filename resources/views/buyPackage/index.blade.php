@@ -7,11 +7,9 @@
         @error('msg')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        @hasanyrole('admin|cityManager|gymManager')
         <div class="d-flex justify-content-center mb-3">
             <a href="{{ route('buyPackage.create') }}" class="btn btn-success my-3">Buy Package</a>
         </div>
-        @endhasanyrole
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">All Purchases</h3>
