@@ -24,7 +24,7 @@
                 </div>
                 @endrole
 
-                @role('cityManager|gymManager')
+                @role('cityManager|gymManager|client')
                 <input type="text" hidden name="city" value="{{$cities}}" id="cityName" />
                 @endrole
 
@@ -43,7 +43,7 @@
                 </div>
                 @endhasanyrole
 
-                @role('gymManager')
+                @role('gymManager|client')
                 <input type="text" hidden name="gym_id" value="{{$gyms}}" />
                 @endrole
 
@@ -59,6 +59,10 @@
                     </select>
                 </div>
                 @endhasanyrole
+
+                @role('client')
+                <input type="text" hidden name="user_id" value="{{$users}}" />
+                @endrole
 
                 <!-- Select Package -->
                 <div class="form-group mb-3">

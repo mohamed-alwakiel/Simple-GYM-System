@@ -19,7 +19,7 @@
         </div>
         <div class="card-body">
             <p class="card-text text-secondary">Package Name : <span class="text-light font-weight-bold">{{$package->package ? $package->package->name : 'not found'}}</span> </p>
-            <p class="card-text text-secondary">Paid Price : <span class="text-light font-weight-bold">{{$package->price}}</span> </p>
+            <p class="card-text text-secondary">Paid Price : <span class="text-light font-weight-bold">{{$package->price / 100}} $</span> </p>
             <p class="card-text text-secondary">Number of Sessions : <span class="text-light font-weight-bold">{{$package->number_of_sessions}}</span> </p>
             <p class="card-text text-secondary">Purchased at : <span class="text-light font-weight-bold">{{ \Carbon\Carbon::parse($package->created_at)->format('Y-m-d') }}</span> </p>
             <p class="card-text text-secondary">Client : <span class="text-light font-weight-bold">{{$package->user ? $package->user->name : 'not found'}}</span> </p>

@@ -46,6 +46,5 @@ class NotifyUsers extends Command implements ShouldQueue
         foreach($users as $user) {
             $user->notify(new WeMissYou($user));
           }
-        // Notification::send($users , new WeMissYou);
     }
 }
