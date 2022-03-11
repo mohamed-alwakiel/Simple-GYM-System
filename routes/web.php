@@ -37,6 +37,8 @@ Auth::routes();
 Route::GET('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 
+
+
 // --------------- CITY MANAGERS
 Route::group(['middleware' => 'auth', 'middleware' => 'role:admin'], function () {
     Route::GET('/cityManagers', [CityManagerController::class, 'index'])->name('cityManagers.index');
@@ -88,7 +90,6 @@ Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager'],
     Route::PUT('/gyms/update/{gym_id}', [GymsController::class, 'update'])->name('gyms.update');
     Route::DELETE('/gyms/{id}', [GymsController::class, 'destroy'])->name('gyms.destroy');
 });
-
 
 // --------------- Users
 Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {

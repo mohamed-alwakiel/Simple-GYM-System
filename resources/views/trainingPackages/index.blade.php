@@ -15,13 +15,6 @@ Training Packages
     </div>
     @endrole
     <div class="col-md-12 px-4">
-
-
-        @role('admin')
-        <div class="d-flex justify-content-center mb-3">
-            <a href="{{ route('trainingPackages.create') }}" class="btn btn-success">Add New Package</a>
-        </div>
-        @endrole
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">All Packages</h3>
@@ -64,7 +57,7 @@ Training Packages
         </div>
     </div>
 </div>
-@stop
+
 
 @section('script')
 <script type="text/javascript">
@@ -93,8 +86,8 @@ Training Packages
             }
         });
     });
-{{-- // @include('layouts.alertScript') --}}
-@error('msg')
+// {{-- // @include('layouts.alertScript') --}}
+@error('message')
     $(document).ready(function() {
      $(window).on('load', function() {
           swal({
@@ -108,7 +101,6 @@ Training Packages
 });
 @enderror
 </script>
-
 
 @stop
 
