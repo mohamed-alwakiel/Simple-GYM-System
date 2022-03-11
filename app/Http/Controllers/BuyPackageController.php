@@ -74,13 +74,14 @@ class BuyPackageController extends Controller
         } elseif ($roleCityManager) {
             $city_id = $loggedInUser->city_id;
             $gym_id = Gym::where('city_id', $city_id)->get();
+        
         } elseif ($roleGymManager) {
             $gym_id = $loggedInUser->gym_id;
             $city_id = $loggedInUser->city_id;
         }else{
-            $gym_id = $loggedInUser->gym_id;
             $city_id = $loggedInUser->city_id;
-            $user_id = $loggedInUser->id;
+            $gym_id = Gym::where('city_id', $city_id)->get();
+                $user_id = $loggedInUser->id;
             return view('payment.create', data: [
                 'cities' => $city_id,
                 'packages' => $packages,
