@@ -82,20 +82,19 @@ class CoachController extends Controller
     public function destroy($id)
     {
         $coach = Coach::find($id);
-        $checkSession = CoachSession::where('coach_id', $id)->first();   
+        $checkSession = CoachSession::where('coach_id', $id)->first();
 
         if ($checkSession == null) {
-
             $coach->gym()->dissociate();
             $coach->trainingSessions()->detach();
             $coach->delete();
+            return to_route('coaches.index')
+                ->with('success', 'Coach deleted successfully');
+        } else {
+            // return Redirect::back()->withErrors(['message' => 'delete']);
+            return redirect()->route('coaches.index')->with('errorMessage', 'cannt be deleted');
 
-            return to_route('coaches.index')->with('success', 'Coach deleted successfully');
         }
-        else {
-            return Redirect::back()->withErrors(['message' => 'delete']);
-        }
-
     }
 
 

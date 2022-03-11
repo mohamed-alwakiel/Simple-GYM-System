@@ -9,6 +9,7 @@ use App\Models\Coach;
 use App\Models\Gym;
 use App\Models\GymManager;
 use App\Models\Session;
+use App\Models\TrainingSession;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -129,11 +130,10 @@ class GymsController extends Controller
 
         $checkUserORManager = User::where('gym_id', $gymID)->first();
         $checkBuyPackage = BuyPackage::where('gym_id', $gymID)->first();
-        $checkSession = Session::where('gym_id', $gymID)->first();
+        $checkSession = TrainingSession::where('gym_id', $gymID)->first();
         $checkCoach = Coach::where('gym_id', $gymID)->first();
 
-        if($checkUserORManager == null && $checkBuyPackage == null && $checkSession == null && $checkCoach == null)
-        {
+        if ($checkUserORManager == null && $checkBuyPackage == null && $checkSession == null && $checkCoach == null) {
             $oldimg = Gym::where('id', $gymID)->first()->cover_img;
             if ($oldimg != "gym.png") {
                 // to delete old image
@@ -144,10 +144,8 @@ class GymsController extends Controller
 
             Gym::findOrFail($gymID)->delete();
             return to_route('gyms.index')->with('success', 'Gym deleted successfully');
-        }
-        else{
-            return Redirect::back()->withErrors(['message' =>'delete' ]);
+        } else {
+            return redirect()->route('gyms.index')->with('errorMessage', 'cannt be deleted');
         }
     }
-
 }

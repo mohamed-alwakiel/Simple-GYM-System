@@ -81,9 +81,9 @@ class TrainingPackageController extends Controller
             $package->delete();
             return to_route('trainingPackages.index')
                 ->with('success', 'package deleted successfully');
-
         } else {
-            return redirect()->route('trainingPackages.index')->with('errorMessage', 'cannt be deleted');
+            return redirect()->route('trainingPackages.index')
+                ->with('errorMessage', 'cannt be deleted');
         }
     }
 }

@@ -61,11 +61,13 @@ class CitiesController extends Controller
 
         if ($checkUserORManager == null && $checkBuyPackage == null && $checkGym == null) {
             City::findOrFail($cityID)->delete();
-            return to_route('cities.index')->with('success', 'City deleted successfully');
+            return to_route('cities.index')
+                ->with('success', 'City deleted successfully');
         } else {
-            return Redirect::back()->withErrors(['message' => 'delete']);
+            // return Redirect::back()->withErrors(['message' => 'delete']);
+            return redirect()->route('cities.index')
+                ->with('errorMessage', 'cannt be deleted');
         }
-
     }
 
     public function deleteMedia($oldImg, $path)

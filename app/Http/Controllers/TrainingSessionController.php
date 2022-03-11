@@ -108,12 +108,12 @@ class TrainingSessionController extends Controller
             $session->coaches()->detach();
             $session->delete();
 
-            return to_route('sessions.index')->with('success', 'sessions deleted successfully');
+            return to_route('sessions.index')
+                ->with('success', 'sessions deleted successfully');
+        } else {
+            return redirect()->route('sessions.index')
+                ->with('errorMessage', 'cannt be deleted');
         }
-        else {
-            return Redirect::back()->withErrors(['message' => 'delete']);
-        }
-
     }
 
     public function store(TrainingSessionRequest $request)

@@ -173,10 +173,11 @@ class UserController extends Controller
             }
 
             User::findOrFail($userId)->delete();
-            return to_route('users.index')->with('success', 'user deleted successfully');
-
+            return to_route('users.index')
+                ->with('success', 'user deleted successfully');
         } else {
-            return Redirect::back()->withErrors(['message' => 'delete']);
+            return redirect()->route('users.index')
+                ->with('errorMessage', 'cannt be deleted');
         }
     }
 
