@@ -59,12 +59,6 @@ Training Packages
 </div>
 @stop
 
-@section('script')
-<script>
-    $(document).ready(function() {
-        $('#table').DataTable();
-    });
-</script>
 
 @section('script')
     <script>
@@ -100,7 +94,7 @@ Training Packages
             }
         });
     });
-    
+
         @error('message')
             $(document).ready(function() {
             $(window).on('load', function() {
@@ -111,9 +105,9 @@ Training Packages
             type: "error",
             confirmButtonColor: '#8CD4F5',
             confirmButtonText: 'Ok',
-        
+
             });
-        
+
             });
             });
         @enderror
