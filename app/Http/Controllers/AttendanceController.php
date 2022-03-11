@@ -18,32 +18,25 @@ class AttendanceController extends Controller
     public function index()
     {
 
-        // $attendances=Attendance::all();
-        // $gyms=Gym::all();
         $roleAdmin = auth()->user()->hasRole('admin');
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleGymManager = auth()->user()->hasRole('gymManager');
 
 
-
         if($roleAdmin){
             $attendances=Attendance::all();
-        }elseif($roleCityManager ){
+        }
+        elseif($roleCityManager ){
            $attendances =Auth::user()->city->attendances;
-
-
-
-        }elseif($roleGymManager){
-
+        }
+        elseif($roleGymManager){
             $attendances =Auth::user()->city->attendances;
         }
-
-
+        else{
+            $attendances = Attendance::where('user_id', Auth::id());
+        }
 
         return view('attendance.index',[
-
-
-
             'attendances'=>$attendances,
         ]
     );
