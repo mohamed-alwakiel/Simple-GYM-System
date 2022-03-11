@@ -163,11 +163,6 @@ class TrainingSessionController extends Controller
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
             $cities = Auth::user()->city_id;
-        }else{
-            $sessions = Auth::user()->gym->trainingSessions;
-            $coaches = Auth::user()->gym->coaches;
-            $gyms = Auth::user()->gym;
-            $cities = Auth::user()->city_id;
         }
 
         return [$sessions, $coaches, $gyms, $cities];
@@ -197,7 +192,7 @@ class TrainingSessionController extends Controller
         }
         return $errors;
     }
-    
+
     function betweenForStart($start, $oldstart, $oldend)
     {
         return $start >= $oldstart && $start < $oldend;
