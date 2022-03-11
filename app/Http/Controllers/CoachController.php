@@ -26,13 +26,12 @@ class CoachController extends Controller
 
     public function create()
     {
-        $coaches = $this->getCoachesAndGymsData()[0];
         $gyms = $this->getCoachesAndGymsData()[1];
         $cities = $this->getCoachesAndGymsData()[2];
 
+        // dd($gyms->id);
 
         return view('coaches.create', [
-            'coaches' => $coaches,
             'gyms' => $gyms,
             'cities' => $cities,
         ]);
@@ -97,12 +96,13 @@ class CoachController extends Controller
             $coaches = Coach::all();
             $cities = City::all();
             $gyms = Gym::all();
-        } elseif ($roleCityManager) {
+        }
+        elseif ($roleCityManager) {
             $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
             $cities = Auth::user()->city;
-        } elseif ($roleGymManager) {
-
+        }
+        elseif ($roleGymManager) {
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
             $cities = Auth::user()->city;
