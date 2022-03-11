@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\File;
+
 
 class GymManagerController extends Controller
 {
@@ -135,8 +137,16 @@ class GymManagerController extends Controller
 
     public function destroy($gymManagerID)
     {
-        User::findOrFail($gymManagerID)->delete();
-        return redirect()->route('gymManagers.index');
+        $oldimg = GymManager::where('id', $gymManagerID)->first()->profile_img;
+        if ($oldimg != "gymMgr.png") {
+            // to delete old image
+            if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
+                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+            }
+        }
+
+        GymManager::findOrFail($gymManagerID)->delete();
+        return to_route('gymManagers.index')->with('success', 'user deleted successfully');
     }
 
     public function ban($gymManager)

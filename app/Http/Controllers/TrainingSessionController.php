@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Period\PeriodCollections;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
+use App\Models\Attendance;
 use App\Models\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class TrainingSessionController extends Controller
 {
@@ -96,11 +98,22 @@ class TrainingSessionController extends Controller
     public function destroy($id)
     {
         $session = TrainingSession::find($id);
-        $session->gyms()->dissociate();
-        $session->coaches()->detach();
-        $session->delete();
 
-        return redirect()->route('sessions.index');
+        $checkSession = CoachSession::where('training_session_id', $id)->first();
+        $checkAttendence = Attendance::where('training_session_id', $id)->first();
+
+        if ($checkSession == null && $checkAttendence == null) {
+
+            $session->gyms()->dissociate();
+            $session->coaches()->detach();
+            $session->delete();
+
+            return to_route('sessions.index')->with('success', 'sessions deleted successfully');
+        }
+        else {
+            return Redirect::back()->withErrors(['message' => 'delete']);
+        }
+
     }
 
     public function store(TrainingSessionRequest $request)

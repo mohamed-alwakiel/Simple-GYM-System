@@ -12,15 +12,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
+
 
 class CityManagerController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $cityManagers = User::role('cityManager')->get();
@@ -30,11 +28,6 @@ class CityManagerController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $cities = City::all();
@@ -50,12 +43,6 @@ class CityManagerController extends Controller
         return view('cityManagers.show', ['manager' => $manager]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGymManagerRequest  $request
-     * @return \Illuminate\Http\Response
-     */
 
     // public function store(StoreGymManagerRequest $request)
     public function store(Request $request)
@@ -100,13 +87,6 @@ class CityManagerController extends Controller
     }
 
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
     public function edit($cityManagerID)
     {
         $cityManager = CityManager::find($cityManagerID);
@@ -119,13 +99,6 @@ class CityManagerController extends Controller
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGymManagerRequest  $request
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateCityManagerRequest $request, $cityManagerID)
     {
         //fetch request data
@@ -144,15 +117,17 @@ class CityManagerController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GymManager  $gymManager
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($cityManagerID)
     {
-        User::findOrFail($cityManagerID)->delete();
-        return redirect()->route('cityManagers.index');
+        $oldimg = CityManager::where('id', $cityManagerID)->first()->profile_img;
+        if ($oldimg != "cityMgr.png") {
+            // to delete old image
+            if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
+                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+            }
+        }
+
+        CityManager::findOrFail($cityManagerID)->delete();
+        return to_route('cityManagers.index')->with('success', 'user deleted successfully');
     }
 }

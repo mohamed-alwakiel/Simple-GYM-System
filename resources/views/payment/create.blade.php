@@ -24,16 +24,16 @@
                 </div>
                 @endrole
 
-                @role('cityManager|gymManager|client')
+                @hasanyrole('cityManager|gymManager|client')
                 <input type="text" hidden name="city" value="{{$cities}}" id="cityName" />
-                @endrole
+                @endhasanyrole
 
                 <!-- Select Gym -->
-                @hasanyrole('admin|cityManager')
+                @hasanyrole('admin|cityManager|client')
                 <div class="form-group mb-3">
                     <label for="gym">Gym</label>
                     <select class="form-control" name="gym_id" id="gymName">
-                        @role('cityManager')
+                        @role('cityManager|client')
                         <option value="0" disabled selected>=== Select Gym ===</option>
                         @foreach ($gyms as $gym)
                         <option value="{{ $gym->id }}">{{ $gym->name }}</option>
@@ -43,7 +43,7 @@
                 </div>
                 @endhasanyrole
 
-                @role('gymManager|client')
+                @role('gymManager')
                 <input type="text" hidden name="gym_id" value="{{$gyms}}" />
                 @endrole
 
