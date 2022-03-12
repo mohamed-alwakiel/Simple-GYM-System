@@ -78,8 +78,8 @@ class CoachController extends Controller
 
     public function destroy($id)
     {
+
         $coach = Coach::find($id);
-        $coach->gym()->dissociate();
         $coach->trainingSessions()->detach();
         $coach->delete();
         return redirect()->route('coaches.index');
