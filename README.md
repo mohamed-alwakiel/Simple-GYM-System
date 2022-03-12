@@ -1,64 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Simply Gym System Using Laravel
 
-## About Laravel
+The system consists of Roles (Admin, Gym Manager, City Manager, Trainee). Each one of them is granted to specific permissions. Trainee is handled to work via API.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
+1- Download or Clone the project
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2- Open the project in vs Code 
 
-## Learning Laravel
+3- In a Terminal window run the following >>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+composer update
+```
+```bash
+cp .env.example .env
+```
+```bash
+php artisan key:generate
+```
+4- Create new Schema in your DBMS, Assign it to "DB_DATABASE=" field in '.env' file, and set your DB Server information
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+5- Set These Values in ".env" file to test Verification using email
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.googlemail.com
+MAIL_PORT=465
+MAIL_USERNAME=gymlaravel@gmail.com
+MAIL_PASSWORD=gym123456789
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=gymlaravel@gmail.com
+MAIL_FROM_NAME="GymSystem"
+```
 
-## Laravel Sponsors
+6- Run the following to load DB & Seed Data
+```bash
+php artisan migrate:fresh
+```
+```bash
+php artisan db:seed
+```
+7- After All is Finished run
+```bash
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Notes
+1- Admin is the 1st record with these login information
+```bash
+Email : admin@admin.com
+Password : 123456789
+```
+2- All Seeded Managers/Trainees have a default Password
 
-### Premium Partners
+which is : 123456789
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+3- Use this email to verify your Registration
+```bash
+Email : gymlaravel@gmail.com
+Password : gym123456789
+```
+4- Use the following Information in the Payment for a TrainingPackage
 
-## Contributing
+Email: anyemail@mail.com
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Card Information:
+```bash
+4242 4242 4242 4242 -->> (Mandatory)
+MM/YY -->> 01/25 (Or Any)
+CVC -->> 123 (Or Any)
+Name On Card -->> gym (Or Any)
+```
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Authors
 
-## Security Vulnerabilities
+- [@Ahmed Mohamed Elsheikh](https://github.com/AhmedElsheikh680)
+- [@Ahmed Reda Mohamed Bastwesy](https://github.com/Ahmed-bastwesy)
+- [@Khalid Gamal Hamed](https://github.com/khalidghanamy)
+- [@Mohamed Hossam ELdeen Alwakiel](https://github.com/Mo7ammed7ossam)
+- [@Nermeen Ismail Shehab](https://github.com/NermeenShehab)
+- [@Reem Adel Bedeer Mahmoud Samak](https://github.com/reemadelsamak)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
