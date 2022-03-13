@@ -33,7 +33,7 @@ class CityManagerFactory extends Factory
             'national_id' => $this->faker->numerify('##############'),
             'date_of_birth' => $this->faker->dateTimeBetween('1990-01-01', '2004-12-31')->format('Y/m/d'),
             'gender' => $gender,
-            'profile_img' => 'CityMgr.Png',
+            'profile_img' => 'cityMgr.png',
             'city_id' => City::inRandomOrder()->first()->id,
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCityManagerRequest;
+use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateCityManagerRequest;
 use App\Models\City;
 use App\Models\CityManager;
@@ -44,8 +45,7 @@ class CityManagerController extends Controller
     }
 
 
-    // public function store(StoreGymManagerRequest $request)
-    public function store(Request $request)
+    public function store(StoreGymManagerRequest $request)
     {
         //        dd($request);
         //fetch request data

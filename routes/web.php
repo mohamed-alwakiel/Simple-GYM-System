@@ -107,22 +107,29 @@ Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gy
 
 
 // --------------- Training Packages
-Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::GET('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
+});
+
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/trainingPackages/create', [TrainingPackageController::class, 'create'])->name('trainingPackages.create');
-    Route::GET('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
     Route::GET('/trainingPackages/{package}/edit', [TrainingPackageController::class, 'edit'])->name('trainingPackages.edit');
     Route::PUT('/trainingPackages/{package}', [TrainingPackageController::class, 'update'])->name('trainingPackages.update');
     Route::POST('/trainingPackages', [TrainingPackageController::class, 'store'])->name('trainingPackages.store');
     Route::DELETE('/trainingPackages/{package}', [TrainingPackageController::class, 'destroy'])->name('trainingPackages.destroy');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::GET('/trainingPackages/{package}', [TrainingPackageController::class, 'show'])->name('trainingPackages.show');
+});
 
 // --------------- Sessions
-Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager|client'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
+});
+
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
-    Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
     Route::POST('/sessions', [TrainingSessionController::class, 'store'])->name('sessions.store');
     Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');
     Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
@@ -130,6 +137,9 @@ Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gy
     Route::GET('/json-coach', [TrainingSessionController::class, 'GetCoachNameFromGymName']);
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
+});
 
 // --------------- Coaches
 Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {

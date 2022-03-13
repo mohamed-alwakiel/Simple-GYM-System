@@ -107,9 +107,14 @@ class GymsController extends Controller
         $data = $request->except('cover_img');
         if ($request->cover_img) {
             $oldImage = public_path("imgs//gym//" . $gym->cover_img);
-            if (file_exists($oldImage)) {
-                unlink($oldImage);
+            
+            if ($oldImage != "gym.png") {
+                if (file_exists($oldImage)) {
+                    unlink($oldImage);
+                }
             }
+            
+           
 
             $image = $request->cover_img;
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
