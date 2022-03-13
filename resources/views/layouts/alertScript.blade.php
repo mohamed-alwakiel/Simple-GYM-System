@@ -16,13 +16,26 @@
             if (willDelete) {
                 try {
                     form.submit();
-                }
-                catch($e){
+                } catch ($e) {
                     swal("Not deleted");
                 }
             } else {
-                swal("Cancelled", "Your Data is safe :)", "error");
+                swal("Cancelled", "Your Data is safe :)", "info");
             }
         });
     });
+    @if (session('errorMessage'))
+        $(document).ready(function() {
+        swal({
+        title: "You can't delete this package",
+        text: "you have user bought this package",
+        icon: "error",
+        type: "error",
+        confirmButtonColor: '#8CD4F5',
+        confirmButtonText: 'Ok',
+
+        });
+
+        });
+    @endif
 </script>

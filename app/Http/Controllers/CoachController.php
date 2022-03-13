@@ -6,8 +6,11 @@ use App\Http\Requests\CoachRequest;
 use App\Models\Gym;
 use App\Models\City;
 use App\Models\Coach;
+use App\Models\CoachSession;
+use Database\Factories\CoachFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 
 class CoachController extends Controller
@@ -80,9 +83,19 @@ class CoachController extends Controller
     {
 
         $coach = Coach::find($id);
-        $coach->trainingSessions()->detach();
-        $coach->delete();
-        return redirect()->route('coaches.index');
+        $checkSession = CoachSession::where('coach_id', $id)->first();
+
+        if ($checkSession == null) {
+            $coach->gym()->dissociate();
+            $coach->trainingSessions()->detach();
+            $coach->delete();
+            return to_route('coaches.index')
+                ->with('success', 'Coach deleted successfully');
+        } else {
+            // return Redirect::back()->withErrors(['message' => 'delete']);
+            return redirect()->route('coaches.index')->with('errorMessage', 'cannt be deleted');
+
+        }
     }
 
 
@@ -96,13 +109,11 @@ class CoachController extends Controller
             $coaches = Coach::all();
             $cities = City::all();
             $gyms = Gym::all();
-        }
-        elseif ($roleCityManager) {
+        } elseif ($roleCityManager) {
             $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
             $cities = Auth::user()->city;
-        }
-        elseif ($roleGymManager) {
+        } elseif ($roleGymManager) {
             $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
             $cities = Auth::user()->city;

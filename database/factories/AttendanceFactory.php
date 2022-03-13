@@ -21,6 +21,8 @@ class AttendanceFactory extends Factory
         return [
             'user_id' => User::inRandomOrder()->role('client')->first()->id,
             'training_session_id' => $this->faker->randomElement(TrainingSession::all())['id'],
+            'attendance_date' => $this->faker->dateTimeBetween('2021-01-20', '2023-12-31')->format('Y/m/d'),
+            'attendance_time' => $this->faker->time('H_i_s'),
         ];
     }
 }

@@ -27,12 +27,6 @@ use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-          $users = User::get();
-          $users = User::whereDate('last_login' ,'<' ,Carbon::now()->subDays(30)->toDateTimeString())->get();
-        return   UserResource::collection($users);
-    }
 
     public function update(Request $request)
     {
@@ -75,30 +69,41 @@ class UserController extends Controller
             ], 201);
         }
     }
-    
+
 
     public function attend(Session $session,Request $request){
         $user=Auth::user();
         $userData=DB::table('bought_packages')->where('user_id' ,$user->id)->first();
+        $dateNow=date('Y-m-d H', strtotime(now()));
         if (isset($userData->package_id)) {
             $start_date= TrainingSession::where('gym_id', $userData->gym_id)->get();
             $remaining_sessions=$userData->remaining_sessions;
             if ($remaining_sessions != 0) {
                 foreach ($start_date as $day) {
                     $date2=date('Y-m-d', strtotime($day->started_at));
+                    $startTime=date('Y-m-d H', strtotime($day->started_at));
+                    $finishTime=date('Y-m-d H', strtotime($day->finished_at));
                     if (Carbon::today()->eq($date2)) {
                         $sessionID=$day->id;
                         if (isset($sessionID)) {
-                            Attendee::where('user_id', $user->id)->decrement('remaining_sessions');
-                            SessionAttendence::create([
-                            "training_session_id" => $sessionID ,
-                            "user_id" => Auth::user()->id,
-                            "attendance_time" => Carbon::now()->toTimeString(),
-                            "attendance_date" => Carbon::now()->toDateString(),
-                        ]);
-                            return response()->json([
+                            if ($dateNow >= $startTime && $dateNow < $finishTime) {
+                                Attendee::where('user_id', $user->id)->decrement('remaining_sessions');
+                                SessionAttendence::create([
+                                    "training_session_id" => $sessionID ,
+                                    "user_id" => Auth::user()->id,
+                                    "attendance_time" => Carbon::now()->toTimeString(),
+                                    "attendance_date" => Carbon::now()->toDateString(),
+                            ]);
+                                return response()->json([
                             'message' => 'Session Attended'
-                        ], 201);
+                            ], 201);
+                            }else if ($dateNow < $startTime){
+                                return response()->json([
+                                    'message' => 'You have Session today but you came early'
+                                ], 201);
+                            } else if ($dateNow > $finishTime){
+                                continue;
+                            }
                         } else {
                             return response()->json([
                             'message' => 'Invalid session '

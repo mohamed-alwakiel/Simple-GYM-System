@@ -7,12 +7,15 @@ use App\Models\User;
 use App\Models\City;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Attendance;
+use App\Models\BuyPackage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -155,8 +158,27 @@ class UserController extends Controller
 
     public function destroy($userId)
     {
-        User::findOrFail($userId)->delete();
-        return redirect()->route('users.index');
+        $checkAttendance = Attendance::where('user_id', $userId)->first();
+        $checkBuyPackage = BuyPackage::where('user_id', $userId)->first();
+
+
+        if ($checkAttendance == null && $checkBuyPackage == null) {
+
+            $oldimg = User::where('id', $userId)->first()->profile_img;
+            if ($oldimg != "Client.png") {
+                // to delete old image
+                if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
+                    file::delete(public_path('imgs//' . 'users/' . $oldimg));
+                }
+            }
+
+            User::findOrFail($userId)->delete();
+            return to_route('users.index')
+                ->with('success', 'user deleted successfully');
+        } else {
+            return redirect()->route('users.index')
+                ->with('errorMessage', 'cannt be deleted');
+        }
     }
 
     public function editProfile()
@@ -186,9 +208,11 @@ class UserController extends Controller
 
             DB::table('users')->where('id', '=', $userID)->update(['profile_img' => $imageName]);
 
-            // to delete old image
-            if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
-                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+            if ($oldimg != "Client.png" && $oldimg != "cityMgr.png" && $oldimg != "gymMgr.png") {
+                // to delete old image
+                if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
+                    file::delete(public_path('imgs//' . 'users/' . $oldimg));
+                }
             }
         }
 
@@ -228,5 +252,4 @@ class UserController extends Controller
             return view('profile.editPassword', ['msg' => $msg]);
         }
     }
-
 }

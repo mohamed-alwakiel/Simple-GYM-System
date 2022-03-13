@@ -3,22 +3,34 @@
 @section('title', 'Create New Session')
 
 @section('content')
+
     <div class=" d-flex justify-content-center">
+      
+
         <div class="card card-success w-50 mt-3">
             <div class="card-header">
                 <h3 class="card-title">Create Section:</h3>
             </div>
             <div class="card-body">
+                @if ($errors->any())
+                <ul class="alert alert-danger">
+                  
+                        <h4>{{$errors->first()}}</h4>
+                
+                </ul>
+            @endif
+            @if ($errors->any())
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
                 <form method="POST" action="{{ route('sessions.store') }}" enctype="multipart/form-data">
-                    @csrf
 
-                    @if ($errors->any())
-                        <ul class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
+                    @csrf
+                   
+
 
                     <!-- Select City -->
                     @role('admin')
@@ -114,6 +126,7 @@
 
 <!-- Get Gyms Related To City -->
 @section('script')
+
     @role('admin')
         <script type="text/javascript">
             $('#cityName').on('change', function(e) {

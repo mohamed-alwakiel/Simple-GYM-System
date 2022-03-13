@@ -26,7 +26,7 @@ class City extends Model
 
     // as a manager
     public function manager(){
-        return $this->hasOne(CityManager::class, 'city_id');
+        return $this->hasOne(User::class, 'city_id');
     }
 
     // as a client

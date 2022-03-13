@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Period\PeriodCollections;
 use App\Http\Requests\TrainingSessionRequest;
 use App\Http\Requests\StoreTrainingSessionRequest;
+use App\Models\Attendance;
 use App\Models\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class TrainingSessionController extends Controller
 {
@@ -96,11 +98,22 @@ class TrainingSessionController extends Controller
     public function destroy($id)
     {
         $session = TrainingSession::find($id);
-        $session->gyms()->dissociate();
-        $session->coaches()->detach();
-        $session->delete();
 
-        return redirect()->route('sessions.index');
+        $checkSession = CoachSession::where('training_session_id', $id)->first();
+        $checkAttendence = Attendance::where('training_session_id', $id)->first();
+
+        if ($checkSession == null && $checkAttendence == null) {
+
+            $session->gyms()->dissociate();
+            $session->coaches()->detach();
+            $session->delete();
+
+            return to_route('sessions.index')
+                ->with('success', 'sessions deleted successfully');
+        } else {
+            return redirect()->route('sessions.index')
+                ->with('errorMessage', 'cannt be deleted');
+        }
     }
 
     public function store(TrainingSessionRequest $request)
@@ -108,7 +121,9 @@ class TrainingSessionController extends Controller
 
         $start = $request['started_at'];
         $end = $request['finished_at'];
-        $checkOverlap = $this->CheckOverlap($start, $end);
+        $gym_id=$request['gym_id'];
+   
+        $checkOverlap = $this->CheckOverlap($start, $end,$gym_id);
 
         if ($checkOverlap == 0) {
             $requestedData =
@@ -131,7 +146,8 @@ class TrainingSessionController extends Controller
             }
             return redirect()->route('sessions.index');
         } else {
-            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            // return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            return Redirect::back()->withErrors(['msg' => 'time overlap ,choose another time']);
         }
     }
 
@@ -170,9 +186,11 @@ class TrainingSessionController extends Controller
 
 
     // ========================> to check time overlap<=============================//
-    public function CheckOverlap($start, $end)
+    public function CheckOverlap($start, $end,$gym_id)
     {
-        $sessions = $this->getSessionsCoachesAndGymsData()[0];
+        $sessions=Gym::find($gym_id)->trainingSessions;
+      
+       
         $start = date('Y-m-d H:i:s', strtotime($start));
         $end = date('Y-m-d H:i:s', strtotime($end));
         $errors = 0;

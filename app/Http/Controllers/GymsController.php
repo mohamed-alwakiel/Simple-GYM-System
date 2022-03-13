@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GymRequest;
+use App\Models\BuyPackage;
 use App\Models\City;
+use App\Models\Coach;
 use App\Models\Gym;
+use App\Models\GymManager;
+use App\Models\Session;
+use App\Models\TrainingSession;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 
 class GymsController extends Controller
@@ -120,12 +127,25 @@ class GymsController extends Controller
 
     public function destroy($gymID)
     {
-        try {
+
+        $checkUserORManager = User::where('gym_id', $gymID)->first();
+        $checkBuyPackage = BuyPackage::where('gym_id', $gymID)->first();
+        $checkSession = TrainingSession::where('gym_id', $gymID)->first();
+        $checkCoach = Coach::where('gym_id', $gymID)->first();
+
+        if ($checkUserORManager == null && $checkBuyPackage == null && $checkSession == null && $checkCoach == null) {
+            $oldimg = Gym::where('id', $gymID)->first()->cover_img;
+            if ($oldimg != "gym.png") {
+                // to delete old image
+                if (file::exists(public_path('imgs//' . 'gym/' . $oldimg))) {
+                    file::delete(public_path('imgs//' . 'gym/' . $oldimg));
+                }
+            }
+
             Gym::findOrFail($gymID)->delete();
-            return redirect()->route('gyms.index');
-        } catch (QueryException $e) {
-            return redirect()->route('gyms.index');
+            return to_route('gyms.index')->with('success', 'Gym deleted successfully');
+        } else {
+            return redirect()->route('gyms.index')->with('errorMessage', 'cannt be deleted');
         }
     }
-
 }

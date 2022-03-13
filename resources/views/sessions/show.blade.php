@@ -23,7 +23,8 @@
       <p class="card-text text-secondary">Name : <span class="text-light font-weight-bold">{{$session->name}}</span> </p>
       <p class="card-text text-secondary">Start At : <span class="text-light font-weight-bold">{{$session->started_at}}</span> </p>
       <p class="card-text text-secondary">Finish At : <span class="text-light font-weight-bold">{{$session->finished_at}}</span> </p>
-      <p class="card-text text-secondary">Gym : <span class="text-light font-weight-bold">{{$session->gym_id}}</span> </p>
+      <p class="card-text text-secondary">Gym : <span class="text-light font-weight-bold">{{$session->gyms->name}}</span> </p>
+      <p class="card-text text-secondary">City : <span class="text-light font-weight-bold">{{$session->gyms->city->name}}</span> </p>
     </div>
 
   </div>
