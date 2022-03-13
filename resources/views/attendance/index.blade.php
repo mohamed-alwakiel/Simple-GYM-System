@@ -31,8 +31,8 @@
                             <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->gyms->city->name : 'Not Found !'}}</td>
                             
                             <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->gyms->name : 'Not Found !'}}</td>
-                            <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->started_at : 'Not Found !'}}</td>
-                            <td>{{ $attendance->trainingSessions ? $attendance->trainingSessions->finished_at : 'Not Found !'}}</td>
+                            <td>{{ $attendance->trainingSessions ? date("Y-m-d h:i a",strtotime($attendance->trainingSessions->started_at)) : 'Not Found !'}}</td>
+                            <td>{{ $attendance->trainingSessions ? date("Y-m-d h:i a",strtotime($attendance->trainingSessions->finished_at)) : 'Not Found !'}}</td>
                         </tr>
                         @endforeach
                     </tbody>

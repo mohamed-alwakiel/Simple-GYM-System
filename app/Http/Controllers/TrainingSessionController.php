@@ -81,16 +81,19 @@ class TrainingSessionController extends Controller
     public function update($id)
     {
         $formDAta = request()->all();
+     
         $start = $formDAta['started_at'];
         $end = $formDAta['finished_at'];
-        $checkOverlap = $this->CheckOverlap($start, $end);
+        $gym_id=$formDAta['gym_id'];
+
+        $checkOverlap = $this->CheckOverlap($start, $end,$gym_id);
 
         if ($checkOverlap == 0) {
             $session = TrainingSession::find($id)->update($formDAta);
 
             return redirect()->route('sessions.index');
         } else {
-            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            return Redirect::back()->withErrors(['msg' => 'time overlap ,choose another time']);
         }
     }
 

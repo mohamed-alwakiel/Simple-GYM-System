@@ -31,6 +31,10 @@
                     <label for="finished_at">Finish at</label>
                     <input name="finished_at" type="datetime-local" value="{{ $session['finished_at'] }}" class="form-control" id="finished_at">
                 </div>
+                <div class="form-group d-none mb-3">
+                    <label for="gym_id"> Gym</label>
+                    <input name="gym_id" type="hidden" value="{{ $session["gym_id"] }}" class="form-control" id="gym_id">
+                </div>
 
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-warning py-2 px-4">update</button>

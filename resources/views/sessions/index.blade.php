@@ -44,8 +44,8 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>{{ $session->started_at }}</td>
-                                    <td>{{ $session->finished_at }}</td>
+                                    <td>{{ date("Y-m-d h:i a",strtotime($session->started_at)) }}</td>
+                                    <td>{{ date("Y-m-d h:i a",strtotime($session->finished_at)) }}</td>
 
 
                                     @role('gymManager|admin|cityManager')

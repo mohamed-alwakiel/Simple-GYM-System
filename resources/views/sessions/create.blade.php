@@ -12,13 +12,7 @@
                 <h3 class="card-title">Create Section:</h3>
             </div>
             <div class="card-body">
-                @if ($errors->any())
-                <ul class="alert alert-danger">
-                  
-                        <h4>{{$errors->first()}}</h4>
                 
-                </ul>
-            @endif
             @if ($errors->any())
             <ul class="alert alert-danger">
                 @foreach ($errors->all() as $error)
