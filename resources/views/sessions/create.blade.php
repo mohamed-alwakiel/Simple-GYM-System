@@ -91,16 +91,15 @@
 
                     <!-- Coaches -->
                     @role('admin|cityManager|gymManager')
-                        <div class="form-group mb-3">
-                            <label>Coach</label>
-                            <select name="coach_id[]" class="form-control" id="coachName" multiple>
-                                @role('gymManager')
-                                    @foreach ($coaches as $coach)
-                                        <option value="{{ $coach->id }}">{{ $coach->name }}</option>
-                                    @endforeach
-                                @endrole
-                            </select>
-                        </div>
+                    <div class="form-group mb-3">
+                        <label>Coach</label>
+                        <select name="coach_id[]" class="form-control" id="coachName" multiple>
+                            @foreach ($coaches as $coach)
+                                <option value="{{ $coach->id }}">{{ $coach->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     @endrole
 
                     <div class="d-flex justify-content-end">
@@ -133,20 +132,21 @@
         </script>
     @endrole
 
-    <!-- Get Coaches Related To Gym -->
-    @role('admin|cityManager')
-        <script type="text/javascript">
-            $('#gymName').on('change', function(e) {
-                var gym_id = e.target.value;
-                $.get('/json-coach?gym_id=' + gym_id, function(data) {
-                    $('#coachName').empty();
+    <script>
+        @if (session('errorMessage'))
+            $(document).ready(function() {
+            swal({
+            title: "Session Overlap",
+            text: "This Session Will Overlap another Session",
+            icon: "error",
+            type: "error",
+            confirmButtonColor: '#8CD4F5',
+            confirmButtonText: 'Ok',
 
-                    $.each(data, function(index, coachObj) {
-                        $('#coachName').append('<option value="' + coachObj.id + '">' + coachObj.name +
-                            '</option>');
-                    })
-                });
             });
-        </script>
-    @endrole
+
+            });
+        @endif
+    </script>
+
 @stop

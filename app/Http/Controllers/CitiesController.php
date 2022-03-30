@@ -74,7 +74,7 @@ class CitiesController extends Controller
     {
         $oldImg = public_path("imgs//$path//" . $oldImg);
         if (file_exists($oldImg)) {
-            unlink($oldImg);
+            // unlink($oldImg);
         }
     }
 }

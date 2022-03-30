@@ -41,6 +41,7 @@ class PaymentController extends Controller
         $user_id = $requestObj->user_id;
         $package_id = $requestObj->package_id;
         $city = $requestObj->city;
+        DB::table('users')->where('id', $user_id)->update(['gym_id' => $gym_id]);
 
         DB::table('users')->where('id', $user_id)->update(['gym_id' => $gym_id]);
 

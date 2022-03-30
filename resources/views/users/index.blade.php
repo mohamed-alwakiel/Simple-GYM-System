@@ -41,7 +41,12 @@
                                     <td><img src="{{ url('imgs/users/' . $user->profile_img) }} " width="50px"
                                             height="50px" alt="not found" /></td>
                                     @role('admin')
-                                        <td>{{ $user->gym->city ? $user->gym->city->name : 'Not Found !' }}</td>
+                                    @if ($user->gym == null )
+                                    <td>Not Found !</td>
+                                    @else
+                                    <td>{{ $user->gym->city ? $user->gym->city->name : 'Not Found !' }}</td>
+                                    @endif
+                                       
                                     @endrole
                                     @role('admin|cityManager')
                                         <td>{{ $user->gym ? $user->gym->name : 'Not Found !' }}</td>
@@ -76,5 +81,20 @@
         });
     </script>
 
-    @include('layouts.alertScript')
+<script>
+    @if (session('errorMessage'))
+    $(document).ready(function() {
+    swal({
+    title: "You can't delete this user",
+    text: "user bought package",
+    icon: "error",
+    type: "error",
+    confirmButtonColor: '#8CD4F5',
+    confirmButtonText: 'Ok',
+   
+    });
+   
+    });
+   @endif
+   </script>
 @stop

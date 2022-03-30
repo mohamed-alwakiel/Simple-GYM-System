@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 
-class NotifyUsers extends Command implements ShouldQueue
+class NotifyUsers extends Command 
 {
     /**
      * The name and signature of the console command.

@@ -141,7 +141,7 @@ class GymManagerController extends Controller
         if ($oldimg != "gymMgr.png") {
             // to delete old image
             if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
-                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+                // file::delete(public_path('imgs//' . 'users/' . $oldimg));
             }
         }
 

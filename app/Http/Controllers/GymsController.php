@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
 
 class GymsController extends Controller
 {
@@ -36,6 +37,13 @@ class GymsController extends Controller
             $gyms = Gym::where('city_id', $city_id)->get();
             return view('gyms.index', ['gyms' => $gyms]);
         }
+    }
+
+
+    public function show($gymID)
+    {
+        $gym = Gym::findOrFail($gymID);
+        return view('gyms.show', ['gym' => $gym]);
     }
 
     public function create()
@@ -96,8 +104,7 @@ class GymsController extends Controller
     {
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
-        
-        
+
         if ($roleAdmin) {
             $city_id = $request['city_id'];
         } elseif ($roleCityManager) {
@@ -105,11 +112,9 @@ class GymsController extends Controller
         }
 
         $gym = Gym::find($gym_id);
-
-
         if ($request->cover_img) :
             $oldImage = public_path("imgs//gym//" . $gym->cover_img);
-            
+
             if ($oldImage != "gym.png") {
                 if (file_exists($oldImage)) {
                     unlink($oldImage);
@@ -123,36 +128,36 @@ class GymsController extends Controller
             DB::table('gyms')->where('id', $gym_id)->update(['cover_img' => $imageName]);
         endif;
 
-
         Gym::find($gym_id)->update([
             'name' => $request->name,
             'city_id' => $city_id
-        ]);
+            ]);
 
-        return redirect()->route('gyms.index');
-    }
-
-    public function destroy($gymID)
-    {
-
-        $checkUserORManager = User::where('gym_id', $gymID)->first();
-        $checkBuyPackage = BuyPackage::where('gym_id', $gymID)->first();
-        $checkSession = TrainingSession::where('gym_id', $gymID)->first();
-        $checkCoach = Coach::where('gym_id', $gymID)->first();
-
-        if ($checkUserORManager == null && $checkBuyPackage == null && $checkSession == null && $checkCoach == null) {
-            $oldimg = Gym::where('id', $gymID)->first()->cover_img;
-            if ($oldimg != "gym.png") {
-                // to delete old image
-                if (file::exists(public_path('imgs//' . 'gym/' . $oldimg))) {
-                    file::delete(public_path('imgs//' . 'gym/' . $oldimg));
-                }
-            }
-
-            Gym::findOrFail($gymID)->delete();
-            return to_route('gyms.index')->with('success', 'Gym deleted successfully');
-        } else {
-            return redirect()->route('gyms.index')->with('errorMessage', 'cannt be deleted');
+            return redirect()->route('gyms.index');
         }
-    }
+
+        public function destroy($gymID)
+        {
+
+            $checkUserORManager = User::where('gym_id', $gymID)->first();
+            $checkBuyPackage = BuyPackage::where('gym_id', $gymID)->first();
+            $checkSession = TrainingSession::where('gym_id', $gymID)->first();
+            $checkCoach = Coach::where('gym_id', $gymID)->first();
+
+            if ($checkUserORManager == null && $checkBuyPackage == null && $checkSession == null && $checkCoach == null) {
+                $oldimg = Gym::where('id', $gymID)->first()->cover_img;
+                if ($oldimg != "gym.png") {
+                    // to delete old image
+                    if (file::exists(public_path('imgs//' . 'gym/' . $oldimg))) {
+                        file::delete(public_path('imgs//' . 'gym/' . $oldimg));
+                    }
+                }
+
+                Gym::findOrFail($gymID)->delete();
+                return to_route('gyms.index')->with('success', 'Gym deleted successfully');
+            } else {
+                return redirect()->route('gyms.index')->with('errorMessage', 'cannt be deleted');
+
+            }
+        }
 }

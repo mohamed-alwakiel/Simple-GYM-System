@@ -64,6 +64,21 @@
             $('#table').DataTable();
         });
     </script>
+    <script>
+ @if (session('errorMessage'))
+ $(document).ready(function() {
+ swal({
+ title: "You can't delete this Gym",
+ text: "you have training in this gym",
+ icon: "error",
+ type: "error",
+ confirmButtonColor: '#8CD4F5',
+ confirmButtonText: 'Ok',
 
-    @include('layouts.alertScript')
+ });
+
+ });
+@endif
+</script>
+    {{-- @include('layouts.alertScript') --}}
 @stop

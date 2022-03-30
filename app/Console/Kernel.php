@@ -15,15 +15,19 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected $commands = [
-        NotifyUsers::class,
+        Commands\NotifyUsers::class,
       ];
       // run this command to start schedule ==========> php artisan schedule:work *=*=*=*=*=*=
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('notify:users-not-logged-in-for-month')
-                 ->daily();
+        // $schedule->command('notify:users-not-logged-in-for-month')
+        //          ->daily();
+                 $schedule->command('notify:users-not-logged-in-for-month')
+                 ->everyMinute();
+
 
     }
+
 
     /**
      * Register the commands for the application.

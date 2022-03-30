@@ -31,7 +31,7 @@ class TrainingSessionRequest extends FormRequest
             'day' => ['required'],
             'started_at' => ['required'],
             'finished_at' => ['required'],
-
+            'coach_id[]'=>['required'],
         ];
 
 

@@ -29,23 +29,49 @@ class CoachController extends Controller
 
     public function create()
     {
-        $gyms = $this->getCoachesAndGymsData()[1];
-        $cities = $this->getCoachesAndGymsData()[2];
 
-        // dd($gyms->id);
+        $roleAdmin  = Auth::user()->hasRole('admin');
+        $roleCityManager = Auth::user()->hasRole('cityManager');
+        $roleGymManager = Auth::user()->hasRole('gymManager');
 
-        return view('coaches.create', [
-            'gyms' => $gyms,
-            'cities' => $cities,
+        $loggedInUser = Auth::user();
+
+
+        if ($roleAdmin) {
+            $cities = City::get();
+            return view('coaches.create', data: [
+                'cities' => $cities,
+            ]);
+        } elseif ($roleCityManager) {
+            $city_id = $loggedInUser->city_id;
+            $gym_id = Gym::where('city_id', $city_id)->get();
+        
+        } elseif ($roleGymManager) {
+            $gym_id = $loggedInUser->gym_id;
+            $city_id = $loggedInUser->city_id;
+        }
+
+        return view('coaches.create', data: [
+            'cities' => $city_id,
+            'gyms' => $gym_id,
         ]);
     }
 
     public function store(CoachRequest $request)
     {
-        $requestedData = request()->all();
-        Coach::create($requestedData);
+
+        $gym_id = $request->gym_id;
+        $name = $request->name;
+        if ($gym_id == null ) {
+            return Redirect::back()->withErrors(['message' => 'complete your data']);
+        } else {
+            Coach::create([
+                'name' =>  $name,
+                'gym_id' => $gym_id,
+            ]);
 
         return redirect()->route('coaches.index');
+        }
     }
 
     public function show($id)
