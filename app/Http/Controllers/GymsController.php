@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -61,6 +62,7 @@ class GymsController extends Controller
         $roleAdmin = auth()->user()->hasRole('admin');
 
         $image = $request->cover_img;
+
         if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'gym'), $imageName);
@@ -92,20 +94,20 @@ class GymsController extends Controller
 
     public function update(GymRequest $request, $gym_id)
     {
-
         $roleCityManager = auth()->user()->hasRole('cityManager');
         $roleAdmin = auth()->user()->hasRole('admin');
-
+        
+        
         if ($roleAdmin) {
             $city_id = $request['city_id'];
         } elseif ($roleCityManager) {
             $city_id = Auth::user()->city_id;
         }
 
-
         $gym = Gym::find($gym_id);
-        $data = $request->except('cover_img');
-        if ($request->cover_img) {
+
+
+        if ($request->cover_img) :
             $oldImage = public_path("imgs//gym//" . $gym->cover_img);
             
             if ($oldImage != "gym.png") {
@@ -113,17 +115,17 @@ class GymsController extends Controller
                     unlink($oldImage);
                 }
             }
-            
-           
 
             $image = $request->cover_img;
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
             $image->move(public_path('imgs//' . 'gym'), $imageName);
-        }
+
+            DB::table('gyms')->where('id', $gym_id)->update(['cover_img' => $imageName]);
+        endif;
+
 
         Gym::find($gym_id)->update([
             'name' => $request->name,
-            'cover_img' => $imageName,
             'city_id' => $city_id
         ]);
 

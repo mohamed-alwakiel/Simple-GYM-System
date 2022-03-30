@@ -165,7 +165,7 @@ class GymManagerController extends Controller
 
     public function banView()
     {
-        $bannedManagers = GymManager::onlyBanned()->get();
+        $bannedManagers = User::onlyBanned()->get();
         return view('gymManagers.banned', [
             "bannedManagers" => $bannedManagers
         ]);
