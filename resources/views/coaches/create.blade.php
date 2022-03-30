@@ -17,6 +17,9 @@
                         <label for="name">Coach name</label>
                         <input name="name" type="text" class="form-control" id="name">
                     </div>
+                    @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
                     {{-- select city and gym --}}
                     @role('admin')
@@ -66,14 +69,7 @@
                     @endrole
 
 
-                    @if ($errors->any())
-                        <ul class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-
+                   
                     <div class="d-flex justify-content-end">
 
                         <button type="submit" class="btn btn-success py-2 px-4">Save</button>

@@ -31,7 +31,7 @@ class Gym extends Model
     // as a manager
     public function manager()
     {
-        return $this->hasMany(GymManager::class, 'gym_id');
+        return $this->hasMany(User::class, 'gym_id');
     }
 
 
@@ -45,7 +45,7 @@ class Gym extends Model
     {
         return $this->hasMany(TrainingSession::class,'gym_id');
     }
-    
+
     public function coaches()
     {
         return $this->hasMany(Coach::class, 'gym_id');

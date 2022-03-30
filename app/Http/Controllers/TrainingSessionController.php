@@ -81,16 +81,19 @@ class TrainingSessionController extends Controller
     public function update($id)
     {
         $formDAta = request()->all();
+     
         $start = $formDAta['started_at'];
         $end = $formDAta['finished_at'];
-        $checkOverlap = $this->CheckOverlap($start, $end);
+        $gym_id=$formDAta['gym_id'];
+
+        $checkOverlap = $this->CheckOverlap($start, $end,$gym_id);
 
         if ($checkOverlap == 0) {
             $session = TrainingSession::find($id)->update($formDAta);
 
             return redirect()->route('sessions.index');
         } else {
-            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            return Redirect::back()->withErrors(['msg' => 'time overlap ,choose another time']);
         }
     }
 
@@ -121,7 +124,9 @@ class TrainingSessionController extends Controller
 
         $start = $request['started_at'];
         $end = $request['finished_at'];
-        $checkOverlap = $this->CheckOverlap($start, $end);
+        $gym_id=$request['gym_id'];
+   
+        $checkOverlap = $this->CheckOverlap($start, $end,$gym_id);
 
         if ($checkOverlap == 0) {
             $requestedData =
@@ -144,7 +149,8 @@ class TrainingSessionController extends Controller
             }
             return redirect()->route('sessions.index');
         } else {
-            return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            // return back()->with('error', 'Session date will Overlap another session, Choose different Date');
+            return Redirect::back()->withErrors(['msg' => 'time overlap ,choose another time']);
         }
     }
 
@@ -183,9 +189,11 @@ class TrainingSessionController extends Controller
 
 
     // ========================> to check time overlap<=============================//
-    public function CheckOverlap($start, $end)
+    public function CheckOverlap($start, $end,$gym_id)
     {
-        $sessions = $this->getSessionsCoachesAndGymsData()[0];
+        $sessions=Gym::find($gym_id)->trainingSessions;
+      
+       
         $start = date('Y-m-d H:i:s', strtotime($start));
         $end = date('Y-m-d H:i:s', strtotime($end));
         $errors = 0;

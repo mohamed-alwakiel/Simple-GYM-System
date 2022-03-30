@@ -42,6 +42,8 @@ class PaymentController extends Controller
         $package_id = $requestObj->package_id;
         $city = $requestObj->city;
 
+        DB::table('users')->where('id', $user_id)->update(['gym_id' => $gym_id]);
+
         if ($gym_id == null ||  $user_id == null ||  $package_id == null  || $city == null) {
             return Redirect::back()->withErrors(['message' => 'complete your data']);
         } else {
@@ -60,7 +62,6 @@ class PaymentController extends Controller
         }
 
 
-        
     }
     public function success()
     {

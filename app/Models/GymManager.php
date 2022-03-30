@@ -30,7 +30,7 @@ class GymManager extends model implements BannableContract
     // one gym for a single manager
     public function gym()
     {
-        return $this->belongsTo(Gym::class, 'id');
+        return $this->belongsTo(Gym::class);
     }
 
     //

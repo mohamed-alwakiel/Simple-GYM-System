@@ -27,7 +27,7 @@
                         @foreach ($cities as $city)
                             <tr>
                                 <td>{{ $city->name }}</td>
-                                <td>{{ $city->manager ? $city->manager->name : 'No Manager !' }}</td>
+                                <td>{{ $city->manager->hasRole('cityManager') ? $city->manager->name : 'No Manager !' }}</td>
 
                                 <td class="d-flex justify-content-center">
                                     <a href="{{ route('cities.show', $city->id) }}" class="btn btn-md btn-info mr-3"><i

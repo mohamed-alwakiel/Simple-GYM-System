@@ -81,6 +81,7 @@ class CoachController extends Controller
 
     public function destroy($id)
     {
+
         $coach = Coach::find($id);
         $checkSession = CoachSession::where('coach_id', $id)->first();
 

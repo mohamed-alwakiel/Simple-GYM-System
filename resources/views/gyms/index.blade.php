@@ -35,7 +35,7 @@
                                         alt="not found" /></td>
                                 @role('admin')
                                     <td>{{ $gym->city ? $gym->city->name : 'Not Found ! ' }}</td>
-                                    <td>{{ $gym->city->manager ? $gym->city->manager->name : 'Not Found !' }}</td>
+                                    <td>{{ $gym->city->manager->hasRole('cityManager') ? $gym->city->manager->name : 'Not Found !' }}</td>
                                 @endrole
                                 <td class="d-flex justify-content-center">
                                     <a href="{{ route('gyms.show', $gym->id) }}" class="btn btn-md btn-info mr-3"><i
