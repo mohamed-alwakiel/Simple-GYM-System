@@ -43,26 +43,32 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     @endrole
+                   
 
-                    {{-- if role city manager --}}
-                    @role('cityManager')
-                        <div class="form-group">
-                            <label for="gymName">Select Gym</label>
-                            <select name="gym_id" class="form-control">
-                                <option value="0" disable="true" selected="true">=== Select Gym ===</option>
-                                @foreach ($gyms as $gym)
-                                    <option value="{{ $gym->id }}"> {{ $gym->name }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @error('gym_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    @endrole
+                    @hasanyrole('cityManager|gymManager')
+                    <input type="text" hidden name="city" value="{{$cities}}" id="cityName" />
+                    @endhasanyrole
+                    @hasanyrole('cityManager')
+                    <div class="form-group mb-3">
+                        <label for="gym">Gym</label>
+                        <select class="form-control" name="gym_id" id="gymName">
+                            @role('cityManager')
+                            <option value="0" disabled selected>=== Select Gym ===</option>
+                            @foreach ($gyms as $gym)
+                            <option value="{{ $gym->id }}">{{ $gym->name }}</option>
+                            @endforeach
+                            @endrole
+                        </select>
+                    </div>
+                    @endhasanyrole
+    
 
+    
+             
                     {{-- if role city manager --}}
                     @role('gymManager')
-                    <input type="hidden" name="gym_id" value="{{ $gyms->id }}">
+                    <input type="hidden" name="city_id" value="{{ $cities }}">
+                    <input type="hidden" name="gym_id" value="{{ $gyms }}">
                     @endrole
 
 

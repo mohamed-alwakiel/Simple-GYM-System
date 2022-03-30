@@ -168,7 +168,7 @@ class UserController extends Controller
             if ($oldimg != "Client.png") {
                 // to delete old image
                 if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
-                    file::delete(public_path('imgs//' . 'users/' . $oldimg));
+                    // file::delete(public_path('imgs//' . 'users/' . $oldimg));
                 }
             }
 

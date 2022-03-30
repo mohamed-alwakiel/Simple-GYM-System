@@ -93,8 +93,7 @@ class TrainingSessionController extends Controller
             return back()->with('error', 'Session date will Overlap another session, Choose different Date');
         }
     }
-
-
+    
     public function destroy($id)
     {
         $session = TrainingSession::find($id);
@@ -108,13 +107,16 @@ class TrainingSessionController extends Controller
             $session->coaches()->detach();
             $session->delete();
 
-            return to_route('sessions.index')
+            return view('sessions.index')
                 ->with('success', 'sessions deleted successfully');
         } else {
             return redirect()->route('sessions.index')
                 ->with('errorMessage', 'cannt be deleted');
         }
     }
+
+
+
 
     public function store(TrainingSessionRequest $request)
     {
@@ -163,23 +165,22 @@ class TrainingSessionController extends Controller
 
         if ($roleAdmin) {
             $sessions = TrainingSession::all();
-            $coaches = Coach::all();
             $gyms = Gym::all();
             $cities = City::all();
         } elseif ($roleCityManager) {
             $sessions = Auth::user()->city->trainingSessions;
-            $coaches = Auth::user()->city->coaches;
             $gyms = Auth::user()->city->gyms;
             $cities = Auth::user()->city_id;
         } elseif ($roleGymManager || $roleClient) {
             $sessions = Auth::user()->gym->trainingSessions;
-            $coaches = Auth::user()->gym->coaches;
             $gyms = Auth::user()->gym;
             $cities = Auth::user()->city_id;
         }
+        $coaches = Coach::all();
 
         return [$sessions, $coaches, $gyms, $cities];
     }
+
 
 
     // ========================> to check time overlap<=============================//

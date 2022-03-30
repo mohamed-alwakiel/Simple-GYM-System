@@ -28,7 +28,7 @@ class CoachRequest extends FormRequest
 
         $validation = [
             'name' => ['required', 'min:3'],
-            'gym_id' => ['required'],
+            'gym_id' => ['required' ,'exists:gyms,id'],
 
         ];
 

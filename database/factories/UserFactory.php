@@ -38,7 +38,7 @@ class UserFactory extends Factory
             'national_id' => $this->faker->numerify('##############'),
             'date_of_birth' => $this->faker->dateTimeBetween('1990-01-01', '2004-12-31')->format('Y/m/d'),
             'gender' => $gender,
-            'profile_img' => 'Client.Png',
+            'profile_img' => 'Client.png',
             'gym_id' => $gymID,
             'city_id' => $cityID,
         ];

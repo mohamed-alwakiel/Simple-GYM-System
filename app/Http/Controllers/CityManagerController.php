@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCityManagerRequest;
+use App\Http\Requests\StoreGymManagerRequest;
 use App\Http\Requests\UpdateCityManagerRequest;
 use App\Models\City;
 use App\Models\CityManager;
@@ -44,10 +45,10 @@ class CityManagerController extends Controller
     }
 
 
-    // public function store(StoreGymManagerRequest $request)
-    public function store(Request $request)
+    public function store(StoreGymManagerRequest $request)
+    // public function store(Request $request)
     {
-        //        dd($request);
+
         //fetch request data
         $requestData = request()->all();
 
@@ -57,7 +58,7 @@ class CityManagerController extends Controller
 
         if ($image != null) :
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
-            $image->move(public_path('imgs//' . 'users/'), $imageName);
+            $image->move(public_path('imgs/' . 'users/'), $imageName);
         else :
             $imageName = 'cityMgr.png';
         endif;
@@ -123,7 +124,7 @@ class CityManagerController extends Controller
         if ($oldimg != "cityMgr.png") {
             // to delete old image
             if (file::exists(public_path('imgs//' . 'users/' . $oldimg))) {
-                file::delete(public_path('imgs//' . 'users/' . $oldimg));
+                // file::delete(public_path('imgs//' . 'users/' . $oldimg));
             }
         }
 

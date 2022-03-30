@@ -32,7 +32,7 @@
                         <td>{{ $manager->name }}</td>
                         <td>{{ $manager->email }}</td>
                         <td>{{ $manager->national_id }}</td>
-                        <td><img src="{{ url('imgs/GymMgr/' . $manager->profile_img) }} " width="50px" height="50px" alt="not found" /></td>
+                        <td><img src="{{ url('imgs/users/' . $manager->profile_img) }} " width="50px" height="50px" alt="not found" /></td>
                         <td>{{ $manager->city ? $manager->city->name : 'Not Found !' }}</td>
                         <td>{{ $manager->gym ? $manager->gym->name : 'Not Found !' }}</td>
                         <td>{{ $manager->banned_at }}</td>
