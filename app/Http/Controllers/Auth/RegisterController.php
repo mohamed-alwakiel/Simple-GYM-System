@@ -24,7 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-    
+
 
     /**
      * Where to redirect users after registration.
@@ -59,10 +59,9 @@ class RegisterController extends Controller
             'userImg' => 'image|mimes:jpg,jpeg',
             'date_of_birth' => 'required|date',
             'national_id' => 'required|unique:users|digits_between:14,14',
-            'gender' =>'required|in:male,female',
-            'city_id' =>'exists:cities,id',
+            'gender' => 'required|in:male,female',
+            'city_id' => 'exists:cities,id',
         ]);
-
     }
 
     /**
@@ -91,9 +90,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'profile_img' => $imageName,
-            'date_of_birth' =>$data['date_of_birth'],
+            'date_of_birth' => $data['date_of_birth'],
             'gender' => $data['gender'],
-            'national_id'=> $data['national_id'],
+            'national_id' => $data['national_id'],
             'city_id' =>  $data['city_id'],
         ]);
 
@@ -101,7 +100,4 @@ class RegisterController extends Controller
         $user->assignRole('client');
         return $user;
     }
-
 }
-
-

@@ -108,7 +108,6 @@ Route::group(['middleware' => ['auth', 'logs-out-banned-user', 'role:admin|cityM
 
 
 // --------------- Training Packages
-// --------------- Training Packages
 Route::group(['middleware' => 'auth'], function () {
     Route::GET('/trainingPackages', [TrainingPackageController::class, 'index'])->name('trainingPackages.index');
 });
@@ -130,8 +129,10 @@ Route::group(['middleware' => 'auth'], function () {
 // --------------- Sessions
 Route::group(['middleware' => ['auth', 'logs-out-banned-user', 'role:admin|cityManager|gymManager'] ], function () {
     Route::GET('/sessions', [TrainingSessionController::class, 'index'])->name('sessions.index');
+});
+
+Route::group(['middleware' => 'auth', 'middleware' => 'role:admin|cityManager|gymManager'], function () {
     Route::GET('/sessions/create', [TrainingSessionController::class, 'create'])->name('sessions.create');
-    Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
     Route::POST('/sessions', [TrainingSessionController::class, 'store'])->name('sessions.store');
     Route::GET('/sessions/{id}/edit', [TrainingSessionController::class, 'edit'])->name('sessions.edit');
     Route::PUT('/sessions/{id}', [TrainingSessionController::class, 'update'])->name('sessions.update');
@@ -139,6 +140,9 @@ Route::group(['middleware' => ['auth', 'logs-out-banned-user', 'role:admin|cityM
     Route::GET('/json-coach', [TrainingSessionController::class, 'GetCoachNameFromGymName']);
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::GET('/sessions/{id}', [TrainingSessionController::class, 'show'])->name('sessions.show');
+});
 
 // --------------- Coaches
 Route::group(['middleware' => ['auth', 'logs-out-banned-user', 'role:admin|cityManager|gymManager'] ], function () {

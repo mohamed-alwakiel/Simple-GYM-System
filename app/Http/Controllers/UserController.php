@@ -198,6 +198,7 @@ class UserController extends Controller
 
         $oldimg = $request->oldimg;
 
+
         if ($request->newimg) {
             $request->validate([
                 'newimg' => 'image | mimes:jpg,jpeg',

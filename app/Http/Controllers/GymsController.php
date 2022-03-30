@@ -119,6 +119,8 @@ class GymsController extends Controller
                     unlink($oldImage);
                 }
             }
+            
+           
 
             $image = $request->cover_img;
             $imageName = time() . rand(1, 200) . '.' . $image->extension();
